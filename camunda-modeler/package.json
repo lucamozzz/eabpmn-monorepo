@@ -90,6 +90,6 @@
     ]
   },
   "dependencies": {
-    "bpenv-modeler": "^0.0.17"
+    "bpenv-modeler": "file:../bpenv-modeler"
   }
 }
