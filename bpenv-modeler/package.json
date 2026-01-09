@@ -1,0 +1,43 @@
+{
+  "name": "bpenv-modeler",
+  "author": "University of Camerino",
+  "private": false,
+  "version": "0.0.23",
+  "type": "module",
+  "main": "dist/bpenv-modeler.js",
+  "module": "dist/bpenv-modeler.js",
+  "exports": {
+    "import": "./dist/bpenv-modeler.js",
+    "require": "./dist/bpenv-modeler.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "style": "dist/style.css",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "bootstrap": "^5.3.7",
+    "leaflet": "1.0",
+    "leaflet-draw": "^0.3.2",
+    "ol": "^10.6.1",
+    "react-icons": "^5.5.0",
+    "zustand": "^5.0.6"
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.9.14",
+    "@types/leaflet-draw": "^0.4.14",
+    "typescript": "~5.6.2",
+    "vite": "^5.4.10",
+    "vitest": "^3.1.1"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0 <20.0.0",
+    "react-dom": ">=16.8.0 <20.0.0"
+  }
+}
