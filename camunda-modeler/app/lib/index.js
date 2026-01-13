@@ -509,6 +509,7 @@ app.createEditorWindow = function() {
 
   if (process.env.NODE_ENV === 'development') {
     url = 'file://' + path.resolve(__dirname + '/../../client/build/index.html');
+
     // url = 'file://' + path.resolve(__dirname + '/../../client/public/index.html');
   }
 

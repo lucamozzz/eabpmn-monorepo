@@ -36,26 +36,27 @@ app.on('before-quit', function() {
 });
 
 app.on('app:window-created', async () => {
+
   // Enable right-click "Inspect Element" context menu
   if (app.mainWindow) {
     app.mainWindow.webContents.on('context-menu', (event, params) => {
       const { Menu, MenuItem } = require('electron');
       const menu = new Menu();
-      
+
       menu.append(new MenuItem({
         label: 'Inspect Element',
         click: () => {
           app.mainWindow.webContents.inspectElement(params.x, params.y);
         }
       }));
-      
+
       menu.append(new MenuItem({
         label: 'Open DevTools (Separate Window)',
         click: () => {
           app.mainWindow.webContents.openDevTools({ mode: 'detach' });
         }
       }));
-      
+
       menu.popup();
     });
     log.info('Right-click context menu enabled for DevTools');

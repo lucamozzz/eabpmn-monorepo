@@ -19,8 +19,7 @@ export default function Loader(props) {
   } = props;
 
   return (
-    <div 
-      className={ classNames('spinner-border', { 'd-none': hidden}) }   
-    ></div>
+    <div
+      className={ classNames('spinner-border', { 'd-none': hidden }) }></div>
   );
 }
