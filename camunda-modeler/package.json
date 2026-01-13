@@ -17,7 +17,7 @@
     "all": "run-s clean lint test \"build -- {@}\" --",
     "auto-test": "run-p *:auto-test",
     "clean": "del-cli 'dist/*' app/public",
-    "eabpm-plugin:build": "npm run build --prefix resources/plugins/BPMNEnv-Aware-Plugins",
+    "eabpm-plugin:build": "cd resources/plugins/BPMNEnv-Aware-Plugins && npm run build",
     "install-all": "npm run install:eabpm-plugin && npm run install:modeler",
     "install:eabpm-plugin": "node scripts/install-plugin.js",
     "install:modeler": "npm install",
