@@ -19,7 +19,7 @@
     "clean": "del-cli 'dist/*' app/public",
     "eabpm-plugin:build": "npm run build --prefix resources/plugins/BPMNEnv-Aware-Plugins",
     "install-all": "npm run install:eabpm-plugin && npm run install:modeler",
-    "install:eabpm-plugin": "npm install --prefix resources/plugins/BPMNEnv-Aware-Plugins",
+    "install:eabpm-plugin": "node scripts/install-plugin.js",
     "install:modeler": "npm install",
     "dev": "npm run preload:build && run-p \"app:dev -- {@}\" client:dev --",
     "dev:plugin": "run-s eabpm-plugin:build preload:build \"app:dev -- {@}\" client:dev --",
