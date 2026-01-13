@@ -25,6 +25,7 @@ const files = {
     'docs',
     'resources/plugins/*/dist',
     'resources/plugins/test-script-error/broken.js',
+    'resources/plugins/BPMNEnv-Aware-Plugins/**',
     'tmp'
   ]
 };
