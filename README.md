@@ -66,15 +66,31 @@ mvn clean install
 
 #### Development with EABPMN Plugin
 
+**⚠️ Windows Users:** If you're on Windows, use **Git Bash** to run these commands, as there is a bug when building on Windows devices with PowerShell/CMD. See [this forum discussion](https://forum.camunda.io/t/cant-build-camunda-modeler/15177/4) for more details.
+
+**Initial Setup:**
 ```bash
 cd camunda-modeler
+npm run all
+npm run build
 npm run dev:plugin
 ```
 
+**⚠️ Important:** After running `npm run dev:plugin` or `npm run dev:plugin:watch`, if the Electron app window appears empty or blank, **wait a bit** (30-60 seconds) as it may still be completing the initial setup and building processes. If it's still white/empty after waiting, then you can run the dev command again.
+
+**Development with Hot Reload (Recommended):**
+```bash
+cd camunda-modeler
+npm run dev:plugin:watch
+```
+
 This will:
-1. Build the EABPMN plugin
-2. Build the preload script
-3. Start the Electron app and React client in dev mode
+1. **First** (sequentially): Build the EABPMN plugin, build `bpenv-modeler`, and build the preload script
+2. **Then** (in parallel): Start watch modes for `bpenv-modeler` and the EABPMN plugin, and start the Electron app and React client in dev mode
+
+**Note:** The `dev:plugin:watch` command ensures all dependencies are built first, then runs all watch processes in parallel. Changes to `bpenv-modeler` will automatically rebuild and be available in the Camunda Modeler without manual rebuilds. The initial sequential build prevents race conditions during startup.
+
+**⚠️ Important:** After initial setup, when running `npm run dev:plugin` or `npm run dev:plugin:watch`, if the Electron app window appears empty or blank, **wait a bit** (30-60 seconds) as it may still be completing the initial setup and building processes. Do **not** run the dev command again immediately, as this could interfere with the ongoing build process.
 
 ### BPENV Modeler Library
 
@@ -222,13 +238,15 @@ This ensures they use the local version of `bpenv-modeler` instead of the npm pa
 2. **Daily Development:**
    ```bash
    cd camunda-modeler
-   npm run dev:plugin
+   npm run dev:plugin:watch    # Recommended: with hot reload for bpenv-modeler and plugin
+   # OR
+   npm run dev:plugin          # Without watch mode (manual rebuilds needed)
    ```
 
 3. **After Plugin Changes:**
-   - The plugin needs to be rebuilt
-   - Use `npm run dev:plugin` which handles this automatically
-   - Or manually: `npm run eabpm-plugin:build`
+   - If using `dev:plugin:watch`: Changes to `bpenv-modeler` and the plugin rebuild automatically
+   - If using `dev:plugin`: The plugin needs to be rebuilt manually with `npm run eabpm-plugin:build`
+   - Changes to `bpenv-modeler` require rebuilding it: `cd ../bpenv-modeler && npm run build`
 
 ## 🧪 Testing
 
