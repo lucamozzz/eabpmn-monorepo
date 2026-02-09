@@ -1,0 +1,143 @@
+[33mcommit d9cd176351d5ef698193bf16b15cb7a097b3f122[m
+Author: Nabil Mohammed Khelifa <nabil.nablotech@gmail.com>
+Date:   Mon Dec 15 04:15:47 2025 +0100
+
+    keyclock configuration
+
+[1mdiff --git a/camnuda-bpmn-engine/src/main/resources/application.yaml b/camnuda-bpmn-engine/src/main/resources/application.yaml[m
+[1mnew file mode 100644[m
+[1mindex 0000000..6890d97[m
+[1m--- /dev/null[m
+[1m+++ b/camnuda-bpmn-engine/src/main/resources/application.yaml[m
+[36m@@ -0,0 +1,32 @@[m
+[32m+[m[32msecurity:[m
+[32m+[m[32m  sso-login:[m
+[32m+[m[32m    csrf-excluded-url-patterns: /camunda/api/**[m
+[32m+[m[32m    keycloak-config:[m
+[32m+[m[32m      keycloakIssuerUrl: http://localhost:8083/realms/eabpmn[m
+[32m+[m[32m      keycloakAdminUrl: http://localhost:8083/admin/realms/eabpmn[m
+[32m+[m[32m      clientId: ${KEYCLOAK_CLIENT_ID}[m
+[32m+[m[32m      clientSecret: ${KEYCLOAK_CLIENT_SECRET}[m
+[32m+[m[32m      useUsernameAsCamundaUserId: false[m
+[32m+[m[32m      useGroupPathAsCamundaGroupId: true[m
+[32m+[m[32m      administratorGroupName: admin-group[m
+[32m+[m
+[32m+[m[32m# Spring Boot Security OAuth2 SSO[m
+[32m+[m[32mspring.security.oauth2:[m
+[32m+[m[32m  client:[m
+[32m+[m[32m    registration:[m
+[32m+[m[32m      keycloak:[m
+[32m+[m[32m        provider: keycloak[m
+[32m+[m[32m        client-id: ${KEYCLOAK_CLIENT_ID}[m
+[32m+[m[32m        client-secret: ${KEYCLOAK_CLIENT_SECRET}[m
+[32m+[m[32m        authorization-grant-type: authorization_code[m
+[32m+[m[32m        redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"[m
+[32m+[m[32m        scope: openid, email[m
+[32m+[m[32m    provider:[m
+[32m+[m[32m      keycloak:[m
+[32m+[m[32m        issuer-uri: http://localhost:8083/realms/eabpmn[m
+[32m+[m[32m        authorization-uri: http://localhost:8083/realms/eabpmn/protocol/openid-connect/auth[m
+[32m+[m[32m        user-info-uri: http://localhost:8083/realms/eabpmn/protocol/openid-connect/userinfo[m
+[32m+[m[32m        token-uri: http://localhost:8083/realms/eabpmn/protocol/openid-connect/token[m
+[32m+[m[32m        jwk-set-uri: http://localhost:8083/realms/eabpmn/protocol/openid-connect/certs[m
+[32m+[m[32m        logout-uri: http://localhost:8083/realms/eabpmn/protocol/openid-connect/logout[m
+[32m+[m[32m        user-name-attribute: preferred_username[m
+\ No newline at end of file[m
+[1mdiff --git a/docker-compose.yml b/docker-compose.yml[m
+[1mindex 6bfd68f..bbbba32 100644[m
+[1m--- a/docker-compose.yml[m
+[1m+++ b/docker-compose.yml[m
+[36m@@ -14,10 +14,11 @@[m [mservices:[m
+ [m
+   keycloak:[m
+     image: quay.io/keycloak/keycloak:23.0.6[m
+[31m-    command: start[m
+[32m+[m[32m    command: start-dev[m
+     environment:[m
+       KC_HOSTNAME: localhost[m
+[31m-      KC_HOSTNAME_PORT: 8080[m
+[32m+[m[32m      KC_HOSTNAME_PORT: 8083[m
+[32m+[m[32m      KC_HTTP_PORT: 8083[m
+       KC_HOSTNAME_STRICT_BACKCHANNEL: false[m
+       KC_HTTP_ENABLED: true[m
+       KC_HOSTNAME_STRICT_HTTPS: false[m
+[36m@@ -29,7 +30,7 @@[m [mservices:[m
+       KC_DB_USERNAME: ${POSTGRES_USER}[m
+       KC_DB_PASSWORD: ${POSTGRES_PASSWORD}[m
+     ports:[m
+[31m-      - 8083:8080[m
+[32m+[m[32m      - 8083:8083[m
+     restart: always[m
+     depends_on:[m
+       - postgres[m
+[1mdiff --git a/postgres_data/base/1/2619 b/postgres_data/base/1/2619[m
+[1mindex b72d1e9..a7954d7 100644[m
+Binary files a/postgres_data/base/1/2619 and b/postgres_data/base/1/2619 differ
+[1mdiff --git a/postgres_data/base/1/2619_fsm b/postgres_data/base/1/2619_fsm[m
+[1mindex 98a590e..6df0c35 100644[m
+Binary files a/postgres_data/base/1/2619_fsm and b/postgres_data/base/1/2619_fsm differ
+[1mdiff --git a/postgres_data/base/1/2619_vm b/postgres_data/base/1/2619_vm[m
+[1mindex fb5245e..14806ec 100644[m
+Binary files a/postgres_data/base/1/2619_vm and b/postgres_data/base/1/2619_vm differ
+[1mdiff --git a/postgres_data/base/1/2696 b/postgres_data/base/1/2696[m
+[1mindex 3dbc2b1..8bd0d99 100644[m
+Binary files a/postgres_data/base/1/2696 and b/postgres_data/base/1/2696 differ
+[1mdiff --git a/postgres_data/base/1/2840 b/postgres_data/base/1/2840[m
+[1mindex 1d45aeb..2d497ce 100644[m
+Binary files a/postgres_data/base/1/2840 and b/postgres_data/base/1/2840 differ
+[1mdiff --git a/postgres_data/base/1/2841 b/postgres_data/base/1/2841[m
+[1mindex 417c870..eeeadfb 100644[m
+Binary files a/postgres_data/base/1/2841 and b/postgres_data/base/1/2841 differ
+[1mdiff --git a/postgres_data/base/1/pg_internal.init b/postgres_data/base/1/pg_internal.init[m
+[1mindex 64a0bdc..d2b4cb1 100644[m
+Binary files a/postgres_data/base/1/pg_internal.init and b/postgres_data/base/1/pg_internal.init differ
+[1mdiff --git a/postgres_data/base/16384/1249 b/postgres_data/base/16384/1249[m
+[1mindex b304bbe..72b6bfc 100644[m
+Binary files a/postgres_data/base/16384/1249 and b/postgres_data/base/16384/1249 differ
+[1mdiff --git a/postgres_data/base/16384/1249_vm b/postgres_data/base/16384/1249_vm[m
+[1mindex abe65e9..e24b7af 100644[m
+Binary files a/postgres_data/base/16384/1249_vm and b/postgres_data/base/16384/1249_vm differ
+[1mdiff --git a/postgres_data/base/16384/1259 b/postgres_data/base/16384/1259[m
+[1mindex 0d36c50..03c05f6 100644[m
+Binary files a/postgres_data/base/16384/1259 and b/postgres_data/base/16384/1259 differ
+[1mdiff --git a/postgres_data/base/16384/1259_vm b/postgres_data/base/16384/1259_vm[m
+[1mindex 4a71275..04a2f8c 100644[m
+Binary files a/postgres_data/base/16384/1259_vm and b/postgres_data/base/16384/1259_vm differ
+[1mdiff --git a/postgres_data/base/16384/16385 b/postgres_data/base/16384/16385[m
+[1mindex 8873e9b..78d4de3 100644[m
+Binary files a/postgres_data/base/16384/16385 and b/postgres_data/base/16384/16385 differ
+[1mdiff --git a/postgres_data/base/16384/16390 b/postgres_data/base/16384/16390[m
+[1mindex 6907899..b2e976f 100644[m
+Binary files a/postgres_data/base/16384/16390 and b/postgres_data/base/16384/16390 differ
+[1mdiff --git a/postgres_data/base/16384/16398 b/postgres_data/base/16384/16398[m
+[1mindex 584f7b7..a080b57 100644[m
+Binary files a/postgres_data/base/16384/16398 and b/postgres_data/base/16384/16398 differ
+[1mdiff --git a/postgres_data/base/16384/16417 b/postgres_data/base/16384/16417[m
+[1mindex 2785335..d2bdb18 100644[m
+Binary files a/postgres_data/base/16384/16417 and b/postgres_data/base/16384/16417 differ
+[1mdiff --git a/postgres_data/base/16384/16417_fsm b/postgres_data/base/16384/16417_fsm[m
+[1mnew file mode 100644[m
+[1mindex 0000000..39940ef[m
+Binary files /dev/null and b/postgres_data/base/16384/16417_fsm differ
+[1mdiff --git a/postgres_data/base/16384/16420 b/postgres_data/base/16384/16420[m
+[1mindex f14285b..84f88ee 100644[m
+Binary files a/postgres_data/base/16384/16420 and b/postgres_data/base/16384/16420 differ
+[1mdiff --git a/postgres_data/base/16384/16433 b/postgres_data/base/16384/16433[m
+[1mindex 5b87f9d..424ee10 100644[m
+Binary files a/postgres_data/base/16384/16433 and b/postgres_data/base/16384/16433 differ
+[1mdiff --git a/postgres_data/base/16384/16433_fsm b/postgres_data/base/16384/16433_fsm[m
+[1mindex 6215a7e..b52a398 100644[m
+Binary files a/postgres_data/base/16384/16433_fsm and b/postgres_data/base/16384/16433_fsm differ
+[1mdiff --git a/postgres_data/base/16384/16439 b/postgres_data/base/16384/16439[m
+[1mindex aa45d20..76fb589 100644[m
+Binary files a/postgres_data/base/16384/16439 and b/postgres_data/base/16384/16439 differ
+[1mdiff --git a/postgres_data/base/16384/16456 b/postgres_data/base/16384/16456[m
+[1mindex ce53e4e..a1a1f2f 100644[m
+Binary files a/postgres_data/base/16384/16456 and b/postgres_data/base/16384/16456 differ
+[1mdiff --git a/postgres_data/base/16384/16464 b/postgres_data/base/16384/16464[m
+[1mindex 529c9cb..b880b40 100644[m
+Binary files a/postgres_data/base/16384/16464 and b/postgres_data/base/16384/16464 differ
+[1mdiff --git a/postgres_data/base/16384/16467 b/postgres_data/base/16384/16467[m
+[1mindex 0de098b..dbf3a56 100644[m
+Binary files a/postgres_data/base/16384/16467 and b/postgres_data/base/16384/16467 differ
+[1mdiff --git a/
