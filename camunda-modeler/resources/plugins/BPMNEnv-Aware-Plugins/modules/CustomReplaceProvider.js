@@ -70,7 +70,7 @@ class CustomReplaceProvider {
         id: 'space-tasks',
         name: translate('Space Tasks')
       },
-      rank: 99 // Position at the top of our group
+      rank: 1 // Position at the top of our group
     };
   }
 

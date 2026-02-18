@@ -1,18 +1,20 @@
 import movementIcon from '../icons/customTask/movement.svg';
 import bindIcon from '../icons/customTask/binding.svg';
 import unbindIcon from '../icons/customTask/unbinding.svg';
+import environmentalIcon from '../icons/customTask/environmental.svg';
 
 export const TASK_TYPE_KEYS = {
   MOVEMENT: 'movement',
   BINDING: 'binding',
-  UNBINDING: 'unbinding'
+  UNBINDING: 'unbinding',
+  ENVIRONMENTAL: 'environmental'
 };
 
 export const TASK_TYPES_CONFIG = {
   [TASK_TYPE_KEYS.MOVEMENT]: {
     key: TASK_TYPE_KEYS.MOVEMENT,
     typeValue: 'Movement',
-    displayName: 'Move to destination',
+    displayName: 'Movement Task',
     icon: { class: 'movement-badge', iconFile: movementIcon },
     extensionElements: [ 'space:Type', 'space:Destination', 'space:TaskAssignment', 'space:TaskAssignmentReached' ],
     defaultDestination: '${destination}',
@@ -22,7 +24,7 @@ export const TASK_TYPES_CONFIG = {
   [TASK_TYPE_KEYS.BINDING]: {
     key: TASK_TYPE_KEYS.BINDING,
     typeValue: 'Binding',
-    displayName: 'Binding',
+    displayName: 'Binding Task',
     icon: { class: 'binding-badge', iconFile: bindIcon },
     extensionElements: [ 'space:Type', 'space:TaskAssignment', 'space:TaskAssignmentReached' ],
     validationRules: [],
@@ -31,10 +33,19 @@ export const TASK_TYPES_CONFIG = {
   [TASK_TYPE_KEYS.UNBINDING]: {
     key: TASK_TYPE_KEYS.UNBINDING,
     typeValue: 'Unbinding',
-    displayName: 'Unbinding',
+    displayName: 'Unbinding Task',
     icon: { class: 'unbinding-badge', iconFile: unbindIcon },
     extensionElements: [ 'space:Type', 'space:TaskAssignment', 'space:TaskAssignmentReached' ],
     validationRules: [ 'requiresUpstreamBinding' ],
+    formType: 'none'
+  },
+  [TASK_TYPE_KEYS.ENVIRONMENTAL]: {
+    key: TASK_TYPE_KEYS.ENVIRONMENTAL,
+    typeValue: 'Environmental',
+    displayName: 'Environmental Task',
+    icon: { class: 'environmental-badge', iconFile: environmentalIcon },
+    extensionElements: [ 'space:Type', 'space:TaskAssignment', 'space:TaskAssignmentReached' ],
+    validationRules: [],
     formType: 'none'
   }
 };

@@ -1144,6 +1144,8 @@ SpacePropertiesProvider.prototype.getStatusText = function(element, currentType)
     status += `<br><strong>${translate('Participant')}:</strong> ${binding || `<em>${translate('(required)')}</em>`}`;
   } else if (currentType === TASK_TYPE_KEYS.UNBINDING) {
     status += `<br><em>${translate('Ready to release bound participants')}</em>`;
+  } else if (currentType === TASK_TYPE_KEYS.ENVIRONMENTAL) {
+    status += `<br><em>${translate('Environmental task')}</em>`;
   }
 
   return status;
