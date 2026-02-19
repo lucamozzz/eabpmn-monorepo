@@ -1122,7 +1122,7 @@ SpacePropertiesProvider.prototype.updateFieldVisibility = function(section, sele
   }
   const assignmentsEntry = section.querySelector('.space-assignments-entry');
   if (assignmentsEntry) {
-    assignmentsEntry.style.display = selectedType ? 'block' : 'none';
+    assignmentsEntry.style.display = selectedType === TASK_TYPE_KEYS.ENVIRONMENTAL ? 'block' : 'none';
   }
 };
 
@@ -1226,6 +1226,19 @@ SpacePropertiesProvider.prototype.refreshSpaceSection = function(element) {
     if (typeSelect) typeSelect.value = currentType || '';
     if (destinationInput) destinationInput.value = currentDestination || '';
     if (bindingInput) bindingInput.value = currentBinding || '';
+
+    
+    if (currentType === TASK_TYPE_KEYS.ENVIRONMENTAL) {
+      const assignmentsEntry = existingSection.querySelector('.space-assignments-entry');
+      if (!assignmentsEntry) {
+        const groupEntries = existingSection.querySelector('.bio-properties-panel-group-entries');
+        if (groupEntries) {
+          const assignmentsHTML = this.renderTaskAssignments(element);
+          groupEntries.insertAdjacentHTML('beforeend', assignmentsHTML);
+          this.attachAssignmentListeners(existingSection, element);
+        }
+      }
+    }
 
     // Update visibility and indicators
     this.updateFieldVisibility(existingSection, currentType);
