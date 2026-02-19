@@ -565,10 +565,10 @@ SpacePropertiesProvider.prototype.createSpaceSection = function(element) {
 
   section.innerHTML = `
     <div class="bio-properties-panel-group-header ${isExpanded ? 'open' : ''} ${hasData ? '' : 'empty'}">
-      <div title="Space Properties" 
-           data-title="Space Properties" 
+      <div title="Environmental Properties" 
+           data-title="Environmental Properties" 
            class="bio-properties-panel-group-header-title">
-          Space Properties
+          Environmental Properties
           ${assignmentCount > 0 ? `<span class="assignment-count-badge">${assignmentCount}</span>` : ''}
       </div>
       <div class="bio-properties-panel-group-header-buttons">
@@ -625,7 +625,7 @@ SpacePropertiesProvider.prototype.createSpaceSection = function(element) {
       </div>
       
       <!-- NEW: Task Assignments Section (shown for all task types) -->
-      ${currentType ? this.renderTaskAssignments(element) : ''}
+      ${currentType==="environmental" ? this.renderTaskAssignments(element) : ''}
       
     </div>
   `;
