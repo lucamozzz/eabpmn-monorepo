@@ -55,8 +55,16 @@ export const EXTENSION_TYPES = {
   DESTINATION: 'space:Destination',
   PARTICIPANT1: 'space:Participant1',
   PARTICIPANT2: 'space:Participant2',
+  CONNECTION_MODE: 'space:ConnectionMode',
+  LEADER_ID: 'space:LeaderId',
   TASK_ASSIGNMENT: 'space:TaskAssignment',
   TASK_ASSIGNMENT_REACHED: 'space:TaskAssignmentReached'
+};
+
+/** Connection mode for binding/unbinding: 'static' | 'dynamic' (default) */
+export const CONNECTION_MODE = {
+  STATIC: 'static',
+  DYNAMIC: 'dynamic'
 };
 
 // Validation rule definitions for clarity

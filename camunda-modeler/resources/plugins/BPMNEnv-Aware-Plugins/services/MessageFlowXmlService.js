@@ -58,19 +58,48 @@ MessageFlowXmlService.prototype.getParticipant2 = function(messageFlow) {
 };
 
 /**
+ * Get connection mode from message flow ('static' | 'dynamic'). Defaults to 'dynamic'.
+ */
+MessageFlowXmlService.prototype.getConnectionMode = function(messageFlow) {
+  if (!messageFlow?.businessObject?.extensionElements?.values) {
+    return 'dynamic';
+  }
+  const el = messageFlow.businessObject.extensionElements.values.find(
+    v => v.$type === EXTENSION_TYPES.CONNECTION_MODE
+  );
+  const mode = el?.body || 'dynamic';
+  return mode === 'static' ? 'static' : 'dynamic';
+};
+
+/**
+ * Get leader participant ID for static mode (which end shows arrow).
+ */
+MessageFlowXmlService.prototype.getLeaderId = function(messageFlow) {
+  if (!messageFlow?.businessObject?.extensionElements?.values) {
+    return null;
+  }
+  const el = messageFlow.businessObject.extensionElements.values.find(
+    v => v.$type === EXTENSION_TYPES.LEADER_ID
+  );
+  return el?.body || null;
+};
+
+/**
  * Get complete connection info from message flow
  */
 MessageFlowXmlService.prototype.getConnectionInfo = function(messageFlow) {
   const type = this.getConnectionType(messageFlow);
-  
+
   if (!type) {
     return null;
   }
-  
+
   return {
     type: type,
     participant1: this.getParticipant1(messageFlow),
     participant2: this.getParticipant2(messageFlow),
+    connectionMode: this.getConnectionMode(messageFlow),
+    leaderId: this.getLeaderId(messageFlow),
     sourceTaskId: messageFlow.source?.id,
     targetTaskId: messageFlow.target?.id,
     connectionId: messageFlow.id

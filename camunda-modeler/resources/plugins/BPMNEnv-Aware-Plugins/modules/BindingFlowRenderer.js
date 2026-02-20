@@ -69,21 +69,30 @@ BindingFlowRenderer.$inject = [
 ];
 
 /**
- * Ensure custom SVG markers are defined in the defs
+ * Ensure custom SVG markers are defined in the defs of the given SVG (or canvas root).
+ * Uses svgRoot when provided so markers live in the same SVG as the connection (url(#id) resolves).
+ * Only adds markers if they are not already present to avoid duplicate IDs.
  */
-BindingFlowRenderer.prototype.ensureCustomMarkers = function() {
-  const container = this._canvas._svg;
+BindingFlowRenderer.prototype.ensureCustomMarkers = function(svgRoot) {
+  const container = svgRoot || (this._canvas && this._canvas._svg);
   if (!container) return;
 
-  let defs = container.querySelector('defs');
+  const root = (container.nodeName && container.nodeName.toLowerCase() === 'svg')
+    ? container
+    : (container.closest && container.closest('svg')) || container;
+
+  let defs = root.querySelector('defs');
   if (!defs) {
     defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
-    container.insertBefore(defs, container.firstChild);
+    root.insertBefore(defs, root.firstChild);
   }
 
-  const bindingDot = this.createDotMarker('binding-dot');
-  defs.appendChild(bindingDot);
-
+  if (!defs.querySelector('#binding-dot')) {
+    defs.appendChild(this.createDotMarker('binding-dot'));
+  }
+  if (!defs.querySelector('#binding-arrow')) {
+    defs.appendChild(this.createArrowMarker('binding-arrow'));
+  }
 };
 
 /**
@@ -131,43 +140,77 @@ BindingFlowRenderer.prototype.createDotMarker = function(id) {
 };
 
 /**
- * Update a single message flow
+ * Create an arrow marker for static mode (leader end).
+ * Single filled triangle only (like createDotMarker: one simple shape), pointing right.
  */
+BindingFlowRenderer.prototype.createArrowMarker = function(id) {
+  const marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
+  marker.setAttribute('id', id);
+  marker.setAttribute('viewBox', '0 0 20 20');
+  marker.setAttribute('refX', '20');
+  marker.setAttribute('refY', '10');
+  marker.setAttribute('markerWidth', '20');
+  marker.setAttribute('markerHeight', '20');
+  marker.setAttribute('markerUnits', 'userSpaceOnUse');
+  marker.setAttribute('orient', 'auto');
+
+  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path.setAttribute('d', 'M 0 5 L 20 10 L 0 15 Z');
+  path.setAttribute('fill', '#000');
+  path.setAttribute('stroke', 'none');
+  marker.appendChild(path);
+  return marker;
+};
+
+
 BindingFlowRenderer.prototype.updateMessageFlow = function(element) {
   if (!element || element.type !== 'bpmn:MessageFlow') return;
 
   const gfx = this._elementRegistry.getGraphics(element);
   if (!gfx) return;
 
-  // Get the connection type from extension elements
   const connectionInfo = this._messageFlowXmlService.getConnectionInfo(element);
+  const dot = 'url(#binding-dot)';
+  const arrow = 'url(#binding-arrow)';
+  let desired = { start: dot, end: dot };
 
-  // Find ALL paths in the visual element
+  if (connectionInfo) {
+    const mode = connectionInfo.connectionMode || 'dynamic';
+    const leaderId = connectionInfo.leaderId;
+    const participant1 = connectionInfo.participant1;
+    const participant2 = connectionInfo.participant2;
+    if (mode === 'static' && leaderId && (participant1 || participant2)) {
+      // Arrow on the leader's end to identify the connection task; dot on the other end.
+      // participant1 = source (path start), participant2 = target (path end).
+      if (leaderId === participant1) desired = { start: arrow, end: dot };
+      else if (leaderId === participant2) desired = { start: dot, end: arrow };
+    }
+  }
+
   const paths = gfx.querySelectorAll('.djs-visual path');
   if (!paths || paths.length === 0) return;
 
-  paths.forEach(path => {
-    if (connectionInfo && connectionInfo.type) {
+  const isBindingOrUnbinding = connectionInfo &&
+    (connectionInfo.type === TASK_TYPE_KEYS.BINDING || connectionInfo.type === TASK_TYPE_KEYS.UNBINDING);
+  if (isBindingOrUnbinding) {
+    const svg = gfx.closest('svg');
+    if (svg) this.ensureCustomMarkers(svg);
+  }
 
-      // Clear any existing markers first
-      path.removeAttribute('marker-start');
-      path.removeAttribute('marker-end');
-      path.removeAttribute('marker-mid');
-
-      // Apply the SAME dot marker to BOTH ends
-      if (connectionInfo.type === TASK_TYPE_KEYS.BINDING || connectionInfo.type === TASK_TYPE_KEYS.UNBINDING) {
-
-        // Use the same marker for both start and end
-        path.setAttribute('marker-start', 'url(#binding-dot)');
-        path.setAttribute('marker-end', 'url(#binding-dot)');
-      } else {
-
-        // Reset to default for regular message flows
-        path.removeAttribute('marker-start');
-        path.removeAttribute('marker-end');
-      }
-    }
+  // Clear markers on all paths so no duplicate/opposite path shows a second marker.
+  paths.forEach(p => {
+    p.removeAttribute('marker-start');
+    p.removeAttribute('marker-end');
+    p.removeAttribute('marker-mid');
   });
+
+  // Apply our markers only to the first (main) path. Other paths (e.g. outline) can have
+  // opposite direction and would draw circle and arrow at the same end if we set them too.
+  const path = paths[0];
+  if (connectionInfo && (connectionInfo.type === TASK_TYPE_KEYS.BINDING || connectionInfo.type === TASK_TYPE_KEYS.UNBINDING)) {
+    path.setAttribute('marker-start', desired.start);
+    path.setAttribute('marker-end', desired.end);
+  }
 };
 
 /**

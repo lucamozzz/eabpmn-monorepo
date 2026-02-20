@@ -1,89 +1,129 @@
 {
-  "name": "space",
-  "uri": "http://space",
-  "prefix": "space",
-  "xml": {
-    "tagAlias": "lowerCase"
-  },
-  "types": [
-    {
-      "name": "Type",
-      "superClass": ["Element"],
-      "properties": [
-        {
-          "name": "body",
-          "isBody": true,
-          "type": "String"
-        }
-      ]
+    "name": "space",
+    "uri": "http://space",
+    "prefix": "space",
+    "xml": {
+        "tagAlias": "lowerCase"
     },
-    {
-      "name": "Destination",
-      "superClass": ["Element"],
-      "properties": [
+    "types": [
         {
-          "name": "body",
-          "isBody": true,
-          "type": "String"
-        }
-      ]
-    },
-    {
-      "name": "Participant1",
-      "superClass": ["Element"],
-      "properties": [
+            "name": "Type",
+            "superClass": [
+                "Element"
+            ],
+            "properties": [
+                {
+                    "name": "body",
+                    "isBody": true,
+                    "type": "String"
+                }
+            ]
+        },
         {
-          "name": "body",
-          "isBody": true,
-          "type": "String"
-        }
-      ]
-    },
-    {
-      "name": "Participant2",
-      "superClass": ["Element"],
-      "properties": [
+            "name": "Destination",
+            "superClass": [
+                "Element"
+            ],
+            "properties": [
+                {
+                    "name": "body",
+                    "isBody": true,
+                    "type": "String"
+                }
+            ]
+        },
         {
-          "name": "body",
-          "isBody": true,
-          "type": "String"
-        }
-      ]
-    },
-    {
-      "name": "Binding",
-      "superClass": ["Element"],
-      "properties": [
+            "name": "Participant1",
+            "superClass": [
+                "Element"
+            ],
+            "properties": [
+                {
+                    "name": "body",
+                    "isBody": true,
+                    "type": "String"
+                }
+            ]
+        },
         {
-          "name": "body",
-          "isBody": true,
-          "type": "String"
-        }
-      ]
-    },
-    {
-      "name": "TaskAssignment",
-      "superClass": ["Element"],
-      "properties": [
+            "name": "Participant2",
+            "superClass": [
+                "Element"
+            ],
+            "properties": [
+                {
+                    "name": "body",
+                    "isBody": true,
+                    "type": "String"
+                }
+            ]
+        },
         {
-          "name": "body",
-          "isBody": true,
-          "type": "String"
-        }
-      ]
-    },
-    {
-      "name": "TaskAssignmentReached",
-      "superClass": ["Element"],
-      "properties": [
+            "name": "ConnectionMode",
+            "superClass": [
+                "Element"
+            ],
+            "properties": [
+                {
+                    "name": "body",
+                    "isBody": true,
+                    "type": "String"
+                }
+            ]
+        },
         {
-          "name": "body",
-          "isBody": true,
-          "type": "String"
+            "name": "LeaderId",
+            "superClass": [
+                "Element"
+            ],
+            "properties": [
+                {
+                    "name": "body",
+                    "isBody": true,
+                    "type": "String"
+                }
+            ]
+        },
+        {
+            "name": "Binding",
+            "superClass": [
+                "Element"
+            ],
+            "properties": [
+                {
+                    "name": "body",
+                    "isBody": true,
+                    "type": "String"
+                }
+            ]
+        },
+        {
+            "name": "TaskAssignment",
+            "superClass": [
+                "Element"
+            ],
+            "properties": [
+                {
+                    "name": "body",
+                    "isBody": true,
+                    "type": "String"
+                }
+            ]
+        },
+        {
+            "name": "TaskAssignmentReached",
+            "superClass": [
+                "Element"
+            ],
+            "properties": [
+                {
+                    "name": "body",
+                    "isBody": true,
+                    "type": "String"
+                }
+            ]
         }
-      ]
-    }
-  ],
-  "emumerations": [],
-  "associations": []
+    ],
+    "emumerations": [],
+    "associations": []
 }

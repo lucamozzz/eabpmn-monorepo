@@ -1,4 +1,4 @@
-import { getTaskConfig, getAllTaskTypes, TASK_TYPE_KEYS } from './TaskTypes';
+import { getTaskConfig, getAllTaskTypes, TASK_TYPE_KEYS, EXTENSION_TYPES, CONNECTION_MODE } from './TaskTypes';
 
 function SpacePropertiesProvider(
     eventBus,
@@ -8,7 +8,9 @@ function SpacePropertiesProvider(
     environmentService,
     messageFlowXmlService,
     elementRegistry,
-    assignmentService
+    assignmentService,
+    modeling,
+    bpmnFactory
 ) {
   this._eventBus = eventBus;
   this._translate = translate;
@@ -18,6 +20,8 @@ function SpacePropertiesProvider(
   this._messageFlowXmlService = messageFlowXmlService;
   this._elementRegistry = elementRegistry;
   this._assignmentService = assignmentService;
+  this._modeling = modeling;
+  this._bpmnFactory = bpmnFactory;
 
   console.info('SpacePropertiesProvider initialized');
 
@@ -76,7 +80,9 @@ SpacePropertiesProvider.$inject = [
   'environmentService',
   'messageFlowXmlService',
   'elementRegistry',
-  'assignmentService'
+  'assignmentService',
+  'modeling',
+  'bpmnFactory'
 ];
 
 /**
@@ -111,7 +117,9 @@ SpacePropertiesProvider.prototype.createMessageFlowSpaceSection = function(messa
 };
 
 /**
- * Create the Space Properties section for message flow
+ * Create the Space Properties section for message flow.
+ * For binding/unbinding: shows Connection Mode (Static/Dynamic) and conditional Leader dropdown.
+ * For other connection types: shows legacy Type and Participant references.
  */
 SpacePropertiesProvider.prototype.createMessageFlowSection = function(messageFlow, connectionInfo) {
   const section = document.createElement('div');
@@ -121,20 +129,93 @@ SpacePropertiesProvider.prototype.createMessageFlowSection = function(messageFlo
   const translate = this._translate;
   const hasData = !!connectionInfo;
   const isExpanded = hasData;
+  const isBindingOrUnbinding = hasData &&
+    (connectionInfo.type === TASK_TYPE_KEYS.BINDING || connectionInfo.type === TASK_TYPE_KEYS.UNBINDING);
 
-  // Get participant names
+  // Participant labels for Leader dropdown (from connected participants)
   const sourceParticipant = connectionInfo ? this._elementRegistry.get(connectionInfo.participant1) : null;
   const targetParticipant = connectionInfo ? this._elementRegistry.get(connectionInfo.participant2) : null;
   const sourceName = sourceParticipant?.businessObject?.name || connectionInfo?.participant1 || '';
   const targetName = targetParticipant?.businessObject?.name || connectionInfo?.participant2 || '';
 
+  const connectionMode = (connectionInfo && this._messageFlowXmlService.getConnectionMode(messageFlow)) || CONNECTION_MODE.DYNAMIC;
+  const leaderId = connectionInfo && this._messageFlowXmlService.getLeaderId(messageFlow);
+  const showLeader = isBindingOrUnbinding && connectionMode === CONNECTION_MODE.STATIC;
+  const p1 = connectionInfo?.participant1 || '';
+  const p2 = connectionInfo?.participant2 || '';
+
+  const entriesContent = isBindingOrUnbinding
+    ? `
+      <!-- Connection Mode Entry -->
+      <div data-entry-id="space-connection-mode" class="bio-properties-panel-entry">
+        <div class="bio-properties-panel-textfield">
+          <label for="connection-mode-select" class="bio-properties-panel-label">${translate('Connection Mode')}</label>
+          <select id="connection-mode-select" 
+                  name="connectionMode" 
+                  class="bio-properties-panel-input connection-mode-select">
+            <option value="${CONNECTION_MODE.DYNAMIC}" ${connectionMode === CONNECTION_MODE.DYNAMIC ? 'selected' : ''}>${translate('Dynamic')}</option>
+            <option value="${CONNECTION_MODE.STATIC}" ${connectionMode === CONNECTION_MODE.STATIC ? 'selected' : ''}>${translate('Static')}</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Leader Entry (only when Static) -->
+      <div data-entry-id="space-leader" class="bio-properties-panel-entry space-leader-entry" style="${showLeader ? '' : 'display: none;'}">
+        <div class="bio-properties-panel-textfield">
+          <label for="leader-select" class="bio-properties-panel-label">${translate('Leader')}</label>
+          <select id="leader-select" 
+                  name="leaderId" 
+                  class="bio-properties-panel-input leader-select">
+            <option value="">${translate('(None)')}</option>
+            ${p1 ? `<option value="${this.escapeHtml(p1)}" ${leaderId === p1 ? 'selected' : ''}>${this.escapeHtml(sourceName || p1)}</option>` : ''}
+            ${p2 ? `<option value="${this.escapeHtml(p2)}" ${leaderId === p2 ? 'selected' : ''}>${this.escapeHtml(targetName || p2)}</option>` : ''}
+          </select>
+        </div>
+      </div>
+    `
+    : `
+      <!-- Legacy: Connection Type Entry -->
+      <div data-entry-id="space-connection-type" class="bio-properties-panel-entry">
+        <div class="bio-properties-panel-textfield">
+          <label class="bio-properties-panel-label">${translate('Type')}</label>
+          <input type="text" 
+                 class="bio-properties-panel-input" 
+                 value="${connectionInfo ? connectionInfo.type : ''}" 
+                 readonly
+                 style="background: #f8f9fa; cursor: default;" />
+        </div>
+      </div>
+      <div data-entry-id="space-source-ref" class="bio-properties-panel-entry">
+        <div class="bio-properties-panel-textfield">
+          <label class="bio-properties-panel-label">${translate('Participant 1 reference')}</label>
+          <input type="text" 
+                 class="bio-properties-panel-input" 
+                 value="${connectionInfo?.participant1 || ''}" 
+                 readonly
+                 title="${sourceName}"
+                 style="background: #f8f9fa; cursor: default;" />
+        </div>
+      </div>
+      <div data-entry-id="space-target-ref" class="bio-properties-panel-entry">
+        <div class="bio-properties-panel-textfield">
+          <label class="bio-properties-panel-label">${translate('Participant 2 reference')}</label>
+          <input type="text" 
+                 class="bio-properties-panel-input" 
+                 value="${connectionInfo?.participant2 || ''}" 
+                 readonly
+                 title="${targetName}"
+                 style="background: #f8f9fa; cursor: default;" />
+        </div>
+      </div>
+    `;
+
   section.innerHTML = `
   ${hasData ? `
     <div class="bio-properties-panel-group-header ${isExpanded ? 'open' : ''}">
-      <div title="Space Properties" 
-           data-title="Space Properties" 
+      <div title="Environmental Properties" 
+           data-title="Environmental Properties" 
            class="bio-properties-panel-group-header-title">
-        Space Properties 
+        Environmental Properties 
       </div>
       <div class="bio-properties-panel-group-header-buttons">
         <div title="Section contains data" class="bio-properties-panel-dot"></div>
@@ -152,50 +233,89 @@ SpacePropertiesProvider.prototype.createMessageFlowSection = function(messageFlo
     </div>
 
     <div class="bio-properties-panel-group-entries ${isExpanded ? 'open' : ''}" style="${isExpanded ? '' : 'display: none;'}">
-      <!-- Connection Type Entry -->
-      <div data-entry-id="space-connection-type" class="bio-properties-panel-entry">
-        <div class="bio-properties-panel-textfield">
-          <label class="bio-properties-panel-label">${translate('Type')}</label>
-          <input type="text" 
-                 class="bio-properties-panel-input" 
-                 value="${connectionInfo.type}" 
-                 readonly
-                 style="background: #f8f9fa; cursor: default;" />
-        </div>
-      </div>
-
-      <!-- Source Reference Entry -->
-      <div data-entry-id="space-source-ref" class="bio-properties-panel-entry">
-        <div class="bio-properties-panel-textfield">
-          <label class="bio-properties-panel-label">${translate('Participant 1 reference')}</label>
-          <input type="text" 
-                 class="bio-properties-panel-input" 
-                 value="${connectionInfo.participant1}" 
-                 readonly
-                 title="${sourceName}"
-                 style="background: #f8f9fa; cursor: default;" />
-        </div>
-      </div>
-
-      <!-- Target Reference Entry -->
-      <div data-entry-id="space-target-ref" class="bio-properties-panel-entry">
-        <div class="bio-properties-panel-textfield">
-          <label class="bio-properties-panel-label">${translate('Participant 2 reference')}</label>
-          <input type="text" 
-                 class="bio-properties-panel-input" 
-                 value="${connectionInfo.participant2}" 
-                 readonly
-                 title="${targetName}"
-                 style="background: #f8f9fa; cursor: default;" />
-        </div>
-      </div>
+      ${entriesContent}
     </div>
   ` : ''}`;
 
-  // Attach toggle event listener
   this.attachSectionEventListeners(section, messageFlow);
+  if (isBindingOrUnbinding) {
+    this.attachMessageFlowConnectionListeners(section, messageFlow);
+  }
 
   return section;
+};
+
+/**
+ * Attach listeners for Connection Mode and Leader on binding/unbinding message flows.
+ * Persists to extensionElements and triggers renderer update via elements.changed.
+ */
+SpacePropertiesProvider.prototype.attachMessageFlowConnectionListeners = function(section, messageFlow) {
+  const connectionModeSelect = section.querySelector('.connection-mode-select');
+  const leaderSelect = section.querySelector('.leader-select');
+  const leaderEntry = section.querySelector('.space-leader-entry');
+
+  if (connectionModeSelect) {
+    connectionModeSelect.addEventListener('change', (e) => {
+      const mode = e.target.value;
+      this.setMessageFlowConnectionMode(messageFlow, mode);
+      if (leaderEntry) {
+        leaderEntry.style.display = mode === CONNECTION_MODE.STATIC ? 'block' : 'none';
+      }
+      if (mode === CONNECTION_MODE.DYNAMIC) {
+        this.setMessageFlowLeaderId(messageFlow, '');
+      }
+      this._eventBus.fire('elements.changed', { elements: [ messageFlow ] });
+    });
+  }
+
+  if (leaderSelect) {
+    leaderSelect.addEventListener('change', (e) => {
+      const leaderId = e.target.value || '';
+      this.setMessageFlowLeaderId(messageFlow, leaderId);
+      this._eventBus.fire('elements.changed', { elements: [ messageFlow ] });
+    });
+  }
+};
+
+/**
+ * Ensure extensionElements on message flow and set or update a single extension by type.
+ */
+SpacePropertiesProvider.prototype.ensureMessageFlowExtension = function(messageFlow, type, value) {
+  const bo = messageFlow.businessObject;
+  if (!bo.extensionElements) {
+    bo.extensionElements = this._bpmnFactory.create('bpmn:ExtensionElements', { values: [] });
+  }
+  const values = bo.extensionElements.values || [];
+  const existing = values.find(v => v.$type === type);
+  if (existing) {
+    this._modeling.updateModdleProperties(messageFlow, existing, { body: value });
+  } else {
+    const el = this._bpmnFactory.create(type, { body: value });
+    const newValues = [ ...values, el ];
+    this._modeling.updateModdleProperties(messageFlow, bo.extensionElements, { values: newValues });
+  }
+};
+
+/**
+ * Remove one extension element type from message flow.
+ */
+SpacePropertiesProvider.prototype.removeMessageFlowExtension = function(messageFlow, type) {
+  const bo = messageFlow.businessObject;
+  if (!bo.extensionElements?.values) return;
+  const values = bo.extensionElements.values.filter(v => v.$type !== type);
+  this._modeling.updateModdleProperties(messageFlow, bo.extensionElements, { values });
+};
+
+SpacePropertiesProvider.prototype.setMessageFlowConnectionMode = function(messageFlow, mode) {
+  this.ensureMessageFlowExtension(messageFlow, EXTENSION_TYPES.CONNECTION_MODE, mode);
+};
+
+SpacePropertiesProvider.prototype.setMessageFlowLeaderId = function(messageFlow, leaderId) {
+  if (!leaderId) {
+    this.removeMessageFlowExtension(messageFlow, EXTENSION_TYPES.LEADER_ID);
+  } else {
+    this.ensureMessageFlowExtension(messageFlow, EXTENSION_TYPES.LEADER_ID, leaderId);
+  }
 };
 
 /**
