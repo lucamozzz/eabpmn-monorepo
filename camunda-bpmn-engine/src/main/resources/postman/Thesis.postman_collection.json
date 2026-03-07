@@ -1,0 +1,300 @@
+{
+	"info": {
+		"_postman_id": "45a13d6f-7031-451d-9008-4f6c15b6a995",
+		"name": "Thesis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39796643"
+	},
+	"item": [
+		{
+			"name": "Camunda",
+			"item": [
+				{
+					"name": "Process",
+					"item": [
+						{
+							"name": "Start",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let data = pm.response.json();\r",
+											"if (data.pid) {\r",
+											"    pm.collectionVariables.set(\"pid\", data.pid);\r",
+											"}\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/process/start?processId={{processId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"process",
+										"start"
+									],
+									"query": [
+										{
+											"key": "processId",
+											"value": "{{processId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get process status",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/process/status?pid={{pid}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"process",
+										"status"
+									],
+									"query": [
+										{
+											"key": "pid",
+											"value": "{{pid}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get last PID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/process/last",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"process",
+										"last"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GPS",
+					"item": [
+						{
+							"name": "Valid GPS",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "pid",
+											"value": "{{pid}}",
+											"type": "text"
+										},
+										{
+											"key": "lat",
+											"value": "22",
+											"type": "text"
+										},
+										{
+											"key": "lon",
+											"value": "12",
+											"type": "text"
+										},
+										{
+											"key": "participantId",
+											"value": "{{participantId}}",
+											"type": "text"
+										},
+										{
+											"key": "activityId",
+											"value": "{{activityId}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/movement/gps",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"movement",
+										"gps"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid GPS",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "pid",
+											"value": "{{pid}}",
+											"type": "text"
+										},
+										{
+											"key": "lat",
+											"value": "30",
+											"type": "text"
+										},
+										{
+											"key": "lon",
+											"value": "5",
+											"type": "text"
+										},
+										{
+											"key": "participantId",
+											"value": "{{participantId}}",
+											"type": "text"
+										},
+										{
+											"key": "activityId",
+											"value": "{{activityId}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/movement/gps",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"movement",
+										"gps"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Position",
+					"item": [
+						{
+							"name": "All",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/position/all",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"position",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Participant",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/position/{{participantId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"position",
+										"{{participantId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "participantId",
+			"value": "Participant_0ie2wap",
+			"type": "string"
+		},
+		{
+			"key": "activityId",
+			"value": "Activity_1stc37q",
+			"type": "string"
+		},
+		{
+			"key": "pid",
+			"value": "null",
+			"type": "string"
+		},
+		{
+			"key": "processId",
+			"value": "Process_0yudeo4",
+			"type": "string"
+		},
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

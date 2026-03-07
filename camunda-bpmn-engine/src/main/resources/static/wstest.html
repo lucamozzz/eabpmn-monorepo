@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Test</title>
+</head>
+<body>
+<h2>WebSocket Connection Test</h2>
+<button onclick="testConnection()">Test Connection</button>
+<div id="status"></div>
+<pre id="log"></pre>
+
+<script>
+    function log(message) {
+        document.getElementById('log').innerHTML += message + '\n';
+        console.log(message);
+    }
+
+    function testConnection() {
+        log('Testing connection...');
+
+        const wsUrl = 'ws://localhost:8082/ws/gps?userId=test&businessKey=test123';
+        log('Connecting to: ' + wsUrl);
+
+        try {
+            const ws = new WebSocket(wsUrl);
+
+            ws.onopen = function() {
+                log('SUCCESS: WebSocket connected!');
+                document.getElementById('status').style.color = 'green';
+                document.getElementById('status').innerHTML = 'Connected';
+            };
+
+            ws.onerror = function(error) {
+                log('ERROR: ' + error);
+                document.getElementById('status').style.color = 'red';
+                document.getElementById('status').innerHTML = 'Error';
+            };
+
+            ws.onclose = function(event) {
+                log('CLOSED: Code=' + event.code + ', Reason=' + event.reason);
+            };
+
+            ws.onmessage = function(event) {
+                log('MESSAGE: ' + event.data);
+            };
+
+        } catch (e) {
+            log('EXCEPTION: ' + e);
+        }
+    }
+</script>
+</body>
+</html>

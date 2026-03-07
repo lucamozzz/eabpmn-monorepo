@@ -1,0 +1,655 @@
+{
+   "places": [
+    {
+      "id": "place1",
+      "name": "R2",
+      "coordinates": [
+        [13.067744928731921, 43.13902470821884],
+        [13.067618864908221, 43.13896109921407],
+        [13.067550468578334, 43.13903253701491],
+        [13.067685920133588, 43.139098103142146]
+      ],
+      "attributes": {
+        "building": "A",
+        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=28&max=34&count=1",
+        "purpose": "studying",
+        "freeSeats": 0
+      }
+    },
+    {
+      "id": "place2",
+      "name": "R3",
+      "coordinates": [
+        [13.067813325061795, 43.13916366919909],
+        [13.067866969242097, 43.139088317157416],
+        [13.067744928731921, 43.13902470821884],
+        [13.067685920133588, 43.139098103142146]
+      ],
+      "attributes": {
+        "building": "A",
+        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
+        "purpose": "phd"
+      }
+    },
+    {
+      "id": "place3",
+      "name": "R6",
+      "coordinates": [
+        [13.067813325061795, 43.13916366919909],
+        [13.067866969242097, 43.139088317157416],
+        [13.067997056379317, 43.139155840419846],
+        [13.067934024467466, 43.13922629939677]
+      ],
+      "attributes": {
+        "building": "A",
+        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
+        "purpose": "phd"
+      }
+    },
+    {
+      "id": "place4",
+      "name": "R8",
+      "coordinates": [
+        [13.067934024467466, 43.13922629939677],
+        [13.067997056379317, 43.139155840419846],
+        [13.068072158231741, 43.1391949843059],
+        [13.068007785215384, 43.13925957166319]
+      ],
+      "attributes": {
+        "building": "A",
+        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
+        "purpose": "teaching",
+        "freeSeats": 17
+      }
+    },
+    {
+      "id": "place5",
+      "name": "R7",
+      "coordinates": [
+        [13.068007785215384, 43.13925957166319],
+        [13.06792329563141, 43.13934960241113],
+        [13.067860263719558, 43.139321223167826],
+        [13.067934024467466, 43.13922629939677]
+      ],
+      "attributes": {
+        "building": "A",
+        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
+        "purpose": "teaching",
+        "freeSeats": 50
+      }
+    },
+    {
+      "id": "place6",
+      "name": "R5",
+      "coordinates": [
+        [13.067934024467466, 43.13922629939677],
+        [13.067813325061795, 43.13916366919909],
+        [13.067755657567977, 43.13926935762046],
+        [13.067860263719558, 43.139321223167826]
+      ],
+      "attributes": {
+        "building": "A",
+        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
+        "purpose": "studying",
+        "freeSeats": 5
+      }
+    },
+    {
+      "id": "place7",
+      "name": "R4",
+      "coordinates": [
+        [13.067755657567977, 43.13926935762046],
+        [13.067620206012727, 43.13919694149956],
+        [13.067685920133588, 43.139098103142146],
+        [13.067813325061795, 43.13916366919909]
+      ],
+      "attributes": {
+        "building": "A",
+        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
+        "purpose": "studying",
+        "freeSeats": 3
+      }
+    },
+    {
+      "id": "place8",
+      "name": "R1",
+      "coordinates": [
+        [13.067467320098876, 43.13911865370483],
+        [13.067620206012727, 43.13919694149956],
+        [13.067685920133588, 43.139098103142146],
+        [13.067550468578334, 43.13903253701491]
+      ],
+      "attributes": {
+        "building": "A",
+        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
+        "purpose": "studying",
+        "freeSeats": 0
+      }
+    },
+    {
+      "id": "place9",
+      "name": "R10",
+      "coordinates": [
+        [13.06861530555725, 43.13940342507735],
+        [13.068734663858413, 43.13945724769627],
+        [13.068679678573607, 43.13952281336813],
+        [13.06855093254089, 43.13947779813833]
+      ],
+      "attributes": {
+        "building": "B",
+        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
+        "purpose": "teaching",
+        "freeSeats": 15
+      }
+    },
+    {
+      "id": "place10",
+      "name": "R12",
+      "coordinates": [
+        [13.068734663858413, 43.13945724769627],
+        [13.068679678573607, 43.13952281336813],
+        [13.06881513012886, 43.1395825074261],
+        [13.068870115413665, 43.13952477055125]
+      ],
+      "attributes": {
+        "building": "B",
+        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
+        "purpose": "teaching",
+        "freeSeats": 15
+      }
+    },
+    {
+      "id": "place11",
+      "name": "R14",
+      "coordinates": [
+        [13.068870115413665, 43.13952477055125],
+        [13.06881513012886, 43.1395825074261],
+        [13.068949240579604, 43.139637308477205],
+        [13.069006908073426, 43.139585443197916]
+      ],
+      "attributes": {
+        "building": "B",
+        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
+        "purpose": "teaching",
+        "freeSeats": 10
+      }
+    },
+    {
+      "id": "place12",
+      "name": "R16",
+      "coordinates": [
+        [13.068949240579604, 43.139637308477205],
+        [13.069006908073426, 43.139585443197916],
+        [13.069084692134856, 43.13962262962903],
+        [13.06904043568611, 43.13967351628759]
+      ],
+      "attributes": {
+        "building": "B",
+        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
+        "purpose": "studying",
+        "freeSeats": 0
+      }
+    },
+    {
+      "id": "place13",
+      "name": "R15",
+      "coordinates": [
+        [13.068949240579604, 43.139637308477205],
+        [13.06904043568611, 43.13967351628759],
+        [13.068963377979273, 43.139760610662535],
+        [13.068884252813335, 43.13972244572696]
+      ],
+      "attributes": {
+        "building": "B",
+        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
+        "purpose": "tutor"
+      }
+    },
+    {
+      "id": "place14",
+      "name": "R13",
+      "coordinates": [
+        [13.068949240579604, 43.139637308477205],
+        [13.068884252813335, 43.13972244572696],
+        [13.068780261411666, 43.13967645205503],
+        [13.06881513012886, 43.1395825074261]
+      ],
+      "attributes": {
+        "building": "B",
+        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
+        "purpose": "studying",
+        "freeSeats": 0
+      }
+    },
+    {
+      "id": "place15",
+      "name": "R11",
+      "coordinates": [
+        [13.068780261411666, 43.13967645205503],
+        [13.06881513012886, 43.1395825074261],
+        [13.068679678573607, 43.13952281336813],
+        [13.068636763229367, 43.13960795077733]
+      ],
+      "attributes": {
+        "building": "B",
+        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
+        "purpose": "teaching",
+        "freeSeats": 35
+      }
+    },
+    {
+      "id": "place16",
+      "name": "R9",
+      "coordinates": [
+        [13.06855093254089, 43.13947779813833],
+        [13.068679678573607, 43.13952281336813],
+        [13.068636763229367, 43.13960795077733],
+        [13.068491923942565, 43.13954629956183]
+      ],
+      "attributes": {
+        "building": "B",
+        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
+        "purpose": "teaching",
+        "freeSeats": 35
+      }
+    }
+  ],
+    "edges": [
+        {
+            "id": "edge1",
+            "name": "Edge 1",
+            "source": "place1",
+            "target": "place2",
+            "attributes": {}
+        },
+        {
+            "id": "edge2",
+            "name": "Edge 2",
+            "source": "place2",
+            "target": "place3",
+            "attributes": {}
+        },
+        {
+            "id": "edge3",
+            "name": "Edge 3",
+            "source": "place3",
+            "target": "place5",
+            "attributes": {}
+        },
+        {
+            "id": "edge4",
+            "name": "Edge 4",
+            "source": "place4",
+            "target": "place5",
+            "attributes": {}
+        },
+        {
+            "id": "edge5",
+            "name": "Edge 5",
+            "source": "place5",
+            "target": "place6",
+            "attributes": {}
+        },
+        {
+            "id": "edge6",
+            "name": "Edge 6",
+            "source": "place8",
+            "target": "place1",
+            "attributes": {}
+        },
+        {
+            "id": "edge7",
+            "name": "Edge 7",
+            "source": "place6",
+            "target": "place3",
+            "attributes": {}
+        },
+        {
+            "id": "edge8",
+            "name": "Edge 8",
+            "source": "place2",
+            "target": "place7",
+            "attributes": {}
+        },
+        {
+            "id": "edge9",
+            "name": "Edge 9",
+            "source": "place17",
+            "target": "place4",
+            "attributes": {}
+        },
+        {
+            "id": "edge10",
+            "name": "Edge 10",
+            "source": "place9",
+            "target": "place10",
+            "attributes": {}
+        },
+        {
+            "id": "edge11",
+            "name": "Edge 11",
+            "source": "place10",
+            "target": "place11",
+            "attributes": {}
+        },
+        {
+            "id": "edge12",
+            "name": "Edge 12",
+            "source": "place11",
+            "target": "place12",
+            "attributes": {}
+        },
+        {
+            "id": "edge13",
+            "name": "Edge 13",
+            "source": "place11",
+            "target": "place14",
+            "attributes": {}
+        },
+        {
+            "id": "edge14",
+            "name": "Edge 14",
+            "source": "place13",
+            "target": "place14",
+            "attributes": {}
+        },
+        {
+            "id": "edge15",
+            "name": "Edge 15",
+            "source": "place14",
+            "target": "place15",
+            "attributes": {}
+        },
+        {
+            "id": "edge16",
+            "name": "Edge 16",
+            "source": "place15",
+            "target": "place16",
+            "attributes": {}
+        },
+        {
+            "id": "edge17",
+            "name": "Edge 17",
+            "source": "place9",
+            "target": "place15",
+            "attributes": {}
+        },
+        {
+            "id": "edge18",
+            "name": "Edge 18",
+            "source": "place15",
+            "target": "place9",
+            "attributes": {}
+        },
+        {
+            "id": "edge19",
+            "name": "Edge 19",
+            "source": "place11",
+            "target": "place15",
+            "attributes": {}
+        },
+        {
+            "id": "edge20",
+            "name": "Edge 20",
+            "source": "place10",
+            "target": "place15",
+            "attributes": {}
+        },
+        {
+            "id": "edge21",
+            "name": "Edge 21",
+            "source": "place2",
+            "target": "place1",
+            "attributes": {}
+        },
+        {
+            "id": "edge22",
+            "name": "Edge 22",
+            "source": "place3",
+            "target": "place2",
+            "attributes": {}
+        },
+        {
+            "id": "edge23",
+            "name": "Edge 23",
+            "source": "place5",
+            "target": "place3",
+            "attributes": {}
+        },
+        {
+            "id": "edge24",
+            "name": "Edge 24",
+            "source": "place5",
+            "target": "place4",
+            "attributes": {}
+        },
+        {
+            "id": "edge25",
+            "name": "Edge 25",
+            "source": "place6",
+            "target": "place5",
+            "attributes": {}
+        },
+        {
+            "id": "edge26",
+            "name": "Edge 26",
+            "source": "place1",
+            "target": "place8",
+            "attributes": {}
+        },
+        {
+            "id": "edge27",
+            "name": "Edge 27",
+            "source": "place3",
+            "target": "place6",
+            "attributes": {}
+        },
+        {
+            "id": "edge28",
+            "name": "Edge 28",
+            "source": "place7",
+            "target": "place2",
+            "attributes": {}
+        },
+        {
+            "id": "edge29",
+            "name": "Edge 29",
+            "source": "place4",
+            "target": "place17",
+            "attributes": {}
+        },
+        {
+            "id": "edge30",
+            "name": "Edge 30",
+            "source": "place10",
+            "target": "place9",
+            "attributes": {}
+        },
+        {
+            "id": "edge31",
+            "name": "Edge 31",
+            "source": "place11",
+            "target": "place10",
+            "attributes": {}
+        },
+        {
+            "id": "edge32",
+            "name": "Edge 32",
+            "source": "place12",
+            "target": "place11",
+            "attributes": {}
+        },
+        {
+            "id": "edge33",
+            "name": "Edge 33",
+            "source": "place14",
+            "target": "place11",
+            "attributes": {}
+        },
+        {
+            "id": "edge34",
+            "name": "Edge 34",
+            "source": "place14",
+            "target": "place13",
+            "attributes": {}
+        },
+        {
+            "id": "edge35",
+            "name": "Edge 35",
+            "source": "place15",
+            "target": "place14",
+            "attributes": {}
+        },
+        {
+            "id": "edge36",
+            "name": "Edge 36",
+            "source": "place16",
+            "target": "place15",
+            "attributes": {}
+        },
+        {
+            "id": "edge37",
+            "name": "Edge 37",
+            "source": "place17",
+            "target": "place9",
+            "attributes": {}
+        },
+        {
+            "id": "edge38",
+            "name": "Edge 38",
+            "source": "place9",
+            "target": "place17",
+            "attributes": {}
+        },
+        {
+            "id": "edge39",
+            "name": "Edge 39",
+            "source": "place15",
+            "target": "place11",
+            "attributes": {}
+        },
+        {
+            "id": "edge40",
+            "name": "Edge 40",
+            "source": "place15",
+            "target": "place10",
+            "attributes": {}
+        }
+    ],
+    "logicalPlaces": [
+        {
+            "id": "set1",
+            "name": "Building A",
+            "conditions": [
+                {
+                    "attribute": "building",
+                    "operator": "==",
+                    "value": "A"
+                }
+            ],
+            "expression": "building === 'A'",
+            "place": "place13"
+        },
+        {
+            "id": "set2",
+            "name": "Building B",
+            "conditions": [
+                {
+                    "attribute": "building",
+                    "operator": "==",
+                    "value": "B"
+                }
+            ],
+            "place": "place5"
+        },
+        {
+            "id": "set3",
+            "name": "Available Study Rooms",
+            "conditions": [
+                {
+                    "attribute": "purpose",
+                    "operator": "==",
+                    "value": "studying"
+                },
+                {
+                    "attribute": "freeSeats",
+                    "operator": ">",
+                    "value": 0
+                }
+            ],
+            "place": "place6"
+        },
+        {
+            "id": "set4",
+            "name": "Available Classrooms",
+            "conditions": [
+                {
+                    "attribute": "purpose",
+                    "operator": "==",
+                    "value": "teaching"
+                },
+                {
+                    "attribute": "freeSeats",
+                    "operator": ">",
+                    "value": 30
+                }
+            ],
+            "place": "place4"
+        },
+        {
+            "id": "set5",
+            "name": "PhD Office",
+            "conditions": [
+                {
+                    "attribute": "purpose",
+                    "operator": "==",
+                    "value": "phd"
+                }
+            ],
+            "place": "place2"
+        },
+        {
+            "id": "set6",
+            "name": "Tutor Office",
+            "conditions": [
+                {
+                    "attribute": "purpose",
+                    "operator": "==",
+                    "value": "tutor"
+                }
+            ],
+            "place": "place13"
+        }
+    ],
+    "views": [
+        {
+            "id": "view1",
+            "name": "Buildings",
+            "logicalPlaces": [
+                "set1",
+                "set2"
+            ],
+            "attributes": {}
+        },
+        {
+            "id": "view2",
+            "name": "Available Rooms",
+            "logicalPlaces": [
+                "set3",
+                "set4"
+            ],
+            "attributes": {
+                "freeSeats": "SUM"
+            }
+        },
+        {
+            "id": "view3",
+            "name": "Offices",
+            "logicalPlaces": [
+                "set5",
+                "set6"
+            ],
+            "attributes": {}
+        }
+    ]
+}
