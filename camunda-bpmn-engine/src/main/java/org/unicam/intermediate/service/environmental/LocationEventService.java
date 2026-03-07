@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.unicam.intermediate.models.WaitingBinding;
 import org.unicam.intermediate.models.environmental.LocationUpdateEvent;
-import org.unicam.intermediate.models.pojo.Place;
+import org.unicam.intermediate.models.pojo.PhysicalPlace;
 import org.unicam.intermediate.models.record.MovementResponse;
 import org.unicam.intermediate.service.environmental.movement.GpsProcessingService;
 import org.unicam.intermediate.service.participant.ParticipantPositionService;
@@ -41,9 +41,9 @@ public class LocationEventService {
         List<String> triggeredEvents = new ArrayList<>();
 
         // 1. Determine which place the location is in
-        Optional<Place> currentPlace = environmentDataService.findPlaceContainingLocation(lat, lon);
-        String placeId = currentPlace.map(Place::getId).orElse(null);
-        String placeName = currentPlace.map(Place::getName).orElse("Unknown");
+        Optional<PhysicalPlace> currentPlace = environmentDataService.findPhysicalPlaceContainingLocation(lat, lon);
+        String placeId = currentPlace.map(PhysicalPlace::getId).orElse(null);
+        String placeName = currentPlace.map(PhysicalPlace::getName).orElse("Unknown");
 
         // 2. Update position (using existing service)
         positionService.updatePosition(participantId, lat, lon, placeId);
@@ -120,7 +120,7 @@ public class LocationEventService {
                     : wb.getCurrentParticipantId();
 
             // Use EXISTING proximityService
-            Place bindingPlace = proximityService.getBindingPlace(
+            PhysicalPlace bindingPlace = proximityService.getBindingPlace(
                     wb.getCurrentParticipantId(), wb.getTargetParticipantId());
 
             if (bindingPlace != null) {
@@ -145,7 +145,7 @@ public class LocationEventService {
                     ? wu.getTargetParticipantId()
                     : wu.getCurrentParticipantId();
 
-            Place unbindingPlace = proximityService.getBindingPlace(
+            PhysicalPlace unbindingPlace = proximityService.getBindingPlace(
                     wu.getCurrentParticipantId(), wu.getTargetParticipantId());
 
             if (unbindingPlace != null) {

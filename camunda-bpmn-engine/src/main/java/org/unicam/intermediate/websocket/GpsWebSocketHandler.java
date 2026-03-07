@@ -19,7 +19,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import org.unicam.intermediate.models.WaitingBinding;
 import org.unicam.intermediate.models.dto.websocket.GpsMessage;
 import org.unicam.intermediate.models.dto.websocket.GpsResponse;
-import org.unicam.intermediate.models.pojo.Place;
+import org.unicam.intermediate.models.pojo.PhysicalPlace;
 import org.unicam.intermediate.service.environmental.BindingService;
 import org.unicam.intermediate.service.environmental.EnvironmentDataService;
 import org.unicam.intermediate.service.environmental.LocationEventService;
@@ -459,8 +459,8 @@ public class GpsWebSocketHandler extends TextWebSocketHandler {
     }
 
     private String updatePosition(String participantId, double lat, double lon) {
-        Optional<Place> place = environmentDataService.findPlaceContainingLocation(lat, lon);
-        String placeId = place.map(Place::getId).orElse(null);
+        Optional<PhysicalPlace> place = environmentDataService.findPhysicalPlaceContainingLocation(lat, lon);
+        String placeId = place.map(PhysicalPlace::getId).orElse(null);
 
         // Aggiorna posizione per il participant
         positionService.updatePosition(participantId, lat, lon, placeId);
@@ -497,7 +497,7 @@ public class GpsWebSocketHandler extends TextWebSocketHandler {
                         String destId = destination.toString();
 
                         // Check if we're in the destination
-                        if (environmentDataService.isLocationInPlace(lat, lon, destId)) {
+                        if (environmentDataService.isLocationInPhysicalPlace(lat, lon, destId)) {
                             log.info("[GPS WS] MOVEMENT COMPLETED - User {} reached {} for task {}",
                                     userId, destId, activityId);
 
@@ -550,7 +550,7 @@ public class GpsWebSocketHandler extends TextWebSocketHandler {
             }
 
             // Ora controlla se sono nella stessa place
-            Place bindingPlace = proximityService.getBindingPlace(
+                PhysicalPlace bindingPlace = proximityService.getBindingPlace(
                     wb.getCurrentParticipantId(),
                     wb.getTargetParticipantId());
 
@@ -628,7 +628,7 @@ public class GpsWebSocketHandler extends TextWebSocketHandler {
             }
 
             // CRITICAL FIX: Use CURRENT positions to check proximity
-            Place unbindingPlace = proximityService.getBindingPlace(
+                PhysicalPlace unbindingPlace = proximityService.getBindingPlace(
                     wu.getCurrentParticipantId(),
                     wu.getTargetParticipantId());
 

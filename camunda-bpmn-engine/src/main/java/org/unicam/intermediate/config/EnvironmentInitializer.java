@@ -25,8 +25,8 @@ public class EnvironmentInitializer implements ApplicationRunner {
             environmentDataService.loadEnvironmentData();
             
             if (environmentDataService.isLoaded()) {
-                log.info("[EnvironmentInitializer] Environment loaded with {} places",
-                        environmentDataService.getPlaces().size());
+                log.info("[EnvironmentInitializer] Environment loaded with {} physical places",
+                        environmentDataService.getPhysicalPlaces().size());
             } else {
                 log.warn("[EnvironmentInitializer] Environment is empty - deploy a process with environment.json");
             }

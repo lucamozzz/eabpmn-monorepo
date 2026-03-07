@@ -11,7 +11,7 @@ import org.camunda.bpm.engine.runtime.Execution;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.springframework.stereotype.Service;
 import org.unicam.intermediate.models.WaitingBinding;
-import org.unicam.intermediate.models.pojo.Place;
+import org.unicam.intermediate.models.pojo.PhysicalPlace;
 import org.unicam.intermediate.models.record.MovementResponse;
 import org.unicam.intermediate.models.record.MovementTask;
 import org.unicam.intermediate.models.enums.TaskType;
@@ -120,7 +120,7 @@ public class GpsProcessingService {
                     wb.getTargetParticipantId().equals(participantId)) {
 
                 // Check if both participants are in the same place
-                Place bindingPlace = proximityService.getBindingPlace(
+                PhysicalPlace bindingPlace = proximityService.getBindingPlace(
                         wb.getCurrentParticipantId(),
                         wb.getTargetParticipantId());
 
@@ -160,7 +160,7 @@ public class GpsProcessingService {
                     wu.getTargetParticipantId().equals(participantId)) {
 
                 // Check if both participants are in the same place
-                Place unbindingPlace = proximityService.getBindingPlace(
+                PhysicalPlace unbindingPlace = proximityService.getBindingPlace(
                         wu.getCurrentParticipantId(),
                         wu.getTargetParticipantId());
 
@@ -252,8 +252,8 @@ public class GpsProcessingService {
 
     private void updateParticipantPosition(String participantId, double lat, double lon) {
         // Find which place (if any) contains this location
-        String currentPlace = environmentDataService.findPlaceContainingLocation(lat, lon)
-                .map(Place::getId)
+        String currentPlace = environmentDataService.findPhysicalPlaceContainingLocation(lat, lon)
+            .map(PhysicalPlace::getId)
                 .orElse(null);
 
         positionService.updatePosition(participantId, lat, lon, currentPlace);
@@ -369,7 +369,7 @@ public class GpsProcessingService {
     }
 
     private boolean isLocationMatchingDestination(double lat, double lon, String destinationId) {
-        boolean matches = environmentDataService.isLocationInPlace(lat, lon, destinationId);
+        boolean matches = environmentDataService.isLocationInPhysicalPlace(lat, lon, destinationId);
 
         if (matches) {
             log.debug("[GPS Service] Location ({}, {}) matches destination: {}",

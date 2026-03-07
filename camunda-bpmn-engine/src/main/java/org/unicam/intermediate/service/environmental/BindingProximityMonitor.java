@@ -8,7 +8,7 @@ import org.camunda.bpm.engine.RuntimeService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.unicam.intermediate.models.WaitingBinding;
-import org.unicam.intermediate.models.pojo.Place;
+import org.unicam.intermediate.models.pojo.PhysicalPlace;
 
 import java.util.List;
 import java.util.Map;
@@ -63,7 +63,7 @@ public class BindingProximityMonitor {
         }
         
         // Check if in same place
-        Place place = proximityService.getBindingPlace(
+        PhysicalPlace place = proximityService.getBindingPlace(
                 binding1.getCurrentParticipantId(),
                 binding2.getCurrentParticipantId());
         

@@ -10,7 +10,7 @@ import org.camunda.bpm.engine.delegate.ExecutionListener;
 import org.springframework.stereotype.Component;
 import org.unicam.intermediate.models.WaitingBinding;
 import org.unicam.intermediate.models.enums.TaskType;
-import org.unicam.intermediate.models.pojo.Place;
+import org.unicam.intermediate.models.pojo.PhysicalPlace;
 import org.unicam.intermediate.service.MessageFlowRegistry;
 import org.unicam.intermediate.service.MessageFlowRegistry.MessageFlowBinding;
 import org.unicam.intermediate.service.environmental.BindingService;
@@ -78,7 +78,7 @@ public class UnbindingExecutionListener implements ExecutionListener {
             WaitingBinding match = waitingUnbinding.get();
 
             // Check if both participants are in the same place for safe unbinding
-            Place unbindingPlace = proximityService.getBindingPlace(
+                PhysicalPlace unbindingPlace = proximityService.getBindingPlace(
                     currentParticipantRef, match.getCurrentParticipantId());
 
             if (unbindingPlace != null) {
@@ -176,7 +176,7 @@ public class UnbindingExecutionListener implements ExecutionListener {
         if (waitingUnbinding.isPresent()) {
             WaitingBinding match = waitingUnbinding.get();
 
-            Place unbindingPlace = proximityService.getBindingPlace(
+                PhysicalPlace unbindingPlace = proximityService.getBindingPlace(
                     currentParticipantId, match.getCurrentParticipantId());
 
             if (unbindingPlace != null) {

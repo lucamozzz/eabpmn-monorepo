@@ -1,5 +1,3 @@
-// src/main/java/org/unicam/intermediate/models/pojo/Place.java
-
 package org.unicam.intermediate.models.pojo;
 
 import lombok.Getter;
@@ -11,14 +9,12 @@ import java.util.Map;
 
 @Setter
 @Getter
-public class Place {
+public class PhysicalPlace {
     private String id;
     private String name;
     private String temperature;
     private List<List<Double>> coordinates;
     private Map<String, Object> attributes;
-
-
 
     private transient LocationArea locationArea;
 

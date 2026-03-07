@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import org.unicam.intermediate.models.Participant;
 import org.unicam.intermediate.models.WaitingBinding;
 import org.unicam.intermediate.models.enums.TaskType;
-import org.unicam.intermediate.models.pojo.Place;
+import org.unicam.intermediate.models.pojo.PhysicalPlace;
 import org.unicam.intermediate.service.MessageFlowRegistry;
 import org.unicam.intermediate.service.MessageFlowRegistry.MessageFlowBinding;
 import org.unicam.intermediate.service.environmental.BindingService;
@@ -89,7 +89,7 @@ public class BindingExecutionListener implements ExecutionListener {
             WaitingBinding match = waiting.get();
 
             // Check if both participants are in the same place
-            Place bindingPlace = proximityService.getBindingPlace(
+                PhysicalPlace bindingPlace = proximityService.getBindingPlace(
                     currentParticipantRef, match.getCurrentParticipantId());
 
             if (bindingPlace != null) {

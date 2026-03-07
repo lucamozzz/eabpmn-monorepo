@@ -8,9 +8,8 @@ import java.util.List;
 @Setter
 @Getter
 public class EnvironmentData {
-    private List<Place> places;
+    private List<PhysicalPlace> physicalPlaces;
     private List<Edge> edges;
     private List<LogicalPlace> logicalPlaces;
     private List<View> views;
-
 }

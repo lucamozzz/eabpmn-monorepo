@@ -3,7 +3,7 @@ package org.unicam.intermediate.service.environmental;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.unicam.intermediate.models.pojo.Place;
+import org.unicam.intermediate.models.pojo.PhysicalPlace;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -43,15 +43,15 @@ public class TemperatureService {
 
     public double getTemperatureFromPlace(String placeId){
         try {
-            Optional<Place> maybePlace = environmentDataService.getData() // Use service
-                    .getPlaces()
+            Optional<PhysicalPlace> maybePlace = environmentDataService.getData() // Use service
+                    .getPhysicalPlaces()
                     .stream()
                     .filter(p -> p.getId().equals(placeId))
                     .findFirst();
 
             if (maybePlace.isEmpty()) throw new IllegalStateException("Place with id " + placeId + " not found");
 
-            Place place = maybePlace.get();
+            PhysicalPlace place = maybePlace.get();
 
             Map<String, Object> attributes = place.getAttributes();
             if (attributes == null || !attributes.containsKey("temperature")) {

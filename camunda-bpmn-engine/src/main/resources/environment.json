@@ -1,5 +1,5 @@
 {
-   "places": [
+   "physicalPlaces": [
     {
       "id": "place1",
       "name": "R2",
@@ -10,10 +10,10 @@
         [13.067685920133588, 43.139098103142146]
       ],
       "attributes": {
-        "building": "A",
-        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=28&max=34&count=1",
         "purpose": "studying",
-        "freeSeats": 0
+        "occupied": null,
+        "light": null,
+        "state": "unchecked"
       }
     },
     {
@@ -26,9 +26,10 @@
         [13.067685920133588, 43.139098103142146]
       ],
       "attributes": {
-        "building": "A",
-        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
-        "purpose": "phd"
+        "purpose": "phd",
+        "occupied": null,
+        "light": null,
+        "state": "unchecked"
       }
     },
     {
@@ -41,9 +42,10 @@
         [13.067934024467466, 43.13922629939677]
       ],
       "attributes": {
-        "building": "A",
-        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
-        "purpose": "phd"
+        "purpose": "phd",
+        "occupied": null,
+        "light": null,
+        "state": "unchecked"
       }
     },
     {
@@ -56,10 +58,10 @@
         [13.068007785215384, 43.13925957166319]
       ],
       "attributes": {
-        "building": "A",
-        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
         "purpose": "teaching",
-        "freeSeats": 17
+        "occupied": null,
+        "light": null,
+        "state": "unchecked"
       }
     },
     {
@@ -72,10 +74,10 @@
         [13.067934024467466, 43.13922629939677]
       ],
       "attributes": {
-        "building": "A",
-        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
         "purpose": "teaching",
-        "freeSeats": 50
+        "occupied": null,
+        "light": null,
+        "state": "unchecked"
       }
     },
     {
@@ -88,10 +90,10 @@
         [13.067860263719558, 43.139321223167826]
       ],
       "attributes": {
-        "building": "A",
-        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
         "purpose": "studying",
-        "freeSeats": 5
+        "occupied": null,
+        "light": null,
+        "state": "unchecked"
       }
     },
     {
@@ -104,10 +106,10 @@
         [13.067813325061795, 43.13916366919909]
       ],
       "attributes": {
-        "building": "A",
-        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
         "purpose": "studying",
-        "freeSeats": 3
+        "occupied": null,
+        "light": null,
+        "state": "unchecked"
       }
     },
     {
@@ -120,10 +122,10 @@
         [13.067550468578334, 43.13903253701491]
       ],
       "attributes": {
-        "building": "A",
-        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
         "purpose": "studying",
-        "freeSeats": 0
+        "occupied": null,
+        "light": null,
+        "state": "unchecked"
       }
     },
     {
@@ -136,10 +138,10 @@
         [13.06855093254089, 43.13947779813833]
       ],
       "attributes": {
-        "building": "B",
-        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
         "purpose": "teaching",
-        "freeSeats": 15
+        "occupied": null,
+        "light": null,
+        "state": "unchecked"
       }
     },
     {
@@ -152,10 +154,10 @@
         [13.068870115413665, 43.13952477055125]
       ],
       "attributes": {
-        "building": "B",
-        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
         "purpose": "teaching",
-        "freeSeats": 15
+        "occupied": null,
+        "light": null,
+        "state": "unchecked"
       }
     },
     {
@@ -168,10 +170,10 @@
         [13.069006908073426, 43.139585443197916]
       ],
       "attributes": {
-        "building": "B",
-        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
         "purpose": "teaching",
-        "freeSeats": 10
+        "occupied": null,
+        "light": null,
+        "state": "unchecked"
       }
     },
     {
@@ -184,10 +186,10 @@
         [13.06904043568611, 43.13967351628759]
       ],
       "attributes": {
-        "building": "B",
-        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
         "purpose": "studying",
-        "freeSeats": 0
+        "occupied": null,
+        "light": null,
+        "state": "unchecked"
       }
     },
     {
@@ -200,9 +202,10 @@
         [13.068884252813335, 43.13972244572696]
       ],
       "attributes": {
-        "building": "B",
-        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
-        "purpose": "tutor"
+        "purpose": "tutor",
+        "occupied": null,
+        "light": null,
+        "state": "unchecked"
       }
     },
     {
@@ -215,10 +218,10 @@
         [13.06881513012886, 43.1395825074261]
       ],
       "attributes": {
-        "building": "B",
-        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
         "purpose": "studying",
-        "freeSeats": 0
+        "occupied": null,
+        "light": null,
+        "state": "unchecked"
       }
     },
     {
@@ -231,10 +234,10 @@
         [13.068636763229367, 43.13960795077733]
       ],
       "attributes": {
-        "building": "B",
-        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
         "purpose": "teaching",
-        "freeSeats": 35
+        "occupied": null,
+        "light": null,
+        "state": "unchecked"
       }
     },
     {
@@ -247,10 +250,10 @@
         [13.068491923942565, 43.13954629956183]
       ],
       "attributes": {
-        "building": "B",
-        "temperature": "http://www.randomnumberapi.com/api/v1.0/random?min=27&max=29&count=1",
         "purpose": "teaching",
-        "freeSeats": 35
+        "occupied": null,
+        "light": null,
+        "state": "unchecked"
       }
     }
   ],
@@ -539,12 +542,17 @@
     "logicalPlaces": [
         {
             "id": "set1",
-            "name": "Building A",
+            "name": "Available Meeting Rooms",
             "conditions": [
                 {
-                    "attribute": "building",
+                    "attribute": "purpose",
                     "operator": "==",
-                    "value": "A"
+                    "value": "meetings"
+                },
+                {
+                    "attribute": "occupied",
+                    "operator": "==",
+                    "value": false
                 }
             ],
             "expression": "building === 'A'",
@@ -555,99 +563,28 @@
             "name": "Building B",
             "conditions": [
                 {
-                    "attribute": "building",
+                    "attribute": "purpose",
                     "operator": "==",
-                    "value": "B"
+                    "value": "tutorsoffice"
                 }
             ],
             "place": "place5"
-        },
-        {
-            "id": "set3",
-            "name": "Available Study Rooms",
-            "conditions": [
-                {
-                    "attribute": "purpose",
-                    "operator": "==",
-                    "value": "studying"
-                },
-                {
-                    "attribute": "freeSeats",
-                    "operator": ">",
-                    "value": 0
-                }
-            ],
-            "place": "place6"
-        },
-        {
-            "id": "set4",
-            "name": "Available Classrooms",
-            "conditions": [
-                {
-                    "attribute": "purpose",
-                    "operator": "==",
-                    "value": "teaching"
-                },
-                {
-                    "attribute": "freeSeats",
-                    "operator": ">",
-                    "value": 30
-                }
-            ],
-            "place": "place4"
-        },
-        {
-            "id": "set5",
-            "name": "PhD Office",
-            "conditions": [
-                {
-                    "attribute": "purpose",
-                    "operator": "==",
-                    "value": "phd"
-                }
-            ],
-            "place": "place2"
-        },
-        {
-            "id": "set6",
-            "name": "Tutor Office",
-            "conditions": [
-                {
-                    "attribute": "purpose",
-                    "operator": "==",
-                    "value": "tutor"
-                }
-            ],
-            "place": "place13"
         }
     ],
     "views": [
         {
             "id": "view1",
-            "name": "Buildings",
+            "name": "Meeting Rooms",
             "logicalPlaces": [
-                "set1",
-                "set2"
+                "set1"
             ],
             "attributes": {}
         },
         {
             "id": "view2",
-            "name": "Available Rooms",
-            "logicalPlaces": [
-                "set3",
-                "set4"
-            ],
-            "attributes": {
-                "freeSeats": "SUM"
-            }
-        },
-        {
-            "id": "view3",
             "name": "Offices",
             "logicalPlaces": [
-                "set5",
-                "set6"
+                "set2"
             ],
             "attributes": {}
         }

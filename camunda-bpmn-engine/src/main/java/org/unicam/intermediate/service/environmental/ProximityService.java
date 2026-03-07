@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.unicam.intermediate.models.environmental.Coordinate;
-import org.unicam.intermediate.models.pojo.Place;
+import org.unicam.intermediate.models.pojo.PhysicalPlace;
 import org.unicam.intermediate.service.participant.ParticipantPositionService;
 
 import java.util.Optional;
@@ -31,8 +31,8 @@ public class ProximityService {
         }
         
         // Find which place each participant is in
-        Optional<Place> place1 = environmentDataService.findPlaceContainingLocation(pos1.lat, pos1.lon);
-        Optional<Place> place2 = environmentDataService.findPlaceContainingLocation(pos2.lat, pos2.lon);
+        Optional<PhysicalPlace> place1 = environmentDataService.findPhysicalPlaceContainingLocation(pos1.lat, pos1.lon);
+        Optional<PhysicalPlace> place2 = environmentDataService.findPhysicalPlaceContainingLocation(pos2.lat, pos2.lon);
         
         // Both must be in a place, and it must be the same place
         if (place1.isPresent() && place2.isPresent()) {
@@ -62,7 +62,7 @@ public class ProximityService {
      * Get the place where binding/unbinding can occur
      * Returns the place if both participants are in the same place, null otherwise
      */
-    public Place getBindingPlace(String participant1Id, String participant2Id) {
+    public PhysicalPlace getBindingPlace(String participant1Id, String participant2Id) {
         Coordinate pos1 = positionService.getPosition(participant1Id);
         Coordinate pos2 = positionService.getPosition(participant2Id);
         
@@ -70,8 +70,8 @@ public class ProximityService {
             return null;
         }
         
-        Optional<Place> place1 = environmentDataService.findPlaceContainingLocation(pos1.lat, pos1.lon);
-        Optional<Place> place2 = environmentDataService.findPlaceContainingLocation(pos2.lat, pos2.lon);
+        Optional<PhysicalPlace> place1 = environmentDataService.findPhysicalPlaceContainingLocation(pos1.lat, pos1.lon);
+        Optional<PhysicalPlace> place2 = environmentDataService.findPhysicalPlaceContainingLocation(pos2.lat, pos2.lon);
         
         if (place1.isPresent() && place2.isPresent() && 
             place1.get().getId().equals(place2.get().getId())) {
@@ -92,8 +92,8 @@ public class ProximityService {
             return new BindingReadiness(false, null, "Missing position data");
         }
         
-        Optional<Place> place1 = environmentDataService.findPlaceContainingLocation(pos1.lat, pos1.lon);
-        Optional<Place> place2 = environmentDataService.findPlaceContainingLocation(pos2.lat, pos2.lon);
+        Optional<PhysicalPlace> place1 = environmentDataService.findPhysicalPlaceContainingLocation(pos1.lat, pos1.lon);
+        Optional<PhysicalPlace> place2 = environmentDataService.findPhysicalPlaceContainingLocation(pos2.lat, pos2.lon);
         
         if (!place1.isPresent()) {
             return new BindingReadiness(false, null, 
@@ -118,7 +118,7 @@ public class ProximityService {
     
     public record BindingReadiness(
             boolean canBind,
-            Place place,
+            PhysicalPlace place,
             String message
     ) {}
 }
