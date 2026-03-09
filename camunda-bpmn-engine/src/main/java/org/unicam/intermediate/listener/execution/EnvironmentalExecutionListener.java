@@ -18,6 +18,7 @@ import static org.unicam.intermediate.utils.Constants.environmentalExecutionList
 public class EnvironmentalExecutionListener implements ExecutionListener {
 
     private static final String GUARD_LOCAL_NAME = "guard";
+    private static final String ACTION_LOCAL_NAME = "action";
     private final EnvironmentalTaskRegistry environmentalTaskRegistry;
 
     public EnvironmentalExecutionListener(EnvironmentalTaskRegistry environmentalTaskRegistry) {
@@ -35,12 +36,20 @@ public class EnvironmentalExecutionListener implements ExecutionListener {
 
     private void handleEnvironmentalStart(DelegateExecution execution) {
         String guardValue = extractGuardValue(execution);
-        environmentalTaskRegistry.registerTask(execution.getId(), execution.getCurrentActivityId(), guardValue);
+        String actionValue = extractActionValue(execution);
 
-        log.info("[ENVIRONMENTAL] WAITING | Activity: {} - {} | Guard: {}",
+        environmentalTaskRegistry.registerTask(
+            execution.getId(),
+            execution.getCurrentActivityId(),
+            guardValue,
+            actionValue
+        );
+
+        log.info("[ENVIRONMENTAL] WAITING | Activity: {} - {} | Guard: {} | Action: {}",
                 execution.getCurrentActivityId(),
                 execution.getCurrentActivityName() != null ? execution.getCurrentActivityName() : "(unnamed)",
-                guardValue != null && !guardValue.isBlank() ? guardValue : "(empty)");
+            guardValue != null && !guardValue.isBlank() ? guardValue : "(empty)",
+            actionValue != null && !actionValue.isBlank() ? actionValue : "(empty)");
     }
 
     private void handleEnvironmentalEnd(DelegateExecution execution) {
@@ -49,6 +58,14 @@ public class EnvironmentalExecutionListener implements ExecutionListener {
     }
 
     private String extractGuardValue(DelegateExecution execution) {
+        return extractExtensionValue(execution, GUARD_LOCAL_NAME);
+    }
+
+    private String extractActionValue(DelegateExecution execution) {
+        return extractExtensionValue(execution, ACTION_LOCAL_NAME);
+    }
+
+    private String extractExtensionValue(DelegateExecution execution, String localName) {
         ModelElementInstance modelElement = execution.getBpmnModelElementInstance();
         if (!(modelElement instanceof Task task)) {
             return null;
@@ -60,15 +77,15 @@ public class EnvironmentalExecutionListener implements ExecutionListener {
         }
 
         return extensionElements.getDomElement().getChildElements().stream()
-                .filter(this::isSpaceGuard)
+                .filter(domElement -> isSpaceElement(domElement, localName))
                 .map(DomElement::getTextContent)
                 .map(String::trim)
                 .findFirst()
                 .orElse(null);
     }
 
-    private boolean isSpaceGuard(DomElement domElement) {
-        return GUARD_LOCAL_NAME.equalsIgnoreCase(domElement.getLocalName())
+    private boolean isSpaceElement(DomElement domElement, String localName) {
+        return localName.equalsIgnoreCase(domElement.getLocalName())
                 && SPACE_NS.getNamespaceUri().equals(domElement.getNamespaceURI());
     }
 }

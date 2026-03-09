@@ -35,18 +35,22 @@ public class EnvironmentalTaskRegistry {
         this.runtimeService = runtimeService;
     }
 
-    public void registerTask(String executionId, String activityId, String guardExpression) {
+    public void registerTask(String executionId, String activityId, String guardExpression, String action) {
         if (executionId == null || activityId == null) {
             log.warn("[EnvironmentalRegistry] Cannot register task with null execution/activity id");
             return;
         }
 
         String normalizedGuard = guardExpression != null ? guardExpression.trim() : "";
-        EnvironmentalTaskInfo info = new EnvironmentalTaskInfo(executionId, activityId, normalizedGuard);
+        String normalizedAction = action != null ? action.trim() : "";
+        EnvironmentalTaskInfo info = new EnvironmentalTaskInfo(executionId, activityId, normalizedGuard, normalizedAction);
         activeEnvironmentalTasks.put(executionId, info);
 
-        log.info("[EnvironmentalRegistry] Registered environmental task | activity={} | execution={} | guard='{}'",
-                activityId, executionId, normalizedGuard.isEmpty() ? "(empty)" : normalizedGuard);
+        log.info("[EnvironmentalRegistry] Registered environmental task | activity={} | execution={} | guard='{}' | action='{}'",
+                activityId,
+                executionId,
+                normalizedGuard.isEmpty() ? "(empty)" : normalizedGuard,
+                normalizedAction.isEmpty() ? "(empty)" : normalizedAction);
     }
 
     public void removeTask(String executionId) {
@@ -75,11 +79,19 @@ public class EnvironmentalTaskRegistry {
                 continue;
             }
 
+            boolean actionSatisfied = evaluateActionGuard(taskInfo.action(), taskInfo.activityId());
+            if (!actionSatisfied) {
+                continue;
+            }
+
             try {
                 runtimeService.signal(taskInfo.executionId());
                 completedExecutions.add(taskInfo.executionId());
-                log.info("[EnvironmentalRegistry] Guard satisfied -> task completed | activity={} | execution={} | guard='{}'",
-                        taskInfo.activityId(), taskInfo.executionId(), taskInfo.guardExpression());
+                log.info("[EnvironmentalRegistry] Guard+Action satisfied -> task completed | activity={} | execution={} | guard='{}' | action='{}'",
+                        taskInfo.activityId(),
+                        taskInfo.executionId(),
+                        taskInfo.guardExpression(),
+                        taskInfo.action());
             } catch (Exception e) {
                 log.error("[EnvironmentalRegistry] Failed to signal execution {} for activity {}: {}",
                         taskInfo.executionId(), taskInfo.activityId(), e.getMessage(), e);
@@ -169,5 +181,20 @@ public class EnvironmentalTaskRegistry {
             return raw.substring(1, raw.length() - 1).trim();
         }
         return raw;
+    }
+
+    private boolean evaluateActionGuard(String action, String activityId) {
+        if (action == null || action.isBlank()) {
+            log.debug("[ENVIRONMENTAL] Empty action for activity {} -> action-check auto-pass", activityId);
+            return true;
+        }
+
+        return switch (action.trim().toLowerCase()) {
+            case "turnlightson" -> evaluateGuard("place1.light == on", activityId + "#action:turnLightsOn");
+            default -> {
+                log.warn("[ENVIRONMENTAL] Unknown action '{}' for activity {} -> action-check fails", action, activityId);
+                yield false;
+            }
+        };
     }
 }
