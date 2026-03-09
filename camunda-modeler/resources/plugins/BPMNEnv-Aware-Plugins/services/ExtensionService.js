@@ -134,6 +134,16 @@ ExtensionService.prototype.getGuard = function(element) {
 };
 
 /**
+ * Get action value from element
+ * @param {Object} element - BPMN element
+ * @returns {string} Action value or empty string
+ */
+ExtensionService.prototype.getAction = function(element) {
+  const actionEl = this.findExtension(element.businessObject, EXTENSION_TYPES.ACTION);
+  return this.getText(actionEl);
+};
+
+/**
  * Check if element has a specific extension type
  * @param {Object} element - BPMN element
  * @param {string} type - Extension type

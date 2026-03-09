@@ -109,6 +109,19 @@
                     "type": "String"
                 }
             ]
+        },
+        {
+            "name": "Action",
+            "superClass": [
+                "Element"
+            ],
+            "properties": [
+                {
+                    "name": "body",
+                    "isBody": true,
+                    "type": "String"
+                }
+            ]
         }
     ],
     "emumerations": [],
