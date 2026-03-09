@@ -98,20 +98,7 @@
             ]
         },
         {
-            "name": "TaskAssignment",
-            "superClass": [
-                "Element"
-            ],
-            "properties": [
-                {
-                    "name": "body",
-                    "isBody": true,
-                    "type": "String"
-                }
-            ]
-        },
-        {
-            "name": "TaskAssignmentReached",
+            "name": "Guard",
             "superClass": [
                 "Element"
             ],

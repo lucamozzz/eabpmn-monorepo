@@ -744,12 +744,28 @@ SpacePropertiesProvider.prototype.createSpaceSection = function(element) {
            style="${currentType !== 'binding' ? 'display: none;' : ''}">
       </div>
       
-      <!-- NEW: Task Assignments Section (shown for all task types) -->
-      ${currentType==="environmental" ? this.renderTaskAssignments(element) : ''}
+      <div data-entry-id="space-guard" 
+           class="bio-properties-panel-entry space-guard-entry" 
+           style="${currentType !== 'environmental' ? 'display: none;' : ''}">
+        <div class="bio-properties-panel-textfield">
+          <label for="space-guard-input" class="bio-properties-panel-label">Guard</label>
+          <input id="space-guard-input" 
+                 type="text" 
+                 name="spaceGuard" 
+                 spellcheck="false" 
+                 autocomplete="off" 
+                 class="bio-properties-panel-input space-guard-input"
+                 placeholder="${translate('Enter guard condition')}"
+                 value="${this._extensionService.getGuard(element) || ''}" />
+        </div>
+      </div>
       
-    </div>
-  `;
-
+      
+      </div>
+      `;
+      
+  // <!-- NEW: Task Assignments Section (shown for all task types) -->
+  // ${currentType==="environmental" ? this.renderTaskAssignments(element) : ''}
   this.attachSectionEventListeners(section, element);
 
   return section;
@@ -1003,6 +1019,7 @@ SpacePropertiesProvider.prototype.attachSectionEventListeners = function(section
   const typeSelect = section.querySelector('.space-type-select');
   const destinationInput = section.querySelector('.space-destination-input');
   const bindingInput = section.querySelector('.space-binding-input');
+  const guardInput = section.querySelector('.space-guard-input');
 
   // Type selection
   if (typeSelect) {
@@ -1060,6 +1077,25 @@ SpacePropertiesProvider.prototype.attachSectionEventListeners = function(section
 
         } catch (error) {
           console.error('Error saving binding:', error);
+        }
+      });
+    });
+  }
+
+  // Guard input - save on change
+  if (guardInput) {
+    [ 'input', 'blur', 'change' ].forEach(eventType => {
+      guardInput.addEventListener(eventType, (e) => {
+        try {
+          const value = e.target.value.trim();
+          if (value) {
+            this._extensionService.setExtension(element, 'space:Guard', value);
+          }
+
+          this.updateSectionIndicators(section, element);
+
+        } catch (error) {
+          console.error('Error saving guard:', error);
         }
       });
     });
@@ -1150,36 +1186,36 @@ SpacePropertiesProvider.prototype.attachAssignmentListeners = function(section, 
   });
 };
 
-SpacePropertiesProvider.prototype.refreshAssignmentsSection = function(section, element) {
-  const assignmentsEntry = section.querySelector('.space-assignments-entry');
-  if (!assignmentsEntry) return;
+// SpacePropertiesProvider.prototype.refreshAssignmentsSection = function(section, element) {
+//   const assignmentsEntry = section.querySelector('.space-assignments-entry');
+//   if (!assignmentsEntry) return;
 
-  // Get the fresh HTML for assignments
-  const newAssignmentsHTML = this.renderTaskAssignments(element);
+//   // Get the fresh HTML for assignments
+//   const newAssignmentsHTML = this.renderTaskAssignments(element);
 
-  // Create a temporary container to parse the HTML
-  const temp = document.createElement('div');
-  temp.innerHTML = newAssignmentsHTML;
+//   // Create a temporary container to parse the HTML
+//   const temp = document.createElement('div');
+//   temp.innerHTML = newAssignmentsHTML;
 
-  // Find the actual content inside the wrapper
-  const newContent = temp.querySelector('.bio-properties-panel-assignments');
+//   // Find the actual content inside the wrapper
+//   const newContent = temp.querySelector('.bio-properties-panel-assignments');
 
-  // Find the existing container and replace its content
-  const existingContainer = assignmentsEntry.querySelector('.bio-properties-panel-assignments');
-  if (existingContainer && newContent) {
-    existingContainer.innerHTML = newContent.innerHTML;
-  } else {
+//   // Find the existing container and replace its content
+//   const existingContainer = assignmentsEntry.querySelector('.bio-properties-panel-assignments');
+//   if (existingContainer && newContent) {
+//     existingContainer.innerHTML = newContent.innerHTML;
+//   } else {
 
-    // Fallback: replace entire content
-    assignmentsEntry.innerHTML = newAssignmentsHTML;
-  }
+//     // Fallback: replace entire content
+//     assignmentsEntry.innerHTML = newAssignmentsHTML;
+//   }
 
-  // Re-attach event listeners
-  this.attachAssignmentListeners(section, element);
+//   // Re-attach event listeners
+//   this.attachAssignmentListeners(section, element);
 
-  // Update the section indicators to refresh the badge count
-  this.updateSectionIndicators(section, element);
-};
+//   // Update the section indicators to refresh the badge count
+//   this.updateSectionIndicators(section, element);
+// };
 
 // SpacePropertiesProvider.prototype.validateAssignmentField = function(input, value, type) {
 //   const assignmentItem = input.closest('.assignment-item');
@@ -1348,27 +1384,27 @@ SpacePropertiesProvider.prototype.refreshSpaceSection = function(element) {
     if (bindingInput) bindingInput.value = currentBinding || '';
 
     
-    if (currentType === TASK_TYPE_KEYS.ENVIRONMENTAL) {
-      const assignmentsEntry = existingSection.querySelector('.space-assignments-entry');
-      if (!assignmentsEntry) {
-        const groupEntries = existingSection.querySelector('.bio-properties-panel-group-entries');
-        if (groupEntries) {
-          const assignmentsHTML = this.renderTaskAssignments(element);
-          groupEntries.insertAdjacentHTML('beforeend', assignmentsHTML);
-          this.attachAssignmentListeners(existingSection, element);
-        }
-      }
-    }
+    // if (currentType === TASK_TYPE_KEYS.ENVIRONMENTAL) {
+    //   const assignmentsEntry = existingSection.querySelector('.space-assignments-entry');
+    //   if (!assignmentsEntry) {
+    //     const groupEntries = existingSection.querySelector('.bio-properties-panel-group-entries');
+    //     if (groupEntries) {
+    //       const assignmentsHTML = this.renderTaskAssignments(element);
+    //       groupEntries.insertAdjacentHTML('beforeend', assignmentsHTML);
+    //       this.attachAssignmentListeners(existingSection, element);
+    //     }
+    //   }
+    // }
 
-    // Update visibility and indicators
-    this.updateFieldVisibility(existingSection, currentType);
-    this.updateSectionIndicators(existingSection, element);
+    // // Update visibility and indicators
+    // this.updateFieldVisibility(existingSection, currentType);
+    // this.updateSectionIndicators(existingSection, element);
 
-    this.updateDestinationAttributes(existingSection, element);
+    // this.updateDestinationAttributes(existingSection, element);
 
-    if (currentType) {
-      this.refreshAssignmentsSection(existingSection, element);
-    }
+    // if (currentType) {
+    //   this.refreshAssignmentsSection(existingSection, element);
+    // }
   }
 };
 
