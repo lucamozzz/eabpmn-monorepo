@@ -91,6 +91,7 @@ public class DynamicParseListener extends AbstractBpmnParseListener {
             case "movement" -> movementExecutionListenerBeanName;
             case "binding" -> bindingExecutionListenerBeanName;
             case "unbinding" -> unbindingExecutionListenerBeanName;
+            case "environmental" -> environmentalExecutionListenerBeanName;
             default -> {
                 log.warn("[DynamicParseListener] Unknown task type: {}", typeValue);
                 yield null;

@@ -9,5 +9,6 @@ public class Constants {
     public static final String movementExecutionListenerBeanName = "movementExecutionListener";
     public static final String unbindingExecutionListenerBeanName = "unbindingExecutionListener";
     public static final String bindingExecutionListenerBeanName = "bindingExecutionListener";
+    public static final String environmentalExecutionListenerBeanName = "environmentalExecutionListener";
 
 }
