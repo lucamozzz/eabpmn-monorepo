@@ -13,6 +13,7 @@ import org.unicam.intermediate.models.pojo.Edge;
 import org.unicam.intermediate.models.pojo.PhysicalPlace;
 import org.unicam.intermediate.models.pojo.LogicalPlace;
 import org.unicam.intermediate.models.pojo.View;
+import org.unicam.intermediate.models.pojo.Participant;
 
 import jakarta.annotation.PostConstruct;
 import java.io.IOException;
@@ -44,6 +45,88 @@ public class EnvironmentDataService {
     public void initialize() {
         loadEnvironmentData();
     }
+
+    // Convenience methods for accessing data
+
+    public List<PhysicalPlace> getPhysicalPlaces() {
+        return data != null && data.getPhysicalPlaces() != null ? data.getPhysicalPlaces() : List.of();
+    }
+
+    public Optional<PhysicalPlace> getPhysicalPlace(String id) {
+        if (id == null || data == null || data.getPhysicalPlaces() == null || data.getPhysicalPlaces().isEmpty()) {
+            return Optional.empty();
+        }
+        return data.getPhysicalPlaces().stream()
+                .filter(p -> id.equals(p.getId()))
+                .findFirst();
+    }
+
+    public List<Edge> getEdges() {
+        return data != null && data.getEdges() != null ? data.getEdges() : List.of();
+    }
+
+    public List<LogicalPlace> getLogicalPlaces() {
+        return data != null && data.getLogicalPlaces() != null ? data.getLogicalPlaces() : List.of();
+    }
+
+    public List<View> getViews() {
+        return data != null && data.getViews() != null ? data.getViews() : List.of();
+    }
+
+    public List<Participant> getParticipants() {
+        return data != null && data.getParticipants() != null ? data.getParticipants() : List.of();
+    }
+
+    public Optional<Participant> getParticipant(String id) {
+        if (id == null || data == null || data.getParticipants() == null || data.getParticipants().isEmpty()) {
+            return Optional.empty();
+        }
+        return data.getParticipants().stream()
+                .filter(p -> id.equals(p.getId()))
+                .findFirst();
+    }
+
+    public void updateParticipantPosition(String id, String position) {
+        if (id == null || data == null || data.getParticipants() == null) {
+            return;
+        }
+        data.getParticipants().stream()
+                .filter(p -> id.equals(p.getId()))
+                .findFirst()
+                .ifPresent(p -> p.setPosition(position));
+    }
+
+    public Optional<PhysicalPlace> findPhysicalPlaceContainingLocation(double lat, double lon) {
+        if (data == null || data.getPhysicalPlaces() == null) {
+            return Optional.empty();
+        }
+        return data.getPhysicalPlaces().stream()
+                .filter(place -> place.getLocationArea() != null &&
+                        place.getLocationArea().contains(lat, lon))
+                .findFirst();
+    }
+
+    public boolean isLocationInPhysicalPlace(double lat, double lon, String placeId) {
+        return getPhysicalPlace(placeId)
+                .map(place -> place.getLocationArea() != null &&
+                        place.getLocationArea().contains(lat, lon))
+                .orElse(false);
+    }
+
+    public boolean isLoaded() {
+        return data != null && data.getPhysicalPlaces() != null && !data.getPhysicalPlaces().isEmpty();
+    }
+
+    public void reloadEnvironment() {
+        loadEnvironmentData();
+        log.info("[EnvironmentDataService] Environment data reloaded");
+    }
+
+    // // Method to refresh environment (can be called from controllers/delegates)
+    // public void refresh() {
+    //     log.info("[EnvironmentService] Manual refresh triggered");
+    //     loadEnvironmentData();
+    // }
 
     public void loadEnvironmentData() {
         loadEnvironmentFromFile();
@@ -80,65 +163,6 @@ public class EnvironmentDataService {
         // this.data.setViews(List.of());
 
         // log.warn("[EnvironmentService] No environment.json found in any deployment, initialized with empty data");
-    }
-
-    // Convenience methods for accessing data
-
-    public List<PhysicalPlace> getPhysicalPlaces() {
-        return data != null && data.getPhysicalPlaces() != null ? data.getPhysicalPlaces() : List.of();
-    }
-
-    public List<Edge> getEdges() {
-        return data != null && data.getEdges() != null ? data.getEdges() : List.of();
-    }
-
-    public List<LogicalPlace> getLogicalPlaces() {
-        return data != null && data.getLogicalPlaces() != null ? data.getLogicalPlaces() : List.of();
-    }
-
-    public List<View> getViews() {
-        return data != null && data.getViews() != null ? data.getViews() : List.of();
-    }
-
-    public Optional<PhysicalPlace> findPhysicalPlaceById(String placeId) {
-        if (placeId == null || data == null || data.getPhysicalPlaces() == null || data.getPhysicalPlaces().isEmpty()) {
-            return Optional.empty();
-        }
-        return data.getPhysicalPlaces().stream()
-                .filter(p -> placeId.equals(p.getId()))
-                .findFirst();
-    }
-
-    public Optional<PhysicalPlace> findPhysicalPlaceContainingLocation(double lat, double lon) {
-        if (data == null || data.getPhysicalPlaces() == null) {
-            return Optional.empty();
-        }
-        return data.getPhysicalPlaces().stream()
-                .filter(place -> place.getLocationArea() != null &&
-                        place.getLocationArea().contains(lat, lon))
-                .findFirst();
-    }
-
-    public boolean isLocationInPhysicalPlace(double lat, double lon, String placeId) {
-        return findPhysicalPlaceById(placeId)
-                .map(place -> place.getLocationArea() != null &&
-                        place.getLocationArea().contains(lat, lon))
-                .orElse(false);
-    }
-
-    // Method to refresh environment (can be called from controllers/delegates)
-    public void refresh() {
-        log.info("[EnvironmentService] Manual refresh triggered");
-        loadEnvironmentData();
-    }
-
-    public boolean isLoaded() {
-        return data != null && data.getPhysicalPlaces() != null && !data.getPhysicalPlaces().isEmpty();
-    }
-
-    public void reloadEnvironment() {
-        loadEnvironmentData();
-        log.info("[EnvironmentDataService] Environment data reloaded");
     }
 
     /**

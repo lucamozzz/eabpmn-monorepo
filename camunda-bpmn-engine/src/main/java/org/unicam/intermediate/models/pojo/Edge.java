@@ -13,5 +13,4 @@ public class Edge {
     private String source;
     private String target;
     private Map<String, Object> attributes;
-
 }

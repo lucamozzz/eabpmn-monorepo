@@ -13,5 +13,4 @@ public class LogicalPlace {
     private List<Condition> conditions;
     private String expression;
     private String place;
-
 }

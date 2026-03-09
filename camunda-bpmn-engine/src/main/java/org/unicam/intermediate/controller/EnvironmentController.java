@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.unicam.intermediate.models.dto.Response;
 import org.unicam.intermediate.models.pojo.PhysicalPlace;
+import org.unicam.intermediate.models.pojo.Participant;
 import org.unicam.intermediate.service.environmental.EnvironmentDataService;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,7 @@ public class EnvironmentController {
 
     private final EnvironmentDataService environmentDataService;
 
-    @GetMapping("/physical-places")
+    @GetMapping("/pp")
     public ResponseEntity<Response<List<PhysicalPlace>>> getPhysicalPlaces() {
         try {
             List<PhysicalPlace> physicalPlaces = environmentDataService.getPhysicalPlaces();
@@ -37,10 +38,10 @@ public class EnvironmentController {
         }
     }
 
-    @GetMapping("/physical-places/{id}")
+    @GetMapping("/pp/{id}")
     public ResponseEntity<Response<PhysicalPlace>> getPhysicalPlaceById(@PathVariable String id) {
         try {
-            Optional<PhysicalPlace> place = environmentDataService.findPhysicalPlaceById(id);
+            Optional<PhysicalPlace> place = environmentDataService.getPhysicalPlace(id);
             if (place.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                         .body(Response.error("Physical place not found: " + id));
@@ -53,10 +54,10 @@ public class EnvironmentController {
         }
     }
 
-    @GetMapping("/physical-places/{id}/attributes/{key}")
+    @GetMapping("/pp/{id}/attributes/{key}")
     public ResponseEntity<Response<Object>> getAttributeByKey(@PathVariable String id, @PathVariable String key) {
         try {
-            Optional<PhysicalPlace> place = environmentDataService.findPhysicalPlaceById(id);
+            Optional<PhysicalPlace> place = environmentDataService.getPhysicalPlace(id);
             if (place.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                         .body(Response.error("Physical place not found: " + id));
@@ -74,11 +75,11 @@ public class EnvironmentController {
         }
     }
 
-    @PutMapping("/physical-places/{id}/attributes/{key}")
+    @PutMapping("/pps/{id}/attributes/{key}")
     public ResponseEntity<Response<Object>> setAttributeByKey(@PathVariable String id, @PathVariable String key,
                                                                @RequestBody Map<String, Object> requestBody) {
         try {
-            Optional<PhysicalPlace> place = environmentDataService.findPhysicalPlaceById(id);
+            Optional<PhysicalPlace> place = environmentDataService.getPhysicalPlace(id);
             if (place.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                         .body(Response.error("Physical place not found: " + id));
@@ -91,6 +92,59 @@ public class EnvironmentController {
             log.error("[Environment API] Failed to set attribute '{}' for place: {}", key, id, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Response.error("Failed to set attribute: " + e.getMessage()));
+        }
+    }
+
+    @GetMapping("/participants")
+    public ResponseEntity<Response<List<Participant>>> getParticipants() {
+        try {
+            List<Participant> participants = environmentDataService.getParticipants();
+            return ResponseEntity.ok(Response.ok(participants));
+        } catch (Exception e) {
+            log.error("[Environment API] Failed to retrieve participants", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Response.error("Failed to retrieve participants: " + e.getMessage()));
+        }
+    }
+
+    @GetMapping("/participants/{id}/position")
+    public ResponseEntity<Response<String>> getParticipantPosition(@PathVariable String id) {
+        try {
+            Optional<Participant> participant = environmentDataService.getParticipant(id);
+            if (participant.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(Response.error("Participant not found: " + id));
+            }
+            String position = participant.get().getPosition();
+            return ResponseEntity.ok(Response.ok(position));
+        } catch (Exception e) {
+            log.error("[Environment API] Failed to retrieve position for participant: {}", id, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Response.error("Failed to retrieve position: " + e.getMessage()));
+        }
+    }
+
+    @PutMapping("/participants/{id}/position")
+    public ResponseEntity<Response<String>> setParticipantPosition(@PathVariable String id,
+                                                                   @RequestBody Map<String, String> requestBody) {
+        try {
+            Optional<Participant> participant = environmentDataService.getParticipant(id);
+            if (participant.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(Response.error("Participant not found: " + id));
+            }
+            String newPosition = requestBody.get("position");
+            if (newPosition == null || newPosition.isEmpty()) {
+                return ResponseEntity.badRequest()
+                        .body(Response.error("Position cannot be empty"));
+            }
+            environmentDataService.updateParticipantPosition(id, newPosition);
+            log.info("[Environment API] Participant '{}' position set to: {}", id, newPosition);
+            return ResponseEntity.ok(Response.ok(newPosition));
+        } catch (Exception e) {
+            log.error("[Environment API] Failed to set position for participant: {}", id, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Response.error("Failed to set position: " + e.getMessage()));
         }
     }
 }
