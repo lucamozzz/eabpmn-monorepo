@@ -1202,7 +1202,12 @@ SpacePropertiesProvider.prototype.attachSectionEventListeners = function(section
         try {
           const value = e.target.value.trim();
           if (value) {
-            this._extensionService.setExtension(element, 'space:Guard', value);
+            this._extensionService.setExtension(element, EXTENSION_TYPES.GUARD, value);
+          } else {
+            this._extensionService.removeExtensions(
+              element,
+              ext => ext.$type === EXTENSION_TYPES.GUARD
+            );
           }
 
           this.updateSectionIndicators(section, element);
@@ -1221,7 +1226,12 @@ SpacePropertiesProvider.prototype.attachSectionEventListeners = function(section
         try {
           const value = e.target.value.trim();
           if (value) {
-            this._extensionService.setExtension(element, 'space:Action', value);
+            this._extensionService.setExtension(element, EXTENSION_TYPES.ACTION, value);
+          } else {
+            this._extensionService.removeExtensions(
+              element,
+              ext => ext.$type === EXTENSION_TYPES.ACTION
+            );
           }
 
           this.updateSectionIndicators(section, element);
@@ -1398,16 +1408,28 @@ SpacePropertiesProvider.prototype.updateFieldVisibility = function(section, sele
   const destinationEntry = section.querySelector('.space-destination-entry');
   const bindingEntry = section.querySelector('.space-binding-entry');
   const unbindingEntry = section.querySelector('.space-unbinding-entry');
+  const guardEntry = section.querySelector('.space-guard-entry');
+  const actionEntry = section.querySelector('.space-action-entry');
 
   if (destinationEntry) {
     destinationEntry.style.display = selectedType === TASK_TYPE_KEYS.MOVEMENT ? 'block' : 'none';
   }
+
+  // By requirement, binding/unbinding should not expose extra fields here.
   if (bindingEntry) {
-    bindingEntry.style.display = selectedType === TASK_TYPE_KEYS.BINDING ? 'block' : 'none';
+    bindingEntry.style.display = 'none';
   }
   if (unbindingEntry) {
-    unbindingEntry.style.display = selectedType === TASK_TYPE_KEYS.UNBINDING ? 'block' : 'none';
+    unbindingEntry.style.display = 'none';
   }
+
+  if (guardEntry) {
+    guardEntry.style.display = selectedType === TASK_TYPE_KEYS.ENVIRONMENTAL ? 'block' : 'none';
+  }
+  if (actionEntry) {
+    actionEntry.style.display = selectedType === TASK_TYPE_KEYS.ENVIRONMENTAL ? 'block' : 'none';
+  }
+
   const assignmentsEntry = section.querySelector('.space-assignments-entry');
   if (assignmentsEntry) {
     assignmentsEntry.style.display = selectedType === TASK_TYPE_KEYS.ENVIRONMENTAL ? 'block' : 'none';
@@ -1514,14 +1536,20 @@ SpacePropertiesProvider.prototype.refreshSpaceSection = function(element) {
     const currentType = this._extensionService.getCurrentType(element);
     const currentDestination = this._extensionService.getDestination(element);
     const currentBinding = this._extensionService.getBinding(element);
+    const currentGuard = this._extensionService.getGuard(element);
+    const currentAction = this._extensionService.getAction(element);
 
     const typeSelect = existingSection.querySelector('.space-type-select');
     const destinationInput = existingSection.querySelector('.space-destination-input');
     const bindingInput = existingSection.querySelector('.space-binding-input');
+    const guardInput = existingSection.querySelector('.space-guard-input');
+    const actionInput = existingSection.querySelector('.space-action-input');
 
     if (typeSelect) typeSelect.value = currentType || '';
     if (destinationInput) destinationInput.value = currentDestination || '';
     if (bindingInput) bindingInput.value = currentBinding || '';
+    if (guardInput) guardInput.value = currentGuard || '';
+    if (actionInput) actionInput.value = currentAction || '';
 
     
     // if (currentType === TASK_TYPE_KEYS.ENVIRONMENTAL) {
@@ -1536,11 +1564,11 @@ SpacePropertiesProvider.prototype.refreshSpaceSection = function(element) {
     //   }
     // }
 
-    // // Update visibility and indicators
-    // this.updateFieldVisibility(existingSection, currentType);
-    // this.updateSectionIndicators(existingSection, element);
+    // Keep UI deterministic when switching type/task: always recompute visibility and values.
+    this.updateFieldVisibility(existingSection, currentType);
+    this.updateSectionIndicators(existingSection, element);
 
-    // this.updateDestinationAttributes(existingSection, element);
+    this.updateDestinationAttributes(existingSection, element);
 
     // if (currentType) {
     //   this.refreshAssignmentsSection(existingSection, element);
