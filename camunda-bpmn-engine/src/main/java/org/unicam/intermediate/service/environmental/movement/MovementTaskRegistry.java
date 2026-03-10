@@ -4,6 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.RuntimeService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.unicam.intermediate.models.pojo.Condition;
+import org.unicam.intermediate.models.pojo.LogicalPlace;
+import org.unicam.intermediate.models.pojo.PhysicalPlace;
 import org.unicam.intermediate.models.record.MovementTaskInfo;
 import org.unicam.intermediate.service.environmental.EnvironmentDataService;
 
@@ -82,7 +85,7 @@ public class MovementTaskRegistry {
                 String currentPosition = participantOpt.get().getPosition();
 
                 // Verifica se ha raggiunto la destinazione
-                if (taskInfo.destination().equals(currentPosition)) {
+                if (isDestinationReached(taskInfo.destination(), currentPosition)) {
                     log.info("[MovementRegistry] ✓ Participant {} reached destination {} | Completing task",
                             participantId, taskInfo.destination());
 
@@ -106,5 +109,103 @@ public class MovementTaskRegistry {
 
         // Rimuovi i task completati dal registro
         completedParticipants.forEach(this::removeTask);
+    }
+
+    /**
+     * A destination can be:
+     * 1) a physical place id (legacy behavior), or
+     * 2) a logical place id, in which case completion happens when participant
+     *    enters any physical place satisfying all logical-place conditions (AND semantics).
+     */
+    private boolean isDestinationReached(String destination, String currentPosition) {
+        if (destination == null || destination.isBlank() || currentPosition == null || currentPosition.isBlank()) {
+            return false;
+        }
+
+        Optional<LogicalPlace> logicalDestination = environmentDataService.getLogicalPlaces().stream()
+                .filter(lp -> destination.equals(lp.getId()))
+                .findFirst();
+
+        // Physical destination: keep current behavior unchanged
+        if (logicalDestination.isEmpty()) {
+            return destination.equals(currentPosition);
+        }
+
+        // Logical destination: complete when current physical place is one of the matched places
+        List<String> matchingPhysicalPlaces = resolvePhysicalPlacesForLogicalPlace(logicalDestination.get())
+                .stream()
+                .map(PhysicalPlace::getId)
+                .toList();
+
+        return matchingPhysicalPlaces.contains(currentPosition);
+    }
+
+    private List<PhysicalPlace> resolvePhysicalPlacesForLogicalPlace(LogicalPlace logicalPlace) {
+        List<Condition> conditions = logicalPlace.getConditions();
+        if (conditions == null || conditions.isEmpty()) {
+            return List.of();
+        }
+
+        return environmentDataService.getPhysicalPlaces().stream()
+                .filter(physicalPlace -> matchesAllConditions(physicalPlace, conditions))
+                .toList();
+    }
+
+    private boolean matchesAllConditions(PhysicalPlace physicalPlace, List<Condition> conditions) {
+        Map<String, Object> attributes = physicalPlace.getAttributes();
+        if (attributes == null) {
+            return false;
+        }
+
+        for (Condition condition : conditions) {
+            if (condition == null || condition.getAttribute() == null || condition.getOperator() == null) {
+                return false;
+            }
+
+            Object actualValue = attributes.get(condition.getAttribute());
+            if (!compare(actualValue, condition.getOperator(), condition.getValue())) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean compare(Object actualValue, String operator, Object expectedValue) {
+        if (actualValue == null) {
+            return false;
+        }
+
+        String actualText = String.valueOf(actualValue).trim();
+        String expectedText = expectedValue == null ? "null" : String.valueOf(expectedValue).trim();
+
+        Double actualNumber = toNumber(actualText);
+        Double expectedNumber = toNumber(expectedText);
+
+        if (actualNumber != null && expectedNumber != null) {
+            return switch (operator) {
+                case "==" -> Double.compare(actualNumber, expectedNumber) == 0;
+                case "!=" -> Double.compare(actualNumber, expectedNumber) != 0;
+                case ">" -> actualNumber > expectedNumber;
+                case "<" -> actualNumber < expectedNumber;
+                case ">=" -> actualNumber >= expectedNumber;
+                case "<=" -> actualNumber <= expectedNumber;
+                default -> false;
+            };
+        }
+
+        return switch (operator) {
+            case "==" -> actualText.equalsIgnoreCase(expectedText);
+            case "!=" -> !actualText.equalsIgnoreCase(expectedText);
+            default -> false;
+        };
+    }
+
+    private Double toNumber(String value) {
+        try {
+            return Double.parseDouble(value);
+        } catch (NumberFormatException ex) {
+            return null;
+        }
     }
 }

@@ -26,8 +26,8 @@
         [13.067685920133588, 43.139098103142146]
       ],
       "attributes": {
-        "purpose": "phd",
-        "occupied": null,
+        "purpose": "meetings",
+        "occupied": false,
         "light": null,
         "state": "unchecked"
       }
@@ -554,9 +554,7 @@
                     "operator": "==",
                     "value": false
                 }
-            ],
-            "expression": "building === 'A'",
-            "place": "place13"
+            ]
         },
         {
             "id": "set2",
@@ -596,7 +594,7 @@
         },
         {
           "id": "Participant_0e908me",
-          "position": "place2"
+          "position": "place12"
         },
         {
             "id": "Participant_0hmc8mr",
