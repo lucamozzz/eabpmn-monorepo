@@ -22,6 +22,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
+import java.util.ArrayDeque;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -70,6 +75,68 @@ public class EnvironmentDataService {
 
     public List<View> getViews() {
         return data != null && data.getViews() != null ? data.getViews() : List.of();
+    }
+
+    /**
+     * Checks if there is at least one directed path from source physical place to target physical place,
+     * traversing the configured edges.
+     */
+    public boolean existsPathBetweenPhysicalPlaces(String sourcePlaceId, String targetPlaceId) {
+        if (sourcePlaceId == null || sourcePlaceId.isBlank() || targetPlaceId == null || targetPlaceId.isBlank()) {
+            return false;
+        }
+
+        if (sourcePlaceId.equals(targetPlaceId)) {
+            return true;
+        }
+
+        Set<String> physicalPlaceIds = getPhysicalPlaces().stream()
+                .map(PhysicalPlace::getId)
+                .filter(id -> id != null && !id.isBlank())
+                .collect(java.util.stream.Collectors.toSet());
+
+        // Validate source/target are known physical places.
+        if (!physicalPlaceIds.contains(sourcePlaceId) || !physicalPlaceIds.contains(targetPlaceId)) {
+            return false;
+        }
+
+        Map<String, Set<String>> adjacency = new HashMap<>();
+        for (Edge edge : getEdges()) {
+            if (edge == null || edge.getSource() == null || edge.getTarget() == null) {
+                continue;
+            }
+
+            String from = edge.getSource();
+            String to = edge.getTarget();
+
+            // Only consider edges between known physical places.
+            if (!physicalPlaceIds.contains(from) || !physicalPlaceIds.contains(to)) {
+                continue;
+            }
+
+            adjacency.computeIfAbsent(from, ignored -> new HashSet<>()).add(to);
+        }
+
+        ArrayDeque<String> queue = new ArrayDeque<>();
+        Set<String> visited = new HashSet<>();
+        queue.add(sourcePlaceId);
+        visited.add(sourcePlaceId);
+
+        while (!queue.isEmpty()) {
+            String current = queue.poll();
+            Set<String> neighbors = adjacency.getOrDefault(current, Set.of());
+
+            for (String neighbor : neighbors) {
+                if (targetPlaceId.equals(neighbor)) {
+                    return true;
+                }
+                if (visited.add(neighbor)) {
+                    queue.add(neighbor);
+                }
+            }
+        }
+
+        return false;
     }
 
     public Optional<PhysicalPlace> findPhysicalPlaceContainingLocation(double lat, double lon) {

@@ -1,12 +1,15 @@
 package org.unicam.intermediate.listener.execution;
 
 import lombok.extern.slf4j.Slf4j;
+import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.ExecutionListener;
 import org.springframework.stereotype.Component;
 import org.unicam.intermediate.models.Participant;
 import org.unicam.intermediate.models.enums.TaskType;
+import org.unicam.intermediate.service.environmental.EnvironmentDataService;
 import org.unicam.intermediate.service.environmental.movement.MovementTaskRegistry;
+import org.unicam.intermediate.service.participant.ParticipantDataService;
 import org.unicam.intermediate.service.participant.ParticipantService;
 import org.unicam.intermediate.service.participant.UserParticipantMappingService;
 import org.unicam.intermediate.service.xml.AbstractXmlService;
@@ -20,15 +23,21 @@ public class MovementExecutionListener implements ExecutionListener {
 
     private final XmlServiceDispatcher dispatcher;
     private final ParticipantService participantService;
+    private final ParticipantDataService participantDataService;
+    private final EnvironmentDataService environmentDataService;
     private final UserParticipantMappingService userParticipantMapping;
     private final MovementTaskRegistry movementTaskRegistry;
 
     public MovementExecutionListener(XmlServiceDispatcher dispatcher,
                                      ParticipantService participantService,
+                                     ParticipantDataService participantDataService,
+                                     EnvironmentDataService environmentDataService,
                                      UserParticipantMappingService userParticipantMapping,
                                      MovementTaskRegistry movementTaskRegistry) {
         this.dispatcher = dispatcher;
         this.participantService = participantService;
+        this.participantDataService = participantDataService;
+        this.environmentDataService = environmentDataService;
         this.userParticipantMapping = userParticipantMapping;
         this.movementTaskRegistry = movementTaskRegistry;
     }
@@ -49,12 +58,28 @@ public class MovementExecutionListener implements ExecutionListener {
                 ? String.valueOf(execution.getVariable(raw.substring(2, raw.length()-1).trim()))
                 : raw;
 
+        Participant participant = participantService.resolveCurrentParticipant(execution);
+        boolean destinationIsPhysicalPlace = value != null && environmentDataService.getPhysicalPlace(value).isPresent();
+        if (participant != null && destinationIsPhysicalPlace) {
+            String participantId = participant.getId();
+            participantDataService.getParticipant(participantId).ifPresent(current -> {
+                String currentPosition = current.getPosition();
+                boolean reachable = environmentDataService.existsPathBetweenPhysicalPlaces(currentPosition, value);
+                if (!reachable) {
+                    throw new BpmnError(
+                            "unreachableDestination",
+                            String.format("No path found from '%s' to '%s' for participant '%s'",
+                                    currentPosition, value, participantId)
+                    );
+                }
+            });
+        }
+
         svc.patchInstanceValue(execution, value);
         var activityId = execution.getCurrentActivityId();
         String varKey = activityId + "." + svc.getLocalName();
         execution.setVariable(varKey, value);
 
-        Participant participant = participantService.resolveCurrentParticipant(execution);
         String businessKey = execution.getBusinessKey();
 
         String userId = (String) execution.getVariable("userId");

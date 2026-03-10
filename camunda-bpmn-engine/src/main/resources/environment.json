@@ -255,6 +255,22 @@
         "light": null,
         "state": "unchecked"
       }
+    },
+    {
+      "id": "place170",
+      "name": "R9",
+      "coordinates": [
+        [13.06855093254089, 43.13947779813833],
+        [13.068679678573607, 43.13952281336813],
+        [13.068636763229367, 43.13960795077733],
+        [13.068491923942565, 43.13954629956183]
+      ],
+      "attributes": {
+        "purpose": "teaching",
+        "occupied": null,
+        "light": null,
+        "state": "unchecked"
+      }
     }
   ],
     "edges": [
