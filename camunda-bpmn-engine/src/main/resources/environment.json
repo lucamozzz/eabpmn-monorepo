@@ -586,19 +586,5 @@
             ],
             "attributes": {}
         }
-    ],
-    "participants": [
-        {
-            "id": "Participant_1u408xr",
-            "position": "place1"
-        },
-        {
-          "id": "Participant_0e908me",
-          "position": "place12"
-        },
-        {
-            "id": "Participant_0hmc8mr",
-            "position": "place1"
-        }
     ]
 }

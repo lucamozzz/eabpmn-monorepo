@@ -6,6 +6,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.unicam.intermediate.models.record.BindingTaskInfo;
 import org.unicam.intermediate.service.environmental.EnvironmentDataService;
+import org.unicam.intermediate.service.participant.ParticipantDataService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class UnbindingTaskRegistry {
 
     private final EnvironmentDataService environmentDataService;
+    private final ParticipantDataService participantDataService;
     private final RuntimeService runtimeService;
 
     // participantId -> unbinding task currently waiting for counterpart
@@ -27,8 +29,10 @@ public class UnbindingTaskRegistry {
     private final Map<String, UnbindingPair> activePairs = new ConcurrentHashMap<>();
 
     public UnbindingTaskRegistry(EnvironmentDataService environmentDataService,
+                                 ParticipantDataService participantDataService,
                                  RuntimeService runtimeService) {
         this.environmentDataService = environmentDataService;
+        this.participantDataService = participantDataService;
         this.runtimeService = runtimeService;
     }
 
@@ -155,7 +159,7 @@ public class UnbindingTaskRegistry {
 
     private String getParticipantPosition(String participantId) {
         Optional<org.unicam.intermediate.models.pojo.Participant> participant =
-                environmentDataService.getParticipant(participantId);
+                participantDataService.getParticipant(participantId);
         return participant.map(org.unicam.intermediate.models.pojo.Participant::getPosition).orElse(null);
     }
 

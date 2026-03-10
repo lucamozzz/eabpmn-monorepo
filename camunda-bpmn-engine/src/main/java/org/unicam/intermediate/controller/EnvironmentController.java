@@ -14,6 +14,7 @@ import org.unicam.intermediate.models.dto.Response;
 import org.unicam.intermediate.models.pojo.PhysicalPlace;
 import org.unicam.intermediate.models.pojo.Participant;
 import org.unicam.intermediate.service.environmental.EnvironmentDataService;
+import org.unicam.intermediate.service.participant.ParticipantDataService;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -25,6 +26,7 @@ import java.util.Optional;
 public class EnvironmentController {
 
     private final EnvironmentDataService environmentDataService;
+    private final ParticipantDataService participantDataService;
 
     @GetMapping("/pp")
     public ResponseEntity<Response<List<PhysicalPlace>>> getPhysicalPlaces() {
@@ -98,7 +100,7 @@ public class EnvironmentController {
     @GetMapping("/participants")
     public ResponseEntity<Response<List<Participant>>> getParticipants() {
         try {
-            List<Participant> participants = environmentDataService.getParticipants();
+            List<Participant> participants = participantDataService.getParticipants();
             return ResponseEntity.ok(Response.ok(participants));
         } catch (Exception e) {
             log.error("[Environment API] Failed to retrieve participants", e);
@@ -110,7 +112,7 @@ public class EnvironmentController {
     @GetMapping("/participants/{id}/position")
     public ResponseEntity<Response<String>> getParticipantPosition(@PathVariable String id) {
         try {
-            Optional<Participant> participant = environmentDataService.getParticipant(id);
+            Optional<Participant> participant = participantDataService.getParticipant(id);
             if (participant.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                         .body(Response.error("Participant not found: " + id));
@@ -128,7 +130,7 @@ public class EnvironmentController {
     public ResponseEntity<Response<String>> setParticipantPosition(@PathVariable String id,
                                                                    @RequestBody Map<String, String> requestBody) {
         try {
-            Optional<Participant> participant = environmentDataService.getParticipant(id);
+            Optional<Participant> participant = participantDataService.getParticipant(id);
             if (participant.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                         .body(Response.error("Participant not found: " + id));
@@ -138,7 +140,7 @@ public class EnvironmentController {
                 return ResponseEntity.badRequest()
                         .body(Response.error("Position cannot be empty"));
             }
-            environmentDataService.updateParticipantPosition(id, newPosition);
+            participantDataService.updateParticipantPosition(id, newPosition);
             log.info("[Environment API] Participant '{}' position set to: {}", id, newPosition);
             return ResponseEntity.ok(Response.ok(newPosition));
         } catch (Exception e) {

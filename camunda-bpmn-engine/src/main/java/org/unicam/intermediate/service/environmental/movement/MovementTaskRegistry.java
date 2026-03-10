@@ -9,6 +9,7 @@ import org.unicam.intermediate.models.pojo.LogicalPlace;
 import org.unicam.intermediate.models.pojo.PhysicalPlace;
 import org.unicam.intermediate.models.record.MovementTaskInfo;
 import org.unicam.intermediate.service.environmental.EnvironmentDataService;
+import org.unicam.intermediate.service.participant.ParticipantDataService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,14 +22,17 @@ import java.util.concurrent.ConcurrentHashMap;
 public class MovementTaskRegistry {
 
     private final EnvironmentDataService environmentDataService;
+    private final ParticipantDataService participantDataService;
     private final RuntimeService runtimeService;
 
     // Registry: participantId -> MovementTaskInfo
     private final Map<String, MovementTaskInfo> activeMovementTasks = new ConcurrentHashMap<>();
 
     public MovementTaskRegistry(EnvironmentDataService environmentDataService,
+                                ParticipantDataService participantDataService,
                                 RuntimeService runtimeService) {
         this.environmentDataService = environmentDataService;
+        this.participantDataService = participantDataService;
         this.runtimeService = runtimeService;
     }
 
@@ -79,7 +83,7 @@ public class MovementTaskRegistry {
 
             // Ottieni la posizione corrente del participant
             Optional<org.unicam.intermediate.models.pojo.Participant> participantOpt = 
-                    environmentDataService.getParticipant(participantId);
+                    participantDataService.getParticipant(participantId);
 
             if (participantOpt.isPresent()) {
                 String currentPosition = participantOpt.get().getPosition();

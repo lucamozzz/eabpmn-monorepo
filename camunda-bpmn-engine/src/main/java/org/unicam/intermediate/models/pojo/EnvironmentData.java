@@ -12,5 +12,4 @@ public class EnvironmentData {
     private List<Edge> edges;
     private List<LogicalPlace> logicalPlaces;
     private List<View> views;
-    private List<Participant> participants;
 }

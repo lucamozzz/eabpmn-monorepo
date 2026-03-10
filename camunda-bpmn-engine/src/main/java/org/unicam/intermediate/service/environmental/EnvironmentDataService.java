@@ -13,7 +13,6 @@ import org.unicam.intermediate.models.pojo.Edge;
 import org.unicam.intermediate.models.pojo.PhysicalPlace;
 import org.unicam.intermediate.models.pojo.LogicalPlace;
 import org.unicam.intermediate.models.pojo.View;
-import org.unicam.intermediate.models.pojo.Participant;
 
 import jakarta.annotation.PostConstruct;
 import java.io.IOException;
@@ -71,29 +70,6 @@ public class EnvironmentDataService {
 
     public List<View> getViews() {
         return data != null && data.getViews() != null ? data.getViews() : List.of();
-    }
-
-    public List<Participant> getParticipants() {
-        return data != null && data.getParticipants() != null ? data.getParticipants() : List.of();
-    }
-
-    public Optional<Participant> getParticipant(String id) {
-        if (id == null || data == null || data.getParticipants() == null || data.getParticipants().isEmpty()) {
-            return Optional.empty();
-        }
-        return data.getParticipants().stream()
-                .filter(p -> id.equals(p.getId()))
-                .findFirst();
-    }
-
-    public void updateParticipantPosition(String id, String position) {
-        if (id == null || data == null || data.getParticipants() == null) {
-            return;
-        }
-        data.getParticipants().stream()
-                .filter(p -> id.equals(p.getId()))
-                .findFirst()
-                .ifPresent(p -> p.setPosition(position));
     }
 
     public Optional<PhysicalPlace> findPhysicalPlaceContainingLocation(double lat, double lon) {
