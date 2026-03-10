@@ -37,8 +37,32 @@ public class DynamicParseListener extends AbstractBpmnParseListener {
         }
 
         Element typeElement = extensions.elementNS(Constants.SPACE_NS, "type");
+        Element guardElement = extensions.elementNS(Constants.SPACE_NS, "guard");
+
+        // Base BPMN task with guard and no explicit space:type: evaluate guard with dedicated listener.
         if (typeElement == null) {
-            log.debug("[DynamicParseListener] No space:type found for activity: {}", activity.getId());
+            if (guardElement == null || guardElement.getText() == null || guardElement.getText().trim().isEmpty()) {
+                log.debug("[DynamicParseListener] No space:type/space:guard found for activity: {}", activity.getId());
+                return;
+            }
+
+            try {
+                activity.setActivityBehavior(new WaitStateActivity());
+
+                ExpressionManager exprMgr = Context.getProcessEngineConfiguration().getExpressionManager();
+                String exprString = "${" + genericTaskExecutionListenerBeanName + "}";
+                var expression = exprMgr.createExpression(exprString);
+
+                ExecutionListener listener = new DelegateExpressionExecutionListener(expression, Collections.emptyList());
+                activity.addListener(ExecutionListener.EVENTNAME_START, listener);
+                activity.addListener(ExecutionListener.EVENTNAME_END, listener);
+
+                log.info("[DynamicParseListener] Configured base BPMN task '{}' with guard listener ${{{}}}",
+                        activity.getId(), genericTaskExecutionListenerBeanName);
+            } catch (Exception e) {
+                log.error("[DynamicParseListener] Failed to configure base BPMN guard listener for activity '{}': {}",
+                        activity.getId(), e.getMessage(), e);
+            }
             return;
         }
 

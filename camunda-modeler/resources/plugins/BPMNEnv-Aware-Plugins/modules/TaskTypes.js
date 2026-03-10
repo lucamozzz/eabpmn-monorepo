@@ -16,7 +16,7 @@ export const TASK_TYPES_CONFIG = {
     typeValue: 'Movement',
     displayName: 'Movement Task',
     icon: { class: 'movement-badge', iconFile: movementIcon },
-    extensionElements: [ 'space:Type', 'space:Destination', 'space:TaskAssignment', 'space:TaskAssignmentReached' ],
+    extensionElements: [ 'space:Type', 'space:Destination', 'space:Guard', 'space:TaskAssignment', 'space:TaskAssignmentReached' ],
     defaultDestination: '${destination}',
     validationRules: [],
     formType: 'destination'
@@ -26,7 +26,7 @@ export const TASK_TYPES_CONFIG = {
     typeValue: 'Binding',
     displayName: 'Binding Task',
     icon: { class: 'binding-badge', iconFile: bindIcon },
-    extensionElements: [ 'space:Type', 'space:TaskAssignment', 'space:TaskAssignmentReached' ],
+    extensionElements: [ 'space:Type', 'space:Guard', 'space:TaskAssignment', 'space:TaskAssignmentReached' ],
     validationRules: [],
     formType: 'none'
   },
@@ -35,7 +35,7 @@ export const TASK_TYPES_CONFIG = {
     typeValue: 'Unbinding',
     displayName: 'Unbinding Task',
     icon: { class: 'unbinding-badge', iconFile: unbindIcon },
-    extensionElements: [ 'space:Type', 'space:TaskAssignment', 'space:TaskAssignmentReached' ],
+    extensionElements: [ 'space:Type', 'space:Guard', 'space:TaskAssignment', 'space:TaskAssignmentReached' ],
     validationRules: [ 'requiresUpstreamBinding' ],
     formType: 'none'
   },

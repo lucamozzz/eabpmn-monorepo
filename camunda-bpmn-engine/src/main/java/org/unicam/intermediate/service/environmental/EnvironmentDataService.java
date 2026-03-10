@@ -156,6 +156,32 @@ public class EnvironmentDataService {
                 .orElse(false);
     }
 
+    /**
+     * Resolves a reference (id or name) to the canonical physical place id.
+     */
+    public Optional<String> resolvePhysicalPlaceId(String reference) {
+        if (reference == null || reference.isBlank()) {
+            return Optional.empty();
+        }
+        return getPhysicalPlaces().stream()
+                .filter(p -> reference.equals(p.getId()) || reference.equalsIgnoreCase(p.getName()))
+                .map(PhysicalPlace::getId)
+                .findFirst();
+    }
+
+    /**
+     * Resolves a reference (id or name) to the canonical logical place id.
+     */
+    public Optional<String> resolveLogicalPlaceId(String reference) {
+        if (reference == null || reference.isBlank()) {
+            return Optional.empty();
+        }
+        return getLogicalPlaces().stream()
+                .filter(p -> reference.equals(p.getId()) || reference.equalsIgnoreCase(p.getName()))
+                .map(LogicalPlace::getId)
+                .findFirst();
+    }
+
     public boolean isLoaded() {
         return data != null && data.getPhysicalPlaces() != null && !data.getPhysicalPlaces().isEmpty();
     }

@@ -151,6 +151,11 @@ public class EnvironmentalTaskRegistry {
         String operator = matcher.group(3);
         String expectedRaw = unquote(matcher.group(4).trim());
 
+        // participant.position == placeRef notation
+        if ("position".equals(attributeKey)) {
+            return evaluateParticipantPosition(placeId, operator, expectedRaw, activityId);
+        }
+
         Optional<PhysicalPlace> placeOpt = environmentDataService.getPhysicalPlace(placeId);
         if (placeOpt.isEmpty()) {
             log.debug("[ENVIRONMENTAL] Place '{}' not found for activity {}", placeId, activityId);
@@ -168,6 +173,35 @@ public class EnvironmentalTaskRegistry {
 
         log.debug("[ENVIRONMENTAL] Guard evaluation | activity={} | expr='{}' | actual='{}' -> {}",
                 activityId, resolvedExpression, actualValue, result);
+
+        return result;
+    }
+
+    private boolean evaluateParticipantPosition(String participantRef, String operator, String expectedPlaceRef, String activityId) {
+        Optional<String> currentPositionOpt = participantDataService.getParticipant(participantRef)
+                .map(p -> p.getPosition());
+
+        if (currentPositionOpt.isEmpty() || currentPositionOpt.get() == null) {
+            log.debug("[ENVIRONMENTAL] Position check: participant '{}' not found or has no position for activity {}",
+                    participantRef, activityId);
+            return false;
+        }
+
+        String currentPosition = currentPositionOpt.get();
+
+        // Resolve right-hand side place reference to canonical id (by id or name)
+        String resolvedExpected = environmentDataService.resolvePhysicalPlaceId(expectedPlaceRef)
+                .or(() -> environmentDataService.resolveLogicalPlaceId(expectedPlaceRef))
+                .orElse(expectedPlaceRef);
+
+        // Resolve participant's current position to canonical id as well
+        String resolvedPosition = environmentDataService.resolvePhysicalPlaceId(currentPosition)
+                .orElse(currentPosition);
+
+        boolean result = compare(resolvedPosition, operator, resolvedExpected);
+
+        log.debug("[ENVIRONMENTAL] Position guard | activity={} | participant='{}' | position='{}' | op='{}' | expected='{}' -> {}",
+                activityId, participantRef, resolvedPosition, operator, resolvedExpected, result);
 
         return result;
     }

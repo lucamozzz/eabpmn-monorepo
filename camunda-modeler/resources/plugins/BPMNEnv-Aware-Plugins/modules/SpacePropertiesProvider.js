@@ -777,13 +777,14 @@ SpacePropertiesProvider.prototype.createSpaceSection = function(element) {
   section.setAttribute('data-group-id', 'group-space-properties');
 
   const currentType = this._extensionService.getCurrentType(element);
+  const currentGuard = this._extensionService.getGuard(element) || '';
   const translate = this._translate;
 
   // NEW: Get assignment count for badge
   const assignmentCount = this._assignmentService.getAssignmentCount(element);
 
-  const isExpanded = !!currentType;
-  const hasData = !!currentType;
+  const isExpanded = !!currentType || !!currentGuard.trim();
+  const hasData = !!currentType || !!currentGuard.trim();
 
   section.innerHTML = `
     <div class="bio-properties-panel-group-header ${isExpanded ? 'open' : ''} ${hasData ? '' : 'empty'}">
@@ -864,7 +865,7 @@ SpacePropertiesProvider.prototype.createSpaceSection = function(element) {
       
       <div data-entry-id="space-guard" 
            class="bio-properties-panel-entry space-guard-entry" 
-           style="${currentType !== 'environmental' ? 'display: none;' : ''}">
+         style="display: block;">
         <div class="bio-properties-panel-textfield">
           <label for="space-guard-input" class="bio-properties-panel-label">Guard</label>
           <input id="space-guard-input" 
@@ -1479,7 +1480,7 @@ SpacePropertiesProvider.prototype.updateFieldVisibility = function(section, sele
   }
 
   if (guardEntry) {
-    guardEntry.style.display = selectedType === TASK_TYPE_KEYS.ENVIRONMENTAL ? 'block' : 'none';
+    guardEntry.style.display = 'block';
   }
   if (actionEntry) {
     actionEntry.style.display = selectedType === TASK_TYPE_KEYS.ENVIRONMENTAL ? 'block' : 'none';
@@ -1498,6 +1499,10 @@ SpacePropertiesProvider.prototype.getStatusText = function(element, currentType)
   const translate = this._translate;
 
   if (!currentType) {
+    const guard = this._extensionService.getGuard(element);
+    if (guard && guard.trim()) {
+      return `<strong>${translate('Status')}:</strong> ${translate('Guard configured on base BPMN task')}`;
+    }
     return `<strong>${translate('Status')}:</strong> ${translate('No configuration')} <br><em>${translate('Select a type to configure this task')}</em>`;
   }
 
@@ -1524,7 +1529,8 @@ SpacePropertiesProvider.prototype.updateSectionIndicators = function(section, el
   const statusDisplay = section.querySelector('.space-status-display');
 
   const currentType = this._extensionService.getCurrentType(element);
-  const hasData = !!currentType;
+  const currentGuard = this._extensionService.getGuard(element) || '';
+  const hasData = !!currentType || !!currentGuard.trim();
 
   const assignmentCount = this._assignmentService.getAssignmentCount(element);
   const titleDiv = header.querySelector('.bio-properties-panel-group-header-title');
