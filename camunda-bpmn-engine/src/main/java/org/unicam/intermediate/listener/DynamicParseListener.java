@@ -10,11 +10,8 @@ import org.camunda.bpm.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.camunda.bpm.engine.impl.pvm.process.ActivityImpl;
 import org.camunda.bpm.engine.impl.pvm.process.ScopeImpl;
 import org.camunda.bpm.engine.impl.util.xml.Element;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.unicam.intermediate.activity.WaitStateActivity;
-import org.unicam.intermediate.service.MessageFlowRegistry;
 import org.unicam.intermediate.utils.Constants;
 
 import java.util.Collections;
@@ -24,10 +21,6 @@ import static org.unicam.intermediate.utils.Constants.*;
 @Component
 @Slf4j
 public class DynamicParseListener extends AbstractBpmnParseListener {
-
-    @Autowired
-    @Lazy  // Break circular dependency
-    private MessageFlowRegistry messageFlowRegistry;
 
     @Override
     public void parseProcess(Element processElement, ProcessDefinitionEntity processDefinition) {
