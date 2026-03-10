@@ -86,6 +86,27 @@ public class DynamicParseListener extends AbstractBpmnParseListener {
         }
     }
 
+    @Override
+    public void parseExclusiveGateway(Element exclusiveGwElement, ScopeImpl scope, ActivityImpl activity) {
+        try {
+            activity.setActivityBehavior(new WaitStateActivity());
+
+            ExpressionManager exprMgr = Context.getProcessEngineConfiguration().getExpressionManager();
+            String exprString = "${" + exclusiveGatewayExecutionListenerBeanName + "}";
+            var expression = exprMgr.createExpression(exprString);
+
+            ExecutionListener listener = new DelegateExpressionExecutionListener(expression, Collections.emptyList());
+            activity.addListener(ExecutionListener.EVENTNAME_START, listener);
+            activity.addListener(ExecutionListener.EVENTNAME_END, listener);
+
+            log.debug("[DynamicParseListener] Configured exclusive gateway '{}' with wait-state listener ${{{}}}",
+                    activity.getId(), exclusiveGatewayExecutionListenerBeanName);
+        } catch (Exception e) {
+            log.error("[DynamicParseListener] Failed to configure exclusive gateway '{}': {}",
+                    activity.getId(), e.getMessage(), e);
+        }
+    }
+
     private String getListenerBeanName(String typeValue) {
         return switch (typeValue.toLowerCase()) {
             case "movement" -> movementExecutionListenerBeanName;

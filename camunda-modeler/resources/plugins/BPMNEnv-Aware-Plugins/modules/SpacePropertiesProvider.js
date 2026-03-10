@@ -35,6 +35,10 @@ function SpacePropertiesProvider(
 
         // Show binding info for connections
         setTimeout(() => this.createMessageFlowSpaceSection(element), 200);
+      } else if (element.type === 'bpmn:SequenceFlow') {
+
+        // Show guard properties for sequence flows
+        setTimeout(() => this.createSequenceFlowSpaceSection(element), 200);
       } else {
         setTimeout(() => this.showEnvironmentSection(), 200);
       }
@@ -1574,6 +1578,192 @@ SpacePropertiesProvider.prototype.refreshSpaceSection = function(element) {
     //   this.refreshAssignmentsSection(existingSection, element);
     // }
   }
+};
+
+/**
+ * Create Space Properties section for sequence flows (guard support)
+ */
+SpacePropertiesProvider.prototype.createSequenceFlowSpaceSection = function(element) {
+  const propertiesPanel = document.querySelector('.bio-properties-panel-scroll-container');
+  if (!propertiesPanel) {
+    return;
+  }
+
+  // Remove existing space sections
+  const existingSection = propertiesPanel.querySelector('.space-properties-section');
+  if (existingSection) {
+    existingSection.remove();
+  }
+
+  const section = document.createElement('div');
+  section.className = 'bio-properties-panel-group space-properties-section';
+  section.setAttribute('data-group-id', 'group-space-flow-properties');
+
+  const currentGuard = this._extensionService.getGuard(element);
+  const hasGuard = !!currentGuard;
+  const translate = this._translate;
+
+  section.innerHTML = `
+    <div class="bio-properties-panel-group-header ${hasGuard ? 'open' : ''} ${hasGuard ? '' : 'empty'}">
+      <div title="Sequence Flow Guard" 
+           data-title="Sequence Flow Guard" 
+           class="bio-properties-panel-group-header-title">
+          Environmental Properties
+          ${hasGuard ? '<span class="assignment-count-badge">✓</span>' : ''}
+      </div>
+      <div class="bio-properties-panel-group-header-buttons">
+        ${hasGuard ? '<div title="Guard is set" class="bio-properties-panel-dot"></div>' : ''}
+        <button type="button" 
+                title="Toggle section" 
+                class="bio-properties-panel-group-header-button bio-properties-panel-arrow">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="${hasGuard ? 'bio-properties-panel-arrow-down' : 'bio-properties-panel-arrow-right'}">
+            <path fill-rule="evenodd" d="m11.657 8-4.95 4.95a1 1 0 0 1-1.414-1.414L8.828 8 5.293 4.464A1 1 0 1 1 6.707 3.05L11.657 8Z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="bio-properties-panel-group-entries ${hasGuard ? 'open' : ''}" style="${hasGuard ? '' : 'display: none;'}">
+      <!-- Guard Entry -->
+      <div data-entry-id="space-seq-guard" class="bio-properties-panel-entry space-seq-guard-entry">
+        <div class="bio-properties-panel-textfield">
+          <label for="space-seq-guard-input" class="bio-properties-panel-label">Guard Condition</label>
+          <input id="space-seq-guard-input" 
+                 type="text" 
+                 name="spaceSeqGuard" 
+                 spellcheck="false" 
+                 autocomplete="off" 
+                 class="bio-properties-panel-input space-seq-guard-input"
+                 placeholder="${translate('Enter guard expression')}"
+                 value="${currentGuard || ''}" />
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Insert after General section
+  const generalSection = propertiesPanel.querySelector('[data-group-id*="general"]');
+  if (generalSection && generalSection.nextSibling) {
+    propertiesPanel.insertBefore(section, generalSection.nextSibling);
+  } else {
+    propertiesPanel.insertBefore(section, propertiesPanel.firstChild);
+  }
+
+  this.attachSequenceFlowEventListeners(section, element);
+};
+
+/**
+ * Attach event listeners specifically for sequence flow guard
+ */
+SpacePropertiesProvider.prototype.attachSequenceFlowEventListeners = function(section, element) {
+  // Toggle section expand/collapse
+  const toggleButton = section.querySelector('.bio-properties-panel-group-header-button');
+  const header = section.querySelector('.bio-properties-panel-group-header');
+  const entries = section.querySelector('.bio-properties-panel-group-entries');
+
+  if (toggleButton && header && entries) {
+    toggleButton.addEventListener('click', () => {
+      const isOpen = header.classList.contains('open');
+
+      if (isOpen) {
+        header.classList.remove('open');
+        entries.classList.remove('open');
+        entries.style.display = 'none';
+        const arrow = toggleButton.querySelector('svg');
+        if (arrow) {
+          arrow.classList.remove('bio-properties-panel-arrow-down');
+          arrow.classList.add('bio-properties-panel-arrow-right');
+        }
+      } else {
+        header.classList.add('open');
+        entries.classList.add('open');
+        entries.style.display = 'block';
+        const arrow = toggleButton.querySelector('svg');
+        if (arrow) {
+          arrow.classList.remove('bio-properties-panel-arrow-right');
+          arrow.classList.add('bio-properties-panel-arrow-down');
+        }
+      }
+    });
+  }
+
+  // Guard input listener
+  const guardInput = section.querySelector('.space-seq-guard-input');
+  if (guardInput) {
+    ['input', 'blur', 'change'].forEach(eventType => {
+      guardInput.addEventListener(eventType, (e) => {
+        try {
+          const value = e.target.value.trim();
+          
+          if (value) {
+            // Set guard extension
+            this._extensionService.setExtension(element, EXTENSION_TYPES.GUARD, value);
+            // Add condition expression to sequence flow
+            this.getOrCreateConditionExpression(element);
+          } else {
+            // Remove guard extension
+            this._extensionService.removeExtensions(
+              element,
+              ext => ext.$type === EXTENSION_TYPES.GUARD
+            );
+            // Remove condition expression
+            this.removeConditionExpression(element);
+          }
+
+          // Update UI state
+          header.classList.toggle('empty', !value);
+          const dot = header.querySelector('.bio-properties-panel-dot');
+          if (!value && dot) {
+            dot.remove();
+          } else if (value && !dot) {
+            const newDot = document.createElement('div');
+            newDot.className = 'bio-properties-panel-dot';
+            newDot.title = 'Guard is set';
+            header.querySelector('.bio-properties-panel-group-header-buttons').insertBefore(newDot, toggleButton);
+          }
+
+        } catch (error) {
+          console.error('Error saving guard:', error);
+        }
+      });
+    });
+  }
+};
+
+/**
+ * Helper: Create or get conditionExpression on sequence flow
+ * Sets it to ${true == true} so Camunda always follows when guard is satisfied
+ */
+SpacePropertiesProvider.prototype.getOrCreateConditionExpression = function(element) {
+  if (!element.businessObject) {
+    return;
+  }
+
+  const bo = element.businessObject;
+  const moddle = bo.$model;
+
+  if (!bo.conditionExpression) {
+    // Create new condition expression
+    const conditionExpression = moddle.create('bpmn:FormalExpression', {
+      body: '${true == true}'
+    });
+    bo.conditionExpression = conditionExpression;
+  } else {
+    // Update existing to true
+    bo.conditionExpression.body = '${true == true}';
+  }
+};
+
+/**
+ * Helper: Remove conditionExpression from sequence flow
+ */
+SpacePropertiesProvider.prototype.removeConditionExpression = function(element) {
+  if (!element.businessObject) {
+    return;
+  }
+
+  const bo = element.businessObject;
+  bo.conditionExpression = undefined;
 };
 
 export default {

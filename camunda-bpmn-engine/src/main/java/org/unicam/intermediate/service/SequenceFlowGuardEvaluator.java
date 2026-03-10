@@ -1,0 +1,213 @@
+package org.unicam.intermediate.service;
+
+import lombok.extern.slf4j.Slf4j;
+import org.camunda.bpm.engine.delegate.DelegateExecution;
+import org.camunda.bpm.engine.RepositoryService;
+import org.camunda.bpm.model.bpmn.instance.ExtensionElements;
+import org.camunda.bpm.model.bpmn.instance.SequenceFlow;
+import org.camunda.bpm.model.xml.instance.DomElement;
+import org.springframework.stereotype.Service;
+import org.unicam.intermediate.models.pojo.PhysicalPlace;
+import org.unicam.intermediate.service.environmental.EnvironmentDataService;
+
+import java.util.Map;
+import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * Evaluates space:guard expressions on sequence flows.
+ * Used by DynamicParseListener to determine if a sequence flow should be followed.
+ */
+@Service
+@Slf4j
+public class SequenceFlowGuardEvaluator {
+
+    private static final Pattern GUARD_PATTERN = Pattern.compile(
+            "^([A-Za-z0-9_-]+)\\.([A-Za-z0-9_-]+)\\s*(==|!=|>=|<=|>|<)\\s*(.+)$"
+    );
+
+    private final EnvironmentDataService environmentDataService;
+    private final RepositoryService repositoryService;
+
+    public SequenceFlowGuardEvaluator(EnvironmentDataService environmentDataService,
+                                      RepositoryService repositoryService) {
+        this.environmentDataService = environmentDataService;
+        this.repositoryService = repositoryService;
+    }
+
+    /**
+     * Evaluate guard for a specific sequence flow.
+     * Called from BPMN condition expressions in DynamicParseListener like:
+     * ${sequenceFlowGuardEvaluator.evaluateGuard(execution, 'Flow_123')}
+     *
+     * @param execution The current execution
+     * @param sequenceFlowId The ID of the sequence flow being evaluated
+     * @return true if guard passes (or no guard defined), false if guard fails
+     */
+    public Boolean evaluateGuard(DelegateExecution execution, String sequenceFlowId) {
+        if (execution == null) {
+            return false;
+        }
+
+        return evaluateGuard(execution.getProcessDefinitionId(), sequenceFlowId);
+    }
+
+    public Boolean evaluateGuard(String processDefinitionId, String sequenceFlowId) {
+        try {
+            log.debug("[SequenceFlowGuardEvaluator] Evaluating guard for sequence flow: {}", sequenceFlowId);
+
+            if (processDefinitionId == null || processDefinitionId.isBlank()) {
+                log.warn("[SequenceFlowGuardEvaluator] Process definition ID not found");
+                return true;
+            }
+
+            // Get BPMN model
+            var bpmnModelInstance = repositoryService.getBpmnModelInstance(processDefinitionId);
+
+            if (bpmnModelInstance == null) {
+                log.debug("[SequenceFlowGuardEvaluator] BPMN model not found for process {}", processDefinitionId);
+                return true; // No guard = pass through
+            }
+
+            // Find the sequence flow by ID
+            var sequenceFlow = bpmnModelInstance.getModelElementById(sequenceFlowId);
+            if (sequenceFlow == null) {
+                log.debug("[SequenceFlowGuardEvaluator] Sequence flow not found: {}", sequenceFlowId);
+                return true; // No guard = pass through
+            }
+
+            // Extract space:guard from extensionElements
+            String guardExpression = extractGuardFromElement(sequenceFlow);
+
+            if (guardExpression == null || guardExpression.trim().isEmpty()) {
+                log.debug("[SequenceFlowGuardEvaluator] No guard defined for sequence flow: {}", sequenceFlowId);
+                return true; // No guard = pass through
+            }
+
+            // Evaluate the guard expression
+            log.debug("[SequenceFlowGuardEvaluator] Evaluating guard for {}: '{}'", sequenceFlowId, guardExpression);
+            boolean result = evaluateGuardExpression(guardExpression, sequenceFlowId);
+
+            log.info("[SequenceFlowGuardEvaluator] Guard evaluation for {} ({}): {}",
+                    sequenceFlowId, guardExpression, result);
+
+            return result;
+
+        } catch (Exception e) {
+            log.error("[SequenceFlowGuardEvaluator] Error evaluating guard for sequence flow {}: {}",
+                    sequenceFlowId, e.getMessage(), e);
+            return false; // Fail safe: if error during guard evaluation, don't follow the flow
+        }
+    }
+
+    /**
+     * Extract space:guard value from element's extensionElements
+     */
+    private String extractGuardFromElement(Object element) {
+        if (!(element instanceof SequenceFlow sequenceFlow)) {
+            return null;
+        }
+
+        ExtensionElements extensionElements = sequenceFlow.getExtensionElements();
+        if (extensionElements == null || extensionElements.getDomElement() == null) {
+            return null;
+        }
+
+        return extensionElements.getDomElement().getChildElements().stream()
+                .filter(this::isSpaceGuard)
+                .map(DomElement::getTextContent)
+                .map(String::trim)
+                .findFirst()
+                .orElse(null);
+    }
+
+    private boolean isSpaceGuard(DomElement domElement) {
+        return "guard".equalsIgnoreCase(domElement.getLocalName())
+                && "http://space".equals(domElement.getNamespaceURI());
+    }
+
+    /**
+     * Evaluate a guard expression like "place1.attribute == value"
+     */
+    private boolean evaluateGuardExpression(String guardExpression, String sourceId) {
+        if (guardExpression == null || guardExpression.isBlank()) {
+            return true;
+        }
+
+        Matcher matcher = GUARD_PATTERN.matcher(guardExpression.trim());
+        if (!matcher.matches()) {
+            log.warn("[SequenceFlowGuardEvaluator] Invalid guard format for {}: '{}'", sourceId, guardExpression);
+            return false;
+        }
+
+        String placeId = matcher.group(1);
+        String attributeKey = matcher.group(2);
+        String operator = matcher.group(3);
+        String expectedRaw = unquote(matcher.group(4).trim());
+
+        Optional<PhysicalPlace> placeOpt = environmentDataService.getPhysicalPlace(placeId);
+        if (placeOpt.isEmpty()) {
+            log.debug("[SequenceFlowGuardEvaluator] Place '{}' not found for {}", placeId, sourceId);
+            return false;
+        }
+
+        Map<String, Object> attributes = placeOpt.get().getAttributes();
+        if (attributes == null || !attributes.containsKey(attributeKey)) {
+            log.debug("[SequenceFlowGuardEvaluator] Attribute '{}.{}' not found for {}", placeId, attributeKey, sourceId);
+            return false;
+        }
+
+        Object actualValue = attributes.get(attributeKey);
+        boolean result = compare(actualValue, operator, expectedRaw);
+
+        log.debug("[SequenceFlowGuardEvaluator] Guard evaluation | source={} | expr='{}' | actual='{}' -> {}",
+                sourceId, guardExpression, actualValue, result);
+
+        return result;
+    }
+
+    private boolean compare(Object actualValue, String operator, String expectedRaw) {
+        if (actualValue == null) {
+            return false;
+        }
+
+        String actualText = String.valueOf(actualValue).trim();
+
+        Double actualNumber = toNumber(actualText);
+        Double expectedNumber = toNumber(expectedRaw);
+
+        if (actualNumber != null && expectedNumber != null) {
+            return switch (operator) {
+                case "==" -> Double.compare(actualNumber, expectedNumber) == 0;
+                case "!=" -> Double.compare(actualNumber, expectedNumber) != 0;
+                case ">" -> actualNumber > expectedNumber;
+                case "<" -> actualNumber < expectedNumber;
+                case ">=" -> actualNumber >= expectedNumber;
+                case "<=" -> actualNumber <= expectedNumber;
+                default -> false;
+            };
+        }
+
+        return switch (operator) {
+            case "==" -> actualText.equals(expectedRaw);
+            case "!=" -> !actualText.equals(expectedRaw);
+            default -> false;
+        };
+    }
+
+    private Double toNumber(String value) {
+        try {
+            return Double.parseDouble(value);
+        } catch (NumberFormatException ex) {
+            return null;
+        }
+    }
+
+    private String unquote(String raw) {
+        if ((raw.startsWith("\"") && raw.endsWith("\"")) || (raw.startsWith("'") && raw.endsWith("'"))) {
+            return raw.substring(1, raw.length() - 1).trim();
+        }
+        return raw;
+    }
+}

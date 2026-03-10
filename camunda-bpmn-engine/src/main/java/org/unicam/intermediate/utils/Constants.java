@@ -10,5 +10,6 @@ public class Constants {
     public static final String unbindingExecutionListenerBeanName = "unbindingExecutionListener";
     public static final String bindingExecutionListenerBeanName = "bindingExecutionListener";
     public static final String environmentalExecutionListenerBeanName = "environmentalExecutionListener";
+    public static final String exclusiveGatewayExecutionListenerBeanName = "exclusiveGatewayExecutionListener";
 
 }
