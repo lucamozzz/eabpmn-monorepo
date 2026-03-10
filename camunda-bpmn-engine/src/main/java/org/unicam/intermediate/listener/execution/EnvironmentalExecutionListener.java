@@ -1,6 +1,7 @@
 package org.unicam.intermediate.listener.execution;
 
 import lombok.extern.slf4j.Slf4j;
+import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.ExecutionListener;
 import org.camunda.bpm.model.bpmn.instance.ExtensionElements;
@@ -19,6 +20,9 @@ public class EnvironmentalExecutionListener implements ExecutionListener {
 
     private static final String GUARD_LOCAL_NAME = "guard";
     private static final String ACTION_LOCAL_NAME = "action";
+    private static final String TIMER_LOCAL_NAME = "timer";
+    private static final String BPMN_ERROR_CODE_VAR = "__spaceBpmnErrorCode";
+    private static final String BPMN_ERROR_MESSAGE_VAR = "__spaceBpmnErrorMessage";
     private final EnvironmentalTaskRegistry environmentalTaskRegistry;
 
     public EnvironmentalExecutionListener(EnvironmentalTaskRegistry environmentalTaskRegistry) {
@@ -37,24 +41,36 @@ public class EnvironmentalExecutionListener implements ExecutionListener {
     private void handleEnvironmentalStart(DelegateExecution execution) {
         String guardValue = extractGuardValue(execution);
         String actionValue = extractActionValue(execution);
+        Double timerValue = extractTimerValue(execution);
 
         environmentalTaskRegistry.registerTask(
             execution.getId(),
             execution.getCurrentActivityId(),
             guardValue,
-            actionValue
+            actionValue,
+            timerValue
         );
 
-        log.info("[ENVIRONMENTAL] WAITING | Activity: {} - {} | Guard: {} | Action: {}",
+        log.info("[ENVIRONMENTAL] WAITING | Activity: {} - {} | Guard: {} | Action: {} | Timer: {}",
                 execution.getCurrentActivityId(),
                 execution.getCurrentActivityName() != null ? execution.getCurrentActivityName() : "(unnamed)",
             guardValue != null && !guardValue.isBlank() ? guardValue : "(empty)",
-            actionValue != null && !actionValue.isBlank() ? actionValue : "(empty)");
+            actionValue != null && !actionValue.isBlank() ? actionValue : "(empty)",
+            timerValue != null ? timerValue : "(empty)");
     }
 
     private void handleEnvironmentalEnd(DelegateExecution execution) {
+        String bpmnErrorCode = (String) execution.getVariableLocal(BPMN_ERROR_CODE_VAR);
+        String bpmnErrorMessage = (String) execution.getVariableLocal(BPMN_ERROR_MESSAGE_VAR);
+        execution.removeVariableLocal(BPMN_ERROR_CODE_VAR);
+        execution.removeVariableLocal(BPMN_ERROR_MESSAGE_VAR);
+
         environmentalTaskRegistry.removeTask(execution.getId());
         log.info("[ENVIRONMENTAL] Task {} ended", execution.getCurrentActivityId());
+
+        if (bpmnErrorCode != null && !bpmnErrorCode.isBlank()) {
+            throw new BpmnError(bpmnErrorCode, bpmnErrorMessage != null ? bpmnErrorMessage : "Environmental task failed");
+        }
     }
 
     private String extractGuardValue(DelegateExecution execution) {
@@ -63,6 +79,27 @@ public class EnvironmentalExecutionListener implements ExecutionListener {
 
     private String extractActionValue(DelegateExecution execution) {
         return extractExtensionValue(execution, ACTION_LOCAL_NAME);
+    }
+
+    private Double extractTimerValue(DelegateExecution execution) {
+        String raw = extractExtensionValue(execution, TIMER_LOCAL_NAME);
+        if (raw == null || raw.isBlank()) {
+            return null;
+        }
+
+        try {
+            double parsed = Double.parseDouble(raw.trim());
+            if (parsed < 0) {
+                log.warn("[ENVIRONMENTAL] Invalid negative timer '{}' for activity {}. Ignoring.",
+                        raw, execution.getCurrentActivityId());
+                return null;
+            }
+            return parsed;
+        } catch (NumberFormatException ex) {
+            log.warn("[ENVIRONMENTAL] Invalid non-numeric timer '{}' for activity {}. Ignoring.",
+                    raw, execution.getCurrentActivityId());
+            return null;
+        }
     }
 
     private String extractExtensionValue(DelegateExecution execution, String localName) {

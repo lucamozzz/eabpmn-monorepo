@@ -122,6 +122,19 @@
                     "type": "String"
                 }
             ]
+        },
+        {
+            "name": "Timer",
+            "superClass": [
+                "Element"
+            ],
+            "properties": [
+                {
+                    "name": "body",
+                    "isBody": true,
+                    "type": "String"
+                }
+            ]
         }
     ],
     "emumerations": [],

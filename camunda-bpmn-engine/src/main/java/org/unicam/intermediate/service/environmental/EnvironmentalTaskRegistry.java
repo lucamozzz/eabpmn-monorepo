@@ -23,11 +23,17 @@ public class EnvironmentalTaskRegistry {
             "^([A-Za-z0-9_-]+)\\.([A-Za-z0-9_-]+)\\s*(==|!=|>=|<=|>|<)\\s*(.+)$"
     );
 
+    private static final String BPMN_ERROR_CODE_VAR = "__spaceBpmnErrorCode";
+    private static final String BPMN_ERROR_MESSAGE_VAR = "__spaceBpmnErrorMessage";
+    private static final String FAILED_ACTION_ERROR_CODE = "failedAction";
+
     private final EnvironmentDataService environmentDataService;
     private final RuntimeService runtimeService;
 
     // executionId -> active environmental task waiting for guard=true
     private final Map<String, EnvironmentalTaskInfo> activeEnvironmentalTasks = new ConcurrentHashMap<>();
+    // executionId -> epoch millis when action timer started
+    private final Map<String, Long> actionTimerStartByExecutionId = new ConcurrentHashMap<>();
 
     public EnvironmentalTaskRegistry(EnvironmentDataService environmentDataService,
                                      RuntimeService runtimeService) {
@@ -35,7 +41,7 @@ public class EnvironmentalTaskRegistry {
         this.runtimeService = runtimeService;
     }
 
-    public void registerTask(String executionId, String activityId, String guardExpression, String action) {
+    public void registerTask(String executionId, String activityId, String guardExpression, String action, Double timer) {
         if (executionId == null || activityId == null) {
             log.warn("[EnvironmentalRegistry] Cannot register task with null execution/activity id");
             return;
@@ -43,14 +49,15 @@ public class EnvironmentalTaskRegistry {
 
         String normalizedGuard = guardExpression != null ? guardExpression.trim() : "";
         String normalizedAction = action != null ? action.trim() : "";
-        EnvironmentalTaskInfo info = new EnvironmentalTaskInfo(executionId, activityId, normalizedGuard, normalizedAction);
+        EnvironmentalTaskInfo info = new EnvironmentalTaskInfo(executionId, activityId, normalizedGuard, normalizedAction, timer);
         activeEnvironmentalTasks.put(executionId, info);
 
-        log.info("[EnvironmentalRegistry] Registered environmental task | activity={} | execution={} | guard='{}' | action='{}'",
+        log.info("[EnvironmentalRegistry] Registered environmental task | activity={} | execution={} | guard='{}' | action='{}' | timer={}",
                 activityId,
                 executionId,
                 normalizedGuard.isEmpty() ? "(empty)" : normalizedGuard,
-                normalizedAction.isEmpty() ? "(empty)" : normalizedAction);
+            normalizedAction.isEmpty() ? "(empty)" : normalizedAction,
+            timer != null ? timer : "(empty)");
     }
 
     public void removeTask(String executionId) {
@@ -59,6 +66,7 @@ public class EnvironmentalTaskRegistry {
         }
 
         EnvironmentalTaskInfo removed = activeEnvironmentalTasks.remove(executionId);
+        actionTimerStartByExecutionId.remove(executionId);
         if (removed != null) {
             log.info("[EnvironmentalRegistry] Removed environmental task | activity={} | execution={}",
                     removed.activityId(), removed.executionId());
@@ -79,19 +87,38 @@ public class EnvironmentalTaskRegistry {
                 continue;
             }
 
-            boolean actionSatisfied = evaluateActionGuard(taskInfo.action(), taskInfo.activityId());
-            if (!actionSatisfied) {
+            ActionCheckResult actionCheckResult = evaluateActionWithOptionalTimer(taskInfo);
+            if (actionCheckResult == ActionCheckResult.WAIT) {
                 continue;
             }
 
             try {
-                runtimeService.signal(taskInfo.executionId());
+                if (actionCheckResult == ActionCheckResult.TIMEOUT) {
+                    runtimeService.setVariableLocal(taskInfo.executionId(), BPMN_ERROR_CODE_VAR, FAILED_ACTION_ERROR_CODE);
+                    runtimeService.setVariableLocal(
+                            taskInfo.executionId(),
+                            BPMN_ERROR_MESSAGE_VAR,
+                            String.format("Action '%s' did not become true within timer for activity '%s'",
+                                    taskInfo.action(), taskInfo.activityId())
+                    );
+                }
+
                 completedExecutions.add(taskInfo.executionId());
-                log.info("[EnvironmentalRegistry] Guard+Action satisfied -> task completed | activity={} | execution={} | guard='{}' | action='{}'",
+                runtimeService.signal(taskInfo.executionId());
+                if (actionCheckResult == ActionCheckResult.TIMEOUT) {
+                    log.warn("[EnvironmentalRegistry] Action timer expired -> raised '{}' | activity={} | execution={} | action='{}' | timer={}",
+                            FAILED_ACTION_ERROR_CODE,
+                            taskInfo.activityId(),
+                            taskInfo.executionId(),
+                            taskInfo.action(),
+                            taskInfo.timer());
+                } else {
+                    log.info("[EnvironmentalRegistry] Guard+Action satisfied -> task completed | activity={} | execution={} | guard='{}' | action='{}'",
                         taskInfo.activityId(),
                         taskInfo.executionId(),
                         taskInfo.guardExpression(),
                         taskInfo.action());
+                }
             } catch (Exception e) {
                 log.error("[EnvironmentalRegistry] Failed to signal execution {} for activity {}: {}",
                         taskInfo.executionId(), taskInfo.activityId(), e.getMessage(), e);
@@ -196,5 +223,51 @@ public class EnvironmentalTaskRegistry {
                 yield false;
             }
         };
+    }
+
+    private ActionCheckResult evaluateActionWithOptionalTimer(EnvironmentalTaskInfo taskInfo) {
+        String action = taskInfo.action();
+        String executionId = taskInfo.executionId();
+        String activityId = taskInfo.activityId();
+
+        // Timer is meaningful only when an action is configured.
+        if (action == null || action.isBlank()) {
+            actionTimerStartByExecutionId.remove(executionId);
+            return ActionCheckResult.SATISFIED;
+        }
+
+        boolean actionSatisfied = evaluateActionGuard(action, activityId);
+        if (actionSatisfied) {
+            actionTimerStartByExecutionId.remove(executionId);
+            return ActionCheckResult.SATISFIED;
+        }
+
+        Double timerSeconds = taskInfo.timer();
+        if (timerSeconds == null || timerSeconds <= 0) {
+            return ActionCheckResult.WAIT;
+        }
+
+        long startTime = actionTimerStartByExecutionId.computeIfAbsent(executionId, ignored -> {
+            long now = System.currentTimeMillis();
+            log.info("[EnvironmentalRegistry] Action timer started | activity={} | execution={} | action='{}' | timer={}s",
+                    activityId, executionId, action, timerSeconds);
+            return now;
+        });
+
+        long timeoutMillis = Math.round(timerSeconds * 1000.0d);
+        long elapsed = System.currentTimeMillis() - startTime;
+
+        if (elapsed >= timeoutMillis) {
+            actionTimerStartByExecutionId.remove(executionId);
+            return ActionCheckResult.TIMEOUT;
+        }
+
+        return ActionCheckResult.WAIT;
+    }
+
+    private enum ActionCheckResult {
+        SATISFIED,
+        WAIT,
+        TIMEOUT
     }
 }

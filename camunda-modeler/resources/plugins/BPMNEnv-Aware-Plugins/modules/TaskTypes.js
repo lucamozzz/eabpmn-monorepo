@@ -44,7 +44,7 @@ export const TASK_TYPES_CONFIG = {
     typeValue: 'Environmental',
     displayName: 'Environmental Task',
     icon: { class: 'environmental-badge', iconFile: environmentalIcon },
-    extensionElements: [ 'space:Type', 'space:Guard', 'space:Action' ],
+    extensionElements: [ 'space:Type', 'space:Guard', 'space:Action', 'space:Timer' ],
     validationRules: [],
     formType: 'none'
   }
@@ -58,7 +58,8 @@ export const EXTENSION_TYPES = {
   CONNECTION_MODE: 'space:ConnectionMode',
   LEADER_ID: 'space:LeaderId',
   GUARD: 'space:Guard',
-  ACTION: 'space:Action'
+  ACTION: 'space:Action',
+  TIMER: 'space:Timer'
 };
 
 /** Connection mode for binding/unbinding: 'static' | 'dynamic' (default) */

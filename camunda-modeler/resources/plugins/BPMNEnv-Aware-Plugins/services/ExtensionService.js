@@ -144,6 +144,16 @@ ExtensionService.prototype.getAction = function(element) {
 };
 
 /**
+ * Get timer value from element
+ * @param {Object} element - BPMN element
+ * @returns {string} Timer value or empty string
+ */
+ExtensionService.prototype.getTimer = function(element) {
+  const timerEl = this.findExtension(element.businessObject, EXTENSION_TYPES.TIMER);
+  return this.getText(timerEl);
+};
+
+/**
  * Check if element has a specific extension type
  * @param {Object} element - BPMN element
  * @param {string} type - Extension type

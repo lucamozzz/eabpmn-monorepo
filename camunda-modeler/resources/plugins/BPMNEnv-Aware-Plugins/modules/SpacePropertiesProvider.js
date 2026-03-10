@@ -877,6 +877,24 @@ SpacePropertiesProvider.prototype.createSpaceSection = function(element) {
                  value="${this._extensionService.getGuard(element) || ''}" />
         </div>
       </div>
+
+      <div data-entry-id="space-timer" 
+           class="bio-properties-panel-entry space-timer-entry" 
+           style="${currentType !== 'environmental' ? 'display: none;' : ''}">
+        <div class="bio-properties-panel-textfield">
+          <label for="space-timer-input" class="bio-properties-panel-label">Timer (optional)</label>
+          <input id="space-timer-input"
+                 type="number"
+                 min="0"
+                 step="1"
+                 name="spaceTimer"
+                 spellcheck="false"
+                 autocomplete="off"
+                 class="bio-properties-panel-input space-timer-input"
+                 placeholder="${translate('Enter timer value')}"
+                 value="${this._extensionService.getTimer(element) || ''}" />
+        </div>
+      </div>
       </div>
       `;
       
@@ -1137,6 +1155,7 @@ SpacePropertiesProvider.prototype.attachSectionEventListeners = function(section
   const bindingInput = section.querySelector('.space-binding-input');
   const guardInput = section.querySelector('.space-guard-input');
   const actionInput = section.querySelector('.space-action-input');
+  const timerInput = section.querySelector('.space-timer-input');
 
   // Type selection
   if (typeSelect) {
@@ -1242,6 +1261,37 @@ SpacePropertiesProvider.prototype.attachSectionEventListeners = function(section
 
         } catch (error) {
           console.error('Error saving action:', error);
+        }
+      });
+    });
+  }
+
+  // Timer input - optional numeric value for environmental tasks
+  if (timerInput) {
+    [ 'input', 'blur', 'change' ].forEach(eventType => {
+      timerInput.addEventListener(eventType, (e) => {
+        try {
+          const value = e.target.value.trim();
+
+          if (!value) {
+            this._extensionService.removeExtensions(
+              element,
+              ext => ext.$type === EXTENSION_TYPES.TIMER
+            );
+            this.updateSectionIndicators(section, element);
+            return;
+          }
+
+          const numeric = Number(value);
+          if (!Number.isFinite(numeric) || numeric < 0) {
+            return;
+          }
+
+          this._extensionService.setExtension(element, EXTENSION_TYPES.TIMER, String(numeric));
+          this.updateSectionIndicators(section, element);
+
+        } catch (error) {
+          console.error('Error saving timer:', error);
         }
       });
     });
@@ -1414,6 +1464,7 @@ SpacePropertiesProvider.prototype.updateFieldVisibility = function(section, sele
   const unbindingEntry = section.querySelector('.space-unbinding-entry');
   const guardEntry = section.querySelector('.space-guard-entry');
   const actionEntry = section.querySelector('.space-action-entry');
+  const timerEntry = section.querySelector('.space-timer-entry');
 
   if (destinationEntry) {
     destinationEntry.style.display = selectedType === TASK_TYPE_KEYS.MOVEMENT ? 'block' : 'none';
@@ -1432,6 +1483,9 @@ SpacePropertiesProvider.prototype.updateFieldVisibility = function(section, sele
   }
   if (actionEntry) {
     actionEntry.style.display = selectedType === TASK_TYPE_KEYS.ENVIRONMENTAL ? 'block' : 'none';
+  }
+  if (timerEntry) {
+    timerEntry.style.display = selectedType === TASK_TYPE_KEYS.ENVIRONMENTAL ? 'block' : 'none';
   }
 
   const assignmentsEntry = section.querySelector('.space-assignments-entry');
@@ -1542,18 +1596,21 @@ SpacePropertiesProvider.prototype.refreshSpaceSection = function(element) {
     const currentBinding = this._extensionService.getBinding(element);
     const currentGuard = this._extensionService.getGuard(element);
     const currentAction = this._extensionService.getAction(element);
+    const currentTimer = this._extensionService.getTimer(element);
 
     const typeSelect = existingSection.querySelector('.space-type-select');
     const destinationInput = existingSection.querySelector('.space-destination-input');
     const bindingInput = existingSection.querySelector('.space-binding-input');
     const guardInput = existingSection.querySelector('.space-guard-input');
     const actionInput = existingSection.querySelector('.space-action-input');
+    const timerInput = existingSection.querySelector('.space-timer-input');
 
     if (typeSelect) typeSelect.value = currentType || '';
     if (destinationInput) destinationInput.value = currentDestination || '';
     if (bindingInput) bindingInput.value = currentBinding || '';
     if (guardInput) guardInput.value = currentGuard || '';
     if (actionInput) actionInput.value = currentAction || '';
+    if (timerInput) timerInput.value = currentTimer || '';
 
     
     // if (currentType === TASK_TYPE_KEYS.ENVIRONMENTAL) {
