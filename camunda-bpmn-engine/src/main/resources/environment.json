@@ -10,7 +10,7 @@
         [13.067685920133588, 43.139098103142146]
       ],
       "attributes": {
-        "purpose": "studying",
+        "purpose": "tutorsoffice",
         "occupied": null,
         "light": null,
         "state": "unchecked"
@@ -558,15 +558,14 @@
         },
         {
             "id": "set2",
-            "name": "Building B",
+            "name": "Tutors Office",
             "conditions": [
                 {
                     "attribute": "purpose",
                     "operator": "==",
                     "value": "tutorsoffice"
                 }
-            ],
-            "place": "place5"
+            ]
         }
     ],
     "views": [

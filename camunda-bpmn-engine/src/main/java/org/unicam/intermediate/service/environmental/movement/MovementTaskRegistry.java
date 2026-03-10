@@ -64,6 +64,28 @@ public class MovementTaskRegistry {
     }
 
     /**
+     * Resolves the list of physical place IDs matched by a logical destination id.
+     * Returns an empty list when destination is not a logical place or when no physical places match.
+     */
+    public List<String> resolveMatchingPhysicalPlaceIdsForLogicalDestination(String destination) {
+        if (destination == null || destination.isBlank()) {
+            return List.of();
+        }
+
+        Optional<LogicalPlace> logicalDestination = environmentDataService.getLogicalPlaces().stream()
+                .filter(lp -> destination.equals(lp.getId()))
+                .findFirst();
+
+        if (logicalDestination.isEmpty()) {
+            return List.of();
+        }
+
+        return resolvePhysicalPlacesForLogicalPlace(logicalDestination.get()).stream()
+                .map(PhysicalPlace::getId)
+                .toList();
+    }
+
+    /**
      * Controllo periodico: verifica se i participant hanno raggiunto le loro destinazioni
      * Eseguito ogni 2 secondi
      */
@@ -136,10 +158,7 @@ public class MovementTaskRegistry {
         }
 
         // Logical destination: complete when current physical place is one of the matched places
-        List<String> matchingPhysicalPlaces = resolvePhysicalPlacesForLogicalPlace(logicalDestination.get())
-                .stream()
-                .map(PhysicalPlace::getId)
-                .toList();
+        List<String> matchingPhysicalPlaces = resolveMatchingPhysicalPlaceIdsForLogicalDestination(destination);
 
         return matchingPhysicalPlaces.contains(currentPosition);
     }

@@ -15,6 +15,8 @@ import org.unicam.intermediate.service.participant.UserParticipantMappingService
 import org.unicam.intermediate.service.xml.AbstractXmlService;
 import org.unicam.intermediate.service.xml.XmlServiceDispatcher;
 
+import java.util.List;
+
 import static org.unicam.intermediate.utils.Constants.*;
 
 @Slf4j
@@ -60,6 +62,22 @@ public class MovementExecutionListener implements ExecutionListener {
 
         Participant participant = participantService.resolveCurrentParticipant(execution);
         boolean destinationIsPhysicalPlace = value != null && environmentDataService.getPhysicalPlace(value).isPresent();
+        boolean destinationIsLogicalPlace = value != null && environmentDataService.getLogicalPlaces().stream()
+            .anyMatch(lp -> value.equals(lp.getId()));
+
+        if (participant != null && destinationIsLogicalPlace) {
+            List<String> matchingPhysicalPlaces = movementTaskRegistry
+                .resolveMatchingPhysicalPlaceIdsForLogicalDestination(value);
+
+            if (matchingPhysicalPlaces.isEmpty()) {
+            throw new BpmnError(
+                "unreachableDestination",
+                String.format("Logical destination '%s' has no matching physical places for participant '%s'",
+                    value, participant.getId())
+            );
+            }
+        }
+
         if (participant != null && destinationIsPhysicalPlace) {
             String participantId = participant.getId();
             participantDataService.getParticipant(participantId).ifPresent(current -> {
