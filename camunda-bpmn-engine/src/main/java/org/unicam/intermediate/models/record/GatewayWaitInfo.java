@@ -6,6 +6,7 @@ public record GatewayWaitInfo(
         String executionId,
         String gatewayId,
         String processDefinitionId,
+        String participantId,
         List<String> outgoingFlowIds
 ) {
 }

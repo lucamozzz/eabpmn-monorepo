@@ -5,6 +5,7 @@ public record EnvironmentalTaskInfo(
         String activityId,
         String guardExpression,
         String action,
+        String participantId,
         Double timer
 ) {
 }

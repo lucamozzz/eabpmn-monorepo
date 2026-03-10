@@ -38,21 +38,16 @@ public class ParticipantDataService {
     private void loadStaticParticipants() {
         // Create static participants
         Participant p1 = new Participant();
-        p1.setId("Participant_1u408xr");
+        p1.setId("Participant_0yrbhi5");
         p1.setPosition("place1");
 
         Participant p2 = new Participant();
-        p2.setId("Participant_0e908me");
+        p2.setId("Participant_1fejmk0");
         p2.setPosition("place12");
-
-        Participant p3 = new Participant();
-        p3.setId("Participant_0hmc8mr");
-        p3.setPosition("place1");
 
         // Add to map
         participantsMap.put(p1.getId(), p1);
         participantsMap.put(p2.getId(), p2);
-        participantsMap.put(p3.getId(), p3);
 
         log.info("[ParticipantDataService] Initialized with {} static participants", participantsMap.size());
     }

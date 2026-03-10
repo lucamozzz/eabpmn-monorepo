@@ -9,6 +9,7 @@ import org.camunda.bpm.model.bpmn.instance.Task;
 import org.camunda.bpm.model.xml.instance.DomElement;
 import org.camunda.bpm.model.xml.instance.ModelElementInstance;
 import org.unicam.intermediate.service.environmental.EnvironmentalTaskRegistry;
+import org.unicam.intermediate.service.participant.ParticipantService;
 import org.springframework.stereotype.Component;
 
 import static org.unicam.intermediate.utils.Constants.SPACE_NS;
@@ -24,9 +25,12 @@ public class EnvironmentalExecutionListener implements ExecutionListener {
     private static final String BPMN_ERROR_CODE_VAR = "__spaceBpmnErrorCode";
     private static final String BPMN_ERROR_MESSAGE_VAR = "__spaceBpmnErrorMessage";
     private final EnvironmentalTaskRegistry environmentalTaskRegistry;
+    private final ParticipantService participantService;
 
-    public EnvironmentalExecutionListener(EnvironmentalTaskRegistry environmentalTaskRegistry) {
+    public EnvironmentalExecutionListener(EnvironmentalTaskRegistry environmentalTaskRegistry,
+                                          ParticipantService participantService) {
         this.environmentalTaskRegistry = environmentalTaskRegistry;
+        this.participantService = participantService;
     }
 
     @Override
@@ -43,11 +47,15 @@ public class EnvironmentalExecutionListener implements ExecutionListener {
         String actionValue = extractActionValue(execution);
         Double timerValue = extractTimerValue(execution);
 
+        org.unicam.intermediate.models.Participant participant = participantService.resolveCurrentParticipant(execution);
+        String participantId = participant != null ? participant.getId() : null;
+
         environmentalTaskRegistry.registerTask(
             execution.getId(),
             execution.getCurrentActivityId(),
             guardValue,
             actionValue,
+            participantId,
             timerValue
         );
 

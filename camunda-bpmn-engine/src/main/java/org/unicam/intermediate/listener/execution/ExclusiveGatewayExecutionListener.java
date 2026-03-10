@@ -9,7 +9,9 @@ import org.camunda.bpm.model.bpmn.instance.SequenceFlow;
 import org.camunda.bpm.model.xml.instance.DomElement;
 import org.camunda.bpm.model.xml.instance.ModelElementInstance;
 import org.springframework.stereotype.Component;
+import org.unicam.intermediate.models.Participant;
 import org.unicam.intermediate.service.ExclusiveGatewayGuardRegistry;
+import org.unicam.intermediate.service.participant.ParticipantService;
 
 import java.util.List;
 
@@ -22,9 +24,12 @@ public class ExclusiveGatewayExecutionListener implements ExecutionListener {
 
     private static final String GATEWAY_BYPASS_VAR = "__spaceGatewayBypass";
     private final ExclusiveGatewayGuardRegistry exclusiveGatewayGuardRegistry;
+    private final ParticipantService participantService;
 
-    public ExclusiveGatewayExecutionListener(ExclusiveGatewayGuardRegistry exclusiveGatewayGuardRegistry) {
+    public ExclusiveGatewayExecutionListener(ExclusiveGatewayGuardRegistry exclusiveGatewayGuardRegistry,
+                                             ParticipantService participantService) {
         this.exclusiveGatewayGuardRegistry = exclusiveGatewayGuardRegistry;
+        this.participantService = participantService;
     }
 
     @Override
@@ -56,10 +61,14 @@ public class ExclusiveGatewayExecutionListener implements ExecutionListener {
         }
 
         execution.setVariableLocal(GATEWAY_BYPASS_VAR, false);
+        Participant participant = participantService.resolveCurrentParticipant(execution);
+        String participantId = participant != null ? participant.getId() : null;
+
         exclusiveGatewayGuardRegistry.registerGateway(
                 execution.getId(),
                 execution.getCurrentActivityId(),
                 execution.getProcessDefinitionId(),
+            participantId,
                 guardedOutgoing
         );
 

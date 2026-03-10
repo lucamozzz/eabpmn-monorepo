@@ -30,12 +30,13 @@ public class ExclusiveGatewayGuardRegistry {
     public void registerGateway(String executionId,
                                 String gatewayId,
                                 String processDefinitionId,
+                                String participantId,
                                 List<String> outgoingFlowIds) {
         if (executionId == null || gatewayId == null || processDefinitionId == null || outgoingFlowIds == null || outgoingFlowIds.isEmpty()) {
             return;
         }
 
-        GatewayWaitInfo info = new GatewayWaitInfo(executionId, gatewayId, processDefinitionId, List.copyOf(outgoingFlowIds));
+        GatewayWaitInfo info = new GatewayWaitInfo(executionId, gatewayId, processDefinitionId, participantId, List.copyOf(outgoingFlowIds));
         activeGateways.put(executionId, info);
 
         log.info("[ExclusiveGatewayRegistry] Registered gateway {} (execution={}) with {} guarded outgoing flows",
@@ -86,7 +87,10 @@ public class ExclusiveGatewayGuardRegistry {
 
     private String selectFirstSatisfiedFlow(GatewayWaitInfo gatewayInfo) {
         for (String flowId : gatewayInfo.outgoingFlowIds()) {
-            boolean satisfied = sequenceFlowGuardEvaluator.evaluateGuard(gatewayInfo.processDefinitionId(), flowId);
+            boolean satisfied = sequenceFlowGuardEvaluator.evaluateGuard(
+                    gatewayInfo.processDefinitionId(),
+                    flowId,
+                    gatewayInfo.participantId());
             if (satisfied) {
                 return flowId;
             }

@@ -6,6 +6,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.unicam.intermediate.models.pojo.PhysicalPlace;
 import org.unicam.intermediate.models.record.EnvironmentalTaskInfo;
+import org.unicam.intermediate.service.participant.ParticipantDataService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ public class EnvironmentalTaskRegistry {
 
     private final EnvironmentDataService environmentDataService;
     private final RuntimeService runtimeService;
+    private final ParticipantDataService participantDataService;
 
     // executionId -> active environmental task waiting for guard=true
     private final Map<String, EnvironmentalTaskInfo> activeEnvironmentalTasks = new ConcurrentHashMap<>();
@@ -36,12 +38,14 @@ public class EnvironmentalTaskRegistry {
     private final Map<String, Long> actionTimerStartByExecutionId = new ConcurrentHashMap<>();
 
     public EnvironmentalTaskRegistry(EnvironmentDataService environmentDataService,
-                                     RuntimeService runtimeService) {
+                                     RuntimeService runtimeService,
+                                     ParticipantDataService participantDataService) {
         this.environmentDataService = environmentDataService;
         this.runtimeService = runtimeService;
+        this.participantDataService = participantDataService;
     }
 
-    public void registerTask(String executionId, String activityId, String guardExpression, String action, Double timer) {
+    public void registerTask(String executionId, String activityId, String guardExpression, String action, String participantId, Double timer) {
         if (executionId == null || activityId == null) {
             log.warn("[EnvironmentalRegistry] Cannot register task with null execution/activity id");
             return;
@@ -49,14 +53,15 @@ public class EnvironmentalTaskRegistry {
 
         String normalizedGuard = guardExpression != null ? guardExpression.trim() : "";
         String normalizedAction = action != null ? action.trim() : "";
-        EnvironmentalTaskInfo info = new EnvironmentalTaskInfo(executionId, activityId, normalizedGuard, normalizedAction, timer);
+        EnvironmentalTaskInfo info = new EnvironmentalTaskInfo(executionId, activityId, normalizedGuard, normalizedAction, participantId, timer);
         activeEnvironmentalTasks.put(executionId, info);
 
-        log.info("[EnvironmentalRegistry] Registered environmental task | activity={} | execution={} | guard='{}' | action='{}' | timer={}",
+        log.info("[EnvironmentalRegistry] Registered environmental task | activity={} | execution={} | guard='{}' | action='{}' | participantId={} | timer={}",
                 activityId,
                 executionId,
                 normalizedGuard.isEmpty() ? "(empty)" : normalizedGuard,
             normalizedAction.isEmpty() ? "(empty)" : normalizedAction,
+            participantId != null ? participantId : "(empty)",
             timer != null ? timer : "(empty)");
     }
 
@@ -82,7 +87,7 @@ public class EnvironmentalTaskRegistry {
         List<String> completedExecutions = new ArrayList<>();
 
         for (EnvironmentalTaskInfo taskInfo : activeEnvironmentalTasks.values()) {
-            boolean guardSatisfied = evaluateGuard(taskInfo.guardExpression(), taskInfo.activityId());
+            boolean guardSatisfied = evaluateGuard(taskInfo.guardExpression(), taskInfo.activityId(), taskInfo.participantId());
             if (!guardSatisfied) {
                 continue;
             }
@@ -128,13 +133,14 @@ public class EnvironmentalTaskRegistry {
         completedExecutions.forEach(this::removeTask);
     }
 
-    private boolean evaluateGuard(String guardExpression, String activityId) {
+    private boolean evaluateGuard(String guardExpression, String activityId, String participantId) {
         if (guardExpression == null || guardExpression.isBlank()) {
             log.info("[ENVIRONMENTAL] Empty guard expression for activity {} -> auto-pass", activityId);
             return true;
         }
 
-        Matcher matcher = GUARD_PATTERN.matcher(guardExpression.trim());
+        String resolvedExpression = resolveMyPlace(guardExpression, participantId, activityId);
+        Matcher matcher = GUARD_PATTERN.matcher(resolvedExpression.trim());
         if (!matcher.matches()) {
             log.warn("[ENVIRONMENTAL] Invalid guard format for activity {}: '{}'", activityId, guardExpression);
             return false;
@@ -161,9 +167,34 @@ public class EnvironmentalTaskRegistry {
         boolean result = compare(actualValue, operator, expectedRaw);
 
         log.debug("[ENVIRONMENTAL] Guard evaluation | activity={} | expr='{}' | actual='{}' -> {}",
-                activityId, guardExpression, actualValue, result);
+                activityId, resolvedExpression, actualValue, result);
 
         return result;
+    }
+
+    private String resolveMyPlace(String expression, String participantId, String activityId) {
+        if (expression == null || !expression.contains("myPlace()")) {
+            return expression;
+        }
+        if (participantId == null) {
+            log.warn("[ENVIRONMENTAL] myPlace() used but no participantId available for activity {}", activityId);
+            return expression;
+        }
+        return participantDataService.getParticipant(participantId)
+                .map(p -> {
+                    String pos = p.getPosition();
+                    if (pos == null) {
+                        log.warn("[ENVIRONMENTAL] myPlace() used but participant '{}' has no position for activity {}", participantId, activityId);
+                        return expression;
+                    }
+                    log.debug("[ENVIRONMENTAL] Resolved myPlace() -> '{}' for participant '{}' activity {}",
+                            pos, participantId, activityId);
+                    return expression.replace("myPlace()", pos);
+                })
+                .orElseGet(() -> {
+                    log.warn("[ENVIRONMENTAL] myPlace() used but participant '{}' not found for activity {}", participantId, activityId);
+                    return expression;
+                });
     }
 
     private boolean compare(Object actualValue, String operator, String expectedRaw) {
@@ -210,14 +241,15 @@ public class EnvironmentalTaskRegistry {
         return raw;
     }
 
-    private boolean evaluateActionGuard(String action, String activityId) {
+    private boolean evaluateActionGuard(String action, String activityId, String participantId) {
         if (action == null || action.isBlank()) {
             log.debug("[ENVIRONMENTAL] Empty action for activity {} -> action-check auto-pass", activityId);
             return true;
         }
 
         return switch (action.trim().toLowerCase()) {
-            case "turnlightson" -> evaluateGuard("place1.light == on", activityId + "#action:turnLightsOn");
+            case "turnlightson" -> evaluateGuard("place1.light == on", activityId + "#action:turnLightsOn", participantId);
+            case "turnlightsoff" -> evaluateGuard("place1.light == off", activityId + "#action:turnLightsOff", participantId);
             default -> {
                 log.warn("[ENVIRONMENTAL] Unknown action '{}' for activity {} -> action-check fails", action, activityId);
                 yield false;
@@ -236,7 +268,7 @@ public class EnvironmentalTaskRegistry {
             return ActionCheckResult.SATISFIED;
         }
 
-        boolean actionSatisfied = evaluateActionGuard(action, activityId);
+        boolean actionSatisfied = evaluateActionGuard(action, activityId, taskInfo.participantId());
         if (actionSatisfied) {
             actionTimerStartByExecutionId.remove(executionId);
             return ActionCheckResult.SATISFIED;
