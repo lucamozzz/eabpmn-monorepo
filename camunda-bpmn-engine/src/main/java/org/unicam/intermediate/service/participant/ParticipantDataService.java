@@ -2,8 +2,10 @@ package org.unicam.intermediate.service.participant;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.unicam.intermediate.events.ParticipantPositionChangedEvent;
 import org.unicam.intermediate.models.pojo.Participant;
 
 import jakarta.annotation.PostConstruct;
@@ -22,6 +24,12 @@ import java.util.Map;
 @Getter
 @Scope("singleton")
 public class ParticipantDataService {
+
+    private final ApplicationEventPublisher eventPublisher;
+
+    public ParticipantDataService(ApplicationEventPublisher eventPublisher) {
+        this.eventPublisher = eventPublisher;
+    }
 
     // Store participants in a concurrent map for thread-safe updates
     private final Map<String, Participant> participantsMap = new ConcurrentHashMap<>();
@@ -78,8 +86,10 @@ public class ParticipantDataService {
         }
         Participant participant = participantsMap.get(id);
         if (participant != null) {
+            String oldPosition = participant.getPosition();
             participant.setPosition(position);
-            log.debug("[ParticipantDataService] Updated participant {} position to {}", id, position);
+            log.debug("[ParticipantDataService] Updated participant {} position: {} -> {}", id, oldPosition, position);
+            eventPublisher.publishEvent(new ParticipantPositionChangedEvent(id, oldPosition, position));
         } else {
             log.warn("[ParticipantDataService] Participant {} not found, cannot update position", id);
         }
