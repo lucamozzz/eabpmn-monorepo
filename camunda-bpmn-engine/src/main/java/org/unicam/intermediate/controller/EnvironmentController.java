@@ -14,6 +14,7 @@ import org.unicam.intermediate.models.dto.Response;
 import org.unicam.intermediate.models.pojo.PhysicalPlace;
 import org.unicam.intermediate.models.pojo.Participant;
 import org.unicam.intermediate.service.environmental.EnvironmentDataService;
+import org.unicam.intermediate.service.environmental.SensorDataService;
 import org.unicam.intermediate.service.participant.ParticipantDataService;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,7 @@ public class EnvironmentController {
 
     private final EnvironmentDataService environmentDataService;
     private final ParticipantDataService participantDataService;
+    private final SensorDataService sensorDataService;
 
     @GetMapping("/pp")
     public ResponseEntity<Response<List<PhysicalPlace>>> getPhysicalPlaces() {
@@ -190,6 +192,36 @@ public class EnvironmentController {
             log.error("[Environment API] Failed to resolve coordinates for participant: {}", id, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Response.error("Failed to resolve coordinates: " + e.getMessage()));
+        }
+    }
+
+    /**
+     * Receives a lumen reading from a light sensor installed in a physical place.
+     * If lumen >= threshold (default 300, configurable via sensors.light.threshold-lumen),
+     * sets light=on, otherwise light=off.
+     * Body: {"lumen": 450.0}
+     */
+    @PutMapping("/pp/{id}/sensors/light")
+    public ResponseEntity<Response<String>> updateLightSensor(@PathVariable String id,
+                                                              @RequestBody Map<String, Double> requestBody) {
+        try {
+            Double lumen = requestBody.get("lumen");
+            if (lumen == null) {
+                return ResponseEntity.badRequest()
+                        .body(Response.error("Request body must contain 'lumen'"));
+            }
+
+            Optional<String> lightState = sensorDataService.updateLightSensor(id, lumen);
+            if (lightState.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(Response.error("Physical place not found: " + id));
+            }
+
+            return ResponseEntity.ok(Response.ok(lightState.get()));
+        } catch (Exception e) {
+            log.error("[Environment API] Failed to update light sensor for place: {}", id, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Response.error("Failed to update light sensor: " + e.getMessage()));
         }
     }
 }
