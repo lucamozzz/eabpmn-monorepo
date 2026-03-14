@@ -69,6 +69,18 @@ public class EnvironmentDataService {
     }
 
     /**
+     * Returns the first physical place whose polygon contains the given GPS coordinates.
+     * Uses the existing {@link org.unicam.intermediate.models.environmental.LocationArea#contains(double, double)}
+     * winding-number algorithm. Places without coordinates are skipped.
+     */
+    public Optional<PhysicalPlace> resolvePhysicalPlaceByCoordinates(double latitude, double longitude) {
+        return getPhysicalPlaces().stream()
+                .filter(p -> p.getLocationArea() != null)
+                .filter(p -> p.getLocationArea().contains(latitude, longitude))
+                .findFirst();
+    }
+
+    /**
      * Reads an attribute from the model after refreshing dynamic attributes when configured.
      * The model remains the source of truth: this method refreshes first, then returns from the model map.
      */

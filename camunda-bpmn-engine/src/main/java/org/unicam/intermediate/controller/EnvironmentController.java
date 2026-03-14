@@ -150,4 +150,46 @@ public class EnvironmentController {
                     .body(Response.error("Failed to set position: " + e.getMessage()));
         }
     }
+
+    /**
+     * Updates a participant's position by resolving GPS coordinates to a physical place.
+     * Body: {"latitude": 43.1376, "longitude": 13.0746}
+     */
+    @PutMapping("/participants/{id}/position/coordinates")
+    public ResponseEntity<Response<String>> setParticipantPositionByCoordinates(
+            @PathVariable String id,
+            @RequestBody Map<String, Double> requestBody) {
+        try {
+            Optional<Participant> participant = participantDataService.getParticipant(id);
+            if (participant.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(Response.error("Participant not found: " + id));
+            }
+
+            Double latitude = requestBody.get("latitude");
+            Double longitude = requestBody.get("longitude");
+            if (latitude == null || longitude == null) {
+                return ResponseEntity.badRequest()
+                        .body(Response.error("Request body must contain 'latitude' and 'longitude'"));
+            }
+
+            Optional<PhysicalPlace> resolvedPlace = environmentDataService.resolvePhysicalPlaceByCoordinates(latitude, longitude);
+
+            String placeId = resolvedPlace.map(PhysicalPlace::getId).orElse(null);
+            participantDataService.updateParticipantPosition(id, placeId);
+
+            if (placeId == null) {
+                log.info("[Environment API] Participant '{}' coordinates ({}, {}) did not match any place — position set to null",
+                        id, latitude, longitude);
+            } else {
+                log.info("[Environment API] Participant '{}' position resolved from ({}, {}) to place '{}'",
+                        id, latitude, longitude, placeId);
+            }
+            return ResponseEntity.ok(Response.ok(placeId));
+        } catch (Exception e) {
+            log.error("[Environment API] Failed to resolve coordinates for participant: {}", id, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Response.error("Failed to resolve coordinates: " + e.getMessage()));
+        }
+    }
 }
