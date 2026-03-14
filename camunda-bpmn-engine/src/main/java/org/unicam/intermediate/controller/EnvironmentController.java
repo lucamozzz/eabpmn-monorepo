@@ -64,12 +64,13 @@ public class EnvironmentController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                         .body(Response.error("Physical place not found: " + id));
             }
-            Object attributeValue = place.get().getAttributes().get(key);
-            if (attributeValue == null) {
+
+            Optional<Object> attributeValue = environmentDataService.getPhysicalPlaceAttribute(id, key);
+            if (attributeValue.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                         .body(Response.error("Attribute not found: " + key));
             }
-            return ResponseEntity.ok(Response.ok(attributeValue));
+            return ResponseEntity.ok(Response.ok(attributeValue.get()));
         } catch (Exception e) {
             log.error("[Environment API] Failed to retrieve attribute '{}' for place: {}", key, id, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

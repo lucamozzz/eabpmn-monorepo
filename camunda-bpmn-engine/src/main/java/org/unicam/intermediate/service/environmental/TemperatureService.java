@@ -3,13 +3,11 @@ package org.unicam.intermediate.service.environmental;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.unicam.intermediate.models.pojo.PhysicalPlace;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -43,22 +41,12 @@ public class TemperatureService {
 
     public double getTemperatureFromPlace(String placeId){
         try {
-            Optional<PhysicalPlace> maybePlace = environmentDataService.getData() // Use service
-                    .getPhysicalPlaces()
-                    .stream()
-                    .filter(p -> p.getId().equals(placeId))
-                    .findFirst();
-
-            if (maybePlace.isEmpty()) throw new IllegalStateException("Place with id " + placeId + " not found");
-
-            PhysicalPlace place = maybePlace.get();
-
-            Map<String, Object> attributes = place.getAttributes();
-            if (attributes == null || !attributes.containsKey("temperature")) {
+            Optional<Object> temperatureValue = environmentDataService.getPhysicalPlaceAttribute(placeId, "temperature");
+            if (temperatureValue.isEmpty()) {
                 throw new IllegalStateException("Temperature attribute not found for place with id " + placeId + " not found");
             }
 
-            String temperature = attributes.get("temperature").toString();
+            String temperature = String.valueOf(temperatureValue.get());
 
             if (temperature.startsWith("http://") || temperature.startsWith("https://") || temperature.isBlank()) {
                 return fetchTemperatureFromEndpoint(temperature);

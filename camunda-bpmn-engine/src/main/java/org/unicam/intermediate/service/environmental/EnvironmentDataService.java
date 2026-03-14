@@ -36,13 +36,16 @@ public class EnvironmentDataService {
 
     private final RepositoryService repositoryService;
     private final ObjectMapper objectMapper;
+    private final ExternalAttributeRefreshService externalAttributeRefreshService;
 
     // Hold the data directly in the service
     private EnvironmentData data = new EnvironmentData();
 
-    public EnvironmentDataService(RepositoryService repositoryService) {
+    public EnvironmentDataService(RepositoryService repositoryService,
+                                  ExternalAttributeRefreshService externalAttributeRefreshService) {
         this.repositoryService = repositoryService;
         this.objectMapper = new ObjectMapper();
+        this.externalAttributeRefreshService = externalAttributeRefreshService;
     }
 
     @PostConstruct
@@ -63,6 +66,36 @@ public class EnvironmentDataService {
         return data.getPhysicalPlaces().stream()
                 .filter(p -> id.equals(p.getId()))
                 .findFirst();
+    }
+
+    /**
+     * Reads an attribute from the model after refreshing dynamic attributes when configured.
+     * The model remains the source of truth: this method refreshes first, then returns from the model map.
+     */
+    public Optional<Object> getPhysicalPlaceAttribute(String placeReference, String key) {
+        if (placeReference == null || placeReference.isBlank() || key == null || key.isBlank()) {
+            return Optional.empty();
+        }
+
+        Optional<PhysicalPlace> placeOpt = resolvePhysicalPlace(placeReference);
+        if (placeOpt.isEmpty()) {
+            return Optional.empty();
+        }
+
+        PhysicalPlace place = placeOpt.get();
+        externalAttributeRefreshService.refreshAttributeIfNeeded(place, key);
+
+        Map<String, Object> attributes = place.getAttributes();
+        if (attributes == null || !attributes.containsKey(key)) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable(attributes.get(key));
+    }
+
+    private Optional<PhysicalPlace> resolvePhysicalPlace(String placeReference) {
+        return getPhysicalPlace(placeReference)
+                .or(() -> resolvePhysicalPlaceId(placeReference).flatMap(this::getPhysicalPlace));
     }
 
     public List<Edge> getEdges() {

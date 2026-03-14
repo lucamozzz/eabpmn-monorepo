@@ -1,5 +1,5 @@
 {
-   "physicalPlaces": [
+  "physicalPlaces": [
     {
       "id": "place1",
       "name": "R2",
@@ -10,10 +10,11 @@
         [13.067685920133588, 43.139098103142146]
       ],
       "attributes": {
-        "purpose": "tutorsoffice",
+        "purpose": "tutorsroom",
         "occupied": null,
         "light": null,
-        "state": "unchecked"
+        "state": null,
+        "isRaining": null
       }
     },
     {
@@ -29,7 +30,8 @@
         "purpose": "meetings",
         "occupied": false,
         "light": null,
-        "state": "unchecked"
+        "state": null,
+        "isRaining": null
       }
     },
     {
@@ -45,7 +47,8 @@
         "purpose": "phd",
         "occupied": null,
         "light": null,
-        "state": "unchecked"
+        "state": null,
+        "isRaining": null
       }
     },
     {
@@ -61,7 +64,8 @@
         "purpose": "teaching",
         "occupied": null,
         "light": null,
-        "state": "unchecked"
+        "state": null,
+        "isRaining": null
       }
     },
     {
@@ -77,7 +81,8 @@
         "purpose": "teaching",
         "occupied": null,
         "light": null,
-        "state": "unchecked"
+        "state": null,
+        "isRaining": null
       }
     },
     {
@@ -93,7 +98,8 @@
         "purpose": "studying",
         "occupied": null,
         "light": null,
-        "state": "unchecked"
+        "state": null,
+        "isRaining": null
       }
     },
     {
@@ -109,7 +115,8 @@
         "purpose": "studying",
         "occupied": null,
         "light": null,
-        "state": "unchecked"
+        "state": null,
+        "isRaining": null
       }
     },
     {
@@ -125,7 +132,8 @@
         "purpose": "studying",
         "occupied": null,
         "light": null,
-        "state": "unchecked"
+        "state": null,
+        "isRaining": null
       }
     },
     {
@@ -141,7 +149,8 @@
         "purpose": "teaching",
         "occupied": null,
         "light": null,
-        "state": "unchecked"
+        "state": null,
+        "isRaining": null
       }
     },
     {
@@ -157,7 +166,8 @@
         "purpose": "teaching",
         "occupied": null,
         "light": null,
-        "state": "unchecked"
+        "state": null,
+        "isRaining": null
       }
     },
     {
@@ -173,7 +183,8 @@
         "purpose": "teaching",
         "occupied": null,
         "light": null,
-        "state": "unchecked"
+        "state": null,
+        "isRaining": null
       }
     },
     {
@@ -189,7 +200,8 @@
         "purpose": "studying",
         "occupied": null,
         "light": null,
-        "state": "unchecked"
+        "state": null,
+        "isRaining": null
       }
     },
     {
@@ -205,7 +217,8 @@
         "purpose": "tutor",
         "occupied": null,
         "light": null,
-        "state": "unchecked"
+        "state": null,
+        "isRaining": null
       }
     },
     {
@@ -221,7 +234,8 @@
         "purpose": "studying",
         "occupied": null,
         "light": null,
-        "state": "unchecked"
+        "state": null,
+        "isRaining": null
       }
     },
     {
@@ -237,7 +251,8 @@
         "purpose": "teaching",
         "occupied": null,
         "light": null,
-        "state": "unchecked"
+        "state": null,
+        "isRaining": null
       }
     },
     {
@@ -253,337 +268,355 @@
         "purpose": "teaching",
         "occupied": null,
         "light": null,
-        "state": "unchecked"
+        "state": null,
+        "isRaining": null
       }
     }
   ],
-    "edges": [
-        {
-            "id": "edge1",
-            "name": "Edge 1",
-            "source": "place1",
-            "target": "place2",
-            "attributes": {}
-        },
-        {
-            "id": "edge2",
-            "name": "Edge 2",
-            "source": "place2",
-            "target": "place3",
-            "attributes": {}
-        },
-        {
-            "id": "edge3",
-            "name": "Edge 3",
-            "source": "place3",
-            "target": "place5",
-            "attributes": {}
-        },
-        {
-            "id": "edge4",
-            "name": "Edge 4",
-            "source": "place4",
-            "target": "place5",
-            "attributes": {}
-        },
-        {
-            "id": "edge5",
-            "name": "Edge 5",
-            "source": "place5",
-            "target": "place6",
-            "attributes": {}
-        },
-        {
-            "id": "edge6",
-            "name": "Edge 6",
-            "source": "place8",
-            "target": "place1",
-            "attributes": {}
-        },
-        {
-            "id": "edge7",
-            "name": "Edge 7",
-            "source": "place6",
-            "target": "place3",
-            "attributes": {}
-        },
-        {
-            "id": "edge8",
-            "name": "Edge 8",
-            "source": "place2",
-            "target": "place7",
-            "attributes": {}
-        },
-        {
-            "id": "edge9",
-            "name": "Edge 9",
-            "source": "place17",
-            "target": "place4",
-            "attributes": {}
-        },
-        {
-            "id": "edge10",
-            "name": "Edge 10",
-            "source": "place9",
-            "target": "place10",
-            "attributes": {}
-        },
-        {
-            "id": "edge11",
-            "name": "Edge 11",
-            "source": "place10",
-            "target": "place11",
-            "attributes": {}
-        },
-        {
-            "id": "edge12",
-            "name": "Edge 12",
-            "source": "place11",
-            "target": "place12",
-            "attributes": {}
-        },
-        {
-            "id": "edge13",
-            "name": "Edge 13",
-            "source": "place11",
-            "target": "place14",
-            "attributes": {}
-        },
-        {
-            "id": "edge14",
-            "name": "Edge 14",
-            "source": "place13",
-            "target": "place14",
-            "attributes": {}
-        },
-        {
-            "id": "edge15",
-            "name": "Edge 15",
-            "source": "place14",
-            "target": "place15",
-            "attributes": {}
-        },
-        {
-            "id": "edge16",
-            "name": "Edge 16",
-            "source": "place15",
-            "target": "place16",
-            "attributes": {}
-        },
-        {
-            "id": "edge17",
-            "name": "Edge 17",
-            "source": "place9",
-            "target": "place15",
-            "attributes": {}
-        },
-        {
-            "id": "edge18",
-            "name": "Edge 18",
-            "source": "place15",
-            "target": "place9",
-            "attributes": {}
-        },
-        {
-            "id": "edge19",
-            "name": "Edge 19",
-            "source": "place11",
-            "target": "place15",
-            "attributes": {}
-        },
-        {
-            "id": "edge20",
-            "name": "Edge 20",
-            "source": "place10",
-            "target": "place15",
-            "attributes": {}
-        },
-        {
-            "id": "edge21",
-            "name": "Edge 21",
-            "source": "place2",
-            "target": "place1",
-            "attributes": {}
-        },
-        {
-            "id": "edge22",
-            "name": "Edge 22",
-            "source": "place3",
-            "target": "place2",
-            "attributes": {}
-        },
-        {
-            "id": "edge23",
-            "name": "Edge 23",
-            "source": "place5",
-            "target": "place3",
-            "attributes": {}
-        },
-        {
-            "id": "edge24",
-            "name": "Edge 24",
-            "source": "place5",
-            "target": "place4",
-            "attributes": {}
-        },
-        {
-            "id": "edge25",
-            "name": "Edge 25",
-            "source": "place6",
-            "target": "place5",
-            "attributes": {}
-        },
-        {
-            "id": "edge26",
-            "name": "Edge 26",
-            "source": "place1",
-            "target": "place8",
-            "attributes": {}
-        },
-        {
-            "id": "edge27",
-            "name": "Edge 27",
-            "source": "place3",
-            "target": "place6",
-            "attributes": {}
-        },
-        {
-            "id": "edge28",
-            "name": "Edge 28",
-            "source": "place7",
-            "target": "place2",
-            "attributes": {}
-        },
-        {
-            "id": "edge29",
-            "name": "Edge 29",
-            "source": "place4",
-            "target": "place17",
-            "attributes": {}
-        },
-        {
-            "id": "edge30",
-            "name": "Edge 30",
-            "source": "place10",
-            "target": "place9",
-            "attributes": {}
-        },
-        {
-            "id": "edge31",
-            "name": "Edge 31",
-            "source": "place11",
-            "target": "place10",
-            "attributes": {}
-        },
-        {
-            "id": "edge32",
-            "name": "Edge 32",
-            "source": "place12",
-            "target": "place11",
-            "attributes": {}
-        },
-        {
-            "id": "edge33",
-            "name": "Edge 33",
-            "source": "place14",
-            "target": "place11",
-            "attributes": {}
-        },
-        {
-            "id": "edge34",
-            "name": "Edge 34",
-            "source": "place14",
-            "target": "place13",
-            "attributes": {}
-        },
-        {
-            "id": "edge35",
-            "name": "Edge 35",
-            "source": "place15",
-            "target": "place14",
-            "attributes": {}
-        },
-        {
-            "id": "edge36",
-            "name": "Edge 36",
-            "source": "place16",
-            "target": "place15",
-            "attributes": {}
-        },
-        {
-            "id": "edge37",
-            "name": "Edge 37",
-            "source": "place17",
-            "target": "place9",
-            "attributes": {}
-        },
-        {
-            "id": "edge38",
-            "name": "Edge 38",
-            "source": "place9",
-            "target": "place17",
-            "attributes": {}
-        },
-        {
-            "id": "edge39",
-            "name": "Edge 39",
-            "source": "place15",
-            "target": "place11",
-            "attributes": {}
-        },
-        {
-            "id": "edge40",
-            "name": "Edge 40",
-            "source": "place15",
-            "target": "place10",
-            "attributes": {}
-        }
-    ],
-    "logicalPlaces": [
-        {
-            "id": "set1",
-            "name": "Available Meeting Rooms",
-            "conditions": [
-                {
-                    "attribute": "purpose",
-                    "operator": "==",
-                    "value": "meetings"
-                },
-                {
-                    "attribute": "occupied",
-                    "operator": "==",
-                    "value": false
-                }
-            ]
-        },
-        {
-            "id": "set2",
-            "name": "Tutors Office",
-            "conditions": [
-                {
-                    "attribute": "purpose",
-                    "operator": "==",
-                    "value": "tutorsoffice"
-                }
-            ]
-        }
-    ],
-    "views": [
-        {
-            "id": "view1",
-            "name": "Meeting Rooms",
-            "logicalPlaces": [
-                "set1"
-            ],
-            "attributes": {}
-        },
-        {
-            "id": "view2",
-            "name": "Offices",
-            "logicalPlaces": [
-                "set2"
-            ],
-            "attributes": {}
-        }
-    ]
+  "edges": [
+      {
+          "id": "edge1",
+          "name": "Edge 1",
+          "source": "place1",
+          "target": "place2",
+          "attributes": {}
+      },
+      {
+          "id": "edge2",
+          "name": "Edge 2",
+          "source": "place2",
+          "target": "place3",
+          "attributes": {}
+      },
+      {
+          "id": "edge3",
+          "name": "Edge 3",
+          "source": "place3",
+          "target": "place5",
+          "attributes": {}
+      },
+      {
+          "id": "edge4",
+          "name": "Edge 4",
+          "source": "place4",
+          "target": "place5",
+          "attributes": {}
+      },
+      {
+          "id": "edge5",
+          "name": "Edge 5",
+          "source": "place5",
+          "target": "place6",
+          "attributes": {}
+      },
+      {
+          "id": "edge6",
+          "name": "Edge 6",
+          "source": "place8",
+          "target": "place1",
+          "attributes": {}
+      },
+      {
+          "id": "edge7",
+          "name": "Edge 7",
+          "source": "place6",
+          "target": "place3",
+          "attributes": {}
+      },
+      {
+          "id": "edge8",
+          "name": "Edge 8",
+          "source": "place2",
+          "target": "place7",
+          "attributes": {}
+      },
+      {
+          "id": "edge9",
+          "name": "Edge 9",
+          "source": "place17",
+          "target": "place4",
+          "attributes": {}
+      },
+      {
+          "id": "edge10",
+          "name": "Edge 10",
+          "source": "place9",
+          "target": "place10",
+          "attributes": {}
+      },
+      {
+          "id": "edge11",
+          "name": "Edge 11",
+          "source": "place10",
+          "target": "place11",
+          "attributes": {}
+      },
+      {
+          "id": "edge12",
+          "name": "Edge 12",
+          "source": "place11",
+          "target": "place12",
+          "attributes": {}
+      },
+      {
+          "id": "edge13",
+          "name": "Edge 13",
+          "source": "place11",
+          "target": "place14",
+          "attributes": {}
+      },
+      {
+          "id": "edge14",
+          "name": "Edge 14",
+          "source": "place13",
+          "target": "place14",
+          "attributes": {}
+      },
+      {
+          "id": "edge15",
+          "name": "Edge 15",
+          "source": "place14",
+          "target": "place15",
+          "attributes": {}
+      },
+      {
+          "id": "edge16",
+          "name": "Edge 16",
+          "source": "place15",
+          "target": "place16",
+          "attributes": {}
+      },
+      {
+          "id": "edge17",
+          "name": "Edge 17",
+          "source": "place9",
+          "target": "place15",
+          "attributes": {}
+      },
+      {
+          "id": "edge18",
+          "name": "Edge 18",
+          "source": "place15",
+          "target": "place9",
+          "attributes": {}
+      },
+      {
+          "id": "edge19",
+          "name": "Edge 19",
+          "source": "place11",
+          "target": "place15",
+          "attributes": {}
+      },
+      {
+          "id": "edge20",
+          "name": "Edge 20",
+          "source": "place10",
+          "target": "place15",
+          "attributes": {}
+      },
+      {
+          "id": "edge21",
+          "name": "Edge 21",
+          "source": "place2",
+          "target": "place1",
+          "attributes": {}
+      },
+      {
+          "id": "edge22",
+          "name": "Edge 22",
+          "source": "place3",
+          "target": "place2",
+          "attributes": {}
+      },
+      {
+          "id": "edge23",
+          "name": "Edge 23",
+          "source": "place5",
+          "target": "place3",
+          "attributes": {}
+      },
+      {
+          "id": "edge24",
+          "name": "Edge 24",
+          "source": "place5",
+          "target": "place4",
+          "attributes": {}
+      },
+      {
+          "id": "edge25",
+          "name": "Edge 25",
+          "source": "place6",
+          "target": "place5",
+          "attributes": {}
+      },
+      {
+          "id": "edge26",
+          "name": "Edge 26",
+          "source": "place1",
+          "target": "place8",
+          "attributes": {}
+      },
+      {
+          "id": "edge27",
+          "name": "Edge 27",
+          "source": "place3",
+          "target": "place6",
+          "attributes": {}
+      },
+      {
+          "id": "edge28",
+          "name": "Edge 28",
+          "source": "place7",
+          "target": "place2",
+          "attributes": {}
+      },
+      {
+          "id": "edge29",
+          "name": "Edge 29",
+          "source": "place4",
+          "target": "place17",
+          "attributes": {}
+      },
+      {
+          "id": "edge30",
+          "name": "Edge 30",
+          "source": "place10",
+          "target": "place9",
+          "attributes": {}
+      },
+      {
+          "id": "edge31",
+          "name": "Edge 31",
+          "source": "place11",
+          "target": "place10",
+          "attributes": {}
+      },
+      {
+          "id": "edge32",
+          "name": "Edge 32",
+          "source": "place12",
+          "target": "place11",
+          "attributes": {}
+      },
+      {
+          "id": "edge33",
+          "name": "Edge 33",
+          "source": "place14",
+          "target": "place11",
+          "attributes": {}
+      },
+      {
+          "id": "edge34",
+          "name": "Edge 34",
+          "source": "place14",
+          "target": "place13",
+          "attributes": {}
+      },
+      {
+          "id": "edge35",
+          "name": "Edge 35",
+          "source": "place15",
+          "target": "place14",
+          "attributes": {}
+      },
+      {
+          "id": "edge36",
+          "name": "Edge 36",
+          "source": "place16",
+          "target": "place15",
+          "attributes": {}
+      },
+      {
+          "id": "edge37",
+          "name": "Edge 37",
+          "source": "place17",
+          "target": "place9",
+          "attributes": {}
+      },
+      {
+          "id": "edge38",
+          "name": "Edge 38",
+          "source": "place9",
+          "target": "place17",
+          "attributes": {}
+      },
+      {
+          "id": "edge39",
+          "name": "Edge 39",
+          "source": "place15",
+          "target": "place11",
+          "attributes": {}
+      },
+      {
+          "id": "edge40",
+          "name": "Edge 40",
+          "source": "place15",
+          "target": "place10",
+          "attributes": {}
+      }
+  ],
+  "logicalPlaces": [
+      {
+          "id": "set1",
+          "name": "Meeting Rooms",
+          "conditions": [
+              {
+                  "attribute": "purpose",
+                  "operator": "==",
+                  "value": "meetings"
+              },
+              {
+                  "attribute": "occupied",
+                  "operator": "==",
+                  "value": false
+              }
+          ]
+      },
+      {
+          "id": "set2",
+          "name": "Tutors Room",
+          "conditions": [
+              {
+                  "attribute": "purpose",
+                  "operator": "==",
+                  "value": "tutorsroom"
+              }
+          ]
+      },
+      {
+          "id": "set3",
+          "name": "Dirty Rooms",
+          "conditions": [
+              {
+                  "attribute": "state",
+                  "operator": "==",
+                  "value": "dirty"
+              }
+          ]
+      },
+      {
+          "id": "set4",
+          "name": "Unchecked Rooms",
+          "conditions": [
+              {
+                  "attribute": "state",
+                  "operator": "==",
+                  "value": null
+              }
+          ]
+      }
+  ],
+  "views": [
+      {
+          "id": "view1",
+          "name": "Rooms",
+          "logicalPlaces": [
+              "set1",
+              "set2",
+              "set3",
+              "set4"
+          ],
+          "attributes": {}
+      }
+  ]
 }

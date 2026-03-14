@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.RuntimeService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.unicam.intermediate.models.pojo.PhysicalPlace;
 import org.unicam.intermediate.models.record.EnvironmentalTaskInfo;
 import org.unicam.intermediate.service.participant.ParticipantDataService;
 
@@ -156,19 +155,13 @@ public class EnvironmentalTaskRegistry {
             return evaluateParticipantPosition(placeId, operator, expectedRaw, activityId);
         }
 
-        Optional<PhysicalPlace> placeOpt = environmentDataService.getPhysicalPlace(placeId);
-        if (placeOpt.isEmpty()) {
-            log.debug("[ENVIRONMENTAL] Place '{}' not found for activity {}", placeId, activityId);
-            return false;
-        }
-
-        Map<String, Object> attributes = placeOpt.get().getAttributes();
-        if (attributes == null || !attributes.containsKey(attributeKey)) {
+        Optional<Object> actualValueOpt = environmentDataService.getPhysicalPlaceAttribute(placeId, attributeKey);
+        if (actualValueOpt.isEmpty()) {
             log.debug("[ENVIRONMENTAL] Attribute '{}.{}' not found for activity {}", placeId, attributeKey, activityId);
             return false;
         }
 
-        Object actualValue = attributes.get(attributeKey);
+        Object actualValue = actualValueOpt.get();
         boolean result = compare(actualValue, operator, expectedRaw);
 
         log.debug("[ENVIRONMENTAL] Guard evaluation | activity={} | expr='{}' | actual='{}' -> {}",

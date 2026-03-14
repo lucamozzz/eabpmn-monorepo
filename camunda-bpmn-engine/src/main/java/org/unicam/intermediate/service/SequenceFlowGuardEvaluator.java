@@ -7,7 +7,6 @@ import org.camunda.bpm.model.bpmn.instance.ExtensionElements;
 import org.camunda.bpm.model.bpmn.instance.SequenceFlow;
 import org.camunda.bpm.model.xml.instance.DomElement;
 import org.springframework.stereotype.Service;
-import org.unicam.intermediate.models.pojo.PhysicalPlace;
 import org.unicam.intermediate.service.environmental.EnvironmentDataService;
 import org.unicam.intermediate.service.participant.ParticipantDataService;
 
@@ -163,19 +162,13 @@ public class SequenceFlowGuardEvaluator {
         String operator = matcher.group(3);
         String expectedRaw = unquote(matcher.group(4).trim());
 
-        Optional<PhysicalPlace> placeOpt = environmentDataService.getPhysicalPlace(placeId);
-        if (placeOpt.isEmpty()) {
-            log.debug("[SequenceFlowGuardEvaluator] Place '{}' not found for {}", placeId, sourceId);
-            return false;
-        }
-
-        Map<String, Object> attributes = placeOpt.get().getAttributes();
-        if (attributes == null || !attributes.containsKey(attributeKey)) {
+        Optional<Object> actualValueOpt = environmentDataService.getPhysicalPlaceAttribute(placeId, attributeKey);
+        if (actualValueOpt.isEmpty()) {
             log.debug("[SequenceFlowGuardEvaluator] Attribute '{}.{}' not found for {}", placeId, attributeKey, sourceId);
             return false;
         }
 
-        Object actualValue = attributes.get(attributeKey);
+        Object actualValue = actualValueOpt.get();
         boolean result = compare(actualValue, operator, expectedRaw);
 
         log.debug("[SequenceFlowGuardEvaluator] Guard evaluation | source={} | expr='{}' | actual='{}' -> {}",

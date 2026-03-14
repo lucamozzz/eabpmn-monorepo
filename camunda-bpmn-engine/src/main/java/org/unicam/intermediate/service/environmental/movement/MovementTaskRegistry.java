@@ -175,17 +175,14 @@ public class MovementTaskRegistry {
     }
 
     private boolean matchesAllConditions(PhysicalPlace physicalPlace, List<Condition> conditions) {
-        Map<String, Object> attributes = physicalPlace.getAttributes();
-        if (attributes == null) {
-            return false;
-        }
-
         for (Condition condition : conditions) {
             if (condition == null || condition.getAttribute() == null || condition.getOperator() == null) {
                 return false;
             }
 
-            Object actualValue = attributes.get(condition.getAttribute());
+            Object actualValue = environmentDataService
+                    .getPhysicalPlaceAttribute(physicalPlace.getId(), condition.getAttribute())
+                    .orElse(null);
             if (!compare(actualValue, condition.getOperator(), condition.getValue())) {
                 return false;
             }
