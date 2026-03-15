@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Environment Cockpit</title>
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --text: #13213a;
+      --muted: #5a6a85;
+      --ok: #0a7f3f;
+      --err: #b42318;
+      --accent: #0b5fff;
+      --border: #d6deeb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at top right, #e9f0ff 0%, var(--bg) 42%);
+    }
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+    .sub {
+      margin: 8px 0 0;
+      color: var(--muted);
+    }
+    .top {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-end;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 2fr 0.9fr;
+      gap: 14px;
+      align-items: start;
+    }
+    .map-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 1px 8px rgba(10, 30, 70, 0.06);
+      overflow: hidden;
+    }
+    .map-header {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+    }
+    #map {
+      width: 100%;
+      height: 620px;
+    }
+    .side-column {
+      height: 620px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 0;
+    }
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 1px 8px rgba(10, 30, 70, 0.06);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-height: 0;
+    }
+    .panel.logical-panel {
+      flex: 0.75;
+    }
+    .panel.physical-panel {
+      flex: 1.25;
+    }
+    .panel-header {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding: 8px;
+    }
+    .grid.scrollable {
+      max-height: none;
+      overflow-y: auto;
+      flex: 1;
+      min-height: 0;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 1px 8px rgba(10, 30, 70, 0.06);
+      transition: border-color 120ms ease, box-shadow 120ms ease;
+    }
+    .card.map-linked {
+      cursor: pointer;
+    }
+    .card.map-linked:hover {
+      border-color: #e45454;
+      box-shadow: 0 0 0 2px rgba(228, 84, 84, 0.18);
+    }
+    .card h2 {
+      margin: 0 0 6px;
+      font-size: 14px;
+      line-height: 1.2;
+    }
+    .list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      border-bottom: 1px dashed var(--border);
+      padding: 5px 0;
+      font-size: 12px;
+    }
+    .list li:last-child { border-bottom: 0; }
+    .k {
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .v {
+      text-align: right;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 11px;
+      word-break: break-word;
+    }
+    .empty {
+      background: var(--card);
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      color: var(--muted);
+    }
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+      .side-column { height: auto; }
+      .panel { min-height: 220px; }
+    }
+
+    @media (max-width: 700px) {
+      #map { height: 300px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <h1>Environment Cockpit</h1>
+      </div>
+    </div>
+    <div class="layout">
+      <section class="map-card">
+        <div id="map"></div>
+      </section>
+      <aside class="side-column">
+        <section class="panel logical-panel">
+          <div class="panel-header">Logical Places</div>
+          <div class="grid scrollable" id="logicalPlaces"></div>
+        </section>
+        <section class="panel physical-panel">
+          <div class="panel-header">Physical Places</div>
+          <div class="grid scrollable" id="physicalPlaces"></div>
+        </section>
+      </aside>
+    </div>
+  </div>
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <script>
+    const physicalPlacesEl = document.getElementById("physicalPlaces");
+    const logicalPlacesEl = document.getElementById("logicalPlaces");
+    const REFRESH_MS = 2000;
+
+    const DEFAULT_POLYGON_STYLE = {
+      color: "#cf2424",
+      weight: 2,
+      fill: false
+    };
+    const HIGHLIGHT_POLYGON_STYLE = {
+      color: "#9c0d0d",
+      weight: 4,
+      fill: true,
+      fillColor: "#f87171",
+      fillOpacity: 0.3
+    };
+
+    const map = L.map("map");
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: "&copy; OpenStreetMap contributors"
+    }).addTo(map);
+    const mapLayers = L.layerGroup().addTo(map);
+    const edgeLayers = L.layerGroup().addTo(map);
+    const participantLayers = L.layerGroup().addTo(map);
+    const polygonsByPlaceId = new Map();
+    const placeCentersById = new Map();
+    map.setView([43.1376, 13.0746], 16);
+
+    const EDGE_STYLE = {
+      color: "#e6d86a",
+      weight: 2,
+      opacity: 0.95
+    };
+    const EDGE_HOVER_STYLE = {
+      color: "#fff29a",
+      weight: 4,
+      opacity: 1
+    };
+
+    const PARTICIPANT_STYLE = {
+      radius: 5,
+      color: "#0f4fbd",
+      fillColor: "#38bdf8",
+      fillOpacity: 0.95,
+      weight: 2
+    };
+
+    function valueToString(value) {
+      if (value === null) {
+        return "null";
+      }
+      if (typeof value === "object") {
+        try {
+          return JSON.stringify(value);
+        } catch (e) {
+          return String(value);
+        }
+      }
+      return String(value);
+    }
+
+    function renderPhysicalPlaces(places) {
+      window.__latestPhysicalPlaces = Array.isArray(places) ? places : [];
+
+      if (!Array.isArray(places) || places.length === 0) {
+        physicalPlacesEl.innerHTML = '<div class="empty">Nessun physical place disponibile.</div>';
+        return;
+      }
+
+      const html = places.map((place) => {
+        const attrs = place && place.attributes ? place.attributes : {};
+        const placeName = place && place.name ? place.name : (place.id || "(senza nome)");
+        const attrEntries = Object.entries(attrs)
+          .filter(([, value]) => value !== null && value !== undefined && value !== "");
+
+        const attrsHtml = attrEntries
+          .map(([key, value]) => '<li><span class="k">' + key + '</span><span class="v">' + valueToString(value) + '</span></li>')
+          .join("");
+
+        return (
+          '<article class="card map-linked physical-place-card" data-place-id="' + valueToString(place.id ?? "") + '">' +
+            '<h2>' + valueToString(placeName) + '</h2>' +
+            (attrsHtml ? '<ul class="list">' + attrsHtml + '</ul>' : '') +
+          '</article>'
+        );
+      }).join("");
+
+      physicalPlacesEl.innerHTML = html;
+      attachPhysicalPlaceHover();
+    }
+
+    function attachPhysicalPlaceHover() {
+      const cards = physicalPlacesEl.querySelectorAll(".physical-place-card");
+      for (const card of cards) {
+        const placeId = card.getAttribute("data-place-id");
+        if (!placeId) {
+          continue;
+        }
+
+        card.addEventListener("mouseenter", () => {
+          const polygon = polygonsByPlaceId.get(placeId);
+          if (polygon) {
+            polygon.setStyle(HIGHLIGHT_POLYGON_STYLE);
+            polygon.bringToFront();
+          }
+        });
+
+        card.addEventListener("mouseleave", () => {
+          const polygon = polygonsByPlaceId.get(placeId);
+          if (polygon) {
+            polygon.setStyle(DEFAULT_POLYGON_STYLE);
+          }
+        });
+      }
+    }
+
+    function resetPolygonStyles() {
+      for (const polygon of polygonsByPlaceId.values()) {
+        polygon.setStyle(DEFAULT_POLYGON_STYLE);
+      }
+    }
+
+    function matchesCondition(place, condition) {
+      const attrs = place && place.attributes ? place.attributes : {};
+      const actualValue = attrs[condition.attribute];
+      const operator = condition.operator;
+      const expectedValue = condition.value;
+
+      if (operator === "==") {
+        return actualValue === expectedValue;
+      }
+      if (operator === "!=") {
+        return actualValue !== expectedValue;
+      }
+
+      const actualNumber = Number(actualValue);
+      const expectedNumber = Number(expectedValue);
+      if (!Number.isFinite(actualNumber) || !Number.isFinite(expectedNumber)) {
+        return false;
+      }
+
+      if (operator === ">") return actualNumber > expectedNumber;
+      if (operator === "<") return actualNumber < expectedNumber;
+      if (operator === ">=") return actualNumber >= expectedNumber;
+      if (operator === "<=") return actualNumber <= expectedNumber;
+      return false;
+    }
+
+    function resolveMatchingPhysicalPlaceIdsForLogicalPlace(logicalPlace, physicalPlaces) {
+      const conditions = Array.isArray(logicalPlace.conditions) ? logicalPlace.conditions : [];
+      if (conditions.length === 0 || !Array.isArray(physicalPlaces)) {
+        return [];
+      }
+      return physicalPlaces
+        .filter((place) => conditions.every((condition) => matchesCondition(place, condition)))
+        .map((place) => String(place.id));
+    }
+
+    function attachLogicalPlaceHover(logicalPlaces) {
+      const logicalById = new Map((logicalPlaces || []).map((lp) => [String(lp.id), lp]));
+      const cards = logicalPlacesEl.querySelectorAll(".logical-place-card");
+
+      for (const card of cards) {
+        const logicalId = card.getAttribute("data-logical-id");
+        if (!logicalId) {
+          continue;
+        }
+
+        card.addEventListener("mouseenter", () => {
+          resetPolygonStyles();
+          const logicalPlace = logicalById.get(logicalId);
+          if (!logicalPlace) {
+            return;
+          }
+
+          const matchingIds = resolveMatchingPhysicalPlaceIdsForLogicalPlace(logicalPlace, window.__latestPhysicalPlaces || []);
+          for (const placeId of matchingIds) {
+            const polygon = polygonsByPlaceId.get(placeId);
+            if (polygon) {
+              polygon.setStyle(HIGHLIGHT_POLYGON_STYLE);
+              polygon.bringToFront();
+            }
+          }
+        });
+
+        card.addEventListener("mouseleave", resetPolygonStyles);
+      }
+    }
+
+    function renderLogicalPlaces(logicalPlaces) {
+      if (!Array.isArray(logicalPlaces) || logicalPlaces.length === 0) {
+        logicalPlacesEl.innerHTML = '<div class="empty">Nessun logical place disponibile.</div>';
+        return;
+      }
+
+      const html = logicalPlaces.map((place) => {
+          const displayName = place && place.name ? place.name : "(senza nome)";
+
+        return (
+          '<article class="card map-linked logical-place-card" data-logical-id="' + valueToString(place.id ?? "") + '">' +
+              '<h2>' + valueToString(displayName) + '</h2>' +
+          '</article>'
+        );
+      }).join("");
+
+      logicalPlacesEl.innerHTML = html;
+      attachLogicalPlaceHover(logicalPlaces);
+    }
+
+    function renderMap(places, edges) {
+      mapLayers.clearLayers();
+      edgeLayers.clearLayers();
+      participantLayers.clearLayers();
+      polygonsByPlaceId.clear();
+      placeCentersById.clear();
+
+      if (!Array.isArray(places) || places.length === 0) {
+        return;
+      }
+
+      const bounds = [];
+
+      for (const place of places) {
+        const coords = place && Array.isArray(place.coordinates) ? place.coordinates : [];
+        if (coords.length === 0) {
+          continue;
+        }
+
+        const latLngs = coords
+          .filter((pair) => Array.isArray(pair) && pair.length >= 2)
+          .map((pair) => [Number(pair[1]), Number(pair[0])])
+          .filter((pair) => Number.isFinite(pair[0]) && Number.isFinite(pair[1]));
+
+        if (latLngs.length === 0) {
+          continue;
+        }
+
+        const polygon = L.polygon(latLngs, DEFAULT_POLYGON_STYLE).addTo(mapLayers);
+
+        polygon.bindPopup("<strong>" + (place.id || "Place") + "</strong>");
+
+        if (place && place.id) {
+          const placeId = String(place.id);
+          polygonsByPlaceId.set(placeId, polygon);
+          placeCentersById.set(placeId, polygon.getBounds().getCenter());
+        }
+
+        bounds.push(...latLngs);
+      }
+
+      if (bounds.length > 0) {
+        map.fitBounds(bounds, { padding: [20, 20] });
+      }
+
+      if (Array.isArray(edges)) {
+        for (const edge of edges) {
+          if (!edge || !edge.source || !edge.target) {
+            continue;
+          }
+
+          const sourceCenter = placeCentersById.get(String(edge.source));
+          const targetCenter = placeCentersById.get(String(edge.target));
+          if (!sourceCenter || !targetCenter) {
+            continue;
+          }
+
+          const edgeLine = L.polyline([sourceCenter, targetCenter], EDGE_STYLE)
+            .addTo(edgeLayers)
+            .bindTooltip(edge.name || edge.id || "edge");
+
+          edgeLine.on("mouseover", () => {
+            edgeLine.setStyle(EDGE_HOVER_STYLE);
+            edgeLine.openTooltip();
+          });
+
+          edgeLine.on("mouseout", () => {
+            edgeLine.setStyle(EDGE_STYLE);
+            edgeLine.closeTooltip();
+          });
+        }
+      }
+    }
+
+    function renderParticipants(participants) {
+      participantLayers.clearLayers();
+
+      if (!Array.isArray(participants) || participants.length === 0) {
+        return;
+      }
+
+      const groupedByPlace = new Map();
+      for (const participant of participants) {
+        const placeId = participant && participant.position ? String(participant.position) : null;
+        if (!placeId) {
+          continue;
+        }
+        if (!groupedByPlace.has(placeId)) {
+          groupedByPlace.set(placeId, []);
+        }
+        groupedByPlace.get(placeId).push(participant);
+      }
+
+      for (const [placeId, placeParticipants] of groupedByPlace.entries()) {
+        const center = placeCentersById.get(placeId);
+        if (!center) {
+          continue;
+        }
+
+        const count = placeParticipants.length;
+        const radiusDeg = 0.000015;
+
+        placeParticipants.forEach((participant, index) => {
+          let lat = center.lat;
+          let lng = center.lng;
+
+          if (count > 1) {
+            const angle = (2 * Math.PI * index) / count;
+            lat += Math.sin(angle) * radiusDeg;
+            lng += Math.cos(angle) * radiusDeg;
+          }
+
+          L.circleMarker([lat, lng], PARTICIPANT_STYLE)
+            .addTo(participantLayers)
+            .bindTooltip((participant.id || "unknown"));
+        });
+      }
+    }
+
+    async function fetchEnvironment() {
+      try {
+        const [physicalResponse, logicalResponse, edgesResponse, participantsResponse] = await Promise.all([
+          fetch("/api/environment/pp", { cache: "no-store" }),
+          fetch("/api/environment/lp", { cache: "no-store" }),
+          fetch("/api/environment/edges", { cache: "no-store" }),
+          fetch("/api/environment/participants", { cache: "no-store" })
+        ]);
+
+        if (!physicalResponse.ok) {
+          throw new Error("Physical HTTP " + physicalResponse.status);
+        }
+        if (!logicalResponse.ok) {
+          throw new Error("Logical HTTP " + logicalResponse.status);
+        }
+        if (!edgesResponse.ok) {
+          throw new Error("Edges HTTP " + edgesResponse.status);
+        }
+        if (!participantsResponse.ok) {
+          throw new Error("Participants HTTP " + participantsResponse.status);
+        }
+
+        const physicalBody = await physicalResponse.json();
+        const logicalBody = await logicalResponse.json();
+        const edgesBody = await edgesResponse.json();
+        const participantsBody = await participantsResponse.json();
+
+        if (!physicalBody || physicalBody.success !== true) {
+          throw new Error(physicalBody && physicalBody.message ? physicalBody.message : "Errore risposta API physical");
+        }
+        if (!logicalBody || logicalBody.success !== true) {
+          throw new Error(logicalBody && logicalBody.message ? logicalBody.message : "Errore risposta API logical");
+        }
+        if (!edgesBody || edgesBody.success !== true) {
+          throw new Error(edgesBody && edgesBody.message ? edgesBody.message : "Errore risposta API edges");
+        }
+        if (!participantsBody || participantsBody.success !== true) {
+          throw new Error(participantsBody && participantsBody.message ? participantsBody.message : "Errore risposta API participants");
+        }
+
+        renderPhysicalPlaces(physicalBody.data);
+        renderLogicalPlaces(logicalBody.data);
+        renderMap(physicalBody.data, edgesBody.data);
+        renderParticipants(participantsBody.data);
+      } catch (error) {
+        console.error("Aggiornamento environment fallito", error);
+      }
+    }
+
+    fetchEnvironment();
+    setInterval(fetchEnvironment, REFRESH_MS);
+  </script>
+</body>
+</html>

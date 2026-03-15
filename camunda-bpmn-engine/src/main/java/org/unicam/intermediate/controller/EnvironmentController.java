@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.unicam.intermediate.models.dto.Response;
+import org.unicam.intermediate.models.pojo.Edge;
+import org.unicam.intermediate.models.pojo.LogicalPlace;
 import org.unicam.intermediate.models.pojo.PhysicalPlace;
 import org.unicam.intermediate.models.pojo.Participant;
 import org.unicam.intermediate.service.environmental.EnvironmentDataService;
@@ -47,6 +49,30 @@ public class EnvironmentController {
             log.error("[Environment API] Failed to retrieve physical places", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Response.error("Failed to retrieve physical places: " + e.getMessage()));
+        }
+    }
+
+    @GetMapping("/lp")
+    public ResponseEntity<Response<List<LogicalPlace>>> getLogicalPlaces() {
+        try {
+            List<LogicalPlace> logicalPlaces = environmentDataService.getLogicalPlaces();
+            return ResponseEntity.ok(Response.ok(logicalPlaces));
+        } catch (Exception e) {
+            log.error("[Environment API] Failed to retrieve logical places", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Response.error("Failed to retrieve logical places: " + e.getMessage()));
+        }
+    }
+
+    @GetMapping("/edges")
+    public ResponseEntity<Response<List<Edge>>> getEdges() {
+        try {
+            List<Edge> edges = environmentDataService.getEdges();
+            return ResponseEntity.ok(Response.ok(edges));
+        } catch (Exception e) {
+            log.error("[Environment API] Failed to retrieve edges", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Response.error("Failed to retrieve edges: " + e.getMessage()));
         }
     }
 
