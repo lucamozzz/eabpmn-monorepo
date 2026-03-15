@@ -352,6 +352,7 @@ public class EnvironmentalTaskRegistry {
             case "cleanroom" -> cleanRoom(activityId, participantId, executionId, notifyParticipant);
             case "checkroom" -> checkRoom(activityId, participantId, executionId, notifyParticipant);
             case "leaveroom" -> leaveRoom(activityId, participantId, notifyParticipant);
+            case "occupyroom" -> occupyRoom(activityId, participantId, notifyParticipant);
             default -> {
                 log.warn("[ENVIRONMENTAL] Unknown action '{}' for activity {} -> action-check fails", action, activityId);
                 yield false;
@@ -463,7 +464,8 @@ public class EnvironmentalTaskRegistry {
                     place -> {
                         if (place.getAttributes() != null) {
                             place.getAttributes().put("state", null);
-                            log.info("[ENVIRONMENTAL] leaveRoom executed | activity={} | participant={} | place={} | state=null",
+                            place.getAttributes().put("occupied", false);
+                            log.info("[ENVIRONMENTAL] leaveRoom executed | activity={} | participant={} | place={} | state=null | occupied=false",
                                     activityId, participantId, place.getId());
                         } else {
                             log.debug("[ENVIRONMENTAL] leaveRoom: place '{}' has no attributes map — skipping | activity={}",
@@ -475,6 +477,51 @@ public class EnvironmentalTaskRegistry {
             );
         } else {
             log.info("[ENVIRONMENTAL] leaveRoom: participant '{}' has no current position — skipping state update | activity={}",
+                    participantId, activityId);
+        }
+
+        return true;
+    }
+
+    /**
+     * occupyRoom is a system action.
+     * Check-only mode has no side effects and always returns true.
+     * Execute mode sets occupied=true on the participant's current place.
+     */
+    private boolean occupyRoom(String activityId, String participantId, boolean execute) {
+        if (!execute) {
+            log.debug("[ENVIRONMENTAL] occupyRoom check-only (no side effects) | activity={} | participant={}",
+                    activityId, participantId);
+            return true;
+        }
+
+        if (participantId == null || participantId.isBlank()) {
+            log.warn("[ENVIRONMENTAL] occupyRoom: participantId missing for activity {} — completing without update", activityId);
+            return true;
+        }
+
+        String placeRef = participantDataService.getParticipant(participantId)
+                .map(p -> p.getPosition())
+                .orElse(null);
+
+        if (placeRef != null && !placeRef.isBlank()) {
+            String placeId = environmentDataService.resolvePhysicalPlaceId(placeRef).orElse(placeRef);
+            environmentDataService.getPhysicalPlace(placeId).ifPresentOrElse(
+                    place -> {
+                        if (place.getAttributes() != null) {
+                            place.getAttributes().put("occupied", true);
+                            log.info("[ENVIRONMENTAL] occupyRoom executed | activity={} | participant={} | place={} | occupied=true",
+                                    activityId, participantId, place.getId());
+                        } else {
+                            log.debug("[ENVIRONMENTAL] occupyRoom: place '{}' has no attributes map — skipping | activity={}",
+                                    placeId, activityId);
+                        }
+                    },
+                    () -> log.info("[ENVIRONMENTAL] occupyRoom: place '{}' not found — skipping | activity={} | participant={}",
+                            placeId, activityId, participantId)
+            );
+        } else {
+            log.info("[ENVIRONMENTAL] occupyRoom: participant '{}' has no current position — skipping | activity={}",
                     participantId, activityId);
         }
 
@@ -566,6 +613,7 @@ public class EnvironmentalTaskRegistry {
             case "cleanroom" -> "Clean the room";
             case "checkroom" -> "Check the room";
             case "leaveroom" -> "Leave the room";
+            case "occupyroom" -> "Occupy the room";
             default -> "Execute action: " + action;
         };
     }

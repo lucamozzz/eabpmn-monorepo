@@ -5,13 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
-import org.unicam.intermediate.events.ParticipantPositionChangedEvent;
 import org.unicam.intermediate.models.pojo.PhysicalPlace;
-import org.unicam.intermediate.service.participant.ParticipantDataService;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -28,19 +23,9 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ExternalAttributeRefreshService {
 
     private static final String IS_RAINING_ATTR = "isRaining";
-    private static final String OCCUPIED_ATTR = "occupied";
     private static final String RAIN_ENDPOINT = "https://api.open-meteo.com/v1/forecast?latitude=43.1376&longitude=13.0746&current=rain";
 
     private final ObjectMapper objectMapper;
-    private final ParticipantDataService participantDataService;
-
-    // Lazily injected to break the circular: EnvironmentDataService -> this -> EnvironmentDataService
-    private EnvironmentDataService environmentDataService;
-
-    @Autowired
-    public void setEnvironmentDataService(@Lazy EnvironmentDataService environmentDataService) {
-        this.environmentDataService = environmentDataService;
-    }
 
     private final HttpClient httpClient = HttpClient.newBuilder()
             .connectTimeout(Duration.ofSeconds(5))
@@ -52,20 +37,6 @@ public class ExternalAttributeRefreshService {
     @PostConstruct
     void init() {
         registerRefresher(IS_RAINING_ATTR, this::refreshIsRaining);
-        registerRefresher(OCCUPIED_ATTR, this::refreshOccupied);
-    }
-
-    @EventListener
-    public void onParticipantPositionChanged(ParticipantPositionChangedEvent event) {
-        if (environmentDataService == null) {
-            return;
-        }
-        if (event.oldPosition() != null) {
-            environmentDataService.getPhysicalPlace(event.oldPosition()).ifPresent(this::refreshOccupied);
-        }
-        if (event.newPosition() != null) {
-            environmentDataService.getPhysicalPlace(event.newPosition()).ifPresent(this::refreshOccupied);
-        }
     }
 
     /**
@@ -131,16 +102,6 @@ public class ExternalAttributeRefreshService {
                     IS_RAINING_ATTR,
                     ex.getMessage());
         }
-    }
-
-    private void refreshOccupied(PhysicalPlace place) {
-        if (place == null || place.getAttributes() == null) {
-            return;
-        }
-        boolean occupied = participantDataService.getParticipants().stream()
-                .anyMatch(p -> place.getId().equals(p.getPosition()));
-        place.getAttributes().put(OCCUPIED_ATTR, occupied);
-        log.debug("[Environment External Refresh] Updated {} for place '{}' to {}", OCCUPIED_ATTR, place.getId(), occupied);
     }
 
     @FunctionalInterface
