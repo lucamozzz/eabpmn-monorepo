@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.RepositoryService;
-import org.camunda.bpm.engine.repository.Deployment;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.unicam.intermediate.models.pojo.EnvironmentData;
@@ -103,6 +102,23 @@ public class EnvironmentDataService {
         }
 
         return Optional.ofNullable(attributes.get(key));
+    }
+
+    public boolean hasPhysicalPlaceAttribute(String placeReference, String key) {
+        if (placeReference == null || placeReference.isBlank() || key == null || key.isBlank()) {
+            return false;
+        }
+
+        Optional<PhysicalPlace> placeOpt = resolvePhysicalPlace(placeReference);
+        if (placeOpt.isEmpty()) {
+            return false;
+        }
+
+        PhysicalPlace place = placeOpt.get();
+        externalAttributeRefreshService.refreshAttributeIfNeeded(place, key);
+
+        Map<String, Object> attributes = place.getAttributes();
+        return attributes != null && attributes.containsKey(key);
     }
 
     private Optional<PhysicalPlace> resolvePhysicalPlace(String placeReference) {

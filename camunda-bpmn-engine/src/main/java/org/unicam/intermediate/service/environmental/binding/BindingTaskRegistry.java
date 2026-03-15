@@ -9,6 +9,7 @@ import org.unicam.intermediate.service.environmental.EnvironmentDataService;
 import org.unicam.intermediate.service.participant.ParticipantDataService;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -86,6 +87,53 @@ public class BindingTaskRegistry {
                 log.info("[BindingRegistry] Removed active pair {} due to task end", pairKey);
             }
         }
+    }
+
+    /**
+     * Returns pending binding notifications for a participant in a shape compatible
+     * with the mobile pending-actions endpoint.
+     */
+    public List<Map<String, String>> getPendingBindingsForParticipant(String participantId) {
+        if (participantId == null || participantId.isBlank()) {
+            return List.of();
+        }
+
+        BindingTaskInfo waitingTask = waitingByParticipant.get(participantId);
+        if (waitingTask != null) {
+            return List.of(toBindingView(waitingTask, waitingTask.targetParticipantId()));
+        }
+
+        for (BindingPair pair : activePairs.values()) {
+            if (participantId.equals(pair.first.participantId())) {
+                if (!isPairAlreadyAtSamePosition(pair)) {
+                    return List.of(toBindingView(pair.first, pair.second.participantId()));
+                }
+                return List.of();
+            }
+            if (participantId.equals(pair.second.participantId())) {
+                if (!isPairAlreadyAtSamePosition(pair)) {
+                    return List.of(toBindingView(pair.second, pair.first.participantId()));
+                }
+                return List.of();
+            }
+        }
+
+        return List.of();
+    }
+
+    private Map<String, String> toBindingView(BindingTaskInfo taskInfo, String counterpartParticipantId) {
+        Map<String, String> view = new LinkedHashMap<>();
+        view.put("executionId", taskInfo.executionId());
+        view.put("action", "binding");
+        view.put("counterpartParticipantId", counterpartParticipantId);
+        view.put("message", "Move to same place as " + counterpartParticipantId + " (binding)");
+        return view;
+    }
+
+    private boolean isPairAlreadyAtSamePosition(BindingPair pair) {
+        String positionA = getParticipantPosition(pair.first.participantId());
+        String positionB = getParticipantPosition(pair.second.participantId());
+        return positionA != null && positionA.equals(positionB);
     }
 
     @Scheduled(fixedRate = 2000)

@@ -12,6 +12,7 @@ import org.unicam.intermediate.service.environmental.EnvironmentDataService;
 import org.unicam.intermediate.service.participant.ParticipantDataService;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -61,6 +62,63 @@ public class MovementTaskRegistry {
         if (removed != null) {
             log.info("[MovementRegistry] Removed movement task for participant: {}", participantId);
         }
+    }
+
+    /**
+     * Returns pending movement tasks for a participant in a shape compatible
+     * with the mobile pending-actions view.
+     */
+    public List<Map<String, String>> getPendingMovementsForParticipant(String participantId) {
+        if (participantId == null || participantId.isBlank()) {
+            return List.of();
+        }
+
+        MovementTaskInfo taskInfo = activeMovementTasks.get(participantId);
+        if (taskInfo == null) {
+            return List.of();
+        }
+
+        String currentPosition = participantDataService.getParticipant(participantId)
+                .map(p -> p.getPosition())
+                .orElse(null);
+
+        // If already reached, no pending movement notification should be shown.
+        if (isDestinationReached(taskInfo.destination(), currentPosition)) {
+            return List.of();
+        }
+
+        String destinationLabel = resolveDestinationLabel(taskInfo.destination());
+
+        Map<String, String> movementView = new LinkedHashMap<>();
+        movementView.put("executionId", taskInfo.executionId());
+        movementView.put("action", "move");
+        movementView.put("destination", taskInfo.destination());
+        movementView.put("message", "Move to " + destinationLabel);
+
+        return List.of(movementView);
+    }
+
+    private String resolveDestinationLabel(String destination) {
+        if (destination == null || destination.isBlank()) {
+            return "destination";
+        }
+
+        Optional<PhysicalPlace> physicalPlace = environmentDataService.getPhysicalPlace(destination);
+        if (physicalPlace.isPresent()) {
+            String name = physicalPlace.get().getName();
+            return name != null && !name.isBlank() ? name : physicalPlace.get().getId();
+        }
+
+        Optional<LogicalPlace> logicalPlace = environmentDataService.getLogicalPlaces().stream()
+                .filter(lp -> destination.equals(lp.getId()))
+                .findFirst();
+
+        if (logicalPlace.isPresent()) {
+            String name = logicalPlace.get().getName();
+            return name != null && !name.isBlank() ? name : logicalPlace.get().getId();
+        }
+
+        return destination;
     }
 
     /**

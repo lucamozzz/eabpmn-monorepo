@@ -9,6 +9,7 @@ import org.unicam.intermediate.service.environmental.EnvironmentDataService;
 import org.unicam.intermediate.service.participant.ParticipantDataService;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -82,6 +83,53 @@ public class UnbindingTaskRegistry {
                 log.info("[UnbindingRegistry] Removed active pair {} due to task end", pairKey);
             }
         }
+    }
+
+    /**
+     * Returns pending unbinding notifications for a participant in a shape compatible
+     * with the mobile pending-actions endpoint.
+     */
+    public List<Map<String, String>> getPendingUnbindingsForParticipant(String participantId) {
+        if (participantId == null || participantId.isBlank()) {
+            return List.of();
+        }
+
+        BindingTaskInfo waitingTask = waitingByParticipant.get(participantId);
+        if (waitingTask != null) {
+            return List.of(toUnbindingView(waitingTask, waitingTask.targetParticipantId()));
+        }
+
+        for (UnbindingPair pair : activePairs.values()) {
+            if (participantId.equals(pair.first.participantId())) {
+                if (!isPairAlreadyAtSamePosition(pair)) {
+                    return List.of(toUnbindingView(pair.first, pair.second.participantId()));
+                }
+                return List.of();
+            }
+            if (participantId.equals(pair.second.participantId())) {
+                if (!isPairAlreadyAtSamePosition(pair)) {
+                    return List.of(toUnbindingView(pair.second, pair.first.participantId()));
+                }
+                return List.of();
+            }
+        }
+
+        return List.of();
+    }
+
+    private Map<String, String> toUnbindingView(BindingTaskInfo taskInfo, String counterpartParticipantId) {
+        Map<String, String> view = new LinkedHashMap<>();
+        view.put("executionId", taskInfo.executionId());
+        view.put("action", "unbinding");
+        view.put("counterpartParticipantId", counterpartParticipantId);
+        view.put("message", "Move to same place as " + counterpartParticipantId + " (unbinding)");
+        return view;
+    }
+
+    private boolean isPairAlreadyAtSamePosition(UnbindingPair pair) {
+        String positionA = getParticipantPosition(pair.first.participantId());
+        String positionB = getParticipantPosition(pair.second.participantId());
+        return positionA != null && positionA.equals(positionB);
     }
 
     @Scheduled(fixedRate = 2000)

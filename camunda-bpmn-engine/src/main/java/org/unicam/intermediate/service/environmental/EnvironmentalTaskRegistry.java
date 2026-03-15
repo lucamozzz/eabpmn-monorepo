@@ -2,12 +2,19 @@ package org.unicam.intermediate.service.environmental;
 
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.RuntimeService;
+import org.camunda.bpm.engine.runtime.Execution;
+import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.unicam.intermediate.models.dto.websocket.GpsResponse;
 import org.unicam.intermediate.models.record.EnvironmentalTaskInfo;
 import org.unicam.intermediate.service.participant.ParticipantDataService;
+import org.unicam.intermediate.service.participant.UserParticipantMappingService;
+import org.unicam.intermediate.service.websocket.WebSocketSessionManager;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -30,18 +37,26 @@ public class EnvironmentalTaskRegistry {
     private final EnvironmentDataService environmentDataService;
     private final RuntimeService runtimeService;
     private final ParticipantDataService participantDataService;
+    private final UserParticipantMappingService userParticipantMappingService;
+    private final WebSocketSessionManager webSocketSessionManager;
 
     // executionId -> active environmental task waiting for guard=true
     private final Map<String, EnvironmentalTaskInfo> activeEnvironmentalTasks = new ConcurrentHashMap<>();
     // executionId -> epoch millis when action timer started
     private final Map<String, Long> actionTimerStartByExecutionId = new ConcurrentHashMap<>();
+    // executionId:action -> notification already sent (dedup)
+    private final Map<String, Boolean> sentActionNotifications = new ConcurrentHashMap<>();
 
     public EnvironmentalTaskRegistry(EnvironmentDataService environmentDataService,
                                      RuntimeService runtimeService,
-                                     ParticipantDataService participantDataService) {
+                                     ParticipantDataService participantDataService,
+                                     UserParticipantMappingService userParticipantMappingService,
+                                     WebSocketSessionManager webSocketSessionManager) {
         this.environmentDataService = environmentDataService;
         this.runtimeService = runtimeService;
         this.participantDataService = participantDataService;
+        this.userParticipantMappingService = userParticipantMappingService;
+        this.webSocketSessionManager = webSocketSessionManager;
     }
 
     public void registerTask(String executionId, String activityId, String guardExpression, String action, String participantId, Double timer) {
@@ -71,10 +86,63 @@ public class EnvironmentalTaskRegistry {
 
         EnvironmentalTaskInfo removed = activeEnvironmentalTasks.remove(executionId);
         actionTimerStartByExecutionId.remove(executionId);
+        clearNotificationMarkersForExecution(executionId);
         if (removed != null) {
             log.info("[EnvironmentalRegistry] Removed environmental task | activity={} | execution={}",
                     removed.activityId(), removed.executionId());
         }
+    }
+
+    /**
+     * Returns action requests currently pending for the given participant.
+     * A request is considered pending when:
+     * 1) the task belongs to the participant,
+     * 2) an action is configured,
+     * 3) guard is already satisfied,
+     * 4) action condition is still not satisfied.
+     */
+    public List<Map<String, String>> getPendingActionsForParticipant(String participantId) {
+        if (participantId == null || participantId.isBlank()) {
+            return List.of();
+        }
+
+        List<Map<String, String>> pendingActions = new ArrayList<>();
+
+        for (EnvironmentalTaskInfo taskInfo : activeEnvironmentalTasks.values()) {
+            if (!participantId.equals(taskInfo.participantId())) {
+                continue;
+            }
+
+            String action = taskInfo.action();
+            if (action == null || action.isBlank()) {
+                continue;
+            }
+
+            boolean guardSatisfied = evaluateGuard(taskInfo.guardExpression(), taskInfo.activityId(), taskInfo.participantId());
+            if (!guardSatisfied) {
+                continue;
+            }
+
+            boolean actionSatisfied = evaluateActionGuard(
+                    action,
+                    taskInfo.activityId(),
+                    taskInfo.participantId(),
+                    taskInfo.executionId(),
+                    false
+            );
+            if (actionSatisfied) {
+                continue;
+            }
+
+            Map<String, String> actionView = new LinkedHashMap<>();
+            actionView.put("executionId", taskInfo.executionId());
+            actionView.put("activityId", taskInfo.activityId());
+            actionView.put("action", action);
+            actionView.put("message", toHumanReadableAction(action));
+            pendingActions.add(actionView);
+        }
+
+        return pendingActions;
     }
 
     @Scheduled(fixedRate = 2000)
@@ -268,19 +336,237 @@ public class EnvironmentalTaskRegistry {
         return raw;
     }
 
-    private boolean evaluateActionGuard(String action, String activityId, String participantId) {
+    private boolean evaluateActionGuard(String action,
+                                        String activityId,
+                                        String participantId,
+                                        String executionId,
+                                        boolean notifyParticipant) {
         if (action == null || action.isBlank()) {
             log.debug("[ENVIRONMENTAL] Empty action for activity {} -> action-check auto-pass", activityId);
             return true;
         }
 
         return switch (action.trim().toLowerCase()) {
-            case "turnlightson" -> evaluateGuard("place1.light == on", activityId + "#action:turnLightsOn", participantId);
-            case "turnlightsoff" -> evaluateGuard("place1.light == off", activityId + "#action:turnLightsOff", participantId);
+            case "turnlightson" -> turnLightsOn(activityId, participantId, executionId, notifyParticipant);
+            case "turnlightsoff" -> turnLightsOff(activityId, participantId, executionId, notifyParticipant);
+            case "cleanroom" -> cleanRoom(activityId, participantId, executionId, notifyParticipant);
+            case "checkroom" -> checkRoom(activityId, participantId, executionId, notifyParticipant);
+            case "leaveroom" -> leaveRoom(activityId, participantId, notifyParticipant);
             default -> {
                 log.warn("[ENVIRONMENTAL] Unknown action '{}' for activity {} -> action-check fails", action, activityId);
                 yield false;
             }
+        };
+    }
+
+    /**
+     * Dedicated action handler for turning lights on.
+     * Notification and guard evaluation are intentionally separate and ordered.
+     */
+    private boolean turnLightsOn(String activityId, String participantId, String executionId, boolean notifyParticipant) {
+        if (notifyParticipant) {
+            notifyTurnLightsOn(executionId, participantId);
+        }
+        return isTurnLightsOnSatisfied(activityId, participantId);
+    }
+
+    /**
+     * Dedicated action handler for turning lights off.
+     * Notification and guard evaluation are intentionally separate and ordered.
+     */
+    private boolean turnLightsOff(String activityId, String participantId, String executionId, boolean notifyParticipant) {
+        if (notifyParticipant) {
+            notifyTurnLightsOff(executionId, participantId);
+        }
+        return isTurnLightsOffSatisfied(activityId, participantId);
+    }
+
+    /**
+     * Dedicated action handler for room cleaning.
+     * Notification and guard evaluation are intentionally separate and ordered.
+     */
+    private boolean cleanRoom(String activityId, String participantId, String executionId, boolean notifyParticipant) {
+        if (notifyParticipant) {
+            notifyCleanRoom(executionId, participantId);
+        }
+        return isCleanRoomSatisfied(activityId, participantId);
+    }
+
+    /**
+     * Dedicated action handler for room checking.
+     * Notification and guard evaluation are intentionally separate and ordered.
+     */
+    private boolean checkRoom(String activityId, String participantId, String executionId, boolean notifyParticipant) {
+        if (notifyParticipant) {
+            notifyCheckRoom(executionId, participantId);
+        }
+        return isCheckRoomSatisfied(activityId, participantId);
+    }
+
+    private void notifyTurnLightsOn(String executionId, String participantId) {
+        notifyParticipantAction(executionId, participantId, "turnLightsOn", "Turn the lights on");
+    }
+
+    private boolean isTurnLightsOnSatisfied(String activityId, String participantId) {
+        return evaluateGuard("myPlace().light == on", activityId + "#action:turnLightsOn", participantId);
+    }
+
+    private void notifyTurnLightsOff(String executionId, String participantId) {
+        notifyParticipantAction(executionId, participantId, "turnLightsOff", "Turn the lights off");
+    }
+
+    private boolean isTurnLightsOffSatisfied(String activityId, String participantId) {
+        return evaluateGuard("myPlace().light == off", activityId + "#action:turnLightsOff", participantId);
+    }
+
+    private void notifyCleanRoom(String executionId, String participantId) {
+        notifyParticipantAction(executionId, participantId, "cleanRoom", "Clean the room");
+    }
+
+    private boolean isCleanRoomSatisfied(String activityId, String participantId) {
+        return evaluateGuard("myPlace().state == clean", activityId + "#action:cleanRoom", participantId);
+    }
+
+    private void notifyCheckRoom(String executionId, String participantId) {
+        notifyParticipantAction(executionId, participantId, "checkRoom", "Check the room");
+    }
+
+    private boolean isCheckRoomSatisfied(String activityId, String participantId) {
+        return evaluateGuard("myPlace().state != null", activityId + "#action:checkRoom", participantId);
+    }
+
+    /**
+     * leaveRoom is a system action.
+     * Read-only checks must not mutate state; execution clears the current place state on a
+     * best-effort basis and always completes the task.
+     */
+    private boolean leaveRoom(String activityId, String participantId, boolean execute) {
+        if (!execute) {
+            log.debug("[ENVIRONMENTAL] leaveRoom check-only (no side effects) | activity={} | participant={}",
+                    activityId, participantId);
+            return true;
+        }
+
+        // Execute path — best-effort cleanup, always returns true.
+        if (participantId == null || participantId.isBlank()) {
+            log.warn("[ENVIRONMENTAL] leaveRoom: participantId missing for activity {} — completing without cleanup", activityId);
+            return true;
+        }
+
+        String placeRef = participantDataService.getParticipant(participantId)
+                .map(p -> p.getPosition())
+                .orElse(null);
+
+        if (placeRef != null && !placeRef.isBlank()) {
+            String placeId = environmentDataService.resolvePhysicalPlaceId(placeRef).orElse(placeRef);
+            environmentDataService.getPhysicalPlace(placeId).ifPresentOrElse(
+                    place -> {
+                        if (place.getAttributes() != null) {
+                            place.getAttributes().put("state", null);
+                            log.info("[ENVIRONMENTAL] leaveRoom executed | activity={} | participant={} | place={} | state=null",
+                                    activityId, participantId, place.getId());
+                        } else {
+                            log.debug("[ENVIRONMENTAL] leaveRoom: place '{}' has no attributes map — skipping | activity={}",
+                                    placeId, activityId);
+                        }
+                    },
+                    () -> log.info("[ENVIRONMENTAL] leaveRoom: place '{}' not found — skipping | activity={} | participant={}",
+                            placeId, activityId, participantId)
+            );
+        } else {
+            log.info("[ENVIRONMENTAL] leaveRoom: participant '{}' has no current position — skipping state update | activity={}",
+                    participantId, activityId);
+        }
+
+        return true;
+    }
+
+    private void notifyParticipantAction(String executionId,
+                                         String participantId,
+                                         String actionKey,
+                                         String message) {
+        if (executionId == null || executionId.isBlank() || participantId == null || participantId.isBlank()) {
+            return;
+        }
+
+        String dedupKey = executionId + ":" + actionKey.toLowerCase();
+        if (sentActionNotifications.putIfAbsent(dedupKey, Boolean.TRUE) != null) {
+            return;
+        }
+
+        String businessKey = resolveBusinessKeyForExecution(executionId);
+        if (businessKey == null || businessKey.isBlank()) {
+            log.warn("[ENVIRONMENTAL] Cannot notify participant '{}' for action '{}' because businessKey is unavailable (execution={})",
+                    participantId, actionKey, executionId);
+            return;
+        }
+
+        String userId = userParticipantMappingService.getUserForParticipant(businessKey, participantId);
+        if (userId == null || userId.isBlank()) {
+            log.info("[ENVIRONMENTAL] Participant '{}' has no mapped user for businessKey '{}' (action='{}')",
+                    participantId, businessKey, actionKey);
+            return;
+        }
+
+        Map<String, Object> payload = new LinkedHashMap<>();
+        payload.put("executionId", executionId);
+        payload.put("participantId", participantId);
+        payload.put("action", actionKey);
+        payload.put("message", message);
+
+        webSocketSessionManager.broadcastToUser(
+                userId,
+                GpsResponse.success("ACTION_REQUIRED", message, payload),
+                null
+        );
+
+        log.info("[ENVIRONMENTAL] Sent action notification | userId={} | participantId={} | action={} | execution={}",
+                userId, participantId, actionKey, executionId);
+    }
+
+    private String resolveBusinessKeyForExecution(String executionId) {
+        try {
+            Execution execution = runtimeService.createExecutionQuery()
+                    .executionId(executionId)
+                    .singleResult();
+            if (execution == null || execution.getProcessInstanceId() == null) {
+                return null;
+            }
+
+            ProcessInstance processInstance = runtimeService.createProcessInstanceQuery()
+                    .processInstanceId(execution.getProcessInstanceId())
+                    .singleResult();
+            return processInstance != null ? processInstance.getBusinessKey() : null;
+        } catch (Exception e) {
+            log.warn("[ENVIRONMENTAL] Failed to resolve businessKey for execution {}: {}", executionId, e.getMessage());
+            return null;
+        }
+    }
+
+    private void clearNotificationMarkersForExecution(String executionId) {
+        if (executionId == null || executionId.isBlank()) {
+            return;
+        }
+        String prefix = executionId + ":";
+        for (String key : new HashSet<>(sentActionNotifications.keySet())) {
+            if (key.startsWith(prefix)) {
+                sentActionNotifications.remove(key);
+            }
+        }
+    }
+
+    private String toHumanReadableAction(String action) {
+        if (action == null || action.isBlank()) {
+            return "Action not specified";
+        }
+
+        return switch (action.trim().toLowerCase()) {
+            case "turnlightson" -> "Turn the lights on";
+            case "turnlightsoff" -> "Turn the lights off";
+            case "cleanroom" -> "Clean the room";
+            case "checkroom" -> "Check the room";
+            case "leaveroom" -> "Leave the room";
+            default -> "Execute action: " + action;
         };
     }
 
@@ -295,9 +581,16 @@ public class EnvironmentalTaskRegistry {
             return ActionCheckResult.SATISFIED;
         }
 
-        boolean actionSatisfied = evaluateActionGuard(action, activityId, taskInfo.participantId());
+        boolean actionSatisfied = evaluateActionGuard(
+                action,
+                activityId,
+                taskInfo.participantId(),
+                executionId,
+                true
+        );
         if (actionSatisfied) {
             actionTimerStartByExecutionId.remove(executionId);
+            clearNotificationMarkersForExecution(executionId);
             return ActionCheckResult.SATISFIED;
         }
 

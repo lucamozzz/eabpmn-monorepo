@@ -14,7 +14,11 @@ import org.unicam.intermediate.models.dto.Response;
 import org.unicam.intermediate.models.pojo.PhysicalPlace;
 import org.unicam.intermediate.models.pojo.Participant;
 import org.unicam.intermediate.service.environmental.EnvironmentDataService;
+import org.unicam.intermediate.service.environmental.EnvironmentalTaskRegistry;
 import org.unicam.intermediate.service.environmental.SensorDataService;
+import org.unicam.intermediate.service.environmental.binding.BindingTaskRegistry;
+import org.unicam.intermediate.service.environmental.movement.MovementTaskRegistry;
+import org.unicam.intermediate.service.environmental.unbinding.UnbindingTaskRegistry;
 import org.unicam.intermediate.service.participant.ParticipantDataService;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +32,10 @@ public class EnvironmentController {
 
     private final EnvironmentDataService environmentDataService;
     private final ParticipantDataService participantDataService;
+    private final EnvironmentalTaskRegistry environmentalTaskRegistry;
+    private final MovementTaskRegistry movementTaskRegistry;
+    private final BindingTaskRegistry bindingTaskRegistry;
+    private final UnbindingTaskRegistry unbindingTaskRegistry;
     private final SensorDataService sensorDataService;
 
     @GetMapping("/pp")
@@ -67,12 +75,13 @@ public class EnvironmentController {
                         .body(Response.error("Physical place not found: " + id));
             }
 
-            Optional<Object> attributeValue = environmentDataService.getPhysicalPlaceAttribute(id, key);
-            if (attributeValue.isEmpty()) {
+            if (!environmentDataService.hasPhysicalPlaceAttribute(id, key)) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                         .body(Response.error("Attribute not found: " + key));
             }
-            return ResponseEntity.ok(Response.ok(attributeValue.get()));
+
+            Optional<Object> attributeValue = environmentDataService.getPhysicalPlaceAttribute(id, key);
+            return ResponseEntity.ok(Response.ok(attributeValue.orElse(null)));
         } catch (Exception e) {
             log.error("[Environment API] Failed to retrieve attribute '{}' for place: {}", key, id, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -126,6 +135,28 @@ public class EnvironmentController {
             log.error("[Environment API] Failed to retrieve position for participant: {}", id, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Response.error("Failed to retrieve position: " + e.getMessage()));
+        }
+    }
+
+    @GetMapping("/participants/{id}/actions/pending")
+    public ResponseEntity<Response<List<Map<String, String>>>> getPendingParticipantActions(@PathVariable String id) {
+        try {
+            Optional<Participant> participant = participantDataService.getParticipant(id);
+            if (participant.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(Response.error("Participant not found: " + id));
+            }
+
+            List<Map<String, String>> pendingActions = new java.util.ArrayList<>();
+            pendingActions.addAll(environmentalTaskRegistry.getPendingActionsForParticipant(id));
+            pendingActions.addAll(movementTaskRegistry.getPendingMovementsForParticipant(id));
+            pendingActions.addAll(bindingTaskRegistry.getPendingBindingsForParticipant(id));
+            pendingActions.addAll(unbindingTaskRegistry.getPendingUnbindingsForParticipant(id));
+            return ResponseEntity.ok(Response.ok(pendingActions));
+        } catch (Exception e) {
+            log.error("[Environment API] Failed to retrieve pending actions for participant: {}", id, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Response.error("Failed to retrieve pending actions: " + e.getMessage()));
         }
     }
 

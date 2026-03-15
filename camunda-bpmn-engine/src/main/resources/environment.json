@@ -12,7 +12,7 @@
       "attributes": {
         "purpose": "tutorsroom",
         "occupied": null,
-        "light": null,
+        "lights": null,
         "state": null,
         "isRaining": null
       }
@@ -29,8 +29,8 @@
       "attributes": {
         "purpose": "meetings",
         "occupied": false,
-        "light": null,
-        "state": null,
+        "lights": null,
+        "state": "clean",
         "isRaining": null
       }
     },
@@ -46,7 +46,7 @@
       "attributes": {
         "purpose": "phd",
         "occupied": null,
-        "light": null,
+        "lights": null,
         "state": null,
         "isRaining": null
       }
@@ -63,7 +63,7 @@
       "attributes": {
         "purpose": "teaching",
         "occupied": null,
-        "light": null,
+        "lights": null,
         "state": null,
         "isRaining": null
       }
@@ -80,7 +80,7 @@
       "attributes": {
         "purpose": "teaching",
         "occupied": null,
-        "light": null,
+        "lights": null,
         "state": null,
         "isRaining": null
       }
@@ -97,7 +97,7 @@
       "attributes": {
         "purpose": "studying",
         "occupied": null,
-        "light": null,
+        "lights": null,
         "state": null,
         "isRaining": null
       }
@@ -114,7 +114,7 @@
       "attributes": {
         "purpose": "studying",
         "occupied": null,
-        "light": null,
+        "lights": null,
         "state": null,
         "isRaining": null
       }
@@ -131,7 +131,7 @@
       "attributes": {
         "purpose": "studying",
         "occupied": null,
-        "light": null,
+        "lights": null,
         "state": null,
         "isRaining": null
       }
@@ -148,7 +148,7 @@
       "attributes": {
         "purpose": "teaching",
         "occupied": null,
-        "light": null,
+        "lights": null,
         "state": null,
         "isRaining": null
       }
@@ -165,7 +165,7 @@
       "attributes": {
         "purpose": "teaching",
         "occupied": null,
-        "light": null,
+        "lights": null,
         "state": null,
         "isRaining": null
       }
@@ -182,7 +182,7 @@
       "attributes": {
         "purpose": "teaching",
         "occupied": null,
-        "light": null,
+        "lights": null,
         "state": null,
         "isRaining": null
       }
@@ -199,8 +199,8 @@
       "attributes": {
         "purpose": "studying",
         "occupied": null,
-        "light": null,
-        "state": null,
+        "lights": null,
+        "state": "clean",
         "isRaining": null
       }
     },
@@ -216,7 +216,7 @@
       "attributes": {
         "purpose": "tutor",
         "occupied": null,
-        "light": null,
+        "lights": null,
         "state": null,
         "isRaining": null
       }
@@ -233,7 +233,7 @@
       "attributes": {
         "purpose": "studying",
         "occupied": null,
-        "light": null,
+        "lights": null,
         "state": null,
         "isRaining": null
       }
@@ -250,7 +250,7 @@
       "attributes": {
         "purpose": "teaching",
         "occupied": null,
-        "light": null,
+        "lights": null,
         "state": null,
         "isRaining": null
       }
@@ -267,7 +267,7 @@
       "attributes": {
         "purpose": "teaching",
         "occupied": null,
-        "light": null,
+        "lights": null,
         "state": null,
         "isRaining": null
       }
@@ -569,6 +569,11 @@
                   "attribute": "occupied",
                   "operator": "==",
                   "value": false
+              },
+              {
+                  "attribute": "state",
+                  "operator": "!=",
+                  "value": "dirty"
               }
           ]
       },
@@ -591,6 +596,11 @@
                   "attribute": "state",
                   "operator": "==",
                   "value": "dirty"
+              },
+              {
+                  "attribute": "occupied",
+                  "operator": "==",
+                  "value": false
               }
           ]
       },
