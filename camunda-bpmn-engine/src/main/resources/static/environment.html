@@ -20,18 +20,20 @@
       --err: #b42318;
       --accent: #0b5fff;
       --border: #d6deeb;
+      --map-height: 620px;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
+      min-height: 100dvh;
       font-family: "Segoe UI", Tahoma, sans-serif;
       color: var(--text);
       background: radial-gradient(circle at top right, #e9f0ff 0%, var(--bg) 42%);
     }
     .wrap {
-      max-width: 1200px;
+      width: min(1400px, 100%);
       margin: 0 auto;
-      padding: 20px 16px 40px;
+      padding: clamp(10px, 2vw, 20px) clamp(10px, 2vw, 16px) 24px;
     }
     h1 {
       margin: 0;
@@ -50,7 +52,7 @@
     }
     .layout {
       display: grid;
-      grid-template-columns: 2fr 0.9fr;
+      grid-template-columns: minmax(0, 2fr) minmax(300px, 0.95fr);
       gap: 14px;
       align-items: start;
     }
@@ -70,10 +72,10 @@
     }
     #map {
       width: 100%;
-      height: 620px;
+      height: var(--map-height);
     }
     .side-column {
-      height: 620px;
+      height: var(--map-height);
       display: flex;
       flex-direction: column;
       gap: 12px;
@@ -166,14 +168,18 @@
       padding: 18px;
       color: var(--muted);
     }
-    @media (max-width: 980px) {
+    @media (max-width: 1120px) {
       .layout { grid-template-columns: 1fr; }
       .side-column { height: auto; }
-      .panel { min-height: 220px; }
+      .panel { min-height: clamp(180px, 30vh, 260px); }
     }
 
     @media (max-width: 700px) {
-      #map { height: 300px; }
+      .wrap { padding-bottom: 16px; }
+      .top { margin-bottom: 8px; }
+      h1 { font-size: 22px; }
+      .panel-header { font-size: 13px; }
+      .card h2 { font-size: 13px; }
     }
   </style>
 </head>
@@ -235,6 +241,39 @@
     const polygonsByPlaceId = new Map();
     const placeCentersById = new Map();
     map.setView([43.1376, 13.0746], 16);
+
+    function invalidateMapSize() {
+      if (!map) {
+        return;
+      }
+      map.invalidateSize();
+    }
+
+    function updateViewportResponsiveHeights() {
+      const vh = window.innerHeight || document.documentElement.clientHeight || 800;
+      const isStackedLayout = window.matchMedia("(max-width: 1120px)").matches;
+
+      let mapHeight;
+      if (isStackedLayout) {
+        mapHeight = Math.max(260, Math.min(460, Math.round(vh * 0.44)));
+      } else {
+        mapHeight = Math.max(420, Math.min(980, Math.round(vh * 0.78)));
+      }
+
+      document.documentElement.style.setProperty("--map-height", mapHeight + "px");
+      invalidateMapSize();
+    }
+
+    let resizeTimer = null;
+    window.addEventListener("resize", () => {
+      if (resizeTimer) {
+        clearTimeout(resizeTimer);
+      }
+      resizeTimer = setTimeout(updateViewportResponsiveHeights, 120);
+    });
+    window.addEventListener("orientationchange", () => {
+      setTimeout(updateViewportResponsiveHeights, 200);
+    });
 
     const EDGE_STYLE = {
       color: "#e6d86a",
@@ -459,6 +498,7 @@
       }
 
       if (bounds.length > 0) {
+        invalidateMapSize();
         map.fitBounds(bounds, { padding: [20, 20] });
       }
 
@@ -588,6 +628,7 @@
       }
     }
 
+    updateViewportResponsiveHeights();
     fetchEnvironment();
     setInterval(fetchEnvironment, REFRESH_MS);
   </script>
