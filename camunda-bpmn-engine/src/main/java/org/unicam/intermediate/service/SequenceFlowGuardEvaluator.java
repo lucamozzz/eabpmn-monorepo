@@ -1,6 +1,7 @@
 package org.unicam.intermediate.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.RepositoryService;
 import org.camunda.bpm.model.bpmn.instance.ExtensionElements;
@@ -29,15 +30,18 @@ public class SequenceFlowGuardEvaluator {
 
     private final EnvironmentDataService environmentDataService;
     private final RepositoryService repositoryService;
+    private final RuntimeService runtimeService;
     private final ParticipantDataService participantDataService;
     private final ParticipantService participantService;
 
     public SequenceFlowGuardEvaluator(EnvironmentDataService environmentDataService,
                                       RepositoryService repositoryService,
+                                      RuntimeService runtimeService,
                                       ParticipantDataService participantDataService,
                                       ParticipantService participantService) {
         this.environmentDataService = environmentDataService;
         this.repositoryService = repositoryService;
+        this.runtimeService = runtimeService;
         this.participantDataService = participantDataService;
         this.participantService = participantService;
     }
@@ -63,11 +67,44 @@ public class SequenceFlowGuardEvaluator {
             participantId = String.valueOf(runtimeParticipant);
         }
 
+        // Fallback: resolve participant from collaboration/process context.
+        if (participantId == null || participantId.isBlank()) {
+            try {
+                org.unicam.intermediate.models.Participant resolvedParticipant = participantService.resolveCurrentParticipant(execution);
+                if (resolvedParticipant != null) {
+                    participantId = resolvedParticipant.getId();
+                }
+            } catch (Exception ex) {
+                log.debug("[SequenceFlowGuardEvaluator] Could not resolve participant from execution context", ex);
+            }
+        }
+
         return evaluateGuard(execution.getProcessDefinitionId(), sequenceFlowId, participantId);
     }
 
     public Boolean evaluateGuard(String processDefinitionId, String sequenceFlowId) {
         return evaluateGuard(processDefinitionId, sequenceFlowId, null);
+    }
+
+    public Boolean evaluateGuard(String processDefinitionId,
+                                String sequenceFlowId,
+                                String participantId,
+                                String executionId) {
+        String effectiveParticipantId = participantId;
+
+        if ((effectiveParticipantId == null || effectiveParticipantId.isBlank())
+                && executionId != null && !executionId.isBlank()) {
+            try {
+                Object runtimeParticipant = runtimeService.getVariable(executionId, "participantId");
+                if (runtimeParticipant != null) {
+                    effectiveParticipantId = String.valueOf(runtimeParticipant);
+                }
+            } catch (Exception ex) {
+                log.debug("[SequenceFlowGuardEvaluator] Could not read participantId from execution {}", executionId, ex);
+            }
+        }
+
+        return evaluateGuard(processDefinitionId, sequenceFlowId, effectiveParticipantId);
     }
 
     public Boolean evaluateGuard(String processDefinitionId, String sequenceFlowId, String participantId) {
@@ -152,7 +189,14 @@ public class SequenceFlowGuardEvaluator {
             return true;
         }
 
-        String resolvedExpression = resolveMyPlace(guardExpression, participantId, sourceId);
+        String resolvedExpression = resolveMyPlace(guardExpression, processDefinitionId, participantId, sourceId);
+        if (guardExpression.contains("myPlace()") && resolvedExpression.contains("myPlace()")) {
+            log.warn("[SequenceFlowGuardEvaluator] Could not resolve myPlace() for {} | participantId={} | processDefinitionId={} | expression='{}'",
+                sourceId,
+                participantId,
+                processDefinitionId,
+                guardExpression);
+        }
 
         Matcher matcher = GUARD_PATTERN.matcher(resolvedExpression.trim());
         if (!matcher.matches()) {
@@ -255,7 +299,7 @@ public class SequenceFlowGuardEvaluator {
         };
     }
 
-    private String resolveMyPlace(String expression, String participantId, String sourceId) {
+    private String resolveMyPlace(String expression, String processDefinitionId, String participantId, String sourceId) {
         if (expression == null || !expression.contains("myPlace()")) {
             return expression;
         }
@@ -265,21 +309,34 @@ public class SequenceFlowGuardEvaluator {
             return expression;
         }
 
-        return participantDataService.getParticipant(participantId)
-                .map(participant -> {
-                    String position = participant.getPosition();
-                    if (position == null || position.isBlank()) {
-                        log.warn("[SequenceFlowGuardEvaluator] myPlace() used but participant '{}' has no position for {}",
-                                participantId, sourceId);
-                        return expression;
-                    }
-                    return expression.replace("myPlace()", position);
-                })
-                .orElseGet(() -> {
-                    log.warn("[SequenceFlowGuardEvaluator] myPlace() used but participant '{}' not found for {}",
+        Optional<org.unicam.intermediate.models.pojo.Participant> participantOpt = participantDataService.getParticipant(participantId);
+
+        if (participantOpt.isEmpty()) {
+            String participantName = participantService.getParticipantName(processDefinitionId, participantId);
+            if (participantName != null && !participantName.equals(participantId)) {
+                participantOpt = participantDataService.getParticipantByName(participantName);
+                if (participantOpt.isPresent()) {
+                    log.debug("[SequenceFlowGuardEvaluator] Resolved runtime participant by name '{}' for BPMN id '{}' on {}",
+                            participantName, participantId, sourceId);
+                }
+            }
+        }
+
+        return participantOpt
+            .map(participant -> {
+                String position = participant.getPosition();
+                if (position == null || position.isBlank()) {
+                    log.warn("[SequenceFlowGuardEvaluator] myPlace() used but participant '{}' has no position for {}",
                             participantId, sourceId);
                     return expression;
-                });
+                }
+                return expression.replace("myPlace()", position);
+            })
+            .orElseGet(() -> {
+                log.warn("[SequenceFlowGuardEvaluator] myPlace() used but participant '{}' not found for {}",
+                        participantId, sourceId);
+                return expression;
+            });
     }
 
     private boolean compare(Object actualValue, String operator, String expectedRaw) {

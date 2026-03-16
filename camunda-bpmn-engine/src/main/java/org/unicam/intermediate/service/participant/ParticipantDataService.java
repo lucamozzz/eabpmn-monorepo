@@ -80,6 +80,20 @@ public class ParticipantDataService {
     }
 
     /**
+     * Get a participant by name (case-insensitive).
+     */
+    public Optional<Participant> getParticipantByName(String name) {
+        if (name == null || name.isBlank()) {
+            return Optional.empty();
+        }
+
+        return participantsMap.values().stream()
+                .filter(participant -> participant.getName() != null
+                        && participant.getName().equalsIgnoreCase(name.trim()))
+                .findFirst();
+    }
+
+    /**
      * Update a participant's position.
      */
     public void updateParticipantPosition(String id, String position) {

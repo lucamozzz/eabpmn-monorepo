@@ -55,13 +55,29 @@ public class ExclusiveGatewayGuardRegistry {
         }
     }
 
+    public void removeGateway(String executionId, String expectedGatewayId) {
+        if (executionId == null || expectedGatewayId == null) {
+            return;
+        }
+
+        GatewayWaitInfo current = activeGateways.get(executionId);
+        if (current == null || !expectedGatewayId.equals(current.gatewayId())) {
+            return;
+        }
+
+        if (activeGateways.remove(executionId, current)) {
+            log.info("[ExclusiveGatewayRegistry] Removed gateway {} (execution={})",
+                    current.gatewayId(), executionId);
+        }
+    }
+
     @Scheduled(fixedRate = 2000)
     public void checkWaitingGateways() {
         if (activeGateways.isEmpty()) {
             return;
         }
 
-        List<String> completedExecutions = new ArrayList<>();
+        List<GatewayWaitInfo> completedGateways = new ArrayList<>();
 
         for (GatewayWaitInfo gatewayInfo : activeGateways.values()) {
             String selectedFlowId = selectFirstSatisfiedFlow(gatewayInfo);
@@ -72,7 +88,7 @@ public class ExclusiveGatewayGuardRegistry {
             try {
                 runtimeService.setVariable(gatewayInfo.executionId(), SELECTED_FLOW_VAR, selectedFlowId);
                 runtimeService.signal(gatewayInfo.executionId());
-                completedExecutions.add(gatewayInfo.executionId());
+                completedGateways.add(gatewayInfo);
 
                 log.info("[ExclusiveGatewayRegistry] Signaled gateway {} (execution={}) with selected flow {}",
                         gatewayInfo.gatewayId(), gatewayInfo.executionId(), selectedFlowId);
@@ -82,7 +98,8 @@ public class ExclusiveGatewayGuardRegistry {
             }
         }
 
-        completedExecutions.forEach(this::removeGateway);
+        completedGateways.forEach(gatewayInfo ->
+            removeGateway(gatewayInfo.executionId(), gatewayInfo.gatewayId()));
     }
 
     private String selectFirstSatisfiedFlow(GatewayWaitInfo gatewayInfo) {
@@ -90,7 +107,8 @@ public class ExclusiveGatewayGuardRegistry {
             boolean satisfied = sequenceFlowGuardEvaluator.evaluateGuard(
                     gatewayInfo.processDefinitionId(),
                     flowId,
-                    gatewayInfo.participantId());
+                    gatewayInfo.participantId(),
+                    gatewayInfo.executionId());
             if (satisfied) {
                 return flowId;
             }

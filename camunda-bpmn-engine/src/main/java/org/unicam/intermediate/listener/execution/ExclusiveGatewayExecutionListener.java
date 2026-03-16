@@ -37,7 +37,7 @@ public class ExclusiveGatewayExecutionListener implements ExecutionListener {
         if (EVENTNAME_START.equals(execution.getEventName())) {
             onStart(execution);
         } else if (EVENTNAME_END.equals(execution.getEventName())) {
-            exclusiveGatewayGuardRegistry.removeGateway(execution.getId());
+            exclusiveGatewayGuardRegistry.removeGateway(execution.getId(), execution.getCurrentActivityId());
         }
     }
 
