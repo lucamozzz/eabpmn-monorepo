@@ -169,6 +169,17 @@ public class SequenceFlowGuardEvaluator {
             return evaluateParticipantPosition(processDefinitionId, reference, operator, expectedRaw, sourceId);
         }
 
+        Optional<String> logicalPlaceId = environmentDataService.resolveLogicalPlaceId(reference);
+        if (logicalPlaceId.isPresent()) {
+            Optional<Object> logicalGuardValue = resolveLogicalPlaceGuardValue(logicalPlaceId.get(), attributeKey);
+            if (logicalGuardValue.isPresent()) {
+                boolean result = compare(logicalGuardValue.get(), operator, expectedRaw);
+                log.debug("[SequenceFlowGuardEvaluator] Logical guard evaluation | source={} | logical='{}' | attr='{}' | actual='{}' | op='{}' | expected='{}' -> {}",
+                        sourceId, logicalPlaceId.get(), attributeKey, logicalGuardValue.get(), operator, expectedRaw, result);
+                return result;
+            }
+        }
+
         Optional<Object> actualValueOpt = environmentDataService.getPhysicalPlaceAttribute(reference, attributeKey);
         if (actualValueOpt.isEmpty()) {
             log.debug("[SequenceFlowGuardEvaluator] Attribute '{}.{}' not found for {}", reference, attributeKey, sourceId);
@@ -229,6 +240,20 @@ public class SequenceFlowGuardEvaluator {
 
         return result;
         }
+
+    private Optional<Object> resolveLogicalPlaceGuardValue(String logicalPlaceId, String attributeKey) {
+        if (attributeKey == null || attributeKey.isBlank()) {
+            return Optional.empty();
+        }
+
+        int count = environmentDataService.countPhysicalPlacesInLogicalPlace(logicalPlaceId);
+        return switch (attributeKey.trim().toLowerCase()) {
+            case "empty", "isempty" -> Optional.of(count == 0);
+            case "nonempty", "isnotempty" -> Optional.of(count > 0);
+            case "count", "size" -> Optional.of(count);
+            default -> Optional.empty();
+        };
+    }
 
     private String resolveMyPlace(String expression, String participantId, String sourceId) {
         if (expression == null || !expression.contains("myPlace()")) {

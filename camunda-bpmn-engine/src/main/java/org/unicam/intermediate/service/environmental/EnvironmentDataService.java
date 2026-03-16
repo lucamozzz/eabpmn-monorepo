@@ -285,6 +285,22 @@ public class EnvironmentDataService {
         return true;
     }
 
+    public int countPhysicalPlacesInLogicalPlace(String logicalPlaceReference) {
+        if (logicalPlaceReference == null || logicalPlaceReference.isBlank()) {
+            return 0;
+        }
+
+        Optional<String> logicalPlaceIdOpt = resolveLogicalPlaceId(logicalPlaceReference);
+        if (logicalPlaceIdOpt.isEmpty()) {
+            return 0;
+        }
+
+        String logicalPlaceId = logicalPlaceIdOpt.get();
+        return (int) getPhysicalPlaces().stream()
+                .filter(physicalPlace -> isPhysicalPlaceInLogicalPlace(physicalPlace.getId(), logicalPlaceId))
+                .count();
+    }
+
     private boolean compareCondition(Object actualValue, String operator, Object expectedValue) {
         if (actualValue == null) {
             return false;

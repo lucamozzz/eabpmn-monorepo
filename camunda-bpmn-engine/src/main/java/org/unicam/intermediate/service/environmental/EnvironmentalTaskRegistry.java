@@ -246,6 +246,17 @@ public class EnvironmentalTaskRegistry {
             return evaluateParticipantPosition(reference, operator, expectedRaw, activityId, executionId);
         }
 
+        Optional<String> logicalPlaceId = environmentDataService.resolveLogicalPlaceId(reference);
+        if (logicalPlaceId.isPresent()) {
+            Optional<Object> logicalGuardValue = resolveLogicalPlaceGuardValue(logicalPlaceId.get(), attributeKey);
+            if (logicalGuardValue.isPresent()) {
+                boolean result = compare(logicalGuardValue.get(), operator, expectedRaw);
+                log.debug("[ENVIRONMENTAL] Logical guard evaluation | activity={} | logical='{}' | attr='{}' | actual='{}' | op='{}' | expected='{}' -> {}",
+                        activityId, logicalPlaceId.get(), attributeKey, logicalGuardValue.get(), operator, expectedRaw, result);
+                return result;
+            }
+        }
+
         Optional<Object> actualValueOpt = environmentDataService.getPhysicalPlaceAttribute(reference, attributeKey);
         if (actualValueOpt.isEmpty()) {
             log.debug("[ENVIRONMENTAL] Attribute '{}.{}' not found for activity {}", reference, attributeKey, activityId);
@@ -402,6 +413,20 @@ public class EnvironmentalTaskRegistry {
             return raw.substring(1, raw.length() - 1).trim();
         }
         return raw;
+    }
+
+    private Optional<Object> resolveLogicalPlaceGuardValue(String logicalPlaceId, String attributeKey) {
+        if (attributeKey == null || attributeKey.isBlank()) {
+            return Optional.empty();
+        }
+
+        int count = environmentDataService.countPhysicalPlacesInLogicalPlace(logicalPlaceId);
+        return switch (attributeKey.trim().toLowerCase()) {
+            case "empty", "isempty" -> Optional.of(count == 0);
+            case "nonempty", "isnotempty" -> Optional.of(count > 0);
+            case "count", "size" -> Optional.of(count);
+            default -> Optional.empty();
+        };
     }
 
     private boolean evaluateActionGuard(String action,

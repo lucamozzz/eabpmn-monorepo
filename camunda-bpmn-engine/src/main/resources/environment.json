@@ -284,9 +284,9 @@
       ],
       "attributes": {
         "purpose": "teaching",
-        "occupied": null,
+        "occupied": false,
         "lights": null,
-        "state": null,
+        "state": "dirty",
         "isRaining": null
       }
     },
@@ -869,6 +869,11 @@
           "attribute": "state",
           "operator": "==",
           "value": null
+        },
+        {
+          "attribute": "purpose",
+          "operator": "!=",
+          "value": "parking"
         }
       ]
     }
