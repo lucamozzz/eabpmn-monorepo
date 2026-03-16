@@ -59,21 +59,25 @@ public class MovementExecutionListener implements ExecutionListener {
         String value = raw != null && raw.startsWith("${") && raw.endsWith("}")
                 ? String.valueOf(execution.getVariable(raw.substring(2, raw.length()-1).trim()))
                 : raw;
+        String destination = value != null
+                ? environmentDataService.resolvePhysicalPlaceId(value)
+                    .or(() -> environmentDataService.resolveLogicalPlaceId(value))
+                    .orElse(value)
+                : null;
 
         Participant participant = participantService.resolveCurrentParticipant(execution);
-        boolean destinationIsPhysicalPlace = value != null && environmentDataService.getPhysicalPlace(value).isPresent();
-        boolean destinationIsLogicalPlace = value != null && environmentDataService.getLogicalPlaces().stream()
-            .anyMatch(lp -> value.equals(lp.getId()));
+        boolean destinationIsPhysicalPlace = destination != null && environmentDataService.getPhysicalPlace(destination).isPresent();
+        boolean destinationIsLogicalPlace = destination != null && environmentDataService.resolveLogicalPlaceId(destination).isPresent();
 
         if (participant != null && destinationIsLogicalPlace) {
             List<String> matchingPhysicalPlaces = movementTaskRegistry
-                .resolveMatchingPhysicalPlaceIdsForLogicalDestination(value);
+                .resolveMatchingPhysicalPlaceIdsForLogicalDestination(destination);
 
             if (matchingPhysicalPlaces.isEmpty()) {
             throw new BpmnError(
                 "unreachableDestination",
                 String.format("Logical destination '%s' has no matching physical places for participant '%s'",
-                    value, participant.getId())
+                    destination, participant.getId())
             );
             }
         }
@@ -82,21 +86,21 @@ public class MovementExecutionListener implements ExecutionListener {
             String participantId = participant.getId();
             participantDataService.getParticipant(participantId).ifPresent(current -> {
                 String currentPosition = current.getPosition();
-                boolean reachable = environmentDataService.existsPathBetweenPhysicalPlaces(currentPosition, value);
+                boolean reachable = environmentDataService.existsPathBetweenPhysicalPlaces(currentPosition, destination);
                 if (!reachable) {
                     throw new BpmnError(
                             "unreachableDestination",
                             String.format("No path found from '%s' to '%s' for participant '%s'",
-                                    currentPosition, value, participantId)
+                                    currentPosition, destination, participantId)
                     );
                 }
             });
         }
 
-        svc.patchInstanceValue(execution, value);
+        svc.patchInstanceValue(execution, destination);
         var activityId = execution.getCurrentActivityId();
         String varKey = activityId + "." + svc.getLocalName();
-        execution.setVariable(varKey, value);
+        execution.setVariable(varKey, destination);
 
         String businessKey = execution.getBusinessKey();
 
@@ -119,11 +123,11 @@ public class MovementExecutionListener implements ExecutionListener {
                 execution.getCurrentActivityId(),
                 activityName != null ? activityName : "(unnamed)",
                 participant.toString(),
-                value != null ? value : "unknown location");
+                destination != null ? destination : "unknown location");
 
         // Registra il task nel registry per il controllo periodico
-        if (participant != null && value != null) {
-            movementTaskRegistry.registerTask(participant.getId(), execution.getId(), value);
+        if (participant != null && destination != null) {
+            movementTaskRegistry.registerTask(participant.getId(), execution.getId(), destination);
         }
     }
 

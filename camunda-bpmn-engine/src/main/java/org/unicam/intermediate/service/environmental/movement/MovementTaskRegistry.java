@@ -47,11 +47,12 @@ public class MovementTaskRegistry {
             return;
         }
 
-        MovementTaskInfo taskInfo = new MovementTaskInfo(executionId, destination, participantId);
+        String normalizedDestination = resolveDestinationReference(destination);
+        MovementTaskInfo taskInfo = new MovementTaskInfo(executionId, normalizedDestination, participantId);
         activeMovementTasks.put(participantId, taskInfo);
         
         log.info("[MovementRegistry] Registered movement task | Participant: {} | Destination: {} | ExecutionId: {}",
-                participantId, destination, executionId);
+            participantId, normalizedDestination, executionId);
     }
 
     /**
@@ -103,14 +104,16 @@ public class MovementTaskRegistry {
             return "destination";
         }
 
-        Optional<PhysicalPlace> physicalPlace = environmentDataService.getPhysicalPlace(destination);
+        String resolvedDestination = resolveDestinationReference(destination);
+
+        Optional<PhysicalPlace> physicalPlace = environmentDataService.getPhysicalPlace(resolvedDestination);
         if (physicalPlace.isPresent()) {
             String name = physicalPlace.get().getName();
             return name != null && !name.isBlank() ? name : physicalPlace.get().getId();
         }
 
         Optional<LogicalPlace> logicalPlace = environmentDataService.getLogicalPlaces().stream()
-                .filter(lp -> destination.equals(lp.getId()))
+                .filter(lp -> resolvedDestination.equals(lp.getId()))
                 .findFirst();
 
         if (logicalPlace.isPresent()) {
@@ -130,8 +133,11 @@ public class MovementTaskRegistry {
             return List.of();
         }
 
+        String resolvedDestination = environmentDataService.resolveLogicalPlaceId(destination)
+                .orElse(destination);
+
         Optional<LogicalPlace> logicalDestination = environmentDataService.getLogicalPlaces().stream()
-                .filter(lp -> destination.equals(lp.getId()))
+                .filter(lp -> resolvedDestination.equals(lp.getId()))
                 .findFirst();
 
         if (logicalDestination.isEmpty()) {
@@ -206,19 +212,33 @@ public class MovementTaskRegistry {
             return false;
         }
 
+        String resolvedDestination = resolveDestinationReference(destination);
+        String resolvedCurrentPosition = environmentDataService.resolvePhysicalPlaceId(currentPosition)
+                .orElse(currentPosition);
+
         Optional<LogicalPlace> logicalDestination = environmentDataService.getLogicalPlaces().stream()
-                .filter(lp -> destination.equals(lp.getId()))
+                .filter(lp -> resolvedDestination.equals(lp.getId()))
                 .findFirst();
 
         // Physical destination: keep current behavior unchanged
         if (logicalDestination.isEmpty()) {
-            return destination.equals(currentPosition);
+            return resolvedDestination.equals(resolvedCurrentPosition);
         }
 
         // Logical destination: complete when current physical place is one of the matched places
-        List<String> matchingPhysicalPlaces = resolveMatchingPhysicalPlaceIdsForLogicalDestination(destination);
+        List<String> matchingPhysicalPlaces = resolveMatchingPhysicalPlaceIdsForLogicalDestination(resolvedDestination);
 
-        return matchingPhysicalPlaces.contains(currentPosition);
+        return matchingPhysicalPlaces.contains(resolvedCurrentPosition);
+    }
+
+    private String resolveDestinationReference(String destination) {
+        if (destination == null || destination.isBlank()) {
+            return destination;
+        }
+
+        return environmentDataService.resolvePhysicalPlaceId(destination)
+                .or(() -> environmentDataService.resolveLogicalPlaceId(destination))
+                .orElse(destination);
     }
 
     private List<PhysicalPlace> resolvePhysicalPlacesForLogicalPlace(LogicalPlace logicalPlace) {

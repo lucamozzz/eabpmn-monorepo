@@ -24,6 +24,7 @@ import org.unicam.intermediate.service.environmental.BindingService;
 import org.unicam.intermediate.service.environmental.EnvironmentDataService;
 import org.unicam.intermediate.service.environmental.LocationEventService;
 import org.unicam.intermediate.service.environmental.ProximityService;
+import org.unicam.intermediate.service.environmental.movement.MovementTaskRegistry;
 import org.unicam.intermediate.service.participant.ParticipantPositionService;
 import org.unicam.intermediate.service.participant.ParticipantService;
 import org.unicam.intermediate.service.participant.UserParticipantMappingService;
@@ -56,6 +57,7 @@ public class GpsWebSocketHandler extends TextWebSocketHandler {
     private final IdentityService identityService;
     private final TaskTrackingService taskTrackingService;
     private final ParticipantService participantService;
+    private final MovementTaskRegistry movementTaskRegistry;
 
     private final ScheduledExecutorService heartbeatExecutor = Executors.newScheduledThreadPool(1);
     private final ConcurrentHashMap<String, Long> lastActivity = new ConcurrentHashMap<>();
@@ -494,12 +496,30 @@ public class GpsWebSocketHandler extends TextWebSocketHandler {
                     Object destination = runtimeService.getVariable(exe.getId(), destinationKey);
 
                     if (destination != null) {
-                        String destId = destination.toString();
+                        String destinationRef = destination.toString();
+                        String resolvedPhysicalDestination = environmentDataService.resolvePhysicalPlaceId(destinationRef)
+                            .orElse(null);
+                        String resolvedLogicalDestination = environmentDataService.resolveLogicalPlaceId(destinationRef)
+                            .orElse(null);
 
-                        // Check if we're in the destination
-                        if (environmentDataService.isLocationInPhysicalPlace(lat, lon, destId)) {
+                        boolean reachedDestination = false;
+                        String destinationForLog = destinationRef;
+
+                        if (resolvedPhysicalDestination != null) {
+                            reachedDestination = environmentDataService
+                                .isLocationInPhysicalPlace(lat, lon, resolvedPhysicalDestination);
+                            destinationForLog = resolvedPhysicalDestination;
+                        } else if (resolvedLogicalDestination != null) {
+                            reachedDestination = movementTaskRegistry
+                                .resolveMatchingPhysicalPlaceIdsForLogicalDestination(resolvedLogicalDestination)
+                                .stream()
+                                .anyMatch(placeId -> environmentDataService.isLocationInPhysicalPlace(lat, lon, placeId));
+                            destinationForLog = resolvedLogicalDestination;
+                        }
+
+                        if (reachedDestination) {
                             log.info("[GPS WS] MOVEMENT COMPLETED - User {} reached {} for task {}",
-                                    userId, destId, activityId);
+                                userId, destinationForLog, activityId);
 
                             // Signal the execution
                             runtimeService.signal(exe.getId());

@@ -9,8 +9,8 @@ import org.camunda.bpm.model.xml.instance.DomElement;
 import org.springframework.stereotype.Service;
 import org.unicam.intermediate.service.environmental.EnvironmentDataService;
 import org.unicam.intermediate.service.participant.ParticipantDataService;
+import org.unicam.intermediate.service.participant.ParticipantService;
 
-import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,19 +24,22 @@ import java.util.regex.Pattern;
 public class SequenceFlowGuardEvaluator {
 
     private static final Pattern GUARD_PATTERN = Pattern.compile(
-            "^([A-Za-z0-9_-]+)\\.([A-Za-z0-9_-]+)\\s*(==|!=|>=|<=|>|<)\\s*(.+)$"
+            "^(.+?)\\.([A-Za-z0-9_-]+)\\s*(==|!=|>=|<=|>|<)\\s*(.+)$"
     );
 
     private final EnvironmentDataService environmentDataService;
     private final RepositoryService repositoryService;
     private final ParticipantDataService participantDataService;
+    private final ParticipantService participantService;
 
     public SequenceFlowGuardEvaluator(EnvironmentDataService environmentDataService,
                                       RepositoryService repositoryService,
-                                      ParticipantDataService participantDataService) {
+                                      ParticipantDataService participantDataService,
+                                      ParticipantService participantService) {
         this.environmentDataService = environmentDataService;
         this.repositoryService = repositoryService;
         this.participantDataService = participantDataService;
+        this.participantService = participantService;
     }
 
     /**
@@ -101,7 +104,7 @@ public class SequenceFlowGuardEvaluator {
 
             // Evaluate the guard expression
             log.debug("[SequenceFlowGuardEvaluator] Evaluating guard for {}: '{}'", sequenceFlowId, guardExpression);
-            boolean result = evaluateGuardExpression(guardExpression, sequenceFlowId, participantId);
+            boolean result = evaluateGuardExpression(processDefinitionId, guardExpression, sequenceFlowId, participantId);
 
             log.info("[SequenceFlowGuardEvaluator] Guard evaluation for {} ({}): {}",
                     sequenceFlowId, guardExpression, result);
@@ -144,7 +147,7 @@ public class SequenceFlowGuardEvaluator {
     /**
      * Evaluate a guard expression like "place1.attribute == value"
      */
-    private boolean evaluateGuardExpression(String guardExpression, String sourceId, String participantId) {
+    private boolean evaluateGuardExpression(String processDefinitionId, String guardExpression, String sourceId, String participantId) {
         if (guardExpression == null || guardExpression.isBlank()) {
             return true;
         }
@@ -157,14 +160,18 @@ public class SequenceFlowGuardEvaluator {
             return false;
         }
 
-        String placeId = matcher.group(1);
+        String reference = matcher.group(1).trim();
         String attributeKey = matcher.group(2);
         String operator = matcher.group(3);
         String expectedRaw = unquote(matcher.group(4).trim());
 
-        Optional<Object> actualValueOpt = environmentDataService.getPhysicalPlaceAttribute(placeId, attributeKey);
+        if ("position".equals(attributeKey)) {
+            return evaluateParticipantPosition(processDefinitionId, reference, operator, expectedRaw, sourceId);
+        }
+
+        Optional<Object> actualValueOpt = environmentDataService.getPhysicalPlaceAttribute(reference, attributeKey);
         if (actualValueOpt.isEmpty()) {
-            log.debug("[SequenceFlowGuardEvaluator] Attribute '{}.{}' not found for {}", placeId, attributeKey, sourceId);
+            log.debug("[SequenceFlowGuardEvaluator] Attribute '{}.{}' not found for {}", reference, attributeKey, sourceId);
             return false;
         }
 
@@ -176,6 +183,52 @@ public class SequenceFlowGuardEvaluator {
 
         return result;
     }
+
+    private boolean evaluateParticipantPosition(String processDefinitionId,
+                                                String participantRef,
+                                                String operator,
+                                                String expectedPlaceRef,
+                                                String sourceId) {
+        String resolvedParticipantRef = participantService.resolveParticipantId(processDefinitionId, participantRef);
+
+        Optional<String> currentPositionOpt = participantDataService.getParticipant(resolvedParticipantRef)
+            .map(p -> p.getPosition());
+
+        if (currentPositionOpt.isEmpty() || currentPositionOpt.get() == null) {
+            log.debug("[SequenceFlowGuardEvaluator] Position check: participant '{}' not found or has no position for {}",
+                participantRef, sourceId);
+            return false;
+        }
+
+        String currentPosition = currentPositionOpt.get();
+        Optional<String> resolvedLogicalExpected = environmentDataService.resolveLogicalPlaceId(expectedPlaceRef);
+        if (resolvedLogicalExpected.isPresent()) {
+            boolean inLogicalPlace = environmentDataService.isPhysicalPlaceInLogicalPlace(currentPosition, resolvedLogicalExpected.get());
+            boolean result = switch (operator) {
+                case "==" -> inLogicalPlace;
+                case "!=" -> !inLogicalPlace;
+                default -> false;
+            };
+
+            log.debug("[SequenceFlowGuardEvaluator] Position guard (logical) | source={} | participant='{}' | position='{}' | op='{}' | expected='{}' -> {}",
+                    sourceId, resolvedParticipantRef, currentPosition, operator, resolvedLogicalExpected.get(), result);
+
+            return result;
+        }
+
+        String resolvedExpected = environmentDataService.resolvePhysicalPlaceId(expectedPlaceRef)
+            .or(() -> environmentDataService.resolveLogicalPlaceId(expectedPlaceRef))
+            .orElse(expectedPlaceRef);
+        String resolvedPosition = environmentDataService.resolvePhysicalPlaceId(currentPosition)
+            .orElse(currentPosition);
+
+        boolean result = compare(resolvedPosition, operator, resolvedExpected);
+
+        log.debug("[SequenceFlowGuardEvaluator] Position guard | source={} | participant='{}' | position='{}' | op='{}' | expected='{}' -> {}",
+            sourceId, resolvedParticipantRef, resolvedPosition, operator, resolvedExpected, result);
+
+        return result;
+        }
 
     private String resolveMyPlace(String expression, String participantId, String sourceId) {
         if (expression == null || !expression.contains("myPlace()")) {

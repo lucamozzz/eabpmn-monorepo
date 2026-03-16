@@ -521,7 +521,13 @@
           43.1391949843059
         ]
       ],
-      "attributes": {}
+      "attributes": {
+        "purpose": "parking",
+        "occupied": null,
+        "lights": null,
+        "state": null,
+        "isRaining": null
+      }
     }
   ],
   "edges": [

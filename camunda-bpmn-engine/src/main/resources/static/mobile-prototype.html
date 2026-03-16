@@ -515,11 +515,11 @@
       showResult(res);
       setStatusOk("Pending actions loaded.");
     } catch (err) {
-      const li = document.createElement("li");
-      li.className = "action-empty";
-      li.textContent = "Error loading actions: " + err.message;
-      pendingActionsList.appendChild(li);
-      setStatusErr("Failed to load pending actions: " + err.message);
+      // const li = document.createElement("li");
+      // li.className = "action-empty";
+      // li.textContent = "Error loading actions: " + err.message;
+      // pendingActionsList.appendChild(li);
+      // setStatusErr("Failed to load pending actions: " + err.message);
     }
   }
 

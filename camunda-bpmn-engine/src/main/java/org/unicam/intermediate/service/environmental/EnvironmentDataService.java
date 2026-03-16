@@ -11,6 +11,7 @@ import org.unicam.intermediate.models.pojo.EnvironmentData;
 import org.unicam.intermediate.models.pojo.Edge;
 import org.unicam.intermediate.models.pojo.PhysicalPlace;
 import org.unicam.intermediate.models.pojo.LogicalPlace;
+import org.unicam.intermediate.models.pojo.Condition;
 import org.unicam.intermediate.models.pojo.View;
 
 import jakarta.annotation.PostConstruct;
@@ -241,6 +242,85 @@ public class EnvironmentDataService {
                 .filter(p -> reference.equals(p.getId()) || reference.equalsIgnoreCase(p.getName()))
                 .map(LogicalPlace::getId)
                 .findFirst();
+    }
+
+    public boolean isPhysicalPlaceInLogicalPlace(String physicalPlaceReference, String logicalPlaceReference) {
+        if (physicalPlaceReference == null || physicalPlaceReference.isBlank()
+                || logicalPlaceReference == null || logicalPlaceReference.isBlank()) {
+            return false;
+        }
+
+        Optional<PhysicalPlace> physicalPlaceOpt = resolvePhysicalPlace(physicalPlaceReference);
+        Optional<String> logicalPlaceIdOpt = resolveLogicalPlaceId(logicalPlaceReference);
+
+        if (physicalPlaceOpt.isEmpty() || logicalPlaceIdOpt.isEmpty()) {
+            return false;
+        }
+
+        Optional<LogicalPlace> logicalPlaceOpt = getLogicalPlaces().stream()
+                .filter(logicalPlace -> logicalPlaceIdOpt.get().equals(logicalPlace.getId()))
+                .findFirst();
+
+        if (logicalPlaceOpt.isEmpty()) {
+            return false;
+        }
+
+        List<Condition> conditions = logicalPlaceOpt.get().getConditions();
+        if (conditions == null || conditions.isEmpty()) {
+            return false;
+        }
+
+        for (Condition condition : conditions) {
+            if (condition == null || condition.getAttribute() == null || condition.getOperator() == null) {
+                return false;
+            }
+
+            Object actualValue = getPhysicalPlaceAttribute(physicalPlaceOpt.get().getId(), condition.getAttribute())
+                    .orElse(null);
+            if (!compareCondition(actualValue, condition.getOperator(), condition.getValue())) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean compareCondition(Object actualValue, String operator, Object expectedValue) {
+        if (actualValue == null) {
+            return false;
+        }
+
+        String actualText = String.valueOf(actualValue).trim();
+        String expectedText = expectedValue == null ? "null" : String.valueOf(expectedValue).trim();
+
+        Double actualNumber = toNumber(actualText);
+        Double expectedNumber = toNumber(expectedText);
+
+        if (actualNumber != null && expectedNumber != null) {
+            return switch (operator) {
+                case "==" -> Double.compare(actualNumber, expectedNumber) == 0;
+                case "!=" -> Double.compare(actualNumber, expectedNumber) != 0;
+                case ">" -> actualNumber > expectedNumber;
+                case "<" -> actualNumber < expectedNumber;
+                case ">=" -> actualNumber >= expectedNumber;
+                case "<=" -> actualNumber <= expectedNumber;
+                default -> false;
+            };
+        }
+
+        return switch (operator) {
+            case "==" -> actualText.equalsIgnoreCase(expectedText);
+            case "!=" -> !actualText.equalsIgnoreCase(expectedText);
+            default -> false;
+        };
+    }
+
+    private Double toNumber(String value) {
+        try {
+            return Double.parseDouble(value);
+        } catch (NumberFormatException ex) {
+            return null;
+        }
     }
 
     public boolean isLoaded() {

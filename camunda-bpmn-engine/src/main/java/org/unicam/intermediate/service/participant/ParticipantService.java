@@ -200,6 +200,32 @@ public class ParticipantService {
         return participantId;
     }
 
+    public String resolveParticipantId(String processDefinitionId, String participantReference) {
+        if (participantReference == null || participantReference.isBlank() || processDefinitionId == null || processDefinitionId.isBlank()) {
+            return participantReference;
+        }
+
+        try {
+            BpmnModelInstance model = repositoryService.getBpmnModelInstance(processDefinitionId);
+            Collection<Participant> participants = model.getModelElementsByType(Participant.class);
+
+            for (Participant participant : participants) {
+                if (participantReference.equals(participant.getId())) {
+                    return participant.getId();
+                }
+
+                String participantName = participant.getName();
+                if (participantName != null && participantReference.equalsIgnoreCase(participantName)) {
+                    return participant.getId();
+                }
+            }
+        } catch (Exception e) {
+            log.debug("[ParticipantService] Error resolving participant reference '{}'", participantReference, e);
+        }
+
+        return participantReference;
+    }
+
     /**
      * Gets all participants in the current collaboration
      */

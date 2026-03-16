@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.unicam.intermediate.models.dto.websocket.GpsResponse;
 import org.unicam.intermediate.models.record.EnvironmentalTaskInfo;
 import org.unicam.intermediate.service.participant.ParticipantDataService;
+import org.unicam.intermediate.service.participant.ParticipantService;
 import org.unicam.intermediate.service.participant.UserParticipantMappingService;
 import org.unicam.intermediate.service.websocket.WebSocketSessionManager;
 
@@ -27,7 +28,7 @@ import java.util.regex.Pattern;
 public class EnvironmentalTaskRegistry {
 
     private static final Pattern GUARD_PATTERN = Pattern.compile(
-            "^([A-Za-z0-9_-]+)\\.([A-Za-z0-9_-]+)\\s*(==|!=|>=|<=|>|<)\\s*(.+)$"
+            "^(.+?)\\.([A-Za-z0-9_-]+)\\s*(==|!=|>=|<=|>|<)\\s*(.+)$"
     );
 
     private static final String BPMN_ERROR_CODE_VAR = "__spaceBpmnErrorCode";
@@ -37,6 +38,7 @@ public class EnvironmentalTaskRegistry {
     private final EnvironmentDataService environmentDataService;
     private final RuntimeService runtimeService;
     private final ParticipantDataService participantDataService;
+    private final ParticipantService participantService;
     private final UserParticipantMappingService userParticipantMappingService;
     private final WebSocketSessionManager webSocketSessionManager;
 
@@ -50,11 +52,13 @@ public class EnvironmentalTaskRegistry {
     public EnvironmentalTaskRegistry(EnvironmentDataService environmentDataService,
                                      RuntimeService runtimeService,
                                      ParticipantDataService participantDataService,
+                                     ParticipantService participantService,
                                      UserParticipantMappingService userParticipantMappingService,
                                      WebSocketSessionManager webSocketSessionManager) {
         this.environmentDataService = environmentDataService;
         this.runtimeService = runtimeService;
         this.participantDataService = participantDataService;
+        this.participantService = participantService;
         this.userParticipantMappingService = userParticipantMappingService;
         this.webSocketSessionManager = webSocketSessionManager;
     }
@@ -118,7 +122,7 @@ public class EnvironmentalTaskRegistry {
                 continue;
             }
 
-            boolean guardSatisfied = evaluateGuard(taskInfo.guardExpression(), taskInfo.activityId(), taskInfo.participantId());
+            boolean guardSatisfied = evaluateGuard(taskInfo.guardExpression(), taskInfo.activityId(), taskInfo.participantId(), taskInfo.executionId());
             if (!guardSatisfied) {
                 continue;
             }
@@ -154,7 +158,7 @@ public class EnvironmentalTaskRegistry {
         List<String> completedExecutions = new ArrayList<>();
 
         for (EnvironmentalTaskInfo taskInfo : activeEnvironmentalTasks.values()) {
-            boolean guardSatisfied = evaluateGuard(taskInfo.guardExpression(), taskInfo.activityId(), taskInfo.participantId());
+            boolean guardSatisfied = evaluateGuard(taskInfo.guardExpression(), taskInfo.activityId(), taskInfo.participantId(), taskInfo.executionId());
             if (!guardSatisfied) {
                 continue;
             }
@@ -200,7 +204,7 @@ public class EnvironmentalTaskRegistry {
         completedExecutions.forEach(this::removeTask);
     }
 
-    private boolean evaluateGuard(String guardExpression, String activityId, String participantId) {
+    private boolean evaluateGuard(String guardExpression, String activityId, String participantId, String executionId) {
         if (guardExpression == null || guardExpression.isBlank()) {
             log.info("[ENVIRONMENTAL] Empty guard expression for activity {} -> auto-pass", activityId);
             return true;
@@ -213,19 +217,19 @@ public class EnvironmentalTaskRegistry {
             return false;
         }
 
-        String placeId = matcher.group(1);
+        String reference = matcher.group(1).trim();
         String attributeKey = matcher.group(2);
         String operator = matcher.group(3);
         String expectedRaw = unquote(matcher.group(4).trim());
 
         // participant.position == placeRef notation
         if ("position".equals(attributeKey)) {
-            return evaluateParticipantPosition(placeId, operator, expectedRaw, activityId);
+            return evaluateParticipantPosition(reference, operator, expectedRaw, activityId, executionId);
         }
 
-        Optional<Object> actualValueOpt = environmentDataService.getPhysicalPlaceAttribute(placeId, attributeKey);
+        Optional<Object> actualValueOpt = environmentDataService.getPhysicalPlaceAttribute(reference, attributeKey);
         if (actualValueOpt.isEmpty()) {
-            log.debug("[ENVIRONMENTAL] Attribute '{}.{}' not found for activity {}", placeId, attributeKey, activityId);
+            log.debug("[ENVIRONMENTAL] Attribute '{}.{}' not found for activity {}", reference, attributeKey, activityId);
             return false;
         }
 
@@ -238,8 +242,10 @@ public class EnvironmentalTaskRegistry {
         return result;
     }
 
-    private boolean evaluateParticipantPosition(String participantRef, String operator, String expectedPlaceRef, String activityId) {
-        Optional<String> currentPositionOpt = participantDataService.getParticipant(participantRef)
+    private boolean evaluateParticipantPosition(String participantRef, String operator, String expectedPlaceRef, String activityId, String executionId) {
+        String resolvedParticipantRef = resolveParticipantReference(executionId, participantRef);
+
+        Optional<String> currentPositionOpt = participantDataService.getParticipant(resolvedParticipantRef)
                 .map(p -> p.getPosition());
 
         if (currentPositionOpt.isEmpty() || currentPositionOpt.get() == null) {
@@ -249,6 +255,21 @@ public class EnvironmentalTaskRegistry {
         }
 
         String currentPosition = currentPositionOpt.get();
+
+        Optional<String> resolvedLogicalExpected = environmentDataService.resolveLogicalPlaceId(expectedPlaceRef);
+        if (resolvedLogicalExpected.isPresent()) {
+            boolean inLogicalPlace = environmentDataService.isPhysicalPlaceInLogicalPlace(currentPosition, resolvedLogicalExpected.get());
+            boolean result = switch (operator) {
+                case "==" -> inLogicalPlace;
+                case "!=" -> !inLogicalPlace;
+                default -> false;
+            };
+
+            log.debug("[ENVIRONMENTAL] Position guard (logical) | activity={} | participant='{}' | position='{}' | op='{}' | expected='{}' -> {}",
+                    activityId, resolvedParticipantRef, currentPosition, operator, resolvedLogicalExpected.get(), result);
+
+            return result;
+        }
 
         // Resolve right-hand side place reference to canonical id (by id or name)
         String resolvedExpected = environmentDataService.resolvePhysicalPlaceId(expectedPlaceRef)
@@ -262,9 +283,37 @@ public class EnvironmentalTaskRegistry {
         boolean result = compare(resolvedPosition, operator, resolvedExpected);
 
         log.debug("[ENVIRONMENTAL] Position guard | activity={} | participant='{}' | position='{}' | op='{}' | expected='{}' -> {}",
-                activityId, participantRef, resolvedPosition, operator, resolvedExpected, result);
+                activityId, resolvedParticipantRef, resolvedPosition, operator, resolvedExpected, result);
 
         return result;
+    }
+
+    private String resolveParticipantReference(String executionId, String participantRef) {
+        if (participantRef == null || participantRef.isBlank() || executionId == null || executionId.isBlank()) {
+            return participantRef;
+        }
+
+        try {
+            Execution execution = runtimeService.createExecutionQuery()
+                    .executionId(executionId)
+                    .singleResult();
+            if (execution == null || execution.getProcessInstanceId() == null) {
+                return participantRef;
+            }
+
+            ProcessInstance processInstance = runtimeService.createProcessInstanceQuery()
+                    .processInstanceId(execution.getProcessInstanceId())
+                    .singleResult();
+            if (processInstance == null || processInstance.getProcessDefinitionId() == null) {
+                return participantRef;
+            }
+
+            return participantService.resolveParticipantId(processInstance.getProcessDefinitionId(), participantRef);
+        } catch (Exception e) {
+            log.debug("[ENVIRONMENTAL] Could not resolve participant reference '{}' for execution {}",
+                    participantRef, executionId, e);
+            return participantRef;
+        }
     }
 
     private String resolveMyPlace(String expression, String participantId, String activityId) {
@@ -409,7 +458,7 @@ public class EnvironmentalTaskRegistry {
     }
 
     private boolean isTurnLightsOnSatisfied(String activityId, String participantId) {
-        return evaluateGuard("myPlace().light == on", activityId + "#action:turnLightsOn", participantId);
+        return evaluateGuard("myPlace().lights == on", activityId + "#action:turnLightsOn", participantId, null);
     }
 
     private void notifyTurnLightsOff(String executionId, String participantId) {
@@ -417,7 +466,7 @@ public class EnvironmentalTaskRegistry {
     }
 
     private boolean isTurnLightsOffSatisfied(String activityId, String participantId) {
-        return evaluateGuard("myPlace().light == off", activityId + "#action:turnLightsOff", participantId);
+        return evaluateGuard("myPlace().lights == off", activityId + "#action:turnLightsOff", participantId, null);
     }
 
     private void notifyCleanRoom(String executionId, String participantId) {
@@ -425,7 +474,7 @@ public class EnvironmentalTaskRegistry {
     }
 
     private boolean isCleanRoomSatisfied(String activityId, String participantId) {
-        return evaluateGuard("myPlace().state == clean", activityId + "#action:cleanRoom", participantId);
+        return evaluateGuard("myPlace().state == clean", activityId + "#action:cleanRoom", participantId, null);
     }
 
     private void notifyCheckRoom(String executionId, String participantId) {
@@ -433,7 +482,7 @@ public class EnvironmentalTaskRegistry {
     }
 
     private boolean isCheckRoomSatisfied(String activityId, String participantId) {
-        return evaluateGuard("myPlace().state != null", activityId + "#action:checkRoom", participantId);
+        return evaluateGuard("myPlace().state != null", activityId + "#action:checkRoom", participantId, null);
     }
 
     /**
