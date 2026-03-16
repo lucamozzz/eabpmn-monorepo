@@ -20,6 +20,7 @@ import org.unicam.intermediate.service.xml.AbstractXmlService;
 import org.unicam.intermediate.service.xml.XmlServiceDispatcher;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.unicam.intermediate.utils.Constants.*;
 
@@ -30,6 +31,8 @@ public class MovementExecutionListener implements ExecutionListener {
     private static final String TIMER_LOCAL_NAME = "timer";
     private static final String BPMN_ERROR_CODE_VAR = "__spaceBpmnErrorCode";
     private static final String BPMN_ERROR_MESSAGE_VAR = "__spaceBpmnErrorMessage";
+    private static final String PARTICIPANT_DESTINATION_PREFIX = "Participant.";
+    private static final String PARTICIPANT_POSITION_SUFFIX = ".position";
 
     private final XmlServiceDispatcher dispatcher;
     private final ParticipantService participantService;
@@ -67,11 +70,7 @@ public class MovementExecutionListener implements ExecutionListener {
         String value = raw != null && raw.startsWith("${") && raw.endsWith("}")
                 ? String.valueOf(execution.getVariable(raw.substring(2, raw.length()-1).trim()))
                 : raw;
-        String destination = value != null
-                ? environmentDataService.resolvePhysicalPlaceId(value)
-                    .or(() -> environmentDataService.resolveLogicalPlaceId(value))
-                    .orElse(value)
-                : null;
+        String destination = resolveDestinationValue(value, execution);
         Double timerValue = extractTimerValue(execution);
 
         Participant participant = participantService.resolveCurrentParticipant(execution);
@@ -215,5 +214,61 @@ public class MovementExecutionListener implements ExecutionListener {
     private boolean isSpaceElement(DomElement domElement, String localName) {
         return localName.equalsIgnoreCase(domElement.getLocalName())
                 && SPACE_NS.getNamespaceUri().equals(domElement.getNamespaceURI());
+    }
+
+    private String resolveDestinationValue(String value, DelegateExecution execution) {
+        if (value == null || value.isBlank()) {
+            return null;
+        }
+
+        String trimmed = value.trim();
+        if (trimmed.startsWith(PARTICIPANT_DESTINATION_PREFIX)
+                && trimmed.length() > PARTICIPANT_DESTINATION_PREFIX.length()) {
+            String participantRef = normalizeParticipantReference(
+                trimmed.substring(PARTICIPANT_DESTINATION_PREFIX.length()).trim()
+            );
+
+            Optional<org.unicam.intermediate.models.pojo.Participant> participantOpt =
+                    participantDataService.getParticipantByName(participantRef)
+                            .or(() -> participantDataService.getParticipant(participantRef));
+
+            if (participantOpt.isEmpty()) {
+                throw new BpmnError(
+                        "unreachableDestination",
+                        String.format("Destination '%s' references unknown participant '%s'", trimmed, participantRef)
+                );
+            }
+
+            String participantPosition = participantOpt.get().getPosition();
+            if (participantPosition == null || participantPosition.isBlank()) {
+                throw new BpmnError(
+                        "unreachableDestination",
+                        String.format("Destination '%s' references participant '%s' without a valid position", trimmed, participantRef)
+                );
+            }
+
+            String resolved = environmentDataService.resolvePhysicalPlaceId(participantPosition)
+                    .or(() -> environmentDataService.resolveLogicalPlaceId(participantPosition))
+                    .orElse(participantPosition);
+
+            log.info("[MOVEMENT] Resolved '{}' to participant position '{}'", trimmed, resolved);
+            return resolved;
+        }
+
+        return environmentDataService.resolvePhysicalPlaceId(trimmed)
+                .or(() -> environmentDataService.resolveLogicalPlaceId(trimmed))
+                .orElse(trimmed);
+    }
+
+    private String normalizeParticipantReference(String participantRef) {
+        if (participantRef == null) {
+            return null;
+        }
+
+        String normalized = participantRef.trim();
+        if (normalized.toLowerCase().endsWith(PARTICIPANT_POSITION_SUFFIX)) {
+            normalized = normalized.substring(0, normalized.length() - PARTICIPANT_POSITION_SUFFIX.length()).trim();
+        }
+        return normalized;
     }
 }

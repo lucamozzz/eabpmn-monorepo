@@ -25,6 +25,8 @@ public class MovementTaskRegistry {
     private static final String BPMN_ERROR_CODE_VAR = "__spaceBpmnErrorCode";
     private static final String BPMN_ERROR_MESSAGE_VAR = "__spaceBpmnErrorMessage";
     private static final String FAILED_MOVEMENT_ERROR_CODE = "failedMovement";
+    private static final String PARTICIPANT_DESTINATION_PREFIX = "Participant.";
+    private static final String PARTICIPANT_POSITION_SUFFIX = ".position";
 
     private final EnvironmentDataService environmentDataService;
     private final ParticipantDataService participantDataService;
@@ -316,9 +318,42 @@ public class MovementTaskRegistry {
             return destination;
         }
 
-        return environmentDataService.resolvePhysicalPlaceId(destination)
-                .or(() -> environmentDataService.resolveLogicalPlaceId(destination))
-                .orElse(destination);
+        String trimmed = destination.trim();
+        if (trimmed.startsWith(PARTICIPANT_DESTINATION_PREFIX)
+            && trimmed.length() > PARTICIPANT_DESTINATION_PREFIX.length()) {
+            String participantRef = normalizeParticipantReference(
+                trimmed.substring(PARTICIPANT_DESTINATION_PREFIX.length()).trim()
+            );
+            Optional<String> participantPositionOpt = participantDataService.getParticipantByName(participantRef)
+                .or(() -> participantDataService.getParticipant(participantRef))
+                .map(org.unicam.intermediate.models.pojo.Participant::getPosition)
+                .filter(pos -> pos != null && !pos.isBlank());
+
+            if (participantPositionOpt.isPresent()) {
+            String participantPosition = participantPositionOpt.get();
+            return environmentDataService.resolvePhysicalPlaceId(participantPosition)
+                .or(() -> environmentDataService.resolveLogicalPlaceId(participantPosition))
+                .orElse(participantPosition);
+            }
+
+            return trimmed;
+        }
+
+        return environmentDataService.resolvePhysicalPlaceId(trimmed)
+            .or(() -> environmentDataService.resolveLogicalPlaceId(trimmed))
+            .orElse(trimmed);
+    }
+
+    private String normalizeParticipantReference(String participantRef) {
+        if (participantRef == null) {
+            return null;
+        }
+
+        String normalized = participantRef.trim();
+        if (normalized.toLowerCase().endsWith(PARTICIPANT_POSITION_SUFFIX)) {
+            normalized = normalized.substring(0, normalized.length() - PARTICIPANT_POSITION_SUFFIX.length()).trim();
+        }
+        return normalized;
     }
 
     private List<PhysicalPlace> resolvePhysicalPlacesForLogicalPlace(LogicalPlace logicalPlace) {
