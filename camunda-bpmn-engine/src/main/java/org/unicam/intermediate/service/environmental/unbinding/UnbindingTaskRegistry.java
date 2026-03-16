@@ -5,7 +5,6 @@ import org.camunda.bpm.engine.RuntimeService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.unicam.intermediate.models.record.BindingTaskInfo;
-import org.unicam.intermediate.service.environmental.EnvironmentDataService;
 import org.unicam.intermediate.service.participant.ParticipantDataService;
 
 import java.util.ArrayList;
@@ -13,13 +12,17 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 @Slf4j
 public class UnbindingTaskRegistry {
 
-    private final EnvironmentDataService environmentDataService;
+    private static final String BPMN_ERROR_CODE_VAR = "__spaceBpmnErrorCode";
+    private static final String BPMN_ERROR_MESSAGE_VAR = "__spaceBpmnErrorMessage";
+    private static final String FAILED_UNBINDING_ERROR_CODE = "failedUnbinding";
+
     private final ParticipantDataService participantDataService;
     private final RuntimeService runtimeService;
 
@@ -29,10 +32,11 @@ public class UnbindingTaskRegistry {
     // pairKey -> active paired unbinding tasks to monitor by position
     private final Map<String, UnbindingPair> activePairs = new ConcurrentHashMap<>();
 
-    public UnbindingTaskRegistry(EnvironmentDataService environmentDataService,
-                                 ParticipantDataService participantDataService,
+    // executionId -> epoch millis when unbinding timer started
+    private final Map<String, Long> unbindingTimerStartByExecutionId = new ConcurrentHashMap<>();
+
+    public UnbindingTaskRegistry(ParticipantDataService participantDataService,
                                  RuntimeService runtimeService) {
-        this.environmentDataService = environmentDataService;
         this.participantDataService = participantDataService;
         this.runtimeService = runtimeService;
     }
@@ -40,18 +44,30 @@ public class UnbindingTaskRegistry {
     public void registerTask(String businessKey,
                              String participantId,
                              String targetParticipantId,
-                             String executionId) {
-        if (businessKey == null || participantId == null || targetParticipantId == null || executionId == null) {
-            log.warn("[UnbindingRegistry] Cannot register unbinding task due to null values: businessKey={}, participantId={}, targetParticipantId={}, executionId={}",
-                    businessKey, participantId, targetParticipantId, executionId);
+                             String executionId,
+                             String activityId,
+                             Double timer) {
+        if (businessKey == null || participantId == null || targetParticipantId == null || executionId == null || activityId == null) {
+            log.warn("[UnbindingRegistry] Cannot register unbinding task due to null values: businessKey={}, participantId={}, targetParticipantId={}, executionId={}, activityId={}",
+                    businessKey, participantId, targetParticipantId, executionId, activityId);
             return;
         }
 
-        log.info("[UnbindingRegistry] Registering task: BK={} | {} -> {} | exec={}",
-                businessKey, participantId, targetParticipantId, executionId);
+        log.info("[UnbindingRegistry] Registering task: BK={} | {} -> {} | exec={} | activity={} | timer={}",
+                businessKey, participantId, targetParticipantId, executionId, activityId, timer != null ? timer : "(empty)");
 
-        BindingTaskInfo taskInfo = new BindingTaskInfo(businessKey, participantId, targetParticipantId, executionId);
+        BindingTaskInfo taskInfo = new BindingTaskInfo(
+                businessKey,
+                participantId,
+                targetParticipantId,
+                executionId,
+                activityId,
+                timer
+        );
+
         waitingByParticipant.put(participantId, taskInfo);
+        unbindingTimerStartByExecutionId.remove(executionId);
+
         log.info("[UnbindingRegistry] Registered waiting unbinding task | BK: {} | participant: {} -> target: {}",
                 businessKey, participantId, targetParticipantId);
 
@@ -63,7 +79,10 @@ public class UnbindingTaskRegistry {
             return;
         }
 
-        waitingByParticipant.remove(participantId);
+        BindingTaskInfo removedWaiting = waitingByParticipant.remove(participantId);
+        if (removedWaiting != null) {
+            unbindingTimerStartByExecutionId.remove(removedWaiting.executionId());
+        }
 
         List<String> pairKeysToRemove = new ArrayList<>();
         for (Map.Entry<String, UnbindingPair> entry : activePairs.entrySet()) {
@@ -78,8 +97,7 @@ public class UnbindingTaskRegistry {
         for (String pairKey : pairKeysToRemove) {
             UnbindingPair removed = activePairs.remove(pairKey);
             if (removed != null) {
-                waitingByParticipant.remove(removed.first.participantId());
-                waitingByParticipant.remove(removed.second.participantId());
+                cleanupPair(removed);
                 log.info("[UnbindingRegistry] Removed active pair {} due to task end", pairKey);
             }
         }
@@ -134,15 +152,46 @@ public class UnbindingTaskRegistry {
 
     @Scheduled(fixedRate = 2000)
     public void checkUnbindingCompletion() {
+        List<String> timedOutWaitingParticipants = new ArrayList<>();
+
+        if (!waitingByParticipant.isEmpty()) {
+            for (BindingTaskInfo waitingTask : waitingByParticipant.values()) {
+                if (isUnbindingTimerExpired(waitingTask) && signalUnbindingTimeout(waitingTask)) {
+                    timedOutWaitingParticipants.add(waitingTask.participantId());
+                }
+            }
+        }
+
+        for (String participantId : timedOutWaitingParticipants) {
+            BindingTaskInfo removed = waitingByParticipant.remove(participantId);
+            if (removed != null) {
+                unbindingTimerStartByExecutionId.remove(removed.executionId());
+            }
+        }
+
         if (activePairs.isEmpty()) {
             return;
         }
 
-        List<String> completedPairs = new ArrayList<>();
+        List<String> pairsToRemove = new ArrayList<>();
+        List<BindingTaskInfo> timedOutInPairs = new ArrayList<>();
 
         for (Map.Entry<String, UnbindingPair> entry : activePairs.entrySet()) {
             String pairKey = entry.getKey();
             UnbindingPair pair = entry.getValue();
+
+            boolean firstTimedOut = isUnbindingTimerExpired(pair.first);
+            boolean secondTimedOut = isUnbindingTimerExpired(pair.second);
+            if (firstTimedOut || secondTimedOut) {
+                if (firstTimedOut) {
+                    timedOutInPairs.add(pair.first);
+                }
+                if (secondTimedOut) {
+                    timedOutInPairs.add(pair.second);
+                }
+                pairsToRemove.add(pairKey);
+                continue;
+            }
 
             String positionA = getParticipantPosition(pair.first.participantId());
             String positionB = getParticipantPosition(pair.second.participantId());
@@ -162,21 +211,107 @@ public class UnbindingTaskRegistry {
                 try {
                     runtimeService.signal(pair.first.executionId());
                     runtimeService.signal(pair.second.executionId());
-                    completedPairs.add(pairKey);
+                    pairsToRemove.add(pairKey);
                 } catch (Exception e) {
                     log.error("[UnbindingRegistry] Failed to signal pair {}: {}", pairKey, e.getMessage(), e);
                 }
             }
         }
 
-        for (String pairKey : completedPairs) {
+        Set<String> uniquePairKeys = ConcurrentHashMap.newKeySet();
+        uniquePairKeys.addAll(pairsToRemove);
+        for (String pairKey : uniquePairKeys) {
             UnbindingPair removed = activePairs.remove(pairKey);
             if (removed != null) {
-                waitingByParticipant.remove(removed.first.participantId());
-                waitingByParticipant.remove(removed.second.participantId());
-                log.info("[UnbindingRegistry] Completed and removed pair {}", pairKey);
+                cleanupPair(removed);
+                log.info("[UnbindingRegistry] Completed/removed pair {}", pairKey);
             }
         }
+
+        for (BindingTaskInfo timedOutTask : timedOutInPairs) {
+            signalUnbindingTimeout(timedOutTask);
+        }
+    }
+
+    private boolean signalUnbindingTimeout(BindingTaskInfo taskInfo) {
+        if (!isExecutionStillActive(taskInfo.executionId())) {
+            return false;
+        }
+
+        try {
+            runtimeService.setVariableLocal(taskInfo.executionId(), BPMN_ERROR_CODE_VAR, FAILED_UNBINDING_ERROR_CODE);
+            runtimeService.setVariableLocal(
+                    taskInfo.executionId(),
+                    BPMN_ERROR_MESSAGE_VAR,
+                    String.format(
+                            "Unbinding with participant '%s' did not complete within timer for activity '%s'",
+                            taskInfo.targetParticipantId(),
+                            taskInfo.activityId()
+                    )
+            );
+            runtimeService.signal(taskInfo.executionId());
+            unbindingTimerStartByExecutionId.remove(taskInfo.executionId());
+            log.warn("[UnbindingRegistry] Unbinding timer expired -> raised '{}' | participant={} | target={} | activity={} | execution={} | timer={}s",
+                    FAILED_UNBINDING_ERROR_CODE,
+                    taskInfo.participantId(),
+                    taskInfo.targetParticipantId(),
+                    taskInfo.activityId(),
+                    taskInfo.executionId(),
+                    taskInfo.timer());
+            return true;
+        } catch (Exception e) {
+            log.error("[UnbindingRegistry] Failed to signal timeout for execution {}: {}",
+                    taskInfo.executionId(), e.getMessage(), e);
+            return false;
+        }
+    }
+
+    private boolean isUnbindingTimerExpired(BindingTaskInfo taskInfo) {
+        Double timerSeconds = taskInfo.timer();
+        if (timerSeconds == null || timerSeconds <= 0) {
+            unbindingTimerStartByExecutionId.remove(taskInfo.executionId());
+            return false;
+        }
+
+        long startTime = unbindingTimerStartByExecutionId.computeIfAbsent(taskInfo.executionId(), ignored -> {
+            long now = System.currentTimeMillis();
+            log.info("[UnbindingRegistry] Unbinding timer started | participant={} | target={} | activity={} | execution={} | timer={}s",
+                    taskInfo.participantId(),
+                    taskInfo.targetParticipantId(),
+                    taskInfo.activityId(),
+                    taskInfo.executionId(),
+                    timerSeconds);
+            return now;
+        });
+
+        long timeoutMillis = Math.round(timerSeconds * 1000.0d);
+        long elapsed = System.currentTimeMillis() - startTime;
+
+        if (elapsed >= timeoutMillis) {
+            unbindingTimerStartByExecutionId.remove(taskInfo.executionId());
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean isExecutionStillActive(String executionId) {
+        if (executionId == null || executionId.isBlank()) {
+            return false;
+        }
+        try {
+            return runtimeService.createExecutionQuery().executionId(executionId).singleResult() != null;
+        } catch (Exception ex) {
+            log.debug("[UnbindingRegistry] Failed to check execution {} activity state: {}", executionId, ex.getMessage());
+            return false;
+        }
+    }
+
+    private void cleanupPair(UnbindingPair pair) {
+        waitingByParticipant.remove(pair.first.participantId());
+        waitingByParticipant.remove(pair.second.participantId());
+        unbindingTimerStartByExecutionId.remove(pair.first.executionId());
+        unbindingTimerStartByExecutionId.remove(pair.second.executionId());
     }
 
     private void tryActivatePair(BindingTaskInfo current) {

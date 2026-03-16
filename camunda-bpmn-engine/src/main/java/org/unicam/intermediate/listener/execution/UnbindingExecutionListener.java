@@ -4,8 +4,13 @@ package org.unicam.intermediate.listener.execution;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.ExecutionListener;
+import org.camunda.bpm.model.bpmn.instance.ExtensionElements;
+import org.camunda.bpm.model.bpmn.instance.Task;
+import org.camunda.bpm.model.xml.instance.DomElement;
+import org.camunda.bpm.model.xml.instance.ModelElementInstance;
 import org.springframework.stereotype.Component;
 import org.unicam.intermediate.models.Participant;
 import org.unicam.intermediate.service.MessageFlowRegistry;
@@ -14,12 +19,17 @@ import org.unicam.intermediate.service.participant.ParticipantService;
 import org.unicam.intermediate.service.participant.UserParticipantMappingService;
 import org.unicam.intermediate.service.environmental.unbinding.UnbindingTaskRegistry;
 
+import static org.unicam.intermediate.utils.Constants.SPACE_NS;
 import static org.unicam.intermediate.utils.Constants.unbindingExecutionListenerBeanName;
 
 @Slf4j
 @Component(unbindingExecutionListenerBeanName)
 @AllArgsConstructor
 public class UnbindingExecutionListener implements ExecutionListener {
+
+    private static final String TIMER_LOCAL_NAME = "timer";
+    private static final String BPMN_ERROR_CODE_VAR = "__spaceBpmnErrorCode";
+    private static final String BPMN_ERROR_MESSAGE_VAR = "__spaceBpmnErrorMessage";
 
     private final UnbindingTaskRegistry unbindingTaskRegistry;
     private final MessageFlowRegistry messageFlowRegistry;
@@ -39,6 +49,7 @@ public class UnbindingExecutionListener implements ExecutionListener {
         String processDefinitionId = execution.getProcessDefinitionId();
         String activityId = execution.getCurrentActivityId();
         String businessKey = execution.getBusinessKey();
+        Double timerValue = extractTimerValue(execution);
 
         // Get message flow unbinding info
         MessageFlowBinding flowBinding = messageFlowRegistry.getFlowBinding(processDefinitionId, activityId);
@@ -75,19 +86,27 @@ public class UnbindingExecutionListener implements ExecutionListener {
                 userId, currentParticipantId, businessKey);
         }
 
-        log.info("[UNBINDING] Task {} started - Participant {} ({}) waiting for unbind with {} ({})",
+        log.info("[UNBINDING] Task {} started - Participant {} ({}) waiting for unbind with {} ({}) | Timer: {}",
             activityId, currentParticipant.getLogDisplayName(), currentParticipantId,
-            targetParticipant.getLogDisplayName(), targetParticipantId);
+            targetParticipant.getLogDisplayName(), targetParticipantId,
+            timerValue != null ? timerValue : "(empty)");
 
         unbindingTaskRegistry.registerTask(
             businessKey,
             currentParticipantId,
             targetParticipantId,
-            execution.getId()
+            execution.getId(),
+            activityId,
+            timerValue
         );
     }
 
     private void handleUnbindingEnd(DelegateExecution execution) {
+        String bpmnErrorCode = (String) execution.getVariableLocal(BPMN_ERROR_CODE_VAR);
+        String bpmnErrorMessage = (String) execution.getVariableLocal(BPMN_ERROR_MESSAGE_VAR);
+        execution.removeVariableLocal(BPMN_ERROR_CODE_VAR);
+        execution.removeVariableLocal(BPMN_ERROR_MESSAGE_VAR);
+
         String activityId = execution.getCurrentActivityId();
         String businessKey = execution.getBusinessKey();
         String processDefinitionId = execution.getProcessDefinitionId();
@@ -112,5 +131,57 @@ public class UnbindingExecutionListener implements ExecutionListener {
         execution.removeVariable("boundParticipantId");
 
         log.info("[UNBINDING] Task {} ended", activityId);
+
+        if (bpmnErrorCode != null && !bpmnErrorCode.isBlank()) {
+            throw new BpmnError(
+                    bpmnErrorCode,
+                    bpmnErrorMessage != null ? bpmnErrorMessage : "Unbinding task failed"
+            );
+        }
+    }
+
+    private Double extractTimerValue(DelegateExecution execution) {
+        String raw = extractExtensionValue(execution, TIMER_LOCAL_NAME);
+        if (raw == null || raw.isBlank()) {
+            return null;
+        }
+
+        try {
+            double parsed = Double.parseDouble(raw.trim());
+            if (parsed < 0) {
+                log.warn("[UNBINDING] Invalid negative timer '{}' for activity {}. Ignoring.",
+                        raw, execution.getCurrentActivityId());
+                return null;
+            }
+            return parsed;
+        } catch (NumberFormatException ex) {
+            log.warn("[UNBINDING] Invalid non-numeric timer '{}' for activity {}. Ignoring.",
+                    raw, execution.getCurrentActivityId());
+            return null;
+        }
+    }
+
+    private String extractExtensionValue(DelegateExecution execution, String localName) {
+        ModelElementInstance modelElement = execution.getBpmnModelElementInstance();
+        if (!(modelElement instanceof Task task)) {
+            return null;
+        }
+
+        ExtensionElements extensionElements = task.getExtensionElements();
+        if (extensionElements == null) {
+            return null;
+        }
+
+        return extensionElements.getDomElement().getChildElements().stream()
+                .filter(domElement -> isSpaceElement(domElement, localName))
+                .map(DomElement::getTextContent)
+                .map(String::trim)
+                .findFirst()
+                .orElse(null);
+    }
+
+    private boolean isSpaceElement(DomElement domElement, String localName) {
+        return localName.equalsIgnoreCase(domElement.getLocalName())
+                && SPACE_NS.getNamespaceUri().equals(domElement.getNamespaceURI());
     }
 }

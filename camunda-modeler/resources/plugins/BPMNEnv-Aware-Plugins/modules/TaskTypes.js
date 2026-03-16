@@ -35,7 +35,7 @@ export const TASK_TYPES_CONFIG = {
     typeValue: 'Unbinding',
     displayName: 'Unbinding Task',
     icon: { class: 'unbinding-badge', iconFile: unbindIcon },
-    extensionElements: [ 'space:Type', 'space:Guard', 'space:TaskAssignment', 'space:TaskAssignmentReached' ],
+    extensionElements: [ 'space:Type', 'space:Guard', 'space:Timer', 'space:TaskAssignment', 'space:TaskAssignmentReached' ],
     validationRules: [ 'requiresUpstreamBinding' ],
     formType: 'none'
   },
