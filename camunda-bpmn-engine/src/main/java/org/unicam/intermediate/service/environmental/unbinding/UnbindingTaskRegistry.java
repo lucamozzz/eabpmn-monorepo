@@ -6,6 +6,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.unicam.intermediate.models.record.BindingTaskInfo;
 import org.unicam.intermediate.service.participant.ParticipantDataService;
+import org.unicam.intermediate.service.environmental.BoundParticipantsDiscordanceMonitor;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -25,6 +26,7 @@ public class UnbindingTaskRegistry {
 
     private final ParticipantDataService participantDataService;
     private final RuntimeService runtimeService;
+    private final BoundParticipantsDiscordanceMonitor boundParticipantsMonitor;
 
     // participantId -> unbinding task currently waiting for counterpart
     private final Map<String, BindingTaskInfo> waitingByParticipant = new ConcurrentHashMap<>();
@@ -36,9 +38,11 @@ public class UnbindingTaskRegistry {
     private final Map<String, Long> unbindingTimerStartByExecutionId = new ConcurrentHashMap<>();
 
     public UnbindingTaskRegistry(ParticipantDataService participantDataService,
-                                 RuntimeService runtimeService) {
+                                 RuntimeService runtimeService,
+                                 BoundParticipantsDiscordanceMonitor boundParticipantsMonitor) {
         this.participantDataService = participantDataService;
         this.runtimeService = runtimeService;
+        this.boundParticipantsMonitor = boundParticipantsMonitor;
     }
 
     public void registerTask(String businessKey,
@@ -209,8 +213,19 @@ public class UnbindingTaskRegistry {
                 log.info("[UnbindingRegistry] Pair {} reached same position '{}' -> completing unbinding tasks",
                         pairKey, positionA);
                 try {
+                    String processInstanceId = getProcessInstanceId(pair.first.executionId());
+
                     runtimeService.signal(pair.first.executionId());
                     runtimeService.signal(pair.second.executionId());
+                    
+                    // Notify the discordance monitor that this pair is no longer bound
+                    boundParticipantsMonitor.markUnbound(
+                            pair.first.businessKey(),
+                        processInstanceId,
+                            pair.first.participantId(),
+                            pair.second.participantId()
+                    );
+                    
                     pairsToRemove.add(pairKey);
                 } catch (Exception e) {
                     log.error("[UnbindingRegistry] Failed to signal pair {}: {}", pairKey, e.getMessage(), e);
@@ -304,6 +319,19 @@ public class UnbindingTaskRegistry {
         } catch (Exception ex) {
             log.debug("[UnbindingRegistry] Failed to check execution {} activity state: {}", executionId, ex.getMessage());
             return false;
+        }
+    }
+
+    private String getProcessInstanceId(String executionId) {
+        if (executionId == null || executionId.isBlank()) {
+            return null;
+        }
+        try {
+            var execution = runtimeService.createExecutionQuery().executionId(executionId).singleResult();
+            return execution != null ? execution.getProcessInstanceId() : null;
+        } catch (Exception ex) {
+            log.debug("[UnbindingRegistry] Failed to resolve processInstanceId for execution {}: {}", executionId, ex.getMessage());
+            return null;
         }
     }
 

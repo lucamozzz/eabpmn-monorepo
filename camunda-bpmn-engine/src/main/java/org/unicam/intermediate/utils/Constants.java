@@ -12,5 +12,6 @@ public class Constants {
     public static final String environmentalExecutionListenerBeanName = "environmentalExecutionListener";
     public static final String exclusiveGatewayExecutionListenerBeanName = "exclusiveGatewayExecutionListener";
     public static final String genericTaskExecutionListenerBeanName = "genericTaskExecutionListener";
+    public static final String discordanceCheckExecutionListenerBeanName = "discordanceCheckExecutionListener";
 
 }

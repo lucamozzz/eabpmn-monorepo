@@ -6,6 +6,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.unicam.intermediate.models.record.BindingTaskInfo;
 import org.unicam.intermediate.service.participant.ParticipantDataService;
+import org.unicam.intermediate.service.environmental.BoundParticipantsDiscordanceMonitor;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -25,6 +26,7 @@ public class BindingTaskRegistry {
 
     private final ParticipantDataService participantDataService;
     private final RuntimeService runtimeService;
+    private final BoundParticipantsDiscordanceMonitor boundParticipantsMonitor;
 
     // participantId -> binding task currently waiting for counterpart
     private final Map<String, BindingTaskInfo> waitingByParticipant = new ConcurrentHashMap<>();
@@ -36,9 +38,11 @@ public class BindingTaskRegistry {
     private final Map<String, Long> bindingTimerStartByExecutionId = new ConcurrentHashMap<>();
 
     public BindingTaskRegistry(ParticipantDataService participantDataService,
-                               RuntimeService runtimeService) {
+                               RuntimeService runtimeService,
+                               BoundParticipantsDiscordanceMonitor boundParticipantsMonitor) {
         this.participantDataService = participantDataService;
         this.runtimeService = runtimeService;
+        this.boundParticipantsMonitor = boundParticipantsMonitor;
     }
 
     public void registerTask(String businessKey,
@@ -218,8 +222,19 @@ public class BindingTaskRegistry {
                 log.info("[BindingRegistry] Pair {} reached same position '{}' -> completing binding tasks",
                         pairKey, positionA);
                 try {
+                    String processInstanceId = getProcessInstanceId(pair.first.executionId());
+
                     runtimeService.signal(pair.first.executionId());
                     runtimeService.signal(pair.second.executionId());
+                    
+                    // Notify the discordance monitor that this pair is now bound
+                    boundParticipantsMonitor.markBound(
+                            pair.first.businessKey(),
+                        processInstanceId,
+                            pair.first.participantId(),
+                            pair.second.participantId()
+                    );
+                    
                     pairsToRemove.add(pairKey);
                 } catch (Exception e) {
                     log.error("[BindingRegistry] Failed to signal pair {}: {}", pairKey, e.getMessage(), e);
@@ -313,6 +328,19 @@ public class BindingTaskRegistry {
         } catch (Exception ex) {
             log.debug("[BindingRegistry] Failed to check execution {} activity state: {}", executionId, ex.getMessage());
             return false;
+        }
+    }
+
+    private String getProcessInstanceId(String executionId) {
+        if (executionId == null || executionId.isBlank()) {
+            return null;
+        }
+        try {
+            var execution = runtimeService.createExecutionQuery().executionId(executionId).singleResult();
+            return execution != null ? execution.getProcessInstanceId() : null;
+        } catch (Exception ex) {
+            log.debug("[BindingRegistry] Failed to resolve processInstanceId for execution {}: {}", executionId, ex.getMessage());
+            return null;
         }
     }
 

@@ -30,6 +30,9 @@ public class DynamicParseListener extends AbstractBpmnParseListener {
 
     @Override
     public void parseTask(Element taskElement, ScopeImpl scope, ActivityImpl activity) {
+        // Add the global discordance check listener to ALL tasks
+        addDiscordanceCheckListener(activity);
+
         Element extensions = taskElement.element("extensionElements");
         if (extensions == null) {
             log.debug("[DynamicParseListener] No extensions found for activity: {}", activity.getId());
@@ -135,5 +138,27 @@ public class DynamicParseListener extends AbstractBpmnParseListener {
                 yield null;
             }
         };
+    }
+
+    /**
+     * Add the global discordance check listener to a task.
+     * This listener checks if there are bound participants with discordant positions
+     * and raises a BpmnError if the grace window has expired.
+     */
+    private void addDiscordanceCheckListener(ActivityImpl activity) {
+        try {
+            ExpressionManager exprMgr = Context.getProcessEngineConfiguration().getExpressionManager();
+            String exprString = "${" + discordanceCheckExecutionListenerBeanName + "}";
+            var expression = exprMgr.createExpression(exprString);
+
+            ExecutionListener listener = new DelegateExpressionExecutionListener(expression, Collections.emptyList());
+            activity.addListener(ExecutionListener.EVENTNAME_START, listener);
+
+            log.debug("[DynamicParseListener] Added global discordance check listener to task '{}'", 
+                    activity.getId());
+        } catch (Exception e) {
+            log.error("[DynamicParseListener] Failed to add discordance check listener to task '{}': {}",
+                    activity.getId(), e.getMessage(), e);
+        }
     }
 }
