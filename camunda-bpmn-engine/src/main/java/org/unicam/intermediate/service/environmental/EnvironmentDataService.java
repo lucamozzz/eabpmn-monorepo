@@ -302,6 +302,14 @@ public class EnvironmentDataService {
     }
 
     private boolean compareCondition(Object actualValue, String operator, Object expectedValue) {
+        if (expectedValue == null) {
+            return switch (operator) {
+                case "==" -> actualValue == null;
+                case "!=" -> actualValue != null;
+                default -> false;
+            };
+        }
+
         if (actualValue == null) {
             return false;
         }
