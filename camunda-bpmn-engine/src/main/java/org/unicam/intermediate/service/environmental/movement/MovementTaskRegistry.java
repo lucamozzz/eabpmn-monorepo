@@ -79,6 +79,10 @@ public class MovementTaskRegistry {
         }
     }
 
+    public boolean hasActiveMovementTask(String participantId) {
+        return participantId != null && activeMovementTasks.containsKey(participantId);
+    }
+
     /**
      * Returns pending movement tasks for a participant in a shape compatible
      * with the mobile pending-actions view.

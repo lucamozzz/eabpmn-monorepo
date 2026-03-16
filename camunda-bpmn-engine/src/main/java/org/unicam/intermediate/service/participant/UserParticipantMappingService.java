@@ -16,7 +16,6 @@ import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.Participant;
 import org.springframework.stereotype.Service;
 import org.unicam.intermediate.service.TaskAuthorizationService;
-import org.unicam.intermediate.service.task.TaskTrackingService;
 
 import java.time.Instant;
 import java.util.*;
@@ -307,6 +306,29 @@ public class UserParticipantMappingService {
             }
 
             return null;
+        }
+
+        public Set<String> getBusinessKeysForParticipant(String participantId) {
+            Set<String> result = new HashSet<>();
+            if (participantId == null || participantId.isBlank()) {
+                return result;
+            }
+
+            for (Map.Entry<String, Map<String, String>> entry : mappings.entrySet()) {
+                if (entry.getValue().containsValue(participantId)) {
+                    result.add(entry.getKey());
+                }
+            }
+
+            for (TrackingContext context : activeTracking.values()) {
+                if (participantId.equals(context.getParticipantId())
+                        && context.getBusinessKey() != null
+                        && !context.getBusinessKey().isBlank()) {
+                    result.add(context.getBusinessKey());
+                }
+            }
+
+            return result;
         }
 
         @Data

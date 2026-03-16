@@ -142,6 +142,24 @@ public class BindingTaskRegistry {
         return List.of();
     }
 
+    public boolean isBindingInProgressForParticipant(String participantId) {
+        if (participantId == null || participantId.isBlank()) {
+            return false;
+        }
+
+        if (waitingByParticipant.containsKey(participantId)) {
+            return true;
+        }
+
+        for (BindingPair pair : activePairs.values()) {
+            if (participantId.equals(pair.first.participantId()) || participantId.equals(pair.second.participantId())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private Map<String, String> toBindingView(BindingTaskInfo taskInfo, String counterpartParticipantId) {
         Map<String, String> view = new LinkedHashMap<>();
         view.put("executionId", taskInfo.executionId());
