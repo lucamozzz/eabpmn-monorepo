@@ -5,7 +5,6 @@ import org.camunda.bpm.engine.RuntimeService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.unicam.intermediate.models.record.BindingTaskInfo;
-import org.unicam.intermediate.service.environmental.EnvironmentDataService;
 import org.unicam.intermediate.service.participant.ParticipantDataService;
 
 import java.util.ArrayList;
@@ -13,13 +12,17 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 @Slf4j
 public class BindingTaskRegistry {
 
-    private final EnvironmentDataService environmentDataService;
+    private static final String BPMN_ERROR_CODE_VAR = "__spaceBpmnErrorCode";
+    private static final String BPMN_ERROR_MESSAGE_VAR = "__spaceBpmnErrorMessage";
+    private static final String FAILED_BINDING_ERROR_CODE = "failedBinding";
+
     private final ParticipantDataService participantDataService;
     private final RuntimeService runtimeService;
 
@@ -29,10 +32,11 @@ public class BindingTaskRegistry {
     // pairKey -> active paired binding tasks to monitor by position
     private final Map<String, BindingPair> activePairs = new ConcurrentHashMap<>();
 
-    public BindingTaskRegistry(EnvironmentDataService environmentDataService,
-                               ParticipantDataService participantDataService,
+    // executionId -> epoch millis when binding timer started
+    private final Map<String, Long> bindingTimerStartByExecutionId = new ConcurrentHashMap<>();
+
+    public BindingTaskRegistry(ParticipantDataService participantDataService,
                                RuntimeService runtimeService) {
-        this.environmentDataService = environmentDataService;
         this.participantDataService = participantDataService;
         this.runtimeService = runtimeService;
     }
@@ -40,18 +44,29 @@ public class BindingTaskRegistry {
     public void registerTask(String businessKey,
                              String participantId,
                              String targetParticipantId,
-                             String executionId) {
-        if (businessKey == null || participantId == null || targetParticipantId == null || executionId == null) {
-            log.warn("[BindingRegistry] Cannot register binding task due to null values: businessKey={}, participantId={}, targetParticipantId={}, executionId={}",
-                    businessKey, participantId, targetParticipantId, executionId);
+                             String executionId,
+                             String activityId,
+                             Double timer) {
+        if (businessKey == null || participantId == null || targetParticipantId == null || executionId == null || activityId == null) {
+            log.warn("[BindingRegistry] Cannot register binding task due to null values: businessKey={}, participantId={}, targetParticipantId={}, executionId={}, activityId={}",
+                    businessKey, participantId, targetParticipantId, executionId, activityId);
             return;
         }
 
-        log.info("[BindingRegistry] Registering task: BK={} | {} -> {} | exec={}", 
-                businessKey, participantId, targetParticipantId, executionId);
+        log.info("[BindingRegistry] Registering task: BK={} | {} -> {} | exec={} | activity={} | timer={}",
+                businessKey, participantId, targetParticipantId, executionId, activityId, timer != null ? timer : "(empty)");
 
-        BindingTaskInfo taskInfo = new BindingTaskInfo(businessKey, participantId, targetParticipantId, executionId);
+        BindingTaskInfo taskInfo = new BindingTaskInfo(
+                businessKey,
+                participantId,
+                targetParticipantId,
+                executionId,
+                activityId,
+                timer
+        );
         waitingByParticipant.put(participantId, taskInfo);
+        bindingTimerStartByExecutionId.remove(executionId);
+
         log.info("[BindingRegistry] Registered waiting binding task | BK: {} | participant: {} -> target: {}",
                 businessKey, participantId, targetParticipantId);
 
@@ -67,7 +82,10 @@ public class BindingTaskRegistry {
             return;
         }
 
-        waitingByParticipant.remove(participantId);
+        BindingTaskInfo removedWaiting = waitingByParticipant.remove(participantId);
+        if (removedWaiting != null) {
+            bindingTimerStartByExecutionId.remove(removedWaiting.executionId());
+        }
 
         List<String> pairKeysToRemove = new ArrayList<>();
         for (Map.Entry<String, BindingPair> entry : activePairs.entrySet()) {
@@ -82,8 +100,7 @@ public class BindingTaskRegistry {
         for (String pairKey : pairKeysToRemove) {
             BindingPair removed = activePairs.remove(pairKey);
             if (removed != null) {
-                waitingByParticipant.remove(removed.first.participantId());
-                waitingByParticipant.remove(removed.second.participantId());
+                cleanupPair(removed);
                 log.info("[BindingRegistry] Removed active pair {} due to task end", pairKey);
             }
         }
@@ -138,29 +155,58 @@ public class BindingTaskRegistry {
 
     @Scheduled(fixedRate = 2000)
     public void checkBindingCompletion() {
+        List<String> timedOutWaitingParticipants = new ArrayList<>();
+
         if (!waitingByParticipant.isEmpty()) {
-            log.info("[BindingRegistry] Waiting for counterpart: {} participants in waiting | waiting={}", 
+            log.info("[BindingRegistry] Waiting for counterpart: {} participants in waiting | waiting={}",
                     waitingByParticipant.size(),
                     waitingByParticipant.entrySet().stream()
                             .map(e -> e.getKey() + "->" + e.getValue().targetParticipantId())
                             .toList());
+
+            for (BindingTaskInfo waitingTask : waitingByParticipant.values()) {
+                if (isBindingTimerExpired(waitingTask) && signalBindingTimeout(waitingTask)) {
+                    timedOutWaitingParticipants.add(waitingTask.participantId());
+                }
+            }
+        }
+
+        for (String participantId : timedOutWaitingParticipants) {
+            BindingTaskInfo removed = waitingByParticipant.remove(participantId);
+            if (removed != null) {
+                bindingTimerStartByExecutionId.remove(removed.executionId());
+            }
         }
 
         if (activePairs.isEmpty()) {
             return;
         }
 
-        List<String> completedPairs = new ArrayList<>();
+        List<String> pairsToRemove = new ArrayList<>();
+        List<BindingTaskInfo> timedOutInPairs = new ArrayList<>();
 
         for (Map.Entry<String, BindingPair> entry : activePairs.entrySet()) {
             String pairKey = entry.getKey();
             BindingPair pair = entry.getValue();
 
+            boolean firstTimedOut = isBindingTimerExpired(pair.first);
+            boolean secondTimedOut = isBindingTimerExpired(pair.second);
+            if (firstTimedOut || secondTimedOut) {
+                if (firstTimedOut) {
+                    timedOutInPairs.add(pair.first);
+                }
+                if (secondTimedOut) {
+                    timedOutInPairs.add(pair.second);
+                }
+                pairsToRemove.add(pairKey);
+                continue;
+            }
+
             String positionA = getParticipantPosition(pair.first.participantId());
             String positionB = getParticipantPosition(pair.second.participantId());
 
-            log.info("[BindingRegistry] Checking pair {}: {} at {} vs {} at {}", 
-                    pairKey, 
+            log.info("[BindingRegistry] Checking pair {}: {} at {} vs {} at {}",
+                    pairKey,
                     pair.first.participantId(), positionA,
                     pair.second.participantId(), positionB);
 
@@ -174,45 +220,131 @@ public class BindingTaskRegistry {
                 try {
                     runtimeService.signal(pair.first.executionId());
                     runtimeService.signal(pair.second.executionId());
-                    completedPairs.add(pairKey);
+                    pairsToRemove.add(pairKey);
                 } catch (Exception e) {
                     log.error("[BindingRegistry] Failed to signal pair {}: {}", pairKey, e.getMessage(), e);
                 }
             }
         }
 
-        for (String pairKey : completedPairs) {
+        Set<String> uniquePairKeys = ConcurrentHashMap.newKeySet();
+        uniquePairKeys.addAll(pairsToRemove);
+        for (String pairKey : uniquePairKeys) {
             BindingPair removed = activePairs.remove(pairKey);
             if (removed != null) {
-                waitingByParticipant.remove(removed.first.participantId());
-                waitingByParticipant.remove(removed.second.participantId());
-                log.info("[BindingRegistry] Completed and removed pair {}", pairKey);
+                cleanupPair(removed);
+                log.info("[BindingRegistry] Completed/removed pair {}", pairKey);
             }
         }
+
+        for (BindingTaskInfo timedOutTask : timedOutInPairs) {
+            signalBindingTimeout(timedOutTask);
+        }
+    }
+
+    private boolean signalBindingTimeout(BindingTaskInfo taskInfo) {
+        if (!isExecutionStillActive(taskInfo.executionId())) {
+            return false;
+        }
+
+        try {
+            runtimeService.setVariableLocal(taskInfo.executionId(), BPMN_ERROR_CODE_VAR, FAILED_BINDING_ERROR_CODE);
+            runtimeService.setVariableLocal(
+                    taskInfo.executionId(),
+                    BPMN_ERROR_MESSAGE_VAR,
+                    String.format(
+                            "Binding with participant '%s' did not complete within timer for activity '%s'",
+                            taskInfo.targetParticipantId(),
+                            taskInfo.activityId()
+                    )
+            );
+            runtimeService.signal(taskInfo.executionId());
+            bindingTimerStartByExecutionId.remove(taskInfo.executionId());
+            log.warn("[BindingRegistry] Binding timer expired -> raised '{}' | participant={} | target={} | activity={} | execution={} | timer={}s",
+                    FAILED_BINDING_ERROR_CODE,
+                    taskInfo.participantId(),
+                    taskInfo.targetParticipantId(),
+                    taskInfo.activityId(),
+                    taskInfo.executionId(),
+                    taskInfo.timer());
+            return true;
+        } catch (Exception e) {
+            log.error("[BindingRegistry] Failed to signal timeout for execution {}: {}",
+                    taskInfo.executionId(), e.getMessage(), e);
+            return false;
+        }
+    }
+
+    private boolean isBindingTimerExpired(BindingTaskInfo taskInfo) {
+        Double timerSeconds = taskInfo.timer();
+        if (timerSeconds == null || timerSeconds <= 0) {
+            bindingTimerStartByExecutionId.remove(taskInfo.executionId());
+            return false;
+        }
+
+        long startTime = bindingTimerStartByExecutionId.computeIfAbsent(taskInfo.executionId(), ignored -> {
+            long now = System.currentTimeMillis();
+            log.info("[BindingRegistry] Binding timer started | participant={} | target={} | activity={} | execution={} | timer={}s",
+                    taskInfo.participantId(),
+                    taskInfo.targetParticipantId(),
+                    taskInfo.activityId(),
+                    taskInfo.executionId(),
+                    timerSeconds);
+            return now;
+        });
+
+        long timeoutMillis = Math.round(timerSeconds * 1000.0d);
+        long elapsed = System.currentTimeMillis() - startTime;
+
+        if (elapsed >= timeoutMillis) {
+            bindingTimerStartByExecutionId.remove(taskInfo.executionId());
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean isExecutionStillActive(String executionId) {
+        if (executionId == null || executionId.isBlank()) {
+            return false;
+        }
+        try {
+            return runtimeService.createExecutionQuery().executionId(executionId).singleResult() != null;
+        } catch (Exception ex) {
+            log.debug("[BindingRegistry] Failed to check execution {} activity state: {}", executionId, ex.getMessage());
+            return false;
+        }
+    }
+
+    private void cleanupPair(BindingPair pair) {
+        waitingByParticipant.remove(pair.first.participantId());
+        waitingByParticipant.remove(pair.second.participantId());
+        bindingTimerStartByExecutionId.remove(pair.first.executionId());
+        bindingTimerStartByExecutionId.remove(pair.second.executionId());
     }
 
     private void tryActivatePair(BindingTaskInfo current) {
         log.info("[BindingRegistry] tryActivatePair: Looking for counterpart for {} -> {}",
                 current.participantId(), current.targetParticipantId());
-        
+
         BindingTaskInfo counterpart = waitingByParticipant.get(current.targetParticipantId());
         if (counterpart == null) {
             log.info("[BindingRegistry] tryActivatePair: No counterpart found for {} (waiting set: {})",
                     current.targetParticipantId(), waitingByParticipant.keySet());
             return;
         }
-        
+
         log.info("[BindingRegistry] tryActivatePair: Found potential counterpart {} -> {}",
                 counterpart.participantId(), counterpart.targetParticipantId());
 
         boolean sameBusinessKey = current.businessKey().equals(counterpart.businessKey());
         log.info("[BindingRegistry] tryActivatePair: Same business key? {} vs {} = {}",
                 current.businessKey(), counterpart.businessKey(), sameBusinessKey);
-        
+
         boolean participantMatch = current.participantId().equals(counterpart.targetParticipantId());
         boolean targetMatch = current.targetParticipantId().equals(counterpart.participantId());
         boolean reciprocalPair = participantMatch && targetMatch;
-        
+
         log.info("[BindingRegistry] tryActivatePair: Reciprocal check - current.id ({}) == counterpart.target ({}) ? {} | current.target ({}) == counterpart.id ({}) ? {}",
                 current.participantId(), counterpart.targetParticipantId(), participantMatch,
                 current.targetParticipantId(), counterpart.participantId(), targetMatch);

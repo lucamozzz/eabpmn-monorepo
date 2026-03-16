@@ -26,7 +26,7 @@ export const TASK_TYPES_CONFIG = {
     typeValue: 'Binding',
     displayName: 'Binding Task',
     icon: { class: 'binding-badge', iconFile: bindIcon },
-    extensionElements: [ 'space:Type', 'space:Guard', 'space:TaskAssignment', 'space:TaskAssignmentReached' ],
+    extensionElements: [ 'space:Type', 'space:Guard', 'space:Timer', 'space:TaskAssignment', 'space:TaskAssignmentReached' ],
     validationRules: [],
     formType: 'none'
   },

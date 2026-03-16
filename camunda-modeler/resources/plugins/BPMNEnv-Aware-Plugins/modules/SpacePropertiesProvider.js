@@ -881,7 +881,7 @@ SpacePropertiesProvider.prototype.createSpaceSection = function(element) {
 
       <div data-entry-id="space-timer" 
            class="bio-properties-panel-entry space-timer-entry" 
-         style="${(currentType !== 'environmental' && currentType !== 'movement') ? 'display: none;' : ''}">
+         style="${(currentType !== 'environmental' && currentType !== 'movement' && currentType !== 'binding') ? 'display: none;' : ''}">
         <div class="bio-properties-panel-textfield">
           <label for="space-timer-input" class="bio-properties-panel-label">Timer (optional)</label>
           <input id="space-timer-input"
@@ -1487,7 +1487,9 @@ SpacePropertiesProvider.prototype.updateFieldVisibility = function(section, sele
   }
   if (timerEntry) {
     timerEntry.style.display =
-      selectedType === TASK_TYPE_KEYS.ENVIRONMENTAL || selectedType === TASK_TYPE_KEYS.MOVEMENT
+      selectedType === TASK_TYPE_KEYS.ENVIRONMENTAL ||
+      selectedType === TASK_TYPE_KEYS.MOVEMENT ||
+      selectedType === TASK_TYPE_KEYS.BINDING
         ? 'block'
         : 'none';
   }
