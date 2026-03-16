@@ -459,7 +459,8 @@
       for (const p of participants) {
         const opt = document.createElement("option");
         opt.value = p.id;
-        opt.textContent = p.id + (p.position ? (" (" + p.position + ")") : " (null)");
+        const participantLabel = (p && p.name ? p.name : p.id || "Unknown");
+        opt.textContent = participantLabel + (p.position ? (" (" + p.position + ")") : " (null)");
         participantSelect.appendChild(opt);
       }
 

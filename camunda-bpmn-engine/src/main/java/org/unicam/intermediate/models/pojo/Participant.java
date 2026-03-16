@@ -7,5 +7,6 @@ import lombok.Setter;
 @Getter
 public class Participant {
     private String id;
+    private String name;
     private String position;
 }

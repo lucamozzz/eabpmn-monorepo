@@ -47,11 +47,13 @@ public class ParticipantDataService {
         // Create static participants
         Participant p1 = new Participant();
         p1.setId("Participant_0yrbhi5");
-        p1.setPosition("place1");
+        p1.setName("Student");
+        p1.setPosition("place17");
 
         Participant p2 = new Participant();
         p2.setId("Participant_1fejmk0");
-        p2.setPosition("place12");
+        p2.setName("Tutor");
+        p2.setPosition("place1");
 
         // Add to map
         participantsMap.put(p1.getId(), p1);

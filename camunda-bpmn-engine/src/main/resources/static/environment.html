@@ -529,9 +529,12 @@
             lng += Math.cos(angle) * radiusDeg;
           }
 
+          const participantLabel = (participant && participant.name ? participant.name : null)
+            || (participant && participant.id ? participant.id : "unknown");
+
           L.circleMarker([lat, lng], PARTICIPANT_STYLE)
             .addTo(participantLayers)
-            .bindTooltip((participant.id || "unknown"));
+            .bindTooltip(participantLabel);
         });
       }
     }
