@@ -18,6 +18,7 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
@@ -97,6 +98,24 @@ public class EnvironmentalTaskRegistry {
         }
     }
 
+    public void removeTask(String executionId, String expectedActivityId) {
+        if (executionId == null || expectedActivityId == null) {
+            return;
+        }
+
+        EnvironmentalTaskInfo currentTask = activeEnvironmentalTasks.get(executionId);
+        if (currentTask == null || !Objects.equals(currentTask.activityId(), expectedActivityId)) {
+            return;
+        }
+
+        if (activeEnvironmentalTasks.remove(executionId, currentTask)) {
+            actionTimerStartByExecutionId.remove(executionId);
+            clearNotificationMarkersForExecution(executionId);
+            log.info("[EnvironmentalRegistry] Removed environmental task | activity={} | execution={}",
+                    currentTask.activityId(), currentTask.executionId());
+        }
+    }
+
     /**
      * Returns action requests currently pending for the given participant.
      * A request is considered pending when:
@@ -155,7 +174,7 @@ public class EnvironmentalTaskRegistry {
             return;
         }
 
-        List<String> completedExecutions = new ArrayList<>();
+        List<EnvironmentalTaskInfo> completedTasks = new ArrayList<>();
 
         for (EnvironmentalTaskInfo taskInfo : activeEnvironmentalTasks.values()) {
             boolean guardSatisfied = evaluateGuard(taskInfo.guardExpression(), taskInfo.activityId(), taskInfo.participantId(), taskInfo.executionId());
@@ -179,7 +198,7 @@ public class EnvironmentalTaskRegistry {
                     );
                 }
 
-                completedExecutions.add(taskInfo.executionId());
+                completedTasks.add(taskInfo);
                 runtimeService.signal(taskInfo.executionId());
                 if (actionCheckResult == ActionCheckResult.TIMEOUT) {
                     log.warn("[EnvironmentalRegistry] Action timer expired -> raised '{}' | activity={} | execution={} | action='{}' | timer={}",
@@ -201,7 +220,7 @@ public class EnvironmentalTaskRegistry {
             }
         }
 
-        completedExecutions.forEach(this::removeTask);
+        completedTasks.forEach(task -> removeTask(task.executionId(), task.activityId()));
     }
 
     private boolean evaluateGuard(String guardExpression, String activityId, String participantId, String executionId) {

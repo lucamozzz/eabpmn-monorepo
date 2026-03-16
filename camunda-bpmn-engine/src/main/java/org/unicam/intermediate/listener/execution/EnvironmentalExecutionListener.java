@@ -73,7 +73,7 @@ public class EnvironmentalExecutionListener implements ExecutionListener {
         execution.removeVariableLocal(BPMN_ERROR_CODE_VAR);
         execution.removeVariableLocal(BPMN_ERROR_MESSAGE_VAR);
 
-        environmentalTaskRegistry.removeTask(execution.getId());
+        environmentalTaskRegistry.removeTask(execution.getId(), execution.getCurrentActivityId());
         log.info("[ENVIRONMENTAL] Task {} ended", execution.getCurrentActivityId());
 
         if (bpmnErrorCode != null && !bpmnErrorCode.isBlank()) {

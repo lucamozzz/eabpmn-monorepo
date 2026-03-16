@@ -2619,3 +2619,589 @@ This generated password is for development use only. Your security configuration
 10:39:21.702 [restartedMain] INFO  o.u.i.config.MessageFlowRegistrar - [MessageFlowRegistrar] Application ready - registering message flows for all deployed processes
 10:39:21.706 [restartedMain] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14014 Starting up the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor].
 10:39:21.706 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14018 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] starting to acquire jobs
+10:39:23.423 [http-nio-8082-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+10:39:23.424 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+10:39:23.427 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+10:41:54.359 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 2 class path changes (0 additions, 0 deletions, 2 modifications)
+10:41:54.368 [Thread-112] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8082"]
+10:41:54.377 [Thread-112] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14015 Shutting down the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]
+10:41:54.377 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14020 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] stopped job acquisition
+10:41:54.378 [Thread-112] INFO  org.camunda.bpm.engine - ENGINE-00007 Process Engine default closed
+10:41:54.379 [Thread-112] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Shutting down embedded database: url='jdbc:h2:mem:aaf821f2-b26d-451e-af6e-c5abda7e06c8;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false'
+10:41:54.548 [restartedMain] INFO  org.unicam.intermediate.Application - Starting Application using Java 21.0.2 with PID 22677 (/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes started by lucamoz in /Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine)
+10:41:54.548 [restartedMain] INFO  org.unicam.intermediate.Application - No active profile set, falling back to 1 default profile: "default"
+10:41:54.813 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
+10:41:54.813 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+10:41:54.814 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+10:41:54.814 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+10:41:54.821 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+10:41:54.821 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 272 ms
+10:41:54.823 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Configuring camunda rest api.
+10:41:54.823 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Finished configuring camunda rest api.
+10:41:54.848 [restartedMain] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:1dd7c5f6-f8c3-4987-ad14-4b3702bdf1f2;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+10:41:54.849 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:1dd7c5f6-f8c3-4987-ad14-4b3702bdf1f2'
+10:41:54.879 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB040 Setting up jobExecutor with corePoolSize=3, maxPoolSize:10
+10:41:54.900 [restartedMain] INFO  org.camunda.bpm.engine.cfg - ENGINE-12003 Plugin 'CompositeProcessEnginePlugin[genericPropertiesConfiguration, camundaConfig, camundaProcessEngineConfiguration, camundaDatasourceConfiguration, camundaJobConfiguration, camundaHistoryConfiguration, camundaMetricsConfiguration, camundaAuthorizationConfiguration, camundaDeploymentConfiguration, createAdminUserConfiguration, failedJobConfiguration, , eventPublisherPlugin, ApplicationContextClassloaderSwitchPlugin]' activated on process engine 'default'
+10:41:55.447 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB021 Auto-Deploying resources: []
+10:41:55.447 [restartedMain] INFO  o.u.i.config.CamundaConfig - [CamundaConfig] Registered parse listeners
+10:41:55.447 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-001: Initialized Camunda Spring Boot Eventing Engine Plugin.
+10:41:55.447 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-003: Task events will be published as Spring Events.
+10:41:55.447 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-005: Execution events will be published as Spring Events.
+10:41:55.447 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-009: Listeners will not be invoked if a skipCustomListeners API parameter is set to true by user.
+10:41:55.447 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-007: History events will be published as Spring events.
+10:41:56.226 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.engine.sql'
+10:41:56.231 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.history.sql'
+10:41:56.232 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'identity' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.identity.sql'
+10:41:56.234 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.engine.sql'
+10:41:56.235 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.history.sql'
+10:41:56.235 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.engine.sql'
+10:41:56.236 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.history.sql'
+10:41:56.236 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03067 No history level property found in database
+10:41:56.236 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03065 Creating historyLevel property in database for level: HistoryLevelFull(name=full, id=3)
+10:41:56.237 [restartedMain] INFO  org.camunda.bpm.engine - ENGINE-00001 Process Engine default created.
+10:41:56.254 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 17 places, 4 logical places
+10:41:56.269 [restartedMain] INFO  o.u.i.service.TaskTypeRegistry - [TaskTypeRegistry] Initialized with 3 task types
+10:41:56.274 [restartedMain] INFO  o.u.i.s.p.ParticipantDataService - [ParticipantDataService] Initialized with 2 static participants
+10:41:56.295 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: aff93c7e-b9ab-4409-a1c7-2e4386f880f5
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+10:41:56.345 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+10:41:56.358 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@501c4b4e, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7f55bda6, org.springframework.security.web.context.SecurityContextHolderFilter@5a62a53a, org.springframework.security.web.header.HeaderWriterFilter@66095f9a, org.springframework.web.filter.CorsFilter@5f64b7a6, org.springframework.security.web.authentication.logout.LogoutFilter@237192f1, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5cf915c4, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@402cc320, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@467f627d, org.springframework.security.web.access.ExceptionTranslationFilter@4b2afc7f, org.springframework.security.web.access.intercept.AuthorizationFilter@11a1046b]
+10:41:56.389 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazySecurityFilter@35fcc257
+10:41:56.389 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazyProcessEnginesFilter@524cd0b3
+10:41:56.410 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+10:41:56.423 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8082"]
+10:41:56.424 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8082 (http) with context path ''
+10:41:56.429 [restartedMain] INFO  org.unicam.intermediate.Application - Started Application in 1.896 seconds (process running for 10097.652)
+10:41:56.430 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Initializing Environment on startup
+10:41:56.430 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 17 places, 4 logical places
+10:41:56.430 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Environment loaded with 17 physical places
+10:41:56.430 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Starting user and group initialization...
+10:41:56.432 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: students
+10:41:56.432 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: tutors
+10:41:56.433 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: acataluffi (Andrea Cataluffi)
+10:41:56.433 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added acataluffi to students group
+10:41:56.434 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: lmozzoni (Luca Mozzoni)
+10:41:56.434 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added lmozzoni to tutors group
+10:41:56.435 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: admins
+10:41:56.436 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added user 'a' to admins group
+10:41:56.436 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+10:41:56.436 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Initialization completed successfully!
+10:41:56.436 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+10:41:56.436 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current users count: 3
+10:41:56.437 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current groups count: 4
+10:41:56.437 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+10:41:56.437 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Camunda Cockpit: http://localhost:8082/camunda
+10:41:56.437 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+10:41:56.437 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Login credentials:
+10:41:56.437 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Admin    : a / a
+10:41:56.437 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Student  : acataluffi / a
+10:41:56.437 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Tutor    : lmozzoni / a
+10:41:56.437 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+10:41:56.437 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] All users in system:
+10:41:56.437 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - a (Luca A) - Groups: [admins, camunda-admin]
+10:41:56.438 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - acataluffi (Andrea Cataluffi) - Groups: [admins, students]
+10:41:56.438 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - lmozzoni (Luca Mozzoni) - Groups: [admins, tutors]
+10:41:56.439 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+10:41:56.439 [restartedMain] INFO  o.u.i.config.MessageFlowRegistrar - [MessageFlowRegistrar] Application ready - registering message flows for all deployed processes
+10:41:56.439 [restartedMain] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14014 Starting up the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor].
+10:41:56.440 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14018 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] starting to acquire jobs
+10:42:04.929 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+10:42:04.936 [Thread-116] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8082"]
+10:42:04.942 [Thread-116] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14015 Shutting down the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]
+10:42:04.942 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14020 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] stopped job acquisition
+10:42:04.943 [Thread-116] INFO  org.camunda.bpm.engine - ENGINE-00007 Process Engine default closed
+10:42:04.944 [Thread-116] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Shutting down embedded database: url='jdbc:h2:mem:1dd7c5f6-f8c3-4987-ad14-4b3702bdf1f2;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false'
+10:42:05.075 [restartedMain] INFO  org.unicam.intermediate.Application - Starting Application using Java 21.0.2 with PID 22677 (/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes started by lucamoz in /Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine)
+10:42:05.075 [restartedMain] INFO  org.unicam.intermediate.Application - No active profile set, falling back to 1 default profile: "default"
+10:42:05.318 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
+10:42:05.319 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+10:42:05.319 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+10:42:05.319 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+10:42:05.327 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+10:42:05.327 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 251 ms
+10:42:05.330 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Configuring camunda rest api.
+10:42:05.330 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Finished configuring camunda rest api.
+10:42:05.357 [restartedMain] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:ee3105d4-8f4b-4b2c-87c1-c7e869fc64a9;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+10:42:05.359 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:ee3105d4-8f4b-4b2c-87c1-c7e869fc64a9'
+10:42:05.401 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB040 Setting up jobExecutor with corePoolSize=3, maxPoolSize:10
+10:42:05.423 [restartedMain] INFO  org.camunda.bpm.engine.cfg - ENGINE-12003 Plugin 'CompositeProcessEnginePlugin[genericPropertiesConfiguration, camundaConfig, camundaProcessEngineConfiguration, camundaDatasourceConfiguration, camundaJobConfiguration, camundaHistoryConfiguration, camundaMetricsConfiguration, camundaAuthorizationConfiguration, camundaDeploymentConfiguration, createAdminUserConfiguration, failedJobConfiguration, , eventPublisherPlugin, ApplicationContextClassloaderSwitchPlugin]' activated on process engine 'default'
+10:42:07.736 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB021 Auto-Deploying resources: []
+10:42:07.738 [restartedMain] INFO  o.u.i.config.CamundaConfig - [CamundaConfig] Registered parse listeners
+10:42:07.739 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-001: Initialized Camunda Spring Boot Eventing Engine Plugin.
+10:42:07.739 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-003: Task events will be published as Spring Events.
+10:42:07.739 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-005: Execution events will be published as Spring Events.
+10:42:07.739 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-009: Listeners will not be invoked if a skipCustomListeners API parameter is set to true by user.
+10:42:07.739 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-007: History events will be published as Spring events.
+10:42:10.533 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.engine.sql'
+10:42:10.540 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.history.sql'
+10:42:10.543 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'identity' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.identity.sql'
+10:42:10.548 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.engine.sql'
+10:42:10.550 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.history.sql'
+10:42:10.552 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.engine.sql'
+10:42:10.555 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.history.sql'
+10:42:10.556 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03067 No history level property found in database
+10:42:10.556 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03065 Creating historyLevel property in database for level: HistoryLevelFull(name=full, id=3)
+10:42:10.558 [restartedMain] INFO  org.camunda.bpm.engine - ENGINE-00001 Process Engine default created.
+10:42:10.597 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 17 places, 4 logical places
+10:42:10.624 [restartedMain] INFO  o.u.i.service.TaskTypeRegistry - [TaskTypeRegistry] Initialized with 3 task types
+10:42:10.633 [restartedMain] INFO  o.u.i.s.p.ParticipantDataService - [ParticipantDataService] Initialized with 2 static participants
+10:42:10.669 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 2e7c3c1f-5acb-4de5-a2c1-aec06ad87c0d
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+10:42:10.745 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+10:42:10.761 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3799f119, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@73af6d40, org.springframework.security.web.context.SecurityContextHolderFilter@8833af1, org.springframework.security.web.header.HeaderWriterFilter@1bb0246a, org.springframework.web.filter.CorsFilter@3e8f05b0, org.springframework.security.web.authentication.logout.LogoutFilter@43b0f842, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@419c1705, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@48fcfa4e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@51c809de, org.springframework.security.web.access.ExceptionTranslationFilter@780e2cf4, org.springframework.security.web.access.intercept.AuthorizationFilter@4db4538c]
+10:42:11.056 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazySecurityFilter@6d709073
+10:42:11.057 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazyProcessEnginesFilter@5319cb86
+10:42:11.092 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+10:42:11.115 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8082"]
+10:42:11.117 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8082 (http) with context path ''
+10:42:11.124 [restartedMain] INFO  org.unicam.intermediate.Application - Started Application in 6.065 seconds (process running for 10112.347)
+10:42:11.125 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Initializing Environment on startup
+10:42:11.126 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 17 places, 4 logical places
+10:42:11.126 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Environment loaded with 17 physical places
+10:42:11.127 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Starting user and group initialization...
+10:42:11.131 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: students
+10:42:11.132 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: tutors
+10:42:11.133 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: acataluffi (Andrea Cataluffi)
+10:42:11.134 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added acataluffi to students group
+10:42:11.135 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: lmozzoni (Luca Mozzoni)
+10:42:11.135 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added lmozzoni to tutors group
+10:42:11.136 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: admins
+10:42:11.137 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added user 'a' to admins group
+10:42:11.137 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+10:42:11.137 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Initialization completed successfully!
+10:42:11.137 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+10:42:11.138 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current users count: 3
+10:42:11.138 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current groups count: 4
+10:42:11.138 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+10:42:11.138 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Camunda Cockpit: http://localhost:8082/camunda
+10:42:11.138 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+10:42:11.138 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Login credentials:
+10:42:11.138 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Admin    : a / a
+10:42:11.138 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Student  : acataluffi / a
+10:42:11.138 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Tutor    : lmozzoni / a
+10:42:11.138 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+10:42:11.138 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] All users in system:
+10:42:11.141 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - a (Luca A) - Groups: [admins, camunda-admin]
+10:42:11.142 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - acataluffi (Andrea Cataluffi) - Groups: [admins, students]
+10:42:11.143 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - lmozzoni (Luca Mozzoni) - Groups: [admins, tutors]
+10:42:11.147 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+10:42:11.147 [restartedMain] INFO  o.u.i.config.MessageFlowRegistrar - [MessageFlowRegistrar] Application ready - registering message flows for all deployed processes
+10:42:11.149 [restartedMain] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14014 Starting up the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor].
+10:42:11.149 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14018 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] starting to acquire jobs
+10:42:12.430 [http-nio-8082-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+10:42:12.430 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+10:42:12.433 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+10:42:12.524 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+10:42:12.528 [Thread-120] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8082"]
+10:42:12.535 [Thread-120] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14015 Shutting down the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]
+10:42:12.535 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14020 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] stopped job acquisition
+10:42:12.535 [Thread-120] INFO  org.camunda.bpm.engine - ENGINE-00007 Process Engine default closed
+10:42:12.536 [Thread-120] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Shutting down embedded database: url='jdbc:h2:mem:ee3105d4-8f4b-4b2c-87c1-c7e869fc64a9;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false'
+10:42:12.667 [restartedMain] INFO  org.unicam.intermediate.Application - Starting Application using Java 21.0.2 with PID 22677 (/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes started by lucamoz in /Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine)
+10:42:12.667 [restartedMain] INFO  org.unicam.intermediate.Application - No active profile set, falling back to 1 default profile: "default"
+10:42:13.363 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
+10:42:13.364 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+10:42:13.364 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+10:42:13.364 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+10:42:13.375 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+10:42:13.375 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 707 ms
+10:42:13.379 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Configuring camunda rest api.
+10:42:13.380 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Finished configuring camunda rest api.
+10:42:13.411 [restartedMain] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:a0b15cd9-2b01-48b3-b427-dec1e58bb361;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+10:42:13.419 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:a0b15cd9-2b01-48b3-b427-dec1e58bb361'
+10:42:13.463 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB040 Setting up jobExecutor with corePoolSize=3, maxPoolSize:10
+10:42:13.483 [restartedMain] INFO  org.camunda.bpm.engine.cfg - ENGINE-12003 Plugin 'CompositeProcessEnginePlugin[genericPropertiesConfiguration, camundaConfig, camundaProcessEngineConfiguration, camundaDatasourceConfiguration, camundaJobConfiguration, camundaHistoryConfiguration, camundaMetricsConfiguration, camundaAuthorizationConfiguration, camundaDeploymentConfiguration, createAdminUserConfiguration, failedJobConfiguration, , eventPublisherPlugin, ApplicationContextClassloaderSwitchPlugin]' activated on process engine 'default'
+10:42:14.180 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB021 Auto-Deploying resources: []
+10:42:14.180 [restartedMain] INFO  o.u.i.config.CamundaConfig - [CamundaConfig] Registered parse listeners
+10:42:14.180 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-001: Initialized Camunda Spring Boot Eventing Engine Plugin.
+10:42:14.180 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-003: Task events will be published as Spring Events.
+10:42:14.180 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-005: Execution events will be published as Spring Events.
+10:42:14.180 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-009: Listeners will not be invoked if a skipCustomListeners API parameter is set to true by user.
+10:42:14.180 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-007: History events will be published as Spring events.
+10:42:15.295 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.engine.sql'
+10:42:15.300 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.history.sql'
+10:42:15.301 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'identity' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.identity.sql'
+10:42:15.306 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.engine.sql'
+10:42:15.308 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.history.sql'
+10:42:15.383 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.engine.sql'
+10:42:15.384 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.history.sql'
+10:42:15.387 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03067 No history level property found in database
+10:42:15.388 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03065 Creating historyLevel property in database for level: HistoryLevelFull(name=full, id=3)
+10:42:15.393 [restartedMain] INFO  org.camunda.bpm.engine - ENGINE-00001 Process Engine default created.
+10:42:15.418 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 17 places, 4 logical places
+10:42:15.441 [restartedMain] INFO  o.u.i.service.TaskTypeRegistry - [TaskTypeRegistry] Initialized with 3 task types
+10:42:15.498 [restartedMain] INFO  o.u.i.s.p.ParticipantDataService - [ParticipantDataService] Initialized with 2 static participants
+10:42:15.529 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 75e26051-c9ed-4d94-bbcf-ed221cd5ebce
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+10:42:15.622 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+10:42:15.637 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@730a48ca, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7da96cc3, org.springframework.security.web.context.SecurityContextHolderFilter@2eed607, org.springframework.security.web.header.HeaderWriterFilter@6e7bb8b4, org.springframework.web.filter.CorsFilter@454ee591, org.springframework.security.web.authentication.logout.LogoutFilter@3956ef7f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6a5fc1fa, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7ef1ff4b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@59bd12c8, org.springframework.security.web.access.ExceptionTranslationFilter@1c311173, org.springframework.security.web.access.intercept.AuthorizationFilter@5c6810e0]
+10:42:15.679 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazySecurityFilter@70833534
+10:42:15.679 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazyProcessEnginesFilter@11f06eeb
+10:42:15.700 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+10:42:15.715 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8082"]
+10:42:15.716 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8082 (http) with context path ''
+10:42:15.722 [restartedMain] INFO  org.unicam.intermediate.Application - Started Application in 3.07 seconds (process running for 10116.945)
+10:42:15.724 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Initializing Environment on startup
+10:42:15.724 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 17 places, 4 logical places
+10:42:15.724 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Environment loaded with 17 physical places
+10:42:15.724 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Starting user and group initialization...
+10:42:15.726 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: students
+10:42:15.726 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: tutors
+10:42:15.727 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: acataluffi (Andrea Cataluffi)
+10:42:15.728 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added acataluffi to students group
+10:42:15.730 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: lmozzoni (Luca Mozzoni)
+10:42:15.731 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added lmozzoni to tutors group
+10:42:15.731 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: admins
+10:42:15.732 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added user 'a' to admins group
+10:42:15.733 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+10:42:15.733 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Initialization completed successfully!
+10:42:15.733 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+10:42:15.734 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current users count: 3
+10:42:15.734 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current groups count: 4
+10:42:15.734 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+10:42:15.734 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Camunda Cockpit: http://localhost:8082/camunda
+10:42:15.734 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+10:42:15.734 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Login credentials:
+10:42:15.734 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Admin    : a / a
+10:42:15.734 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Student  : acataluffi / a
+10:42:15.734 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Tutor    : lmozzoni / a
+10:42:15.734 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+10:42:15.734 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] All users in system:
+10:42:15.736 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - a (Luca A) - Groups: [admins, camunda-admin]
+10:42:15.737 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - acataluffi (Andrea Cataluffi) - Groups: [admins, students]
+10:42:15.737 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - lmozzoni (Luca Mozzoni) - Groups: [admins, tutors]
+10:42:15.738 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+10:42:15.738 [restartedMain] INFO  o.u.i.config.MessageFlowRegistrar - [MessageFlowRegistrar] Application ready - registering message flows for all deployed processes
+10:42:15.740 [restartedMain] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14014 Starting up the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor].
+10:42:15.740 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14018 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] starting to acquire jobs
+10:42:16.422 [http-nio-8082-exec-3] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+10:42:16.422 [http-nio-8082-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+10:42:16.423 [http-nio-8082-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+10:43:46.124 [http-nio-8082-exec-3] INFO  o.u.i.listener.DynamicParseListener - [DynamicParseListener] Configured activity 'Activity_1t301f5' with type 'unbinding' -> listener ${{unbindingExecutionListener}}
+10:43:46.125 [http-nio-8082-exec-3] INFO  o.u.i.listener.DynamicParseListener - [DynamicParseListener] Configured activity 'Activity_0r4gaqa' with type 'binding' -> listener ${{bindingExecutionListener}}
+10:43:46.125 [http-nio-8082-exec-3] INFO  o.u.i.listener.DynamicParseListener - [DynamicParseListener] Configured activity 'Activity_0pux44l' with type 'movement' -> listener ${{movementExecutionListener}}
+10:43:46.126 [http-nio-8082-exec-3] INFO  o.u.i.listener.DynamicParseListener - [DynamicParseListener] Configured activity 'Activity_053u9k9' with type 'environmental' -> listener ${{environmentalExecutionListener}}
+10:43:46.128 [http-nio-8082-exec-3] INFO  o.u.i.listener.DynamicParseListener - [DynamicParseListener] Configured activity 'Activity_0t7ecrn' with type 'binding' -> listener ${{bindingExecutionListener}}
+10:43:46.128 [http-nio-8082-exec-3] INFO  o.u.i.listener.DynamicParseListener - [DynamicParseListener] Configured activity 'Activity_134ot6o' with type 'movement' -> listener ${{movementExecutionListener}}
+10:43:46.129 [http-nio-8082-exec-3] INFO  o.u.i.listener.DynamicParseListener - [DynamicParseListener] Configured activity 'Activity_1qbf2yn' with type 'environmental' -> listener ${{environmentalExecutionListener}}
+10:43:46.129 [http-nio-8082-exec-3] INFO  o.u.i.listener.DynamicParseListener - [DynamicParseListener] Configured activity 'Activity_1nycl57' with type 'environmental' -> listener ${{environmentalExecutionListener}}
+10:43:46.129 [http-nio-8082-exec-3] INFO  o.u.i.listener.DynamicParseListener - [DynamicParseListener] Configured activity 'Activity_1b8dtmr' with type 'unbinding' -> listener ${{unbindingExecutionListener}}
+10:43:46.130 [http-nio-8082-exec-3] INFO  o.u.i.listener.DynamicParseListener - [DynamicParseListener] Configured activity 'Activity_146u96e' with type 'environmental' -> listener ${{environmentalExecutionListener}}
+10:43:46.131 [http-nio-8082-exec-3] INFO  o.u.i.listener.DynamicParseListener - [DynamicParseListener] Configured activity 'Activity_0ni6qyx' with type 'environmental' -> listener ${{environmentalExecutionListener}}
+10:43:46.159 [http-nio-8082-exec-7] ERROR o.u.i.e.GlobalExceptionHandler - [Unexpected Error] No static resource .well-known/camunda-automation-platform/webapps.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource .well-known/camunda-automation-platform/webapps.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:479)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:340)
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:82)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:128)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:323)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:224)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1736)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+10:43:46.167 [http-nio-8082-exec-7] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource .well-known/camunda-automation-platform/webapps.]
+10:43:56.273 [http-nio-8082-exec-6] INFO  o.u.i.s.p.ParticipantService - [ParticipantService] Extracted collaboration with 2 participants
+10:43:56.275 [http-nio-8082-exec-6] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='set2' on Activity_0pux44l
+10:43:56.275 [http-nio-8082-exec-6] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_0pux44l - Move to
+tutor's room | Participant: Student (Participant_0yrbhi5) | Destination: set2
+10:43:56.276 [http-nio-8082-exec-6] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_0yrbhi5 | Destination: set2 | ExecutionId: a693a27e-211c-11f1-9f0b-52aadf7d5077
+10:43:56.276 [http-nio-8082-exec-6] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0pux44l' has entered wait state.
+10:43:57.789 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] ✓ Participant Participant_0yrbhi5 reached destination set2 | Completing task
+10:43:57.792 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0pux44l'. signalName=null, signalData=null
+10:43:57.794 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] restored <space:destination>='set2' on Activity_0pux44l
+10:43:57.794 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_0yrbhi5
+10:43:57.794 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Task completed for participant Participant_0yrbhi5
+10:43:57.795 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Registered environmental task | activity=Activity_053u9k9 | execution=a693a27e-211c-11f1-9f0b-52aadf7d5077 | guard='Tutor.position == Tutors Room' | action='(empty)' | participantId=Participant_0yrbhi5 | timer=(empty)
+10:43:57.796 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] WAITING | Activity: Activity_053u9k9 - Ask for explanation | Guard: Tutor.position == Tutors Room | Action: (empty) | Timer: (empty)
+10:43:57.796 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_053u9k9' has entered wait state.
+10:43:57.797 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Task completed successfully for participant Participant_0yrbhi5
+10:43:58.967 [http-nio-8082-exec-4] INFO  o.u.i.service.MessageFlowRegistry - [MessageFlowRegistry] Registered binding flow: Activity_0r4gaqa -> Activity_0t7ecrn (participants: null -> null)
+10:43:58.967 [http-nio-8082-exec-4] INFO  o.u.i.service.MessageFlowRegistry - [MessageFlowRegistry] Registered unbinding flow: Activity_1b8dtmr -> Activity_1t301f5 (participants: null -> null)
+10:43:58.967 [http-nio-8082-exec-4] INFO  o.u.i.service.MessageFlowRegistry - [MessageFlowRegistry] Late registration of flows for process: Tutor:1:a089762d-211c-11f1-9f0b-52aadf7d5077
+10:43:58.968 [http-nio-8082-exec-4] INFO  o.u.i.l.e.BindingExecutionListener - [BINDING] Task Activity_0t7ecrn started - Participant Tutor (Participant_1fejmk0) waiting for Student (Participant_0yrbhi5)
+10:43:58.968 [http-nio-8082-exec-4] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Registering task: BK=a | Participant_1fejmk0 -> Participant_0yrbhi5 | exec=a82eb4e7-211c-11f1-9f0b-52aadf7d5077
+10:43:58.968 [http-nio-8082-exec-4] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Registered waiting binding task | BK: a | participant: Participant_1fejmk0 -> target: Participant_0yrbhi5
+10:43:58.968 [http-nio-8082-exec-4] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting tasks after registration: [Participant_1fejmk0=>Participant_0yrbhi5]
+10:43:58.968 [http-nio-8082-exec-4] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] tryActivatePair: Looking for counterpart for Participant_1fejmk0 -> Participant_0yrbhi5
+10:43:58.968 [http-nio-8082-exec-4] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] tryActivatePair: No counterpart found for Participant_0yrbhi5 (waiting set: [Participant_1fejmk0])
+10:43:58.968 [http-nio-8082-exec-4] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0t7ecrn' has entered wait state.
+10:43:59.791 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_1fejmk0->Participant_0yrbhi5]
+10:44:01.796 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_1fejmk0->Participant_0yrbhi5]
+10:44:03.791 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_1fejmk0->Participant_0yrbhi5]
+10:44:05.798 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_1fejmk0->Participant_0yrbhi5]
+10:44:07.790 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_1fejmk0->Participant_0yrbhi5]
+10:44:09.791 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_1fejmk0->Participant_0yrbhi5]
+10:44:11.788 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_1fejmk0->Participant_0yrbhi5]
+10:44:13.788 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_1fejmk0->Participant_0yrbhi5]
+10:44:15.789 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_1fejmk0->Participant_0yrbhi5]
+10:44:17.787 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_1fejmk0->Participant_0yrbhi5]
+10:44:19.790 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_1fejmk0->Participant_0yrbhi5]
+10:44:21.791 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_1fejmk0->Participant_0yrbhi5]
+10:44:23.792 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_1fejmk0->Participant_0yrbhi5]
+10:44:25.786 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_1fejmk0->Participant_0yrbhi5]
+10:44:26.908 [http-nio-8082-exec-9] INFO  o.u.i.c.EnvironmentController - [Environment API] Participant 'Participant_1fejmk0' position set to: place1
+10:44:27.792 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_053u9k9'. signalName=null, signalData=null
+10:44:27.794 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Removed environmental task | activity=Activity_053u9k9 | execution=a693a27e-211c-11f1-9f0b-52aadf7d5077
+10:44:27.795 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] Task Activity_053u9k9 ended
+10:44:27.798 [scheduling-1] INFO  o.u.i.service.MessageFlowRegistry - [MessageFlowRegistry] Registered binding flow: Activity_0r4gaqa -> Activity_0t7ecrn (participants: null -> null)
+10:44:27.798 [scheduling-1] INFO  o.u.i.service.MessageFlowRegistry - [MessageFlowRegistry] Registered unbinding flow: Activity_1b8dtmr -> Activity_1t301f5 (participants: null -> null)
+10:44:27.798 [scheduling-1] INFO  o.u.i.service.MessageFlowRegistry - [MessageFlowRegistry] Late registration of flows for process: Student:1:a0894f1c-211c-11f1-9f0b-52aadf7d5077
+10:44:27.798 [scheduling-1] INFO  o.u.i.l.e.BindingExecutionListener - [BINDING] Task Activity_0r4gaqa started - Participant Student (Participant_0yrbhi5) waiting for Tutor (Participant_1fejmk0)
+10:44:27.798 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Registering task: BK=a | Participant_0yrbhi5 -> Participant_1fejmk0 | exec=a693a27e-211c-11f1-9f0b-52aadf7d5077
+10:44:27.798 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Registered waiting binding task | BK: a | participant: Participant_0yrbhi5 -> target: Participant_1fejmk0
+10:44:27.798 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting tasks after registration: [Participant_0yrbhi5=>Participant_1fejmk0, Participant_1fejmk0=>Participant_0yrbhi5]
+10:44:27.798 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] tryActivatePair: Looking for counterpart for Participant_0yrbhi5 -> Participant_1fejmk0
+10:44:27.798 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] tryActivatePair: Found potential counterpart Participant_1fejmk0 -> Participant_0yrbhi5
+10:44:27.798 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] tryActivatePair: Same business key? a vs a = true
+10:44:27.798 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] tryActivatePair: Reciprocal check - current.id (Participant_0yrbhi5) == counterpart.target (Participant_0yrbhi5) ? true | current.target (Participant_1fejmk0) == counterpart.id (Participant_1fejmk0) ? true
+10:44:27.800 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] ✓ Activated pair a:Participant_0yrbhi5<->Participant_1fejmk0 (Participant_0yrbhi5 <-> Participant_1fejmk0)
+10:44:27.801 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0r4gaqa' has entered wait state.
+10:44:27.802 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Guard+Action satisfied -> task completed | activity=Activity_053u9k9 | execution=a693a27e-211c-11f1-9f0b-52aadf7d5077 | guard='Tutor.position == Tutors Room' | action=''
+10:44:27.803 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Checking pair a:Participant_0yrbhi5<->Participant_1fejmk0: Participant_0yrbhi5 at place1 vs Participant_1fejmk0 at place1
+10:44:27.803 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Pair a:Participant_0yrbhi5<->Participant_1fejmk0 reached same position 'place1' -> completing binding tasks
+10:44:27.804 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0r4gaqa'. signalName=null, signalData=null
+10:44:27.804 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Removed active pair a:Participant_0yrbhi5<->Participant_1fejmk0 due to task end
+10:44:27.804 [scheduling-1] INFO  o.u.i.l.e.BindingExecutionListener - [BINDING] Task Activity_0r4gaqa ended
+10:44:27.804 [scheduling-1] INFO  o.u.i.l.e.UnbindingExecutionListener - [UNBINDING] Task Activity_1t301f5 started - Participant Student (Participant_0yrbhi5) waiting for unbind with Tutor (Participant_1fejmk0)
+10:44:27.804 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Registering task: BK=a | Participant_0yrbhi5 -> Participant_1fejmk0 | exec=a693a27e-211c-11f1-9f0b-52aadf7d5077
+10:44:27.804 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Registered waiting unbinding task | BK: a | participant: Participant_0yrbhi5 -> target: Participant_1fejmk0
+10:44:27.805 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_1t301f5' has entered wait state.
+10:44:27.806 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0t7ecrn'. signalName=null, signalData=null
+10:44:27.806 [scheduling-1] INFO  o.u.i.l.e.BindingExecutionListener - [BINDING] Task Activity_0t7ecrn ended
+10:44:27.807 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='set1' on Activity_134ot6o
+10:44:27.808 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_134ot6o - Move to
+meeting room | Participant: Tutor (Participant_1fejmk0) | Destination: set1
+10:44:27.808 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_1fejmk0 | Destination: set1 | ExecutionId: b95fcc9e-211c-11f1-9f0b-52aadf7d5077
+10:44:27.808 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_134ot6o' has entered wait state.
+10:44:37.855 [http-nio-8082-exec-8] INFO  o.u.i.c.EnvironmentController - [Environment API] Participant 'Participant_1fejmk0' position set to: place2
+10:44:39.785 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] ✓ Participant Participant_1fejmk0 reached destination set1 | Completing task
+10:44:39.789 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_134ot6o'. signalName=null, signalData=null
+10:44:39.792 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] restored <space:destination>='set1' on Activity_134ot6o
+10:44:39.792 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_1fejmk0
+10:44:39.792 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Task completed for participant Participant_1fejmk0
+10:44:39.803 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Registered gateway Gateway_1vxzxud (execution=a82eb4e7-211c-11f1-9f0b-52aadf7d5077) with 2 guarded outgoing flows
+10:44:39.803 [scheduling-1] INFO  o.u.i.l.e.ExclusiveGatewayExecutionListener - [ExclusiveGatewayListener] Gateway Gateway_1vxzxud entered wait mode with 2 guarded flows
+10:44:39.803 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Gateway_1vxzxud' has entered wait state.
+10:44:39.806 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Task completed successfully for participant Participant_1fejmk0
+10:44:39.808 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:44:39.808 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): false
+10:44:41.786 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:44:41.788 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): false
+10:44:42.174 [http-nio-8082-exec-8] INFO  o.u.i.c.EnvironmentController - [Environment API] Participant 'Participant_0yrbhi5' position set to: place2
+10:44:43.783 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:44:43.783 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): false
+10:44:45.785 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:44:45.786 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): false
+10:44:47.783 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:44:47.784 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): false
+10:44:49.787 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:44:49.788 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): false
+10:44:51.781 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:44:51.782 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): false
+10:44:53.781 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:44:53.783 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): false
+10:44:55.783 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:44:55.784 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): false
+10:44:57.785 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:44:57.787 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): false
+10:44:59.786 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:44:59.787 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): false
+10:45:01.786 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:45:01.788 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): false
+10:45:03.791 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:45:03.792 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): false
+10:45:05.785 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:45:05.786 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): false
+10:45:07.779 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:45:07.780 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): false
+10:45:09.789 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:45:09.790 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): false
+10:45:11.782 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:45:11.783 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): false
+10:45:13.784 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:45:13.785 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): false
+10:45:14.157 [http-nio-8082-exec-9] INFO  o.u.i.c.EnvironmentController - [Environment API] Attribute 'lights' for place 'place2' set to: on
+10:45:15.789 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:45:15.789 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): true
+10:45:15.799 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Gateway_1vxzxud'. signalName=null, signalData=null
+10:45:15.801 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Removed gateway Gateway_1vxzxud (execution=a82eb4e7-211c-11f1-9f0b-52aadf7d5077)
+10:45:15.803 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Registered environmental task | activity=Activity_1nycl57 | execution=a82eb4e7-211c-11f1-9f0b-52aadf7d5077 | guard='(empty)' | action='occupyRoom' | participantId=Participant_1fejmk0 | timer=(empty)
+10:45:15.803 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] WAITING | Activity: Activity_1nycl57 - Explain topic | Guard: (empty) | Action: occupyRoom | Timer: (empty)
+10:45:15.803 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_1nycl57' has entered wait state.
+10:45:15.807 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Signaled gateway Gateway_1vxzxud (execution=a82eb4e7-211c-11f1-9f0b-52aadf7d5077) with selected flow Flow_02i8y5s
+10:45:17.784 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1nycl57 -> auto-pass
+10:45:17.786 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] occupyRoom executed | activity=Activity_1nycl57 | participant=Participant_1fejmk0 | place=place2 | occupied=true
+10:45:17.788 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_1nycl57'. signalName=null, signalData=null
+10:45:17.791 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Removed environmental task | activity=Activity_1nycl57 | execution=a82eb4e7-211c-11f1-9f0b-52aadf7d5077
+10:45:17.791 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] Task Activity_1nycl57 ended
+10:45:17.792 [scheduling-1] INFO  o.u.i.l.e.UnbindingExecutionListener - [UNBINDING] Task Activity_1b8dtmr started - Participant Tutor (Participant_1fejmk0) waiting for unbind with Student (Participant_0yrbhi5)
+10:45:17.792 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Registering task: BK=a | Participant_1fejmk0 -> Participant_0yrbhi5 | exec=a82eb4e7-211c-11f1-9f0b-52aadf7d5077
+10:45:17.792 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Registered waiting unbinding task | BK: a | participant: Participant_1fejmk0 -> target: Participant_0yrbhi5
+10:45:17.793 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Activated pair a:Participant_0yrbhi5<->Participant_1fejmk0 (Participant_1fejmk0 <-> Participant_0yrbhi5)
+10:45:17.793 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_1b8dtmr' has entered wait state.
+10:45:17.795 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Guard+Action satisfied -> task completed | activity=Activity_1nycl57 | execution=a82eb4e7-211c-11f1-9f0b-52aadf7d5077 | guard='' | action='occupyRoom'
+10:45:17.795 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Pair a:Participant_0yrbhi5<->Participant_1fejmk0 reached same position 'place2' -> completing unbinding tasks
+10:45:17.796 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_1b8dtmr'. signalName=null, signalData=null
+10:45:17.796 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Removed active pair a:Participant_0yrbhi5<->Participant_1fejmk0 due to task end
+10:45:17.796 [scheduling-1] INFO  o.u.i.l.e.UnbindingExecutionListener - [UNBINDING] Task Activity_1b8dtmr ended
+10:45:17.797 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Registered gateway Gateway_1xbm01q (execution=a82eb4e7-211c-11f1-9f0b-52aadf7d5077) with 2 guarded outgoing flows
+10:45:17.797 [scheduling-1] INFO  o.u.i.l.e.ExclusiveGatewayExecutionListener - [ExclusiveGatewayListener] Gateway Gateway_1xbm01q entered wait mode with 2 guarded flows
+10:45:17.797 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Gateway_1xbm01q' has entered wait state.
+10:45:17.798 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_1t301f5'. signalName=null, signalData=null
+10:45:17.798 [scheduling-1] INFO  o.u.i.l.e.UnbindingExecutionListener - [UNBINDING] Task Activity_1t301f5 ended
+10:45:17.802 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_1inu7lz (myPlace().lights == on): true
+10:45:17.803 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Gateway_1xbm01q'. signalName=null, signalData=null
+10:45:17.804 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Removed gateway Gateway_1xbm01q (execution=a82eb4e7-211c-11f1-9f0b-52aadf7d5077)
+10:45:17.804 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Registered environmental task | activity=Activity_146u96e | execution=a82eb4e7-211c-11f1-9f0b-52aadf7d5077 | guard='(empty)' | action='turnLightsOff' | participantId=Participant_1fejmk0 | timer=(empty)
+10:45:17.804 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] WAITING | Activity: Activity_146u96e - Turn off lights | Guard: (empty) | Action: turnLightsOff | Timer: (empty)
+10:45:17.804 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_146u96e' has entered wait state.
+10:45:17.805 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Signaled gateway Gateway_1xbm01q (execution=a82eb4e7-211c-11f1-9f0b-52aadf7d5077) with selected flow Flow_1inu7lz
+10:45:19.784 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_146u96e -> auto-pass
+10:45:19.790 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Participant 'Participant_1fejmk0' has no mapped user for businessKey 'a' (action='turnLightsOff')
+10:45:21.783 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_146u96e -> auto-pass
+10:45:23.785 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_146u96e -> auto-pass
+10:45:25.782 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_146u96e -> auto-pass
+10:45:27.780 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_146u96e -> auto-pass
+10:45:29.779 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_146u96e -> auto-pass
+10:45:30.333 [http-nio-8082-exec-4] INFO  o.u.i.c.EnvironmentController - [Environment API] Attribute 'lights' for place 'place2' set to: off
+10:45:31.781 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_146u96e -> auto-pass
+10:45:31.785 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_146u96e'. signalName=null, signalData=null
+10:45:31.787 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Removed environmental task | activity=Activity_146u96e | execution=a82eb4e7-211c-11f1-9f0b-52aadf7d5077
+10:45:31.787 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] Task Activity_146u96e ended
+10:45:31.790 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Registered environmental task | activity=Activity_0ni6qyx | execution=a82eb4e7-211c-11f1-9f0b-52aadf7d5077 | guard='(empty)' | action='leaveRoom' | participantId=Participant_1fejmk0 | timer=(empty)
+10:45:31.790 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] WAITING | Activity: Activity_0ni6qyx - Leave room | Guard: (empty) | Action: leaveRoom | Timer: (empty)
+10:45:31.790 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0ni6qyx' has entered wait state.
+10:45:31.794 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Guard+Action satisfied -> task completed | activity=Activity_146u96e | execution=a82eb4e7-211c-11f1-9f0b-52aadf7d5077 | guard='' | action='turnLightsOff'
+10:45:33.783 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0ni6qyx -> auto-pass
+10:45:33.787 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] leaveRoom executed | activity=Activity_0ni6qyx | participant=Participant_1fejmk0 | place=place2 | state=null | occupied=false
+10:45:33.789 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0ni6qyx'. signalName=null, signalData=null
+10:45:33.790 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Removed environmental task | activity=Activity_0ni6qyx | execution=a82eb4e7-211c-11f1-9f0b-52aadf7d5077
+10:45:33.790 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] Task Activity_0ni6qyx ended
+10:45:33.794 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Guard+Action satisfied -> task completed | activity=Activity_0ni6qyx | execution=a82eb4e7-211c-11f1-9f0b-52aadf7d5077 | guard='' | action='leaveRoom'
+10:45:47.819 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 4 class path changes (0 additions, 0 deletions, 4 modifications)
+10:45:47.830 [Thread-124] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8082"]
+10:45:47.838 [Thread-124] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14015 Shutting down the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]
+10:45:47.838 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14020 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] stopped job acquisition
+10:45:47.842 [Thread-124] INFO  org.camunda.bpm.engine - ENGINE-00007 Process Engine default closed
+10:45:47.844 [Thread-124] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Shutting down embedded database: url='jdbc:h2:mem:a0b15cd9-2b01-48b3-b427-dec1e58bb361;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false'
+10:45:48.079 [restartedMain] INFO  org.unicam.intermediate.Application - Starting Application using Java 21.0.2 with PID 22677 (/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes started by lucamoz in /Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine)
+10:45:48.079 [restartedMain] INFO  org.unicam.intermediate.Application - No active profile set, falling back to 1 default profile: "default"
