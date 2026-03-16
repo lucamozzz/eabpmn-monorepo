@@ -16,7 +16,7 @@ export const TASK_TYPES_CONFIG = {
     typeValue: 'Movement',
     displayName: 'Movement Task',
     icon: { class: 'movement-badge', iconFile: movementIcon },
-    extensionElements: [ 'space:Type', 'space:Destination', 'space:Guard', 'space:TaskAssignment', 'space:TaskAssignmentReached' ],
+    extensionElements: [ 'space:Type', 'space:Destination', 'space:Guard', 'space:Timer', 'space:TaskAssignment', 'space:TaskAssignmentReached' ],
     defaultDestination: '${destination}',
     validationRules: [],
     formType: 'destination'

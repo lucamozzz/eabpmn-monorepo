@@ -881,7 +881,7 @@ SpacePropertiesProvider.prototype.createSpaceSection = function(element) {
 
       <div data-entry-id="space-timer" 
            class="bio-properties-panel-entry space-timer-entry" 
-           style="${currentType !== 'environmental' ? 'display: none;' : ''}">
+         style="${(currentType !== 'environmental' && currentType !== 'movement') ? 'display: none;' : ''}">
         <div class="bio-properties-panel-textfield">
           <label for="space-timer-input" class="bio-properties-panel-label">Timer (optional)</label>
           <input id="space-timer-input"
@@ -1267,7 +1267,7 @@ SpacePropertiesProvider.prototype.attachSectionEventListeners = function(section
     });
   }
 
-  // Timer input - optional numeric value for environmental tasks
+  // Timer input - optional numeric value for environmental and movement tasks
   if (timerInput) {
     [ 'input', 'blur', 'change' ].forEach(eventType => {
       timerInput.addEventListener(eventType, (e) => {
@@ -1486,7 +1486,10 @@ SpacePropertiesProvider.prototype.updateFieldVisibility = function(section, sele
     actionEntry.style.display = selectedType === TASK_TYPE_KEYS.ENVIRONMENTAL ? 'block' : 'none';
   }
   if (timerEntry) {
-    timerEntry.style.display = selectedType === TASK_TYPE_KEYS.ENVIRONMENTAL ? 'block' : 'none';
+    timerEntry.style.display =
+      selectedType === TASK_TYPE_KEYS.ENVIRONMENTAL || selectedType === TASK_TYPE_KEYS.MOVEMENT
+        ? 'block'
+        : 'none';
   }
 
   const assignmentsEntry = section.querySelector('.space-assignments-entry');

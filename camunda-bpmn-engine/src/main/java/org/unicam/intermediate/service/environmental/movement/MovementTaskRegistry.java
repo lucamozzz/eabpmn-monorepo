@@ -22,12 +22,18 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 public class MovementTaskRegistry {
 
+    private static final String BPMN_ERROR_CODE_VAR = "__spaceBpmnErrorCode";
+    private static final String BPMN_ERROR_MESSAGE_VAR = "__spaceBpmnErrorMessage";
+    private static final String FAILED_MOVEMENT_ERROR_CODE = "failedMovement";
+
     private final EnvironmentDataService environmentDataService;
     private final ParticipantDataService participantDataService;
     private final RuntimeService runtimeService;
 
     // Registry: participantId -> MovementTaskInfo
     private final Map<String, MovementTaskInfo> activeMovementTasks = new ConcurrentHashMap<>();
+    // executionId -> epoch millis when movement timer started
+    private final Map<String, Long> movementTimerStartByExecutionId = new ConcurrentHashMap<>();
 
     public MovementTaskRegistry(EnvironmentDataService environmentDataService,
                                 ParticipantDataService participantDataService,
@@ -40,19 +46,24 @@ public class MovementTaskRegistry {
     /**
      * Registra un nuovo movement task per un participant
      */
-    public void registerTask(String participantId, String executionId, String destination) {
-        if (participantId == null || executionId == null || destination == null) {
-            log.warn("[MovementRegistry] Cannot register task with null values: participantId={}, executionId={}, destination={}",
-                    participantId, executionId, destination);
+    public void registerTask(String participantId,
+                             String executionId,
+                             String activityId,
+                             String destination,
+                             Double timer) {
+        if (participantId == null || executionId == null || activityId == null || destination == null) {
+            log.warn("[MovementRegistry] Cannot register task with null values: participantId={}, executionId={}, activityId={}, destination={}",
+                    participantId, executionId, activityId, destination);
             return;
         }
 
         String normalizedDestination = resolveDestinationReference(destination);
-        MovementTaskInfo taskInfo = new MovementTaskInfo(executionId, normalizedDestination, participantId);
+        MovementTaskInfo taskInfo = new MovementTaskInfo(executionId, normalizedDestination, participantId, activityId, timer);
         activeMovementTasks.put(participantId, taskInfo);
+        movementTimerStartByExecutionId.remove(executionId);
         
-        log.info("[MovementRegistry] Registered movement task | Participant: {} | Destination: {} | ExecutionId: {}",
-            participantId, normalizedDestination, executionId);
+        log.info("[MovementRegistry] Registered movement task | Participant: {} | Activity: {} | Destination: {} | ExecutionId: {} | Timer: {}",
+                participantId, activityId, normalizedDestination, executionId, timer != null ? timer : "(empty)");
     }
 
     /**
@@ -61,6 +72,7 @@ public class MovementTaskRegistry {
     public void removeTask(String participantId) {
         MovementTaskInfo removed = activeMovementTasks.remove(participantId);
         if (removed != null) {
+            movementTimerStartByExecutionId.remove(removed.executionId());
             log.info("[MovementRegistry] Removed movement task for participant: {}", participantId);
         }
     }
@@ -166,6 +178,7 @@ public class MovementTaskRegistry {
         for (Map.Entry<String, MovementTaskInfo> entry : activeMovementTasks.entrySet()) {
             String participantId = entry.getKey();
             MovementTaskInfo taskInfo = entry.getValue();
+            boolean destinationReached = false;
 
             // Ottieni la posizione corrente del participant
             Optional<org.unicam.intermediate.models.pojo.Participant> participantOpt = 
@@ -175,19 +188,10 @@ public class MovementTaskRegistry {
                 String currentPosition = participantOpt.get().getPosition();
 
                 // Verifica se ha raggiunto la destinazione
-                if (isDestinationReached(taskInfo.destination(), currentPosition)) {
+                destinationReached = isDestinationReached(taskInfo.destination(), currentPosition);
+                if (destinationReached) {
                     log.info("[MovementRegistry] ✓ Participant {} reached destination {} | Completing task",
                             participantId, taskInfo.destination());
-
-                    // Completa il task
-                    try {
-                        runtimeService.signal(taskInfo.executionId());
-                        completedParticipants.add(participantId);
-                        log.info("[MovementRegistry] Task completed successfully for participant {}", participantId);
-                    } catch (Exception e) {
-                        log.error("[MovementRegistry] Failed to signal execution {} for participant {}: {}",
-                                taskInfo.executionId(), participantId, e.getMessage(), e);
-                    }
                 } else {
                     log.trace("[MovementRegistry] Participant {} at position {}, waiting for {}",
                             participantId, currentPosition, taskInfo.destination());
@@ -195,10 +199,86 @@ public class MovementTaskRegistry {
             } else {
                 log.warn("[MovementRegistry] Participant {} not found in environment data", participantId);
             }
+
+            if (destinationReached) {
+                if (signalMovement(taskInfo, participantId, false)) {
+                    completedParticipants.add(participantId);
+                }
+                continue;
+            }
+
+            if (isMovementTimerExpired(taskInfo)) {
+                runtimeService.setVariableLocal(taskInfo.executionId(), BPMN_ERROR_CODE_VAR, FAILED_MOVEMENT_ERROR_CODE);
+                runtimeService.setVariableLocal(
+                        taskInfo.executionId(),
+                        BPMN_ERROR_MESSAGE_VAR,
+                        String.format(
+                                "Participant '%s' did not reach destination '%s' within timer for activity '%s'",
+                                participantId,
+                                taskInfo.destination(),
+                                taskInfo.activityId()
+                        )
+                );
+
+                if (signalMovement(taskInfo, participantId, true)) {
+                    completedParticipants.add(participantId);
+                }
+            }
         }
 
         // Rimuovi i task completati dal registro
         completedParticipants.forEach(this::removeTask);
+    }
+
+    private boolean signalMovement(MovementTaskInfo taskInfo, String participantId, boolean timeout) {
+        try {
+            runtimeService.signal(taskInfo.executionId());
+            if (timeout) {
+                log.warn("[MovementRegistry] Movement timer expired -> raised '{}' | participant={} | activity={} | execution={} | destination={} | timer={}s",
+                        FAILED_MOVEMENT_ERROR_CODE,
+                        participantId,
+                        taskInfo.activityId(),
+                        taskInfo.executionId(),
+                        taskInfo.destination(),
+                        taskInfo.timer());
+            } else {
+                log.info("[MovementRegistry] Task completed successfully for participant {}", participantId);
+            }
+            return true;
+        } catch (Exception e) {
+            log.error("[MovementRegistry] Failed to signal execution {} for participant {}: {}",
+                    taskInfo.executionId(), participantId, e.getMessage(), e);
+            return false;
+        }
+    }
+
+    private boolean isMovementTimerExpired(MovementTaskInfo taskInfo) {
+        Double timerSeconds = taskInfo.timer();
+        if (timerSeconds == null || timerSeconds <= 0) {
+            movementTimerStartByExecutionId.remove(taskInfo.executionId());
+            return false;
+        }
+
+        long startTime = movementTimerStartByExecutionId.computeIfAbsent(taskInfo.executionId(), ignored -> {
+            long now = System.currentTimeMillis();
+            log.info("[MovementRegistry] Movement timer started | participant={} | activity={} | execution={} | destination={} | timer={}s",
+                    taskInfo.participantId(),
+                    taskInfo.activityId(),
+                    taskInfo.executionId(),
+                    taskInfo.destination(),
+                    timerSeconds);
+            return now;
+        });
+
+        long timeoutMillis = Math.round(timerSeconds * 1000.0d);
+        long elapsed = System.currentTimeMillis() - startTime;
+
+        if (elapsed >= timeoutMillis) {
+            movementTimerStartByExecutionId.remove(taskInfo.executionId());
+            return true;
+        }
+
+        return false;
     }
 
     /**

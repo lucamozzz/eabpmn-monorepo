@@ -4,6 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.ExecutionListener;
+import org.camunda.bpm.model.bpmn.instance.ExtensionElements;
+import org.camunda.bpm.model.bpmn.instance.Task;
+import org.camunda.bpm.model.xml.instance.DomElement;
+import org.camunda.bpm.model.xml.instance.ModelElementInstance;
 import org.springframework.stereotype.Component;
 import org.unicam.intermediate.models.Participant;
 import org.unicam.intermediate.models.enums.TaskType;
@@ -22,6 +26,10 @@ import static org.unicam.intermediate.utils.Constants.*;
 @Slf4j
 @Component(movementExecutionListenerBeanName)
 public class MovementExecutionListener implements ExecutionListener {
+
+    private static final String TIMER_LOCAL_NAME = "timer";
+    private static final String BPMN_ERROR_CODE_VAR = "__spaceBpmnErrorCode";
+    private static final String BPMN_ERROR_MESSAGE_VAR = "__spaceBpmnErrorMessage";
 
     private final XmlServiceDispatcher dispatcher;
     private final ParticipantService participantService;
@@ -64,6 +72,7 @@ public class MovementExecutionListener implements ExecutionListener {
                     .or(() -> environmentDataService.resolveLogicalPlaceId(value))
                     .orElse(value)
                 : null;
+        Double timerValue = extractTimerValue(execution);
 
         Participant participant = participantService.resolveCurrentParticipant(execution);
         boolean destinationIsPhysicalPlace = destination != null && environmentDataService.getPhysicalPlace(destination).isPresent();
@@ -119,19 +128,31 @@ public class MovementExecutionListener implements ExecutionListener {
 
         String activityName = execution.getCurrentActivityName();
         
-        log.info("[MOVEMENT] WAITING | Activity: {} - {} | Participant: {} | Destination: {}", 
+        log.info("[MOVEMENT] WAITING | Activity: {} - {} | Participant: {} | Destination: {} | Timer: {}",
                 execution.getCurrentActivityId(),
                 activityName != null ? activityName : "(unnamed)",
                 participant.toString(),
-                destination != null ? destination : "unknown location");
+                destination != null ? destination : "unknown location",
+                timerValue != null ? timerValue : "(empty)");
 
         // Registra il task nel registry per il controllo periodico
         if (participant != null && destination != null) {
-            movementTaskRegistry.registerTask(participant.getId(), execution.getId(), destination);
+            movementTaskRegistry.registerTask(
+                    participant.getId(),
+                    execution.getId(),
+                    execution.getCurrentActivityId(),
+                    destination,
+                    timerValue
+            );
         }
     }
 
     private void handleMovementEnd(DelegateExecution execution) {
+        String bpmnErrorCode = (String) execution.getVariableLocal(BPMN_ERROR_CODE_VAR);
+        String bpmnErrorMessage = (String) execution.getVariableLocal(BPMN_ERROR_MESSAGE_VAR);
+        execution.removeVariableLocal(BPMN_ERROR_CODE_VAR);
+        execution.removeVariableLocal(BPMN_ERROR_MESSAGE_VAR);
+
         AbstractXmlService svc = dispatcher.get(SPACE_NS.getNamespaceUri(), TaskType.MOVEMENT);
         String raw = svc.extractRaw(execution);
         svc.restoreInstanceValue(execution, raw);
@@ -142,5 +163,57 @@ public class MovementExecutionListener implements ExecutionListener {
             movementTaskRegistry.removeTask(participant.getId());
             log.info("[MOVEMENT] Task completed for participant {}", participant.getId());
         }
+
+        if (bpmnErrorCode != null && !bpmnErrorCode.isBlank()) {
+            throw new BpmnError(
+                    bpmnErrorCode,
+                    bpmnErrorMessage != null ? bpmnErrorMessage : "Movement task failed"
+            );
+        }
+    }
+
+    private Double extractTimerValue(DelegateExecution execution) {
+        String raw = extractExtensionValue(execution, TIMER_LOCAL_NAME);
+        if (raw == null || raw.isBlank()) {
+            return null;
+        }
+
+        try {
+            double parsed = Double.parseDouble(raw.trim());
+            if (parsed < 0) {
+                log.warn("[MOVEMENT] Invalid negative timer '{}' for activity {}. Ignoring.",
+                        raw, execution.getCurrentActivityId());
+                return null;
+            }
+            return parsed;
+        } catch (NumberFormatException ex) {
+            log.warn("[MOVEMENT] Invalid non-numeric timer '{}' for activity {}. Ignoring.",
+                    raw, execution.getCurrentActivityId());
+            return null;
+        }
+    }
+
+    private String extractExtensionValue(DelegateExecution execution, String localName) {
+        ModelElementInstance modelElement = execution.getBpmnModelElementInstance();
+        if (!(modelElement instanceof Task task)) {
+            return null;
+        }
+
+        ExtensionElements extensionElements = task.getExtensionElements();
+        if (extensionElements == null) {
+            return null;
+        }
+
+        return extensionElements.getDomElement().getChildElements().stream()
+                .filter(domElement -> isSpaceElement(domElement, localName))
+                .map(DomElement::getTextContent)
+                .map(String::trim)
+                .findFirst()
+                .orElse(null);
+    }
+
+    private boolean isSpaceElement(DomElement domElement, String localName) {
+        return localName.equalsIgnoreCase(domElement.getLocalName())
+                && SPACE_NS.getNamespaceUri().equals(domElement.getNamespaceURI());
     }
 }
