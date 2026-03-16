@@ -11612,3 +11612,4 @@ org.springframework.web.servlet.resource.NoResourceFoundException: No static res
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
 	at java.base/java.lang.Thread.run(Thread.java:1583)
 14:29:10.351 [http-nio-8082-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource .well-known/appspecific/com.chrome.devtools.json.]
+14:37:16.630 [http-nio-8082-exec-3] INFO  o.u.i.c.EnvironmentController - [Environment API] Participant 'Participant_0yrbhi5' coordinates (0.0, 0.0) did not match any place — position set to null
