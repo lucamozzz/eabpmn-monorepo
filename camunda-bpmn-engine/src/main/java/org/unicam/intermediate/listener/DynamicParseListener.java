@@ -7,11 +7,16 @@ import org.camunda.bpm.engine.impl.bpmn.parser.AbstractBpmnParseListener;
 import org.camunda.bpm.engine.impl.context.Context;
 import org.camunda.bpm.engine.impl.el.ExpressionManager;
 import org.camunda.bpm.engine.impl.persistence.entity.ProcessDefinitionEntity;
+import org.camunda.bpm.engine.impl.pvm.delegate.ActivityBehavior;
 import org.camunda.bpm.engine.impl.pvm.process.ActivityImpl;
 import org.camunda.bpm.engine.impl.pvm.process.ScopeImpl;
 import org.camunda.bpm.engine.impl.util.xml.Element;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import org.unicam.intermediate.activity.GuardedSendTaskActivity;
 import org.unicam.intermediate.activity.WaitStateActivity;
+import org.unicam.intermediate.service.environmental.EnvironmentalTaskRegistry;
+import org.unicam.intermediate.service.participant.ParticipantService;
 import org.unicam.intermediate.utils.Constants;
 
 import java.util.Collections;
@@ -21,6 +26,15 @@ import static org.unicam.intermediate.utils.Constants.*;
 @Component
 @Slf4j
 public class DynamicParseListener extends AbstractBpmnParseListener {
+
+    private final EnvironmentalTaskRegistry environmentalTaskRegistry;
+    private final ParticipantService participantService;
+
+    public DynamicParseListener(@Lazy EnvironmentalTaskRegistry environmentalTaskRegistry,
+                                @Lazy ParticipantService participantService) {
+        this.environmentalTaskRegistry = environmentalTaskRegistry;
+        this.participantService = participantService;
+    }
 
     @Override
     public void parseProcess(Element processElement, ProcessDefinitionEntity processDefinition) {
@@ -104,6 +118,36 @@ public class DynamicParseListener extends AbstractBpmnParseListener {
             log.error("[DynamicParseListener] Failed to configure task type '{}' for activity '{}': {}",
                     typeValue, activity.getId(), e.getMessage(), e);
         }
+    }
+
+    @Override
+    public void parseSendTask(Element sendTaskElement, ScopeImpl scope, ActivityImpl activity) {
+        addDiscordanceCheckListener(activity);
+
+        Element extensions = sendTaskElement.element("extensionElements");
+        if (extensions == null) {
+            return;
+        }
+
+        Element guardElement = extensions.elementNS(Constants.SPACE_NS, "guard");
+        if (guardElement == null || guardElement.getText() == null || guardElement.getText().trim().isEmpty()) {
+            return;
+        }
+
+        ActivityBehavior currentBehavior = activity.getActivityBehavior();
+        if (currentBehavior == null) {
+            log.warn("[DynamicParseListener] Send task '{}' has guard but no activity behavior to wrap", activity.getId());
+            return;
+        }
+
+        activity.setActivityBehavior(new GuardedSendTaskActivity(
+                currentBehavior,
+                environmentalTaskRegistry,
+                participantService
+        ));
+
+        log.info("[DynamicParseListener] Configured guarded send task '{}' with wait-for-guard behavior",
+                activity.getId());
     }
 
     @Override

@@ -25,11 +25,18 @@ function SpacePropertiesProvider(
 
   console.info('SpacePropertiesProvider initialized');
 
+  const isSupportedTaskElement = (element) => {
+    return element && (
+      element.type === 'bpmn:Task' ||
+      element.type === 'bpmn:SendTask'
+    );
+  };
+
   eventBus.on('selection.changed', (event) => {
     if (event.newSelection && event.newSelection.length === 1) {
       const element = event.newSelection[0];
 
-      if (element.type === 'bpmn:Task') {
+      if (isSupportedTaskElement(element)) {
         setTimeout(() => this.createStandaloneSpaceSection(element), 200);
       } else if (element.type === 'bpmn:MessageFlow') {
 
@@ -55,7 +62,7 @@ function SpacePropertiesProvider(
   eventBus.on('elements.changed', (event) => {
     if (event.elements && event.elements.length > 0) {
       const element = event.elements[0];
-      if (element.type === 'bpmn:Task') {
+      if (isSupportedTaskElement(element)) {
         setTimeout(() => this.refreshSpaceSection(element), 100);
       }
     }
@@ -772,6 +779,10 @@ SpacePropertiesProvider.prototype.createStandaloneSpaceSection = function(elemen
 
 // FIXED: Removed the double 'S' typo here
 SpacePropertiesProvider.prototype.createSpaceSection = function(element) {
+  if (element.type === 'bpmn:SendTask') {
+    return this.createSendTaskSpaceSectionContent(element);
+  }
+
   const section = document.createElement('div');
   section.className = 'bio-properties-panel-group space-properties-section';
   section.setAttribute('data-group-id', 'group-space-properties');
@@ -903,6 +914,56 @@ SpacePropertiesProvider.prototype.createSpaceSection = function(element) {
   // ${currentType==="environmental" ? this.renderTaskAssignments(element) : ''}
   this.attachSectionEventListeners(section, element);
 
+  return section;
+};
+
+SpacePropertiesProvider.prototype.createSendTaskSpaceSectionContent = function(element) {
+  const section = document.createElement('div');
+  section.className = 'bio-properties-panel-group space-properties-section';
+  section.setAttribute('data-group-id', 'group-space-properties');
+
+  const currentGuard = this._extensionService.getGuard(element) || '';
+  const translate = this._translate;
+  const hasData = !!currentGuard.trim();
+  const isExpanded = hasData;
+
+  section.innerHTML = `
+    <div class="bio-properties-panel-group-header ${isExpanded ? 'open' : ''} ${hasData ? '' : 'empty'}">
+       <div title="Environmental Properties" 
+         data-title="Environmental Properties" 
+           class="bio-properties-panel-group-header-title">
+        Environmental Properties
+      </div>
+      <div class="bio-properties-panel-group-header-buttons">
+        ${hasData ? '<div title="Section contains data" class="bio-properties-panel-dot"></div>' : ''}
+        <button type="button" 
+                title="Toggle section" 
+                class="bio-properties-panel-group-header-button bio-properties-panel-arrow">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="${isExpanded ? 'bio-properties-panel-arrow-down' : 'bio-properties-panel-arrow-right'}">
+            <path fill-rule="evenodd" d="m11.657 8-4.95 4.95a1 1 0 0 1-1.414-1.414L8.828 8 5.293 4.464A1 1 0 1 1 6.707 3.05L11.657 8Z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="bio-properties-panel-group-entries ${isExpanded ? 'open' : ''}" style="${isExpanded ? '' : 'display: none;'}">
+      <div data-entry-id="space-guard" class="bio-properties-panel-entry space-guard-entry" style="display: block;">
+        <div class="bio-properties-panel-textfield">
+          <label for="space-guard-input" class="bio-properties-panel-label">Guard</label>
+          <input id="space-guard-input"
+                 type="text"
+                 name="spaceGuard"
+                 spellcheck="false"
+                 autocomplete="off"
+                 class="bio-properties-panel-input space-guard-input"
+                 placeholder="${translate('Enter guard condition')}"
+                 value="${currentGuard}" />
+        </div>
+      </div>
+    </div>
+  `;
+
+  this.attachSectionEventListeners(section, element);
   return section;
 };
 
@@ -1460,6 +1521,14 @@ SpacePropertiesProvider.prototype.updateDestinationAttributes = function(section
 };
 
 SpacePropertiesProvider.prototype.updateFieldVisibility = function(section, selectedType) {
+  if (selectedType === undefined && section.querySelector('.space-type-select') === null) {
+    const guardEntry = section.querySelector('.space-guard-entry');
+    if (guardEntry) {
+      guardEntry.style.display = 'block';
+    }
+    return;
+  }
+
   const destinationEntry = section.querySelector('.space-destination-entry');
   const bindingEntry = section.querySelector('.space-binding-entry');
   const unbindingEntry = section.querySelector('.space-unbinding-entry');
@@ -1504,6 +1573,14 @@ SpacePropertiesProvider.prototype.updateFieldVisibility = function(section, sele
 SpacePropertiesProvider.prototype.getStatusText = function(element, currentType) {
   const translate = this._translate;
 
+  if (element.type === 'bpmn:SendTask') {
+    const guard = this._extensionService.getGuard(element);
+    if (guard && guard.trim()) {
+      return `<strong>${translate('Status')}:</strong> ${translate('Guard configured on send task')}`;
+    }
+    return `<strong>${translate('Status')}:</strong> ${translate('No configuration')} <br><em>${translate('Configure a guard for this send task')}</em>`;
+  }
+
   if (!currentType) {
     const guard = this._extensionService.getGuard(element);
     if (guard && guard.trim()) {
@@ -1536,14 +1613,20 @@ SpacePropertiesProvider.prototype.updateSectionIndicators = function(section, el
 
   const currentType = this._extensionService.getCurrentType(element);
   const currentGuard = this._extensionService.getGuard(element) || '';
-  const hasData = !!currentType || !!currentGuard.trim();
+  const hasData = element.type === 'bpmn:SendTask'
+    ? !!currentGuard.trim()
+    : (!!currentType || !!currentGuard.trim());
 
   const assignmentCount = this._assignmentService.getAssignmentCount(element);
   const titleDiv = header.querySelector('.bio-properties-panel-group-header-title');
 
   if (titleDiv) {
+    if (element.type === 'bpmn:SendTask') {
+      titleDiv.childNodes[0].textContent = 'Environmental Properties';
+    }
+
     let badge = titleDiv.querySelector('.assignment-count-badge');
-    if (assignmentCount > 0) {
+    if (element.type !== 'bpmn:SendTask' && assignmentCount > 0) {
       if (!badge) {
         badge = document.createElement('span');
         badge.className = 'assignment-count-badge';
@@ -1599,6 +1682,17 @@ SpacePropertiesProvider.prototype.refreshSpaceSection = function(element) {
       if (guardInput) {
         guardInput.value = this._extensionService.getGuard(element) || '';
       }
+      return;
+    }
+
+    if (element.type === 'bpmn:SendTask') {
+      const guardInput = existingSection.querySelector('.space-guard-input');
+      if (guardInput) {
+        guardInput.value = this._extensionService.getGuard(element) || '';
+      }
+
+      this.updateFieldVisibility(existingSection, undefined);
+      this.updateSectionIndicators(existingSection, element);
       return;
     }
 
