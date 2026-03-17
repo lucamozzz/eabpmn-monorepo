@@ -25,10 +25,11 @@ function SpacePropertiesProvider(
 
   console.info('SpacePropertiesProvider initialized');
 
-  const isSupportedTaskElement = (element) => {
+  const isSupportedSpaceElement = (element) => {
     return element && (
       element.type === 'bpmn:Task' ||
-      element.type === 'bpmn:SendTask'
+      element.type === 'bpmn:SendTask' ||
+      element.type === 'bpmn:StartEvent'
     );
   };
 
@@ -36,7 +37,7 @@ function SpacePropertiesProvider(
     if (event.newSelection && event.newSelection.length === 1) {
       const element = event.newSelection[0];
 
-      if (isSupportedTaskElement(element)) {
+      if (isSupportedSpaceElement(element)) {
         setTimeout(() => this.createStandaloneSpaceSection(element), 200);
       } else if (element.type === 'bpmn:MessageFlow') {
 
@@ -62,7 +63,7 @@ function SpacePropertiesProvider(
   eventBus.on('elements.changed', (event) => {
     if (event.elements && event.elements.length > 0) {
       const element = event.elements[0];
-      if (isSupportedTaskElement(element)) {
+      if (isSupportedSpaceElement(element)) {
         setTimeout(() => this.refreshSpaceSection(element), 100);
       }
     }
@@ -779,6 +780,10 @@ SpacePropertiesProvider.prototype.createStandaloneSpaceSection = function(elemen
 
 // FIXED: Removed the double 'S' typo here
 SpacePropertiesProvider.prototype.createSpaceSection = function(element) {
+  if (element.type === 'bpmn:StartEvent') {
+    return this.createStartEventSpaceSectionContent(element);
+  }
+
   if (element.type === 'bpmn:SendTask') {
     return this.createSendTaskSpaceSectionContent(element);
   }
@@ -957,6 +962,55 @@ SpacePropertiesProvider.prototype.createSendTaskSpaceSectionContent = function(e
                  autocomplete="off"
                  class="bio-properties-panel-input space-guard-input"
                  placeholder="${translate('Enter guard condition')}"
+                 value="${currentGuard}" />
+        </div>
+      </div>
+    </div>
+  `;
+
+  this.attachSectionEventListeners(section, element);
+  return section;
+};
+
+SpacePropertiesProvider.prototype.createStartEventSpaceSectionContent = function(element) {
+  const section = document.createElement('div');
+  section.className = 'bio-properties-panel-group space-properties-section';
+  section.setAttribute('data-group-id', 'group-space-properties');
+
+  const currentGuard = this._extensionService.getGuard(element) || '';
+  const translate = this._translate;
+  const hasData = !!currentGuard.trim();
+  const isExpanded = hasData;
+
+  section.innerHTML = `
+    <div class="bio-properties-panel-group-header ${isExpanded ? 'open' : ''} ${hasData ? '' : 'empty'}">
+       <div title="Environmental Properties"
+         data-title="Environmental Properties"
+           class="bio-properties-panel-group-header-title">
+        Environmental Properties
+      </div>
+      <div class="bio-properties-panel-group-header-buttons">
+        ${hasData ? '<div title="Section contains data" class="bio-properties-panel-dot"></div>' : ''}
+        <button type="button"
+                title="Toggle section"
+                class="bio-properties-panel-group-header-button bio-properties-panel-arrow">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="${isExpanded ? 'bio-properties-panel-arrow-down' : 'bio-properties-panel-arrow-right'}">
+            <path fill-rule="evenodd" d="m11.657 8-4.95 4.95a1 1 0 0 1-1.414-1.414L8.828 8 5.293 4.464A1 1 0 1 1 6.707 3.05L11.657 8Z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="bio-properties-panel-group-entries ${isExpanded ? 'open' : ''}" style="${isExpanded ? '' : 'display: none;'}">
+      <div data-entry-id="space-guard" class="bio-properties-panel-entry space-guard-entry" style="display: block;">
+        <div class="bio-properties-panel-textfield">
+          <label for="space-guard-input" class="bio-properties-panel-label">Condition</label>
+          <input id="space-guard-input"
+                 type="text"
+                 name="spaceGuard"
+                 spellcheck="false"
+                 autocomplete="off"
+                 class="bio-properties-panel-input space-guard-input"
                  value="${currentGuard}" />
         </div>
       </div>

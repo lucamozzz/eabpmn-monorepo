@@ -156,6 +156,27 @@ public class SequenceFlowGuardEvaluator {
     }
 
     /**
+     * Evaluate an ad-hoc guard expression bound to a BPMN source element
+     * (e.g. a StartEvent with space:guard extension).
+     */
+    public Boolean evaluateAdHocGuard(String processDefinitionId,
+                                      String sourceId,
+                                      String guardExpression,
+                                      String participantId) {
+        if (guardExpression == null || guardExpression.isBlank()) {
+            return true;
+        }
+
+        try {
+            return evaluateGuardExpression(processDefinitionId, guardExpression, sourceId, participantId);
+        } catch (Exception e) {
+            log.error("[SequenceFlowGuardEvaluator] Error evaluating ad-hoc guard for {}: {}",
+                    sourceId, e.getMessage(), e);
+            return false;
+        }
+    }
+
+    /**
      * Extract space:guard value from element's extensionElements
      */
     private String extractGuardFromElement(Object element) {
