@@ -50,6 +50,21 @@
       gap: 12px;
       margin-bottom: 12px;
     }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+      border-radius: 12px;
+      background: #fff;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(17, 24, 39, 0.06);
+    }
     .layout {
       display: grid;
       grid-template-columns: minmax(0, 2fr) minmax(300px, 0.95fr);
@@ -186,8 +201,11 @@
 <body>
   <div class="wrap">
     <div class="top">
+      <div class="brand">
+        <img class="brand-logo" src="/BEE.png" alt="BEE logo" />
+      </div>
       <div>
-        <h1>Environment Cockpit</h1>
+        <h1>BEE Environment Cockpit</h1>
       </div>
     </div>
     <div class="layout">

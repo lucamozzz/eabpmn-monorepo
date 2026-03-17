@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +40,27 @@ public class EnvironmentController {
     private final BindingTaskRegistry bindingTaskRegistry;
     private final UnbindingTaskRegistry unbindingTaskRegistry;
     private final SensorDataService sensorDataService;
+
+    @GetMapping("/reload")
+    public ResponseEntity<Response<String>> reloadEnvironmentGet() {
+        return reloadEnvironmentInternal();
+    }
+
+    @PostMapping("/reload")
+    public ResponseEntity<Response<String>> reloadEnvironmentPost() {
+        return reloadEnvironmentInternal();
+    }
+
+    private ResponseEntity<Response<String>> reloadEnvironmentInternal() {
+        try {
+            environmentDataService.reloadEnvironment();
+            return ResponseEntity.ok(Response.ok("Environment reloaded"));
+        } catch (Exception e) {
+            log.error("[Environment API] Failed to reload environment", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Response.error("Failed to reload environment: " + e.getMessage()));
+        }
+    }
 
     @GetMapping("/pp")
     public ResponseEntity<Response<List<PhysicalPlace>>> getPhysicalPlaces() {
