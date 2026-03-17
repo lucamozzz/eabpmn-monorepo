@@ -444,6 +444,8 @@ public class EnvironmentalTaskRegistry {
             case "turnlightsoff" -> turnLightsOff(activityId, participantId, executionId, notifyParticipant);
             case "cleanroom" -> cleanRoom(activityId, participantId, executionId, notifyParticipant);
             case "checkroom" -> checkRoom(activityId, participantId, executionId, notifyParticipant);
+            case "preparearea" -> prepareArea(activityId, participantId, executionId, notifyParticipant);
+            case "plantarea" -> plantArea(activityId, participantId, executionId, notifyParticipant);
             case "leaveroom" -> leaveRoom(activityId, participantId, notifyParticipant);
             case "occupyroom" -> occupyRoom(activityId, participantId, notifyParticipant);
             default -> {
@@ -497,6 +499,17 @@ public class EnvironmentalTaskRegistry {
         return isCheckRoomSatisfied(activityId, participantId);
     }
 
+    /**
+     * Dedicated action handler for area preparation before planting.
+     * Notification and guard evaluation are intentionally separate and ordered.
+     */
+    private boolean prepareArea(String activityId, String participantId, String executionId, boolean notifyParticipant) {
+        if (notifyParticipant) {
+            notifyPrepareArea(executionId, participantId);
+        }
+        return isPrepareAreaSatisfied(activityId, participantId);
+    }
+
     private void notifyTurnLightsOn(String executionId, String participantId) {
         notifyParticipantAction(executionId, participantId, "turnLightsOn", "Turn the lights on");
     }
@@ -527,6 +540,33 @@ public class EnvironmentalTaskRegistry {
 
     private boolean isCheckRoomSatisfied(String activityId, String participantId) {
         return evaluateGuard("myPlace().state != null", activityId + "#action:checkRoom", participantId, null);
+    }
+
+    private void notifyPrepareArea(String executionId, String participantId) {
+        notifyParticipantAction(executionId, participantId, "prepareArea", "Prepare the area for planting");
+    }
+
+    private boolean isPrepareAreaSatisfied(String activityId, String participantId) {
+        return evaluateGuard("myPlace().state == crop", activityId + "#action:prepareArea", participantId, null);
+    }
+
+    /**
+     * Dedicated action handler for planting the current area.
+     * Notification and guard evaluation are intentionally separate and ordered.
+     */
+    private boolean plantArea(String activityId, String participantId, String executionId, boolean notifyParticipant) {
+        if (notifyParticipant) {
+            notifyPlantArea(executionId, participantId);
+        }
+        return isPlantAreaSatisfied(activityId, participantId);
+    }
+
+    private void notifyPlantArea(String executionId, String participantId) {
+        notifyParticipantAction(executionId, participantId, "plantArea", "Plant in that area");
+    }
+
+    private boolean isPlantAreaSatisfied(String activityId, String participantId) {
+        return evaluateGuard("myPlace().state == planted", activityId + "#action:plantArea", participantId, null);
     }
 
     /**
@@ -705,6 +745,8 @@ public class EnvironmentalTaskRegistry {
             case "turnlightsoff" -> "Turn the lights off";
             case "cleanroom" -> "Clean the room";
             case "checkroom" -> "Check the room";
+            case "preparearea" -> "Prepare the area for planting";
+            case "plantarea" -> "Plant in that area";
             case "leaveroom" -> "Leave the room";
             case "occupyroom" -> "Occupy the room";
             default -> "Execute action: " + action;

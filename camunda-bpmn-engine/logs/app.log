@@ -26157,3 +26157,672 @@ org.camunda.bpm.engine.exception.NotValidException: Element 'Event_06p37pb' does
 17:38:15.865 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_1fejmk0
 17:38:15.865 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Task completed for participant Participant_1fejmk0
 17:38:15.878 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Movement timer expired -> raised 'failedMovement' | participant=Participant_1fejmk0 | activity=Activity_1ucrz0n | execution=8c555933-221f-11f1-8b56-464d64e222d1 | destination=Lp_1yqx9h | timer=60.0s
+17:43:28.877 [http-nio-8082-exec-3] INFO  o.u.i.s.p.ParticipantService - [ParticipantService] Extracted collaboration with 2 participants
+17:43:28.878 [http-nio-8082-exec-3] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='Lp_1yqx9h' on Activity_1ucrz0n
+17:43:28.880 [http-nio-8082-exec-3] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_1ucrz0n - Move to crop area | Participant: Robot Planter (Participant_1fejmk0) | Destination: Lp_1yqx9h | Timer: 60.0
+17:43:28.880 [http-nio-8082-exec-3] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_1fejmk0 | Activity: Activity_1ucrz0n | Destination: Lp_1yqx9h | ExecutionId: 6d0863b1-2220-11f1-8b56-464d64e222d1 | Timer: 60.0
+17:43:28.880 [http-nio-8082-exec-3] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_1ucrz0n' has entered wait state.
+17:43:29.846 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Movement timer started | participant=Participant_1fejmk0 | activity=Activity_1ucrz0n | execution=6d0863b1-2220-11f1-8b56-464d64e222d1 | destination=Lp_1yqx9h | timer=60.0s
+17:43:39.141 [http-nio-8082-exec-9] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='Lp_bkw2w6' on Activity_0bueab4
+17:43:39.141 [http-nio-8082-exec-9] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_0bueab4 - Move to
+free area | Participant: Farmer (Participant_2abc123) | Destination: Lp_bkw2w6 | Timer: (empty)
+17:43:39.141 [http-nio-8082-exec-9] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_2abc123 | Activity: Activity_0bueab4 | Destination: Lp_bkw2w6 | ExecutionId: 7325a2d7-2220-11f1-8b56-464d64e222d1 | Timer: (empty)
+17:43:39.141 [http-nio-8082-exec-9] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0bueab4' has entered wait state.
+17:43:39.840 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] ✓ Participant Participant_2abc123 reached destination Lp_bkw2w6 | Completing task
+17:43:39.843 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0bueab4'. signalName=null, signalData=null
+17:43:39.844 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] restored <space:destination>='Lp_bkw2w6' on Activity_0bueab4
+17:43:39.844 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_2abc123
+17:43:39.844 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Task completed for participant Participant_2abc123
+17:43:39.846 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Registered environmental task | activity=Activity_1jf86rf | execution=7325a2d7-2220-11f1-8b56-464d64e222d1 | guard='(empty)' | action='prepareArea' | participantId=Participant_2abc123 | timer=(empty)
+17:43:39.846 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] WAITING | Activity: Activity_1jf86rf - Prepare area | Guard: (empty) | Action: prepareArea | Timer: (empty)
+17:43:39.846 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_1jf86rf' has entered wait state.
+17:43:39.848 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Task completed successfully for participant Participant_2abc123
+17:43:39.848 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:43:39.848 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:43:41.844 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:43:41.845 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:43:43.841 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:43:43.842 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:43:45.845 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:43:45.845 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:43:47.846 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:43:47.846 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:43:49.844 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:43:49.844 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:43:51.844 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:43:51.844 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:43:53.841 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:43:53.841 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:43:55.846 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:43:55.846 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:43:57.840 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:43:57.841 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:43:59.846 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:43:59.846 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:01.841 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:01.842 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:03.846 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:03.847 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:05.846 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:05.847 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:07.845 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:07.846 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:09.845 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:09.845 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:11.845 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:11.845 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:13.845 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:13.846 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:15.842 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:15.843 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:17.844 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:17.845 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:19.843 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:19.844 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:21.841 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:21.841 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:23.845 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:23.846 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:25.843 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:25.845 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:27.844 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:27.844 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:29.845 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:29.845 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:31.851 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_1ucrz0n'. signalName=null, signalData=null
+17:44:31.853 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] restored <space:destination>='Lp_1yqx9h' on Activity_1ucrz0n
+17:44:31.853 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_1fejmk0
+17:44:31.853 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Task completed for participant Participant_1fejmk0
+17:44:31.857 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Movement timer expired -> raised 'failedMovement' | participant=Participant_1fejmk0 | activity=Activity_1ucrz0n | execution=6d0863b1-2220-11f1-8b56-464d64e222d1 | destination=Lp_1yqx9h | timer=60.0s
+17:44:31.858 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:31.858 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:33.844 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:33.845 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:35.842 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:35.842 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:37.845 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:37.846 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:39.851 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:39.851 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:41.853 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:41.853 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:43.849 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:43.850 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:45.853 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:45.854 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:47.857 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:47.857 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:49.858 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:49.858 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:51.857 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:51.857 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:53.858 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:53.858 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:55.856 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:55.856 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:57.856 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:57.856 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:44:59.861 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:44:59.861 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:01.857 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:01.858 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:03.862 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:03.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:05.858 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:05.858 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:07.863 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:07.863 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:09.858 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:09.859 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:11.863 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:11.864 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:13.863 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:13.864 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:15.862 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:15.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:17.859 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:17.859 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:19.864 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:19.864 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:21.859 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:21.859 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:23.864 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:23.864 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:25.864 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:25.865 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:27.864 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:27.864 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:29.864 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:29.864 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:31.864 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:31.865 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:33.864 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:33.864 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:35.862 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:35.863 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:37.862 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:37.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:39.863 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:39.863 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:41.863 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:41.864 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:43.864 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:43.864 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:45.862 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:45.863 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:47.862 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:47.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:49.863 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:49.863 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:51.862 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:51.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:53.864 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:53.864 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:55.862 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:55.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:57.860 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:57.860 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:45:59.864 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:45:59.865 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:01.862 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:01.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:03.863 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:03.864 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:05.861 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:05.861 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:07.862 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:07.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:09.862 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:09.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:11.863 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:11.863 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:13.864 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:13.864 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:15.862 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:15.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:17.862 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:17.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:19.859 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:19.859 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:21.862 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:21.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:23.859 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:23.859 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:25.859 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:25.859 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:27.864 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:27.864 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:29.860 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:29.860 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:31.864 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:31.864 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:33.863 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:33.863 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:35.859 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:35.859 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:37.864 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:37.865 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:39.863 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:39.863 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:41.864 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:41.864 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:43.862 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:43.863 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:45.859 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:45.859 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:47.862 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:47.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:49.863 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:49.863 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:51.861 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:51.861 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:53.859 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:53.859 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:55.861 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:55.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:57.863 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:57.864 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:46:59.861 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:46:59.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:01.863 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:01.863 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:03.863 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:03.863 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:05.859 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:05.859 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:07.861 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:07.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:09.863 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:09.863 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:11.863 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:11.863 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:13.861 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:13.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:15.863 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:15.863 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:17.863 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:17.863 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:19.858 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:19.858 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:21.863 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:21.863 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:23.861 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:23.861 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:25.861 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:25.861 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:27.861 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:27.861 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:29.861 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:29.861 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:31.863 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:31.863 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:33.862 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:33.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:35.861 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:35.861 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:37.863 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:37.863 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:39.861 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:39.861 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:41.862 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:41.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:43.862 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:43.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:45.861 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:45.861 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:47.860 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:47.861 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:49.862 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:49.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:51.857 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:51.858 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:53.861 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:53.861 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:55.862 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:55.863 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:57.857 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:57.858 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:47:59.861 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:47:59.861 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:48:01.862 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:48:01.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:48:03.862 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:48:03.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:48:05.862 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:48:05.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:48:07.860 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:48:07.860 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:48:09.862 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:48:09.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:48:11.862 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:48:11.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:48:13.862 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:48:13.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:48:15.860 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:48:15.861 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:48:17.857 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:48:17.857 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:48:19.860 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:48:19.861 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:48:21.861 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:48:21.861 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:48:23.861 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:48:23.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:48:25.860 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:48:25.861 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:48:27.860 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:48:27.860 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:48:29.861 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:48:29.861 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:48:31.861 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+17:48:31.862 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Unknown action 'prepareArea' for activity Activity_1jf86rf -> action-check fails
+17:48:33.217 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 2 class path changes (0 additions, 0 deletions, 2 modifications)
+17:48:33.229 [Thread-207] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8082"]
+17:48:33.237 [Thread-207] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14015 Shutting down the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]
+17:48:33.238 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14020 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] stopped job acquisition
+17:48:33.238 [Thread-207] INFO  org.camunda.bpm.engine - ENGINE-00007 Process Engine default closed
+17:48:33.238 [Thread-207] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Shutting down embedded database: url='jdbc:h2:mem:a9434265-3858-436f-8507-2e17fb957121;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false'
+17:48:33.422 [restartedMain] INFO  org.unicam.intermediate.Application - Starting Application using Java 21.0.2 with PID 11433 (/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes started by lucamoz in /Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine)
+17:48:33.422 [restartedMain] INFO  org.unicam.intermediate.Application - No active profile set, falling back to 1 default profile: "default"
+17:48:33.818 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
+17:48:33.819 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+17:48:33.819 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+17:48:33.819 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+17:48:33.826 [restartedMain] INFO  o.a.c.c.C.[Tomcat-1].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+17:48:33.826 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 403 ms
+17:48:33.830 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Configuring camunda rest api.
+17:48:33.830 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Finished configuring camunda rest api.
+17:48:33.867 [restartedMain] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:918d0135-f24f-4234-828a-69955c61b061;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+17:48:33.872 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:918d0135-f24f-4234-828a-69955c61b061'
+17:48:33.910 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB040 Setting up jobExecutor with corePoolSize=3, maxPoolSize:10
+17:48:33.938 [restartedMain] INFO  org.camunda.bpm.engine.cfg - ENGINE-12003 Plugin 'CompositeProcessEnginePlugin[genericPropertiesConfiguration, camundaConfig, camundaProcessEngineConfiguration, camundaDatasourceConfiguration, camundaJobConfiguration, camundaHistoryConfiguration, camundaMetricsConfiguration, camundaAuthorizationConfiguration, camundaDeploymentConfiguration, createAdminUserConfiguration, failedJobConfiguration, , eventPublisherPlugin, ApplicationContextClassloaderSwitchPlugin]' activated on process engine 'default'
+17:48:34.350 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB021 Auto-Deploying resources: []
+17:48:34.350 [restartedMain] INFO  o.u.i.config.CamundaConfig - [CamundaConfig] Registered parse listeners
+17:48:34.350 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-001: Initialized Camunda Spring Boot Eventing Engine Plugin.
+17:48:34.350 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-003: Task events will be published as Spring Events.
+17:48:34.350 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-005: Execution events will be published as Spring Events.
+17:48:34.350 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-009: Listeners will not be invoked if a skipCustomListeners API parameter is set to true by user.
+17:48:34.350 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-007: History events will be published as Spring events.
+17:48:35.092 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.engine.sql'
+17:48:35.099 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.history.sql'
+17:48:35.100 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'identity' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.identity.sql'
+17:48:35.103 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.engine.sql'
+17:48:35.104 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.history.sql'
+17:48:35.104 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.engine.sql'
+17:48:35.106 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.history.sql'
+17:48:35.106 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03067 No history level property found in database
+17:48:35.106 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03065 Creating historyLevel property in database for level: HistoryLevelFull(name=full, id=3)
+17:48:35.109 [restartedMain] INFO  org.camunda.bpm.engine - ENGINE-00001 Process Engine default created.
+17:48:35.136 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 13 places, 5 logical places
+17:48:35.166 [restartedMain] INFO  o.u.i.service.TaskTypeRegistry - [TaskTypeRegistry] Initialized with 3 task types
+17:48:35.173 [restartedMain] INFO  o.u.i.s.p.ParticipantDataService - [ParticipantDataService] Initialized with 3 static participants
+17:48:35.204 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: fce730fa-4c03-467b-97f7-122c5435dc77
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+17:48:35.262 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+17:48:35.273 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3117f804, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5c41e450, org.springframework.security.web.context.SecurityContextHolderFilter@31ea4a57, org.springframework.security.web.header.HeaderWriterFilter@6623c5f7, org.springframework.web.filter.CorsFilter@276a6697, org.springframework.security.web.authentication.logout.LogoutFilter@35eaa044, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@56eece1, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2e459465, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7f307aa1, org.springframework.security.web.access.ExceptionTranslationFilter@3c82f051, org.springframework.security.web.access.intercept.AuthorizationFilter@7c1482d1]
+17:48:35.308 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazyProcessEnginesFilter@19386fe0
+17:48:35.310 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazySecurityFilter@1d44d1dd
+17:48:35.329 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+17:48:35.344 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8082"]
+17:48:35.345 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8082 (http) with context path ''
+17:48:35.351 [restartedMain] INFO  org.unicam.intermediate.Application - Started Application in 1.969 seconds (process running for 23127.721)
+17:48:35.352 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Initializing Environment on startup
+17:48:35.352 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 13 places, 5 logical places
+17:48:35.352 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Environment loaded with 13 physical places
+17:48:35.352 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Starting user and group initialization...
+17:48:35.353 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: students
+17:48:35.353 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: tutors
+17:48:35.354 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: acataluffi (Andrea Cataluffi)
+17:48:35.355 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added acataluffi to students group
+17:48:35.355 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: lmozzoni (Luca Mozzoni)
+17:48:35.356 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added lmozzoni to tutors group
+17:48:35.356 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: admins
+17:48:35.357 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+17:48:35.357 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Initialization completed successfully!
+17:48:35.357 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+17:48:35.357 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current users count: 3
+17:48:35.357 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current groups count: 4
+17:48:35.357 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+17:48:35.357 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Camunda Cockpit: http://localhost:8082/camunda
+17:48:35.357 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+17:48:35.357 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Login credentials:
+17:48:35.357 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Admin    : a / a
+17:48:35.357 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Student  : acataluffi / a
+17:48:35.357 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Tutor    : lmozzoni / a
+17:48:35.357 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+17:48:35.357 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] All users in system:
+17:48:35.358 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - acataluffi (Andrea Cataluffi) - Groups: [admins, students]
+17:48:35.358 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - demo (demo Demo) - Groups: [camunda-admin]
+17:48:35.359 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - lmozzoni (Luca Mozzoni) - Groups: [admins, tutors]
+17:48:35.359 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+17:48:35.359 [restartedMain] INFO  o.u.i.config.MessageFlowRegistrar - [MessageFlowRegistrar] Application ready - registering message flows for all deployed processes
+17:48:35.360 [restartedMain] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14014 Starting up the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor].
+17:48:35.360 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14018 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] starting to acquire jobs
+17:49:10.819 [http-nio-8082-exec-3] INFO  o.a.c.c.C.[Tomcat-1].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+17:49:10.821 [http-nio-8082-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+17:49:10.828 [http-nio-8082-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 7 ms
+17:49:15.294 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 2 class path changes (0 additions, 0 deletions, 2 modifications)
+17:49:15.295 [Thread-211] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8082"]
+17:49:15.300 [Thread-211] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14015 Shutting down the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]
+17:49:15.300 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14020 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] stopped job acquisition
+17:49:15.300 [Thread-211] INFO  org.camunda.bpm.engine - ENGINE-00007 Process Engine default closed
+17:49:15.301 [Thread-211] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Shutting down embedded database: url='jdbc:h2:mem:918d0135-f24f-4234-828a-69955c61b061;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false'
+17:49:15.371 [restartedMain] INFO  org.unicam.intermediate.Application - Starting Application using Java 21.0.2 with PID 11433 (/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes started by lucamoz in /Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine)
+17:49:15.371 [restartedMain] INFO  org.unicam.intermediate.Application - No active profile set, falling back to 1 default profile: "default"
+17:49:15.609 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
+17:49:15.610 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+17:49:15.610 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+17:49:15.610 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+17:49:15.615 [restartedMain] INFO  o.a.c.c.C.[Tomcat-1].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+17:49:15.615 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 243 ms
+17:49:15.617 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Configuring camunda rest api.
+17:49:15.618 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Finished configuring camunda rest api.
+17:49:15.638 [restartedMain] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:3b4e5c73-e593-44e4-8329-ef8957981180;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+17:49:15.639 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:3b4e5c73-e593-44e4-8329-ef8957981180'
+17:49:15.667 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB040 Setting up jobExecutor with corePoolSize=3, maxPoolSize:10
+17:49:15.683 [restartedMain] INFO  org.camunda.bpm.engine.cfg - ENGINE-12003 Plugin 'CompositeProcessEnginePlugin[genericPropertiesConfiguration, camundaConfig, camundaProcessEngineConfiguration, camundaDatasourceConfiguration, camundaJobConfiguration, camundaHistoryConfiguration, camundaMetricsConfiguration, camundaAuthorizationConfiguration, camundaDeploymentConfiguration, createAdminUserConfiguration, failedJobConfiguration, , eventPublisherPlugin, ApplicationContextClassloaderSwitchPlugin]' activated on process engine 'default'
+17:49:16.085 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB021 Auto-Deploying resources: []
+17:49:16.085 [restartedMain] INFO  o.u.i.config.CamundaConfig - [CamundaConfig] Registered parse listeners
+17:49:16.085 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-001: Initialized Camunda Spring Boot Eventing Engine Plugin.
+17:49:16.085 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-003: Task events will be published as Spring Events.
+17:49:16.085 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-005: Execution events will be published as Spring Events.
+17:49:16.085 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-009: Listeners will not be invoked if a skipCustomListeners API parameter is set to true by user.
+17:49:16.085 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-007: History events will be published as Spring events.
+17:49:16.858 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.engine.sql'
+17:49:16.866 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.history.sql'
+17:49:16.868 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'identity' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.identity.sql'
+17:49:16.873 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.engine.sql'
+17:49:16.875 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.history.sql'
+17:49:16.876 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.engine.sql'
+17:49:16.876 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.history.sql'
+17:49:16.877 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03067 No history level property found in database
+17:49:16.877 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03065 Creating historyLevel property in database for level: HistoryLevelFull(name=full, id=3)
+17:49:16.880 [restartedMain] INFO  org.camunda.bpm.engine - ENGINE-00001 Process Engine default created.
+17:49:16.905 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 13 places, 5 logical places
+17:49:16.919 [restartedMain] INFO  o.u.i.service.TaskTypeRegistry - [TaskTypeRegistry] Initialized with 3 task types
+17:49:16.924 [restartedMain] INFO  o.u.i.s.p.ParticipantDataService - [ParticipantDataService] Initialized with 3 static participants
+17:49:16.945 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 766728bf-fc43-4799-9888-b314fb6b5251
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+17:49:16.993 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+17:49:17.004 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5044a88f, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7330ca70, org.springframework.security.web.context.SecurityContextHolderFilter@2674c09, org.springframework.security.web.header.HeaderWriterFilter@3a59a4ec, org.springframework.web.filter.CorsFilter@30869fba, org.springframework.security.web.authentication.logout.LogoutFilter@6c29efd8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5fdb2e29, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@231f480c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@198f4da8, org.springframework.security.web.access.ExceptionTranslationFilter@58d49d9b, org.springframework.security.web.access.intercept.AuthorizationFilter@33035466]
+17:49:17.033 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazySecurityFilter@3b10b994
+17:49:17.033 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazyProcessEnginesFilter@444c0d47
+17:49:17.049 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+17:49:17.061 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8082"]
+17:49:17.062 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8082 (http) with context path ''
+17:49:17.068 [restartedMain] INFO  org.unicam.intermediate.Application - Started Application in 1.711 seconds (process running for 23169.439)
+17:49:17.069 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Initializing Environment on startup
+17:49:17.070 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 13 places, 5 logical places
+17:49:17.070 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Environment loaded with 13 physical places
+17:49:17.070 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Starting user and group initialization...
+17:49:17.071 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: students
+17:49:17.071 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: tutors
+17:49:17.073 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: acataluffi (Andrea Cataluffi)
+17:49:17.074 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added acataluffi to students group
+17:49:17.074 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: lmozzoni (Luca Mozzoni)
+17:49:17.075 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added lmozzoni to tutors group
+17:49:17.076 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: admins
+17:49:17.077 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+17:49:17.077 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Initialization completed successfully!
+17:49:17.077 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+17:49:17.077 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current users count: 3
+17:49:17.077 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current groups count: 4
+17:49:17.077 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+17:49:17.077 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Camunda Cockpit: http://localhost:8082/camunda
+17:49:17.077 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+17:49:17.077 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Login credentials:
+17:49:17.077 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Admin    : a / a
+17:49:17.077 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Student  : acataluffi / a
+17:49:17.077 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Tutor    : lmozzoni / a
+17:49:17.077 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+17:49:17.077 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] All users in system:
+17:49:17.078 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - acataluffi (Andrea Cataluffi) - Groups: [admins, students]
+17:49:17.079 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - demo (demo Demo) - Groups: [camunda-admin]
+17:49:17.079 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - lmozzoni (Luca Mozzoni) - Groups: [admins, tutors]
+17:49:17.080 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+17:49:17.080 [restartedMain] INFO  o.u.i.config.MessageFlowRegistrar - [MessageFlowRegistrar] Application ready - registering message flows for all deployed processes
+17:49:17.081 [restartedMain] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14014 Starting up the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor].
+17:49:17.081 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14018 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] starting to acquire jobs
+17:50:01.079 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 2 class path changes (0 additions, 0 deletions, 2 modifications)
+17:50:01.091 [Thread-215] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8082"]
+17:50:01.102 [Thread-215] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14015 Shutting down the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]
+17:50:01.102 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14020 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] stopped job acquisition
+17:50:01.103 [Thread-215] INFO  org.camunda.bpm.engine - ENGINE-00007 Process Engine default closed
+17:50:01.104 [Thread-215] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Shutting down embedded database: url='jdbc:h2:mem:3b4e5c73-e593-44e4-8329-ef8957981180;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false'
+17:50:01.222 [restartedMain] INFO  org.unicam.intermediate.Application - Starting Application using Java 21.0.2 with PID 11433 (/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes started by lucamoz in /Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine)
+17:50:01.222 [restartedMain] INFO  org.unicam.intermediate.Application - No active profile set, falling back to 1 default profile: "default"
+17:50:01.501 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
+17:50:01.501 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+17:50:01.502 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+17:50:01.502 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+17:50:01.508 [restartedMain] INFO  o.a.c.c.C.[Tomcat-1].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+17:50:01.508 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 286 ms
+17:50:01.510 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Configuring camunda rest api.
+17:50:01.510 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Finished configuring camunda rest api.
+17:50:01.532 [restartedMain] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:69f5b1a0-7354-4538-8acf-0a0cf0af35bb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+17:50:01.533 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:69f5b1a0-7354-4538-8acf-0a0cf0af35bb'
+17:50:01.565 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB040 Setting up jobExecutor with corePoolSize=3, maxPoolSize:10
+17:50:01.583 [restartedMain] INFO  org.camunda.bpm.engine.cfg - ENGINE-12003 Plugin 'CompositeProcessEnginePlugin[genericPropertiesConfiguration, camundaConfig, camundaProcessEngineConfiguration, camundaDatasourceConfiguration, camundaJobConfiguration, camundaHistoryConfiguration, camundaMetricsConfiguration, camundaAuthorizationConfiguration, camundaDeploymentConfiguration, createAdminUserConfiguration, failedJobConfiguration, , eventPublisherPlugin, ApplicationContextClassloaderSwitchPlugin]' activated on process engine 'default'
+17:50:02.004 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB021 Auto-Deploying resources: []
+17:50:02.004 [restartedMain] INFO  o.u.i.config.CamundaConfig - [CamundaConfig] Registered parse listeners
+17:50:02.004 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-001: Initialized Camunda Spring Boot Eventing Engine Plugin.
+17:50:02.004 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-003: Task events will be published as Spring Events.
+17:50:02.004 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-005: Execution events will be published as Spring Events.
+17:50:02.004 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-009: Listeners will not be invoked if a skipCustomListeners API parameter is set to true by user.
+17:50:02.004 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-007: History events will be published as Spring events.
+17:50:02.719 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.engine.sql'
+17:50:02.725 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.history.sql'
+17:50:02.727 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'identity' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.identity.sql'
+17:50:02.728 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.engine.sql'
+17:50:02.729 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.history.sql'
+17:50:02.729 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.engine.sql'
+17:50:02.730 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.history.sql'
+17:50:02.730 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03067 No history level property found in database
+17:50:02.730 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03065 Creating historyLevel property in database for level: HistoryLevelFull(name=full, id=3)
+17:50:02.732 [restartedMain] INFO  org.camunda.bpm.engine - ENGINE-00001 Process Engine default created.
+17:50:02.752 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 13 places, 5 logical places
+17:50:02.766 [restartedMain] INFO  o.u.i.service.TaskTypeRegistry - [TaskTypeRegistry] Initialized with 3 task types
+17:50:02.771 [restartedMain] INFO  o.u.i.s.p.ParticipantDataService - [ParticipantDataService] Initialized with 3 static participants
+17:50:02.796 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: a584efc5-ab5e-482c-9f4e-4ee5bbc393aa
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+17:50:02.844 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+17:50:02.856 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4bea41d0, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2fae05a3, org.springframework.security.web.context.SecurityContextHolderFilter@706841ce, org.springframework.security.web.header.HeaderWriterFilter@4a1c8b98, org.springframework.web.filter.CorsFilter@21a79b47, org.springframework.security.web.authentication.logout.LogoutFilter@3b0be573, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@19c6f80f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@27b1ac82, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7edc1c43, org.springframework.security.web.access.ExceptionTranslationFilter@78f8c62b, org.springframework.security.web.access.intercept.AuthorizationFilter@3fdc0f07]
+17:50:02.887 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazySecurityFilter@225dbcac
+17:50:02.888 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazyProcessEnginesFilter@38fe74a5
+17:50:02.903 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+17:50:02.914 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8082"]
+17:50:02.915 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8082 (http) with context path ''
+17:50:02.920 [restartedMain] INFO  org.unicam.intermediate.Application - Started Application in 1.714 seconds (process running for 23215.292)
+17:50:02.921 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Initializing Environment on startup
+17:50:02.921 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 13 places, 5 logical places
+17:50:02.921 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Environment loaded with 13 physical places
+17:50:02.921 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Starting user and group initialization...
+17:50:02.922 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: students
+17:50:02.923 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: tutors
+17:50:02.923 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: acataluffi (Andrea Cataluffi)
+17:50:02.924 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added acataluffi to students group
+17:50:02.924 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: lmozzoni (Luca Mozzoni)
+17:50:02.925 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added lmozzoni to tutors group
+17:50:02.925 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: admins
+17:50:02.926 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+17:50:02.926 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Initialization completed successfully!
+17:50:02.926 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+17:50:02.927 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current users count: 3
+17:50:02.927 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current groups count: 4
+17:50:02.927 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+17:50:02.927 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Camunda Cockpit: http://localhost:8082/camunda
+17:50:02.927 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+17:50:02.927 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Login credentials:
+17:50:02.927 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Admin    : a / a
+17:50:02.927 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Student  : acataluffi / a
+17:50:02.927 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Tutor    : lmozzoni / a
+17:50:02.927 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+17:50:02.927 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] All users in system:
+17:50:02.928 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - acataluffi (Andrea Cataluffi) - Groups: [admins, students]
+17:50:02.929 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - demo (demo Demo) - Groups: [camunda-admin]
+17:50:02.929 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - lmozzoni (Luca Mozzoni) - Groups: [admins, tutors]
+17:50:02.929 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+17:50:02.930 [restartedMain] INFO  o.u.i.config.MessageFlowRegistrar - [MessageFlowRegistrar] Application ready - registering message flows for all deployed processes
+17:50:02.930 [restartedMain] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14014 Starting up the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor].
+17:50:02.930 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14018 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] starting to acquire jobs
+17:50:10.816 [http-nio-8082-exec-1] INFO  o.a.c.c.C.[Tomcat-1].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+17:50:10.817 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+17:50:10.818 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+17:50:26.666 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 2 class path changes (0 additions, 0 deletions, 2 modifications)
+17:50:26.669 [Thread-219] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8082"]
+17:50:26.674 [Thread-219] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14015 Shutting down the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]
+17:50:26.675 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14020 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] stopped job acquisition
+17:50:26.675 [Thread-219] INFO  org.camunda.bpm.engine - ENGINE-00007 Process Engine default closed
+17:50:26.675 [Thread-219] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Shutting down embedded database: url='jdbc:h2:mem:69f5b1a0-7354-4538-8acf-0a0cf0af35bb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false'
+17:50:26.774 [restartedMain] INFO  org.unicam.intermediate.Application - Starting Application using Java 21.0.2 with PID 11433 (/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes started by lucamoz in /Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine)
+17:50:26.775 [restartedMain] INFO  org.unicam.intermediate.Application - No active profile set, falling back to 1 default profile: "default"
+17:50:27.011 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
+17:50:27.011 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+17:50:27.012 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+17:50:27.012 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+17:50:27.017 [restartedMain] INFO  o.a.c.c.C.[Tomcat-1].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+17:50:27.017 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 241 ms
+17:50:27.019 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Configuring camunda rest api.
+17:50:27.019 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Finished configuring camunda rest api.
+17:50:27.038 [restartedMain] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:f6797bdd-58b2-4d6d-86f7-ebe804b4201f;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+17:50:27.039 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:f6797bdd-58b2-4d6d-86f7-ebe804b4201f'
+17:50:27.066 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB040 Setting up jobExecutor with corePoolSize=3, maxPoolSize:10
+17:50:27.082 [restartedMain] INFO  org.camunda.bpm.engine.cfg - ENGINE-12003 Plugin 'CompositeProcessEnginePlugin[genericPropertiesConfiguration, camundaConfig, camundaProcessEngineConfiguration, camundaDatasourceConfiguration, camundaJobConfiguration, camundaHistoryConfiguration, camundaMetricsConfiguration, camundaAuthorizationConfiguration, camundaDeploymentConfiguration, createAdminUserConfiguration, failedJobConfiguration, , eventPublisherPlugin, ApplicationContextClassloaderSwitchPlugin]' activated on process engine 'default'
+17:50:27.523 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB021 Auto-Deploying resources: []
+17:50:27.523 [restartedMain] INFO  o.u.i.config.CamundaConfig - [CamundaConfig] Registered parse listeners
+17:50:27.523 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-001: Initialized Camunda Spring Boot Eventing Engine Plugin.
+17:50:27.523 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-003: Task events will be published as Spring Events.
+17:50:27.523 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-005: Execution events will be published as Spring Events.
+17:50:27.523 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-009: Listeners will not be invoked if a skipCustomListeners API parameter is set to true by user.
+17:50:27.523 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-007: History events will be published as Spring events.
+17:50:28.205 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.engine.sql'
+17:50:28.209 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.history.sql'
+17:50:28.210 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'identity' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.identity.sql'
+17:50:28.211 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.engine.sql'
+17:50:28.211 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.history.sql'
+17:50:28.212 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.engine.sql'
+17:50:28.213 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.history.sql'
+17:50:28.213 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03067 No history level property found in database
+17:50:28.213 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03065 Creating historyLevel property in database for level: HistoryLevelFull(name=full, id=3)
+17:50:28.214 [restartedMain] INFO  org.camunda.bpm.engine - ENGINE-00001 Process Engine default created.
+17:50:28.231 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 13 places, 5 logical places
+17:50:28.244 [restartedMain] INFO  o.u.i.service.TaskTypeRegistry - [TaskTypeRegistry] Initialized with 3 task types
+17:50:28.249 [restartedMain] INFO  o.u.i.s.p.ParticipantDataService - [ParticipantDataService] Initialized with 3 static participants
+17:50:28.269 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 74f509a4-1272-4eca-85dc-9e30169617b9
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+17:50:28.313 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+17:50:28.323 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@26584586, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@9dcc7b9, org.springframework.security.web.context.SecurityContextHolderFilter@3ec00144, org.springframework.security.web.header.HeaderWriterFilter@481e0ef8, org.springframework.web.filter.CorsFilter@635746f, org.springframework.security.web.authentication.logout.LogoutFilter@85e5d9, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1bf10c9c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6a0be90, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@31754f92, org.springframework.security.web.access.ExceptionTranslationFilter@1de0159f, org.springframework.security.web.access.intercept.AuthorizationFilter@10d4f477]
+17:50:28.351 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazySecurityFilter@750f2a0a
+17:50:28.351 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazyProcessEnginesFilter@41f2a4eb
+17:50:28.365 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+17:50:28.377 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8082"]
+17:50:28.378 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8082 (http) with context path ''
+17:50:28.383 [restartedMain] INFO  org.unicam.intermediate.Application - Started Application in 1.619 seconds (process running for 23240.755)
+17:50:28.383 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Initializing Environment on startup
+17:50:28.384 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 13 places, 5 logical places
+17:50:28.384 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Environment loaded with 13 physical places
+17:50:28.384 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Starting user and group initialization...
+17:50:28.385 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: students
+17:50:28.385 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: tutors
+17:50:28.385 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: acataluffi (Andrea Cataluffi)
+17:50:28.386 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added acataluffi to students group
+17:50:28.387 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: lmozzoni (Luca Mozzoni)
+17:50:28.387 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added lmozzoni to tutors group
+17:50:28.388 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: admins
+17:50:28.389 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+17:50:28.389 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Initialization completed successfully!
+17:50:28.389 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+17:50:28.389 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current users count: 3
+17:50:28.389 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current groups count: 4
+17:50:28.389 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+17:50:28.389 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Camunda Cockpit: http://localhost:8082/camunda
+17:50:28.389 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+17:50:28.389 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Login credentials:
+17:50:28.389 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Admin    : a / a
+17:50:28.389 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Student  : acataluffi / a
+17:50:28.389 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Tutor    : lmozzoni / a
+17:50:28.389 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+17:50:28.389 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] All users in system:
+17:50:28.390 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - acataluffi (Andrea Cataluffi) - Groups: [admins, students]
+17:50:28.399 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - demo (demo Demo) - Groups: [camunda-admin]
+17:50:28.399 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - lmozzoni (Luca Mozzoni) - Groups: [admins, tutors]
+17:50:28.400 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+17:50:28.400 [restartedMain] INFO  o.u.i.config.MessageFlowRegistrar - [MessageFlowRegistrar] Application ready - registering message flows for all deployed processes
+17:50:28.400 [restartedMain] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14014 Starting up the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor].
+17:50:28.401 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14018 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] starting to acquire jobs
