@@ -47,30 +47,51 @@ public class ParticipantDataService {
         // Create static participants
         Participant p1 = new Participant();
         p1.setId("Participant_0yrbhi5");
-        p1.setName("Student");
-        p1.setPosition("place17");
+        p1.setName("Robot Sprinkler");
+        p1.setPosition("place7");
 
         Participant p2 = new Participant();
         p2.setId("Participant_1fejmk0");
-        p2.setName("Tutor");
-        p2.setPosition("place1");
+        p2.setName("Robot Planter");
+        p2.setPosition("place7");
 
         Participant p3 = new Participant();
         p3.setId("Participant_2abc123");
-        p3.setName("Maintenance Supervisor");
-        p3.setPosition("place5");
-
-        
-        Participant p4 = new Participant();
-        p4.setId("Participant_3def456");
-        p4.setName("Attendant");
-        p4.setPosition("place10");
+        p3.setName("Farmer");
+        p3.setPosition("place13");
 
         // Add to map
         participantsMap.put(p1.getId(), p1);
         participantsMap.put(p2.getId(), p2);
         participantsMap.put(p3.getId(), p3);
-        participantsMap.put(p4.getId(), p4);
+
+        // Create static participants
+        // Participant p1 = new Participant();
+        // p1.setId("Participant_0yrbhi5");
+        // p1.setName("Student");
+        // p1.setPosition("place17");
+
+        // Participant p2 = new Participant();
+        // p2.setId("Participant_1fejmk0");
+        // p2.setName("Tutor");
+        // p2.setPosition("place1");
+
+        // Participant p3 = new Participant();
+        // p3.setId("Participant_2abc123");
+        // p3.setName("Maintenance Supervisor");
+        // p3.setPosition("place5");
+
+        
+        // Participant p4 = new Participant();
+        // p4.setId("Participant_3def456");
+        // p4.setName("Attendant");
+        // p4.setPosition("place10");
+
+        // // Add to map
+        // participantsMap.put(p1.getId(), p1);
+        // participantsMap.put(p2.getId(), p2);
+        // participantsMap.put(p3.getId(), p3);
+        // participantsMap.put(p4.getId(), p4);
 
         log.info("[ParticipantDataService] Initialized with {} static participants", participantsMap.size());
     }

@@ -1,6 +1,7 @@
 // src/main/java/org/unicam/intermediate/service/environmental/EnvironmentService.java
 package org.unicam.intermediate.service.environmental;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -44,7 +45,8 @@ public class EnvironmentDataService {
     public EnvironmentDataService(RepositoryService repositoryService,
                                   ExternalAttributeRefreshService externalAttributeRefreshService) {
         this.repositoryService = repositoryService;
-        this.objectMapper = new ObjectMapper();
+        this.objectMapper = new ObjectMapper()
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         this.externalAttributeRefreshService = externalAttributeRefreshService;
     }
 
@@ -406,7 +408,7 @@ public class EnvironmentDataService {
     public void loadEnvironmentFromFile() {
         try {
             // Try to load from classpath first (standard location in packaged app)
-            InputStream is = this.getClass().getClassLoader().getResourceAsStream("environment.json");
+            InputStream is = this.getClass().getClassLoader().getResourceAsStream("farm.json");
             
             if (is != null) {
                 this.data = objectMapper.readValue(is, EnvironmentData.class);
@@ -417,7 +419,7 @@ public class EnvironmentDataService {
             }
 
             // Fallback: try to load from project directory (for development)
-            Path filePath = Paths.get("camunda-bpmn-engine/src/main/resources/environment.json");
+            Path filePath = Paths.get("camunda-bpmn-engine/src/main/resources/farm.json");
             if (Files.exists(filePath)) {
                 byte[] fileBytes = Files.readAllBytes(filePath);
                 this.data = objectMapper.readValue(fileBytes, EnvironmentData.class);
