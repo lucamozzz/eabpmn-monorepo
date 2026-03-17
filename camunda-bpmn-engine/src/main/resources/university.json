@@ -876,6 +876,28 @@
           "value": "parking"
         }
       ]
+    },
+    {
+      "id": "set5",
+      "name": "Library",
+      "conditions": [
+        {
+          "attribute": "purpose",
+          "operator": "==",
+          "value": "library"
+        }
+      ]
+    },
+    {
+      "id": "set6",
+      "name": "Reading Rooms",
+      "conditions": [
+        {
+          "attribute": "purpose",
+          "operator": "==",
+          "value": "reading"
+        }
+      ]
     }
   ],
   "views": [
@@ -886,7 +908,9 @@
         "set1",
         "set2",
         "set3",
-        "set4"
+        "set4",
+        "set5",
+        "set6"
       ],
       "attributes": {}
     }

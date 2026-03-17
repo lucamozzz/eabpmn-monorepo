@@ -446,6 +446,7 @@ public class EnvironmentalTaskRegistry {
             case "checkroom" -> checkRoom(activityId, participantId, executionId, notifyParticipant);
             case "preparearea" -> prepareArea(activityId, participantId, executionId, notifyParticipant);
             case "plantarea" -> plantArea(activityId, participantId, executionId, notifyParticipant);
+            case "waterarea" -> waterArea(activityId, participantId, executionId, notifyParticipant);
             case "leaveroom" -> leaveRoom(activityId, participantId, notifyParticipant);
             case "occupyroom" -> occupyRoom(activityId, participantId, notifyParticipant);
             default -> {
@@ -567,6 +568,25 @@ public class EnvironmentalTaskRegistry {
 
     private boolean isPlantAreaSatisfied(String activityId, String participantId) {
         return evaluateGuard("myPlace().state == planted", activityId + "#action:plantArea", participantId, null);
+    }
+
+    /**
+     * Dedicated action handler for watering the current area.
+     * Notification and guard evaluation are intentionally separate and ordered.
+     */
+    private boolean waterArea(String activityId, String participantId, String executionId, boolean notifyParticipant) {
+        if (notifyParticipant) {
+            notifyWaterArea(executionId, participantId);
+        }
+        return isWaterAreaSatisfied(activityId, participantId);
+    }
+
+    private void notifyWaterArea(String executionId, String participantId) {
+        notifyParticipantAction(executionId, participantId, "waterArea", "Water that area");
+    }
+
+    private boolean isWaterAreaSatisfied(String activityId, String participantId) {
+        return evaluateGuard("myPlace().dry == false", activityId + "#action:waterArea", participantId, null);
     }
 
     /**
@@ -747,6 +767,7 @@ public class EnvironmentalTaskRegistry {
             case "checkroom" -> "Check the room";
             case "preparearea" -> "Prepare the area for planting";
             case "plantarea" -> "Plant in that area";
+            case "waterarea" -> "Water that area";
             case "leaveroom" -> "Leave the room";
             case "occupyroom" -> "Occupy the room";
             default -> "Execute action: " + action;

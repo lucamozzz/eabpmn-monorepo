@@ -408,7 +408,7 @@ public class EnvironmentDataService {
     public void loadEnvironmentFromFile() {
         try {
             // Try to load from classpath first (standard location in packaged app)
-            InputStream is = this.getClass().getClassLoader().getResourceAsStream("farm.json");
+            InputStream is = this.getClass().getClassLoader().getResourceAsStream("university.json");
             
             if (is != null) {
                 this.data = objectMapper.readValue(is, EnvironmentData.class);
@@ -419,7 +419,7 @@ public class EnvironmentDataService {
             }
 
             // Fallback: try to load from project directory (for development)
-            Path filePath = Paths.get("camunda-bpmn-engine/src/main/resources/farm.json");
+            Path filePath = Paths.get("camunda-bpmn-engine/src/main/resources/university.json");
             if (Files.exists(filePath)) {
                 byte[] fileBytes = Files.readAllBytes(filePath);
                 this.data = objectMapper.readValue(fileBytes, EnvironmentData.class);
