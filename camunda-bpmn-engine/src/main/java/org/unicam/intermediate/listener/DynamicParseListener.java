@@ -171,6 +171,20 @@ public class DynamicParseListener extends AbstractBpmnParseListener {
         }
     }
 
+    @Override
+    public void parseIntermediateThrowEvent(Element intermediateEventElement, ScopeImpl scope, ActivityImpl activity) {
+        if (hasMessageEventDefinition(intermediateEventElement)) {
+            addMessageThrowListener(activity);
+        }
+    }
+
+    @Override
+    public void parseEndEvent(Element endEventElement, ScopeImpl scope, ActivityImpl activity) {
+        if (hasMessageEventDefinition(endEventElement)) {
+            addMessageThrowListener(activity);
+        }
+    }
+
     private String getListenerBeanName(String typeValue) {
         return switch (typeValue.toLowerCase()) {
             case "movement" -> movementExecutionListenerBeanName;
@@ -202,6 +216,26 @@ public class DynamicParseListener extends AbstractBpmnParseListener {
                     activity.getId());
         } catch (Exception e) {
             log.error("[DynamicParseListener] Failed to add discordance check listener to task '{}': {}",
+                    activity.getId(), e.getMessage(), e);
+        }
+    }
+
+    private boolean hasMessageEventDefinition(Element eventElement) {
+        return eventElement != null && eventElement.element("messageEventDefinition") != null;
+    }
+
+    private void addMessageThrowListener(ActivityImpl activity) {
+        try {
+            ExpressionManager exprMgr = Context.getProcessEngineConfiguration().getExpressionManager();
+            String exprString = "${" + messageThrowExecutionListenerBeanName + "}";
+            var expression = exprMgr.createExpression(exprString);
+
+            ExecutionListener listener = new DelegateExpressionExecutionListener(expression, Collections.emptyList());
+            activity.addListener(ExecutionListener.EVENTNAME_START, listener);
+
+            log.debug("[DynamicParseListener] Added message throw listener to event '{}'", activity.getId());
+        } catch (Exception e) {
+            log.error("[DynamicParseListener] Failed to add message throw listener to event '{}': {}",
                     activity.getId(), e.getMessage(), e);
         }
     }

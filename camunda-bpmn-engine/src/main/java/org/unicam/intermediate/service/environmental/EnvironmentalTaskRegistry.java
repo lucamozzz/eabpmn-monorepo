@@ -444,6 +444,7 @@ public class EnvironmentalTaskRegistry {
             case "turnlightsoff" -> turnLightsOff(activityId, participantId, executionId, notifyParticipant);
             case "cleanroom" -> cleanRoom(activityId, participantId, executionId, notifyParticipant);
             case "checkroom" -> checkRoom(activityId, participantId, executionId, notifyParticipant);
+            case "assessalldirty" -> assessAllDirty(activityId, executionId, notifyParticipant);
             case "preparearea" -> prepareArea(activityId, participantId, executionId, notifyParticipant);
             case "plantarea" -> plantArea(activityId, participantId, executionId, notifyParticipant);
             case "waterarea" -> waterArea(activityId, participantId, executionId, notifyParticipant);
@@ -541,6 +542,36 @@ public class EnvironmentalTaskRegistry {
 
     private boolean isCheckRoomSatisfied(String activityId, String participantId) {
         return evaluateGuard("myPlace().state != null", activityId + "#action:checkRoom", participantId, null);
+    }
+
+    /**
+     * assessAllDirty is a system action with no participant notification.
+     * Execute mode marks state=dirty for place1..place16 and completes immediately.
+     */
+    private boolean assessAllDirty(String activityId, String executionId, boolean execute) {
+        if (!execute) {
+            return true;
+        }
+
+        int updated = 0;
+        for (int i = 1; i <= 16; i++) {
+            String placeId = "place" + i;
+            environmentDataService.getPhysicalPlace(placeId).ifPresent(place -> {
+                if (place.getAttributes() != null) {
+                    place.getAttributes().put("state", "dirty");
+                }
+            });
+
+            if (environmentDataService.getPhysicalPlace(placeId)
+                    .map(p -> p.getAttributes() != null && "dirty".equals(String.valueOf(p.getAttributes().get("state"))))
+                    .orElse(false)) {
+                updated++;
+            }
+        }
+
+        log.info("[ENVIRONMENTAL] assessAllDirty executed | activity={} | execution={} | updatedPlaces={}",
+                activityId, executionId, updated);
+        return true;
     }
 
     private void notifyPrepareArea(String executionId, String participantId) {
@@ -765,6 +796,7 @@ public class EnvironmentalTaskRegistry {
             case "turnlightsoff" -> "Turn the lights off";
             case "cleanroom" -> "Clean the room";
             case "checkroom" -> "Check the room";
+            case "assessalldirty" -> "Assess all rooms as dirty";
             case "preparearea" -> "Prepare the area for planting";
             case "plantarea" -> "Plant in that area";
             case "waterarea" -> "Water that area";

@@ -9,6 +9,8 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.Expression;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.stereotype.Component;
+import org.camunda.bpm.engine.impl.cfg.TransactionState;
+import org.camunda.bpm.engine.impl.context.Context;
 
 @Component("startProcessByMessageDelegate")
 @Slf4j
@@ -35,6 +37,25 @@ public class StartProcessByMessageDelegate implements JavaDelegate {
             businessKey = execution.getBusinessKey();
         }
 
+        final String resolvedMessageName = messageName;
+        final String resolvedBusinessKey = businessKey;
+
+        var commandContext = Context.getCommandContext();
+        if (commandContext != null && commandContext.getTransactionContext() != null) {
+            commandContext.getTransactionContext().addTransactionListener(
+                    TransactionState.COMMITTED,
+                    command -> startProcessByMessage(resolvedMessageName, resolvedBusinessKey)
+            );
+
+            log.info("[StartByMessage] Scheduled process start by message '{}' after commit (businessKey='{}')",
+                    resolvedMessageName, resolvedBusinessKey);
+            return;
+        }
+
+        startProcessByMessage(resolvedMessageName, resolvedBusinessKey);
+    }
+
+    private void startProcessByMessage(String messageName, String businessKey) {
         if (businessKey == null || businessKey.isBlank()) {
             runtimeService.startProcessInstanceByMessage(messageName);
             log.info("[StartByMessage] Started process by message '{}' without businessKey", messageName);
