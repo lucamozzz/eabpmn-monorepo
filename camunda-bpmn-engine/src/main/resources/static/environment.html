@@ -108,10 +108,10 @@
       min-height: 0;
     }
     .panel.logical-panel {
-      flex: 0.75;
+      flex: 1;
     }
     .panel.physical-panel {
-      flex: 1.25;
+      flex: 1;
     }
     .panel-header {
       padding: 10px 12px;
@@ -151,6 +151,65 @@
       margin: 0 0 6px;
       font-size: 14px;
       line-height: 1.2;
+    }
+    .logical-place-details {
+      width: 100%;
+    }
+    .logical-place-summary {
+      cursor: pointer;
+      list-style: none;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      outline: none;
+    }
+    .logical-place-summary::-webkit-details-marker {
+      display: none;
+    }
+    .logical-place-summary::before {
+      content: "▸";
+      color: var(--muted);
+      font-size: 12px;
+      transition: transform 120ms ease;
+    }
+    .logical-place-details[open] .logical-place-summary::before {
+      transform: rotate(90deg);
+    }
+    .logical-place-members {
+      margin: 8px 0 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px dashed var(--border);
+    }
+    .logical-place-members li {
+      padding: 8px 0;
+      border-bottom: 1px dashed var(--border);
+    }
+    .logical-place-members li:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+    .physical-name {
+      display: block;
+      font-size: 12px;
+      color: var(--text);
+      font-weight: 600;
+    }
+    .physical-id {
+      display: block;
+      margin-top: 2px;
+      font-size: 11px;
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    .logical-empty {
+      display: block;
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--muted);
     }
     .list {
       margin: 0;
@@ -234,6 +293,7 @@
     const physicalPlacesEl = document.getElementById("physicalPlaces");
     const logicalPlacesEl = document.getElementById("logicalPlaces");
     const REFRESH_MS = 2000;
+    const logicalOpenIds = new Set();
 
     const DEFAULT_POLYGON_STYLE = {
       color: "#cf2424",
@@ -423,6 +483,39 @@
         .map((place) => String(place.id));
     }
 
+    function snapshotOpenLogicalPlaces() {
+      const openDetails = logicalPlacesEl.querySelectorAll(".logical-place-details[open]");
+      logicalOpenIds.clear();
+      for (const details of openDetails) {
+        const logicalId = details.getAttribute("data-logical-id");
+        if (logicalId) {
+          logicalOpenIds.add(logicalId);
+        }
+      }
+    }
+
+    function restoreAndTrackOpenLogicalPlaces() {
+      const allDetails = logicalPlacesEl.querySelectorAll(".logical-place-details");
+      for (const details of allDetails) {
+        const logicalId = details.getAttribute("data-logical-id");
+        if (!logicalId) {
+          continue;
+        }
+
+        if (logicalOpenIds.has(logicalId)) {
+          details.setAttribute("open", "open");
+        }
+
+        details.addEventListener("toggle", () => {
+          if (details.open) {
+            logicalOpenIds.add(logicalId);
+          } else {
+            logicalOpenIds.delete(logicalId);
+          }
+        });
+      }
+    }
+
     function attachLogicalPlaceHover(logicalPlaces) {
       const logicalById = new Map((logicalPlaces || []).map((lp) => [String(lp.id), lp]));
       const cards = logicalPlacesEl.querySelectorAll(".logical-place-card");
@@ -455,22 +548,51 @@
     }
 
     function renderLogicalPlaces(logicalPlaces) {
+      snapshotOpenLogicalPlaces();
+
       if (!Array.isArray(logicalPlaces) || logicalPlaces.length === 0) {
         logicalPlacesEl.innerHTML = '<div class="empty">Nessun logical place disponibile.</div>';
+        logicalOpenIds.clear();
         return;
       }
 
+      const physicalPlaces = window.__latestPhysicalPlaces || [];
+      const physicalById = new Map(
+        physicalPlaces
+          .filter((place) => place && place.id !== undefined && place.id !== null)
+          .map((place) => [String(place.id), place])
+      );
+
       const html = logicalPlaces.map((place) => {
-          const displayName = place && place.name ? place.name : "(senza nome)";
+        const displayName = place && place.name ? place.name : "(senza nome)";
+        const matchingIds = resolveMatchingPhysicalPlaceIdsForLogicalPlace(place, physicalPlaces);
+        const matchingItemsHtml = matchingIds.map((id) => {
+          const physical = physicalById.get(String(id));
+          const physicalName = physical && physical.name ? physical.name : "(senza nome)";
+          return (
+            '<li>' +
+              '<span class="physical-name">' + valueToString(physicalName) + '</span>' +
+              '<span class="physical-id">' + valueToString(id) + '</span>' +
+            '</li>'
+          );
+        }).join("");
+
+        const membersHtml = matchingItemsHtml
+          ? '<ul class="logical-place-members">' + matchingItemsHtml + '</ul>'
+          : '<span class="logical-empty">No corresponding physical places.</span>';
 
         return (
           '<article class="card map-linked logical-place-card" data-logical-id="' + valueToString(place.id ?? "") + '">' +
-              '<h2>' + valueToString(displayName) + '</h2>' +
+            '<details class="logical-place-details" data-logical-id="' + valueToString(place.id ?? "") + '">' +
+              '<summary class="logical-place-summary">' + valueToString(displayName) + '</summary>' +
+              membersHtml +
+            '</details>' +
           '</article>'
         );
       }).join("");
 
       logicalPlacesEl.innerHTML = html;
+      restoreAndTrackOpenLogicalPlaces();
       attachLogicalPlaceHover(logicalPlaces);
     }
 

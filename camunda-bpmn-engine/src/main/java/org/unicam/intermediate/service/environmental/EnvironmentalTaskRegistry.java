@@ -7,6 +7,7 @@ import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.unicam.intermediate.models.dto.websocket.GpsResponse;
+import org.unicam.intermediate.models.pojo.PhysicalPlace;
 import org.unicam.intermediate.models.record.EnvironmentalTaskInfo;
 import org.unicam.intermediate.service.participant.ParticipantDataService;
 import org.unicam.intermediate.service.participant.ParticipantService;
@@ -445,6 +446,9 @@ public class EnvironmentalTaskRegistry {
             case "cleanroom" -> cleanRoom(activityId, participantId, executionId, notifyParticipant);
             case "checkroom" -> checkRoom(activityId, participantId, executionId, notifyParticipant);
             case "assessalldirty" -> assessAllDirty(activityId, executionId, notifyParticipant);
+            case "startemergency" -> startEmergency(activityId, executionId, notifyParticipant);
+            case "endemergency" -> endEmergency(activityId, executionId, notifyParticipant);
+            case "extinguishfire" -> extinguishFire(activityId, participantId, executionId, notifyParticipant);
             case "preparearea" -> prepareArea(activityId, participantId, executionId, notifyParticipant);
             case "plantarea" -> plantArea(activityId, participantId, executionId, notifyParticipant);
             case "waterarea" -> waterArea(activityId, participantId, executionId, notifyParticipant);
@@ -545,6 +549,25 @@ public class EnvironmentalTaskRegistry {
     }
 
     /**
+     * Dedicated action handler for fire extinguishing.
+     * Notification and guard evaluation are intentionally separate and ordered.
+     */
+    private boolean extinguishFire(String activityId, String participantId, String executionId, boolean notifyParticipant) {
+        if (notifyParticipant) {
+            notifyExtinguishFire(executionId, participantId);
+        }
+        return isExtinguishFireSatisfied(activityId, participantId);
+    }
+
+    private void notifyExtinguishFire(String executionId, String participantId) {
+        notifyParticipantAction(executionId, participantId, "extinguishFire", "Extinguish the fire");
+    }
+
+    private boolean isExtinguishFireSatisfied(String activityId, String participantId) {
+        return evaluateGuard("myPlace().fire == false", activityId + "#action:extinguishFire", participantId, null);
+    }
+
+    /**
      * assessAllDirty is a system action with no participant notification.
      * Execute mode marks state=dirty for place1..place16 and completes immediately.
      */
@@ -571,6 +594,97 @@ public class EnvironmentalTaskRegistry {
 
         log.info("[ENVIRONMENTAL] assessAllDirty executed | activity={} | execution={} | updatedPlaces={}",
                 activityId, executionId, updated);
+        return true;
+    }
+
+    /**
+     * startEmergency is a system action with no participant notification.
+     * Execute mode sets alarm=true and emergency=true for all physical places that currently
+     * belong to the logical place "Fire Areas", then completes immediately.
+     */
+    private boolean startEmergency(String activityId, String executionId, boolean execute) {
+        if (!execute) {
+            return true;
+        }
+
+        Optional<String> fireAreasLogicalIdOpt = environmentDataService.resolveLogicalPlaceId("Fire Areas");
+        if (fireAreasLogicalIdOpt.isEmpty()) {
+            log.warn("[ENVIRONMENTAL] startEmergency executed but logical place 'Fire Areas' was not found | activity={} | execution={}",
+                    activityId, executionId);
+            return true;
+        }
+
+        String fireAreasLogicalId = fireAreasLogicalIdOpt.get();
+        int matchedPlaces = 0;
+        int updatedPlaces = 0;
+
+        for (PhysicalPlace place : environmentDataService.getPhysicalPlaces()) {
+            if (place == null || place.getId() == null || place.getId().isBlank()) {
+                continue;
+            }
+
+            if (!environmentDataService.isPhysicalPlaceInLogicalPlace(place.getId(), fireAreasLogicalId)) {
+                continue;
+            }
+
+            matchedPlaces++;
+            if (place.getAttributes() == null) {
+                log.debug("[ENVIRONMENTAL] startEmergency: place '{}' has no attributes map - skipping", place.getId());
+                continue;
+            }
+
+            place.getAttributes().put("alarm", true);
+            place.getAttributes().put("emergency", true);
+            updatedPlaces++;
+        }
+
+        log.info("[ENVIRONMENTAL] startEmergency executed | activity={} | execution={} | logicalPlace='{}' | matchedPlaces={} | updatedPlaces={} | alarm=true | emergency=true",
+                activityId, executionId, fireAreasLogicalId, matchedPlaces, updatedPlaces);
+        return true;
+    }
+
+    /**
+     * endEmergency is a system action with no participant notification.
+     * Execute mode sets alarm=false for all physical places that currently belong
+     * to the logical place "Emergency Areas", then completes immediately.
+     */
+    private boolean endEmergency(String activityId, String executionId, boolean execute) {
+        if (!execute) {
+            return true;
+        }
+
+        Optional<String> emergencyAreasLogicalIdOpt = environmentDataService.resolveLogicalPlaceId("Emergency Areas");
+        if (emergencyAreasLogicalIdOpt.isEmpty()) {
+            log.warn("[ENVIRONMENTAL] endEmergency executed but logical place 'Emergency Areas' was not found | activity={} | execution={}",
+                    activityId, executionId);
+            return true;
+        }
+
+        String emergencyAreasLogicalId = emergencyAreasLogicalIdOpt.get();
+        int matchedPlaces = 0;
+        int updatedPlaces = 0;
+
+        for (PhysicalPlace place : environmentDataService.getPhysicalPlaces()) {
+            if (place == null || place.getId() == null || place.getId().isBlank()) {
+                continue;
+            }
+
+            if (!environmentDataService.isPhysicalPlaceInLogicalPlace(place.getId(), emergencyAreasLogicalId)) {
+                continue;
+            }
+
+            matchedPlaces++;
+            if (place.getAttributes() == null) {
+                log.debug("[ENVIRONMENTAL] endEmergency: place '{}' has no attributes map - skipping", place.getId());
+                continue;
+            }
+
+            place.getAttributes().put("alarm", false);
+            updatedPlaces++;
+        }
+
+        log.info("[ENVIRONMENTAL] endEmergency executed | activity={} | execution={} | logicalPlace='{}' | matchedPlaces={} | updatedPlaces={} | alarm=false",
+                activityId, executionId, emergencyAreasLogicalId, matchedPlaces, updatedPlaces);
         return true;
     }
 
@@ -797,6 +911,9 @@ public class EnvironmentalTaskRegistry {
             case "cleanroom" -> "Clean the room";
             case "checkroom" -> "Check the room";
             case "assessalldirty" -> "Assess all rooms as dirty";
+            case "startemergency" -> "Start emergency";
+            case "endemergency" -> "End emergency";
+            case "extinguishfire" -> "Extinguish the fire";
             case "preparearea" -> "Prepare the area for planting";
             case "plantarea" -> "Plant in that area";
             case "waterarea" -> "Water that area";

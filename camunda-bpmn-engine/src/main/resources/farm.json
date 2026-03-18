@@ -38,7 +38,7 @@
         ]
       ],
       "attributes": {
-        "state": "crop",
+        "state": "planted",
         "purpose": "tomatoes",
         "dry": true
       }
@@ -131,7 +131,7 @@
         ]
       ],
       "attributes": {
-        "state": "crop",
+        "state": "planted",
         "purpose": "zucchini",
         "dry": true
       }
@@ -174,7 +174,7 @@
         ]
       ],
       "attributes": {
-        "state": "crop",
+        "state": "planted",
         "purpose": "zucchini",
         "dry": true
       }
@@ -300,7 +300,7 @@
         ]
       ],
       "attributes": {
-        "state": null,
+        "state": "planted",
         "purpose": "tomatoes",
         "dry": false
       }
@@ -969,6 +969,11 @@
           "attribute": "dry",
           "operator": "==",
           "value": true
+        },
+        {
+          "attribute": "state",
+          "operator": "==",
+          "value": "planted"
         }
       ],
       "operator": "AND",

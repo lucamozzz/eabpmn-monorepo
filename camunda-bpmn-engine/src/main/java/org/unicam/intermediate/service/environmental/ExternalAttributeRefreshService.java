@@ -22,7 +22,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 public class ExternalAttributeRefreshService {
 
-    private static final String IS_RAINING_ATTR = "isRaining";
+    private static final String RAIN_ATTR = "rain";
     private static final String RAIN_ENDPOINT = "https://api.open-meteo.com/v1/forecast?latitude=43.1376&longitude=13.0746&current=rain";
 
     private final ObjectMapper objectMapper;
@@ -36,7 +36,7 @@ public class ExternalAttributeRefreshService {
 
     @PostConstruct
     void init() {
-        registerRefresher(IS_RAINING_ATTR, this::refreshIsRaining);
+        registerRefresher(RAIN_ATTR, this::refreshIsRaining);
     }
 
     /**
@@ -90,16 +90,16 @@ public class ExternalAttributeRefreshService {
 
             boolean isRaining = rainNode.asDouble() > 0.0d;
             if (place.getAttributes() != null) {
-                place.getAttributes().put(IS_RAINING_ATTR, isRaining);
+                place.getAttributes().put(RAIN_ATTR, isRaining);
                 log.debug("[Environment External Refresh] Updated {} for place '{}' to {}",
-                        IS_RAINING_ATTR,
+                    RAIN_ATTR,
                         place.getId(),
                         isRaining);
             }
 
         } catch (Exception ex) {
             log.warn("[Environment External Refresh] Failed to refresh '{}' from Open-Meteo: {}",
-                    IS_RAINING_ATTR,
+                    RAIN_ATTR,
                     ex.getMessage());
         }
     }

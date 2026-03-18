@@ -26,7 +26,7 @@
         "occupied": null,
         "lights": null,
         "state": null,
-        "isRaining": null
+        "rain": null
       }
     },
     {
@@ -55,7 +55,7 @@
         "occupied": false,
         "lights": null,
         "state": "clean",
-        "isRaining": null
+        "rain": null
       }
     },
     {
@@ -84,7 +84,7 @@
         "occupied": null,
         "lights": null,
         "state": null,
-        "isRaining": null
+        "rain": null
       }
     },
     {
@@ -113,7 +113,7 @@
         "occupied": null,
         "lights": null,
         "state": null,
-        "isRaining": null
+        "rain": null
       }
     },
     {
@@ -142,7 +142,7 @@
         "occupied": null,
         "lights": null,
         "state": null,
-        "isRaining": null
+        "rain": null
       }
     },
     {
@@ -171,7 +171,7 @@
         "occupied": null,
         "lights": null,
         "state": null,
-        "isRaining": null
+        "rain": null
       }
     },
     {
@@ -200,7 +200,7 @@
         "occupied": null,
         "lights": null,
         "state": null,
-        "isRaining": null
+        "rain": null
       }
     },
     {
@@ -229,7 +229,7 @@
         "occupied": null,
         "lights": null,
         "state": null,
-        "isRaining": null
+        "rain": null
       }
     },
     {
@@ -258,7 +258,7 @@
         "occupied": null,
         "lights": null,
         "state": null,
-        "isRaining": null
+        "rain": null
       }
     },
     {
@@ -287,7 +287,7 @@
         "occupied": false,
         "lights": null,
         "state": "dirty",
-        "isRaining": null
+        "rain": null
       }
     },
     {
@@ -316,7 +316,7 @@
         "occupied": false,
         "lights": null,
         "state": "dirty",
-        "isRaining": null
+        "rain": null
       }
     },
     {
@@ -345,7 +345,7 @@
         "occupied": null,
         "lights": null,
         "state": "clean",
-        "isRaining": null
+        "rain": null
       }
     },
     {
@@ -374,7 +374,7 @@
         "occupied": null,
         "lights": null,
         "state": null,
-        "isRaining": null
+        "rain": null
       }
     },
     {
@@ -403,7 +403,7 @@
         "occupied": null,
         "lights": null,
         "state": null,
-        "isRaining": null
+        "rain": null
       }
     },
     {
@@ -432,7 +432,7 @@
         "occupied": null,
         "lights": null,
         "state": null,
-        "isRaining": null
+        "rain": null
       }
     },
     {
@@ -461,7 +461,7 @@
         "occupied": null,
         "lights": null,
         "state": null,
-        "isRaining": null
+        "rain": null
       }
     },
     {
@@ -526,7 +526,7 @@
         "occupied": null,
         "lights": null,
         "state": null,
-        "isRaining": null
+        "rain": null
       }
     }
   ],
