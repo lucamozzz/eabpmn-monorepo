@@ -4,15 +4,20 @@ import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.RepositoryService;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
+import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
+import org.camunda.bpm.model.bpmn.instance.Collaboration;
 import org.camunda.bpm.model.bpmn.instance.ExtensionElements;
+import org.camunda.bpm.model.bpmn.instance.Participant;
 import org.camunda.bpm.model.bpmn.instance.Process;
 import org.camunda.bpm.model.bpmn.instance.StartEvent;
 import org.camunda.bpm.model.xml.instance.DomElement;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -25,6 +30,7 @@ public class EnvironmentConditionalStartService {
 
     private static final String SPACE_NS = "http://space";
     private static final String GUARD_LOCAL_NAME = "guard";
+    private static final String DEFAULT_CONDITIONAL_START_BUSINESS_KEY = "a";
 
     private final RepositoryService repositoryService;
     private final RuntimeService runtimeService;
@@ -58,6 +64,11 @@ public class EnvironmentConditionalStartService {
                 continue;
             }
 
+            Process parentProcess = (Process) startEvent.getParentElement();
+            if (!definition.getKey().equals(parentProcess.getId())) {
+                continue;
+            }
+
             String guardExpression = extractGuard(startEvent.getExtensionElements());
             if (guardExpression == null || guardExpression.isBlank()) {
                 continue;
@@ -73,24 +84,28 @@ public class EnvironmentConditionalStartService {
             );
 
             if (isSatisfied && !wasSatisfied) {
-                long activeInstances = runtimeService.createProcessInstanceQuery()
-                        .processDefinitionId(definition.getId())
-                        .active()
-                        .count();
+                Set<String> collaborationBusinessKeys = findCollaborationBusinessKeys(modelInstance);
 
-                if (activeInstances == 0) {
-                    try {
-                        runtimeService.createProcessInstanceById(definition.getId())
-                                .startBeforeActivity(startEvent.getId())
-                                .setVariable("__spaceConditionalStartEventId", startEvent.getId())
-                                .setVariable("__spaceConditionalStartGuard", guardExpression)
-                                .execute();
+                if (!collaborationBusinessKeys.isEmpty()) {
+                    for (String businessKey : collaborationBusinessKeys) {
+                        long activeForBusinessKey = runtimeService.createProcessInstanceQuery()
+                                .processDefinitionKey(definition.getKey())
+                                .processInstanceBusinessKey(businessKey)
+                                .active()
+                                .count();
 
-                        log.info("[EnvironmentConditionalStart] Triggered process '{}' from StartEvent '{}' with guard '{}'",
-                                definition.getKey(), startEvent.getId(), guardExpression);
-                    } catch (Exception e) {
-                        log.error("[EnvironmentConditionalStart] Failed to trigger process '{}' for StartEvent '{}': {}",
-                                definition.getKey(), startEvent.getId(), e.getMessage(), e);
+                        if (activeForBusinessKey == 0) {
+                            startConditionalProcess(definition, startEvent, guardExpression, businessKey);
+                        }
+                    }
+                } else {
+                    long activeInstances = runtimeService.createProcessInstanceQuery()
+                            .processDefinitionId(definition.getId())
+                            .active()
+                            .count();
+
+                    if (activeInstances == 0) {
+                        startConditionalProcess(definition, startEvent, guardExpression, DEFAULT_CONDITIONAL_START_BUSINESS_KEY);
                     }
                 }
             }
@@ -116,5 +131,60 @@ public class EnvironmentConditionalStartService {
     private boolean isSpaceGuard(DomElement domElement) {
         return GUARD_LOCAL_NAME.equalsIgnoreCase(domElement.getLocalName())
                 && SPACE_NS.equals(domElement.getNamespaceURI());
+    }
+
+    private void startConditionalProcess(ProcessDefinition definition,
+                                         StartEvent startEvent,
+                                         String guardExpression,
+                                         String businessKey) {
+        try {
+            var builder = runtimeService.createProcessInstanceById(definition.getId())
+                    .startBeforeActivity(startEvent.getId())
+                    .setVariable("__spaceConditionalStartEventId", startEvent.getId())
+                    .setVariable("__spaceConditionalStartGuard", guardExpression);
+
+            if (businessKey != null && !businessKey.isBlank()) {
+                builder.businessKey(businessKey);
+            }
+
+            builder.execute();
+
+            log.info("[EnvironmentConditionalStart] Triggered process '{}' from StartEvent '{}' with guard '{}'{}",
+                    definition.getKey(),
+                    startEvent.getId(),
+                    guardExpression,
+                    businessKey != null && !businessKey.isBlank() ? " | BK=" + businessKey : "");
+        } catch (Exception e) {
+            log.error("[EnvironmentConditionalStart] Failed to trigger process '{}' for StartEvent '{}': {}",
+                    definition.getKey(), startEvent.getId(), e.getMessage(), e);
+        }
+    }
+
+    private Set<String> findCollaborationBusinessKeys(BpmnModelInstance modelInstance) {
+        Set<String> keys = new LinkedHashSet<>();
+        if (modelInstance == null) {
+            return keys;
+        }
+
+        for (Collaboration collaboration : modelInstance.getModelElementsByType(Collaboration.class)) {
+            for (Participant participant : collaboration.getParticipants()) {
+                Process participantProcess = participant.getProcess();
+                if (participantProcess == null || participantProcess.getId() == null || participantProcess.getId().isBlank()) {
+                    continue;
+                }
+
+                for (ProcessInstance instance : runtimeService.createProcessInstanceQuery()
+                        .processDefinitionKey(participantProcess.getId())
+                        .active()
+                        .list()) {
+                    String businessKey = instance.getBusinessKey();
+                    if (businessKey != null && !businessKey.isBlank()) {
+                        keys.add(businessKey);
+                    }
+                }
+            }
+        }
+
+        return keys;
     }
 }
