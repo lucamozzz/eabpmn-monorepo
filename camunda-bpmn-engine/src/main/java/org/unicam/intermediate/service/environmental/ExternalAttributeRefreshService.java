@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.unicam.intermediate.models.pojo.PhysicalPlace;
+import org.unicam.intermediate.models.environmental.LocationArea;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -14,6 +15,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
+import java.time.Instant;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -23,7 +25,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ExternalAttributeRefreshService {
 
     private static final String RAIN_ATTR = "rain";
-    private static final String RAIN_ENDPOINT = "https://api.open-meteo.com/v1/forecast?latitude=43.1376&longitude=13.0746&current=rain";
+    private static final long CACHE_DURATION_MILLIS = 5 * 60 * 1000; // 5 minutes
 
     private final ObjectMapper objectMapper;
 
@@ -31,8 +33,32 @@ public class ExternalAttributeRefreshService {
             .connectTimeout(Duration.ofSeconds(5))
             .build();
 
+    // placeId -> RainCache
+    private final Map<String, RainCache> rainCache = new ConcurrentHashMap<>();
+
     // attributeKey(lowercase) -> refresher function
     private final Map<String, AttributeRefresher> refreshers = new ConcurrentHashMap<>();
+
+    /**
+     * Cache entry for rain data: coordinates + timestamp + value
+     */
+    private static class RainCache {
+        final double latitude;
+        final double longitude;
+        long lastFetchTime;
+        boolean isRaining;
+
+        RainCache(double latitude, double longitude) {
+            this.latitude = latitude;
+            this.longitude = longitude;
+            this.lastFetchTime = 0;
+            this.isRaining = false;
+        }
+
+        boolean isCacheValid() {
+            return System.currentTimeMillis() - lastFetchTime < CACHE_DURATION_MILLIS;
+        }
+    }
 
     @PostConstruct
     void init() {
@@ -65,9 +91,43 @@ public class ExternalAttributeRefreshService {
     }
 
     private void refreshIsRaining(PhysicalPlace place) {
+        if (place == null || place.getLocationArea() == null) {
+            log.debug("[Environment External Refresh] Place '{}' has no location area, skipping rain refresh", 
+                place != null ? place.getId() : "unknown");
+            return;
+        }
+
+        LocationArea area = place.getLocationArea();
+        
+        // Calculate centroid of bounding box
+        double centerLat = (area.getMinY() + area.getMaxY()) / 2.0;
+        double centerLon = (area.getMinX() + area.getMaxX()) / 2.0;
+
+        // Check cache
+        RainCache cached = rainCache.computeIfAbsent(
+            place.getId(),
+            k -> new RainCache(centerLat, centerLon)
+        );
+
+        // If cache is still valid, use cached value
+        if (cached.isCacheValid()) {
+            if (place.getAttributes() != null) {
+                place.getAttributes().put(RAIN_ATTR, cached.isRaining);
+                log.debug("[Environment External Refresh] Rain (cached) for place '{}' at ({}, {}) = {}",
+                    place.getId(), centerLat, centerLon, cached.isRaining);
+            }
+            return;
+        }
+
+        // Fetch fresh data from Open-Meteo
         try {
+            String endpoint = String.format(
+                "https://api.open-meteo.com/v1/forecast?latitude=%.6f&longitude=%.6f&current=rain",
+                centerLat, centerLon
+            );
+
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(RAIN_ENDPOINT))
+                    .uri(URI.create(endpoint))
                     .timeout(Duration.ofSeconds(8))
                     .GET()
                     .build();
@@ -76,31 +136,36 @@ public class ExternalAttributeRefreshService {
                     HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
 
             if (response.statusCode() < 200 || response.statusCode() >= 300) {
-                log.warn("[Environment External Refresh] Open-Meteo request failed with status {}", response.statusCode());
+                log.warn("[Environment External Refresh] Open-Meteo request failed for place '{}' ({}, {}) with status {}",
+                    place.getId(), centerLat, centerLon, response.statusCode());
                 return;
             }
 
             JsonNode root = objectMapper.readTree(response.body());
             JsonNode rainNode = root.path("current").path("rain");
 
-            if (rainNode.isMissingNode() || rainNode.isNull() || !rainNode.isNumber()) {
-                log.warn("[Environment External Refresh] Missing or invalid 'current.rain' in weather response");
+            if (rainNode.isMissingNode() || rainNode.isNull()) {
+                log.warn("[Environment External Refresh] Missing 'current.rain' in weather response for place '{}' ({}, {})",
+                    place.getId(), centerLat, centerLon);
                 return;
             }
 
-            boolean isRaining = rainNode.asDouble() > 0.0d;
+            boolean isRaining = rainNode.isNumber() && rainNode.asDouble() > 0.0d;
+            
+            // Update cache
+            cached.isRaining = isRaining;
+            cached.lastFetchTime = System.currentTimeMillis();
+
+            // Update place attributes
             if (place.getAttributes() != null) {
                 place.getAttributes().put(RAIN_ATTR, isRaining);
-                log.debug("[Environment External Refresh] Updated {} for place '{}' to {}",
-                    RAIN_ATTR,
-                        place.getId(),
-                        isRaining);
+                log.info("[Environment External Refresh] Updated rain for place '{}' at ({}, {}) = {} (from Open-Meteo)",
+                    place.getId(), centerLat, centerLon, isRaining);
             }
 
         } catch (Exception ex) {
-            log.warn("[Environment External Refresh] Failed to refresh '{}' from Open-Meteo: {}",
-                    RAIN_ATTR,
-                    ex.getMessage());
+            log.warn("[Environment External Refresh] Failed to refresh '{}' for place '{}' from Open-Meteo: {}",
+                    RAIN_ATTR, place.getId(), ex.getMessage());
         }
     }
 

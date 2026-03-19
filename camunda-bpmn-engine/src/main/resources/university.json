@@ -896,6 +896,11 @@
           "attribute": "purpose",
           "operator": "==",
           "value": "reading"
+        },
+        {
+          "attribute": "occupied",
+          "operator": "==",
+          "value": false
         }
       ]
     }

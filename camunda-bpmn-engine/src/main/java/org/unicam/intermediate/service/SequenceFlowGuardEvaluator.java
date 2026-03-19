@@ -212,11 +212,12 @@ public class SequenceFlowGuardEvaluator {
 
         String resolvedExpression = resolveMyPlace(guardExpression, processDefinitionId, participantId, sourceId);
         if (guardExpression.contains("myPlace()") && resolvedExpression.contains("myPlace()")) {
-            log.warn("[SequenceFlowGuardEvaluator] Could not resolve myPlace() for {} | participantId={} | processDefinitionId={} | expression='{}'",
+            log.debug("[SequenceFlowGuardEvaluator] Waiting for participant position to resolve myPlace() for {} | participantId={} | processDefinitionId={} | expression='{}'",
                 sourceId,
                 participantId,
                 processDefinitionId,
                 guardExpression);
+            return false;
         }
 
         Matcher matcher = GUARD_PATTERN.matcher(resolvedExpression.trim());

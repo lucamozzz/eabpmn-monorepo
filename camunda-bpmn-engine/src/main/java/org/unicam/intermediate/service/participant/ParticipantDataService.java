@@ -66,63 +66,30 @@ public class ParticipantDataService {
         // participantsMap.put(p3.getId(), p3);
 
         // Create university participants
-        // Participant p1 = new Participant();
-        // p1.setId("Participant_0yrbhi5");
-        // p1.setName("Student");
-        // p1.setPosition("place17");
-
-        // Participant p2 = new Participant();
-        // p2.setId("Participant_1fejmk0");
-        // p2.setName("Tutor");
-        // p2.setPosition("place1");
-
-        // Participant p3 = new Participant();
-        // p3.setId("Participant_2abc123");
-        // p3.setName("Maintenance Supervisor");
-        // p3.setPosition("place5");
-
-        // Participant p4 = new Participant();
-        // p4.setId("Participant_3def456");
-        // p4.setName("Attendant");
-        // p4.setPosition("place10");
-        
-        // Participant p5 = new Participant();
-        // p5.setId("Participant_1mdszue");
-        // p5.setName("Librarian");
-        // p5.setPosition("place8");
-
-        // // Add to map
-        // participantsMap.put(p1.getId(), p1);
-        // participantsMap.put(p2.getId(), p2);
-        // participantsMap.put(p3.getId(), p3);
-        // participantsMap.put(p4.getId(), p4);
-        // participantsMap.put(p5.getId(), p5);
-
-        // Create university participants
         Participant p1 = new Participant();
         p1.setId("Participant_0yrbhi5");
-        p1.setName("Fire control system");
-        p1.setPosition(null);
+        p1.setName("Car Rental Operator");
+        p1.setPosition("place13");
 
         Participant p2 = new Participant();
         p2.setId("Participant_1fejmk0");
-        p2.setName("Fire-fighter robot");
-        p2.setPosition("place37");
+        p2.setName("Bike Rental Operator");
+        p2.setPosition("place13");
 
         Participant p3 = new Participant();
         p3.setId("Participant_2abc123");
-        p3.setName("Nurse");
-        p3.setPosition("place18");
+        p3.setName("Car Fixer");
+        p3.setPosition("place13");
 
         Participant p4 = new Participant();
         p4.setId("Participant_3def456");
-        p4.setName("Patient");
-        p4.setPosition("place39");
-        
+        p4.setName("Bike Fixer");
+        p4.setPosition("place13");
+
         Participant p5 = new Participant();
         p5.setId("Participant_1mdszue");
-        p5.setName("Ambulance");
-        p5.setPosition("place18");
+        p5.setName("Customer");
+        p5.setPosition("place13");
 
         // Add to map
         participantsMap.put(p1.getId(), p1);
@@ -130,6 +97,38 @@ public class ParticipantDataService {
         participantsMap.put(p3.getId(), p3);
         participantsMap.put(p4.getId(), p4);
         participantsMap.put(p5.getId(), p5);
+        // Create university participants
+        // Participant p1 = new Participant();
+        // p1.setId("Participant_0yrbhi5");
+        // p1.setName("Fire control system");
+        // p1.setPosition(null);
+
+        // Participant p2 = new Participant();
+        // p2.setId("Participant_1fejmk0");
+        // p2.setName("Fire-fighter robot");
+        // p2.setPosition("place37");
+
+        // Participant p3 = new Participant();
+        // p3.setId("Participant_2abc123");
+        // p3.setName("Nurse");
+        // p3.setPosition("place18");
+
+        // Participant p4 = new Participant();
+        // p4.setId("Participant_3def456");
+        // p4.setName("Patient");
+        // p4.setPosition("place39");
+        
+        // Participant p5 = new Participant();
+        // p5.setId("Participant_1mdszue");
+        // p5.setName("Ambulance");
+        // p5.setPosition("place18");
+
+        // // Add to map
+        // participantsMap.put(p1.getId(), p1);
+        // participantsMap.put(p2.getId(), p2);
+        // participantsMap.put(p3.getId(), p3);
+        // participantsMap.put(p4.getId(), p4);
+        // participantsMap.put(p5.getId(), p5);
 
         log.info("[ParticipantDataService] Initialized with {} static participants", participantsMap.size());
     }

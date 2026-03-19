@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -77,6 +78,34 @@ public class MovementTaskRegistry {
             movementTimerStartByExecutionId.remove(removed.executionId());
             log.info("[MovementRegistry] Removed movement task for participant: {}", participantId);
         }
+    }
+
+    /**
+     * Remove task only if the current task for participant matches the expected execution id.
+     */
+    public boolean removeTask(String participantId, String expectedExecutionId) {
+        if (participantId == null || expectedExecutionId == null) {
+            return false;
+        }
+
+        MovementTaskInfo current = activeMovementTasks.get(participantId);
+        if (current == null) {
+            return false;
+        }
+
+        if (!Objects.equals(current.executionId(), expectedExecutionId)) {
+            log.debug("[MovementRegistry] Skip remove for participant {}: expected execution {}, found {}",
+                    participantId, expectedExecutionId, current.executionId());
+            return false;
+        }
+
+        boolean removed = activeMovementTasks.remove(participantId, current);
+        if (removed) {
+            movementTimerStartByExecutionId.remove(expectedExecutionId);
+            log.info("[MovementRegistry] Removed movement task for participant: {} (execution={})",
+                    participantId, expectedExecutionId);
+        }
+        return removed;
     }
 
     public boolean hasActiveMovementTask(String participantId) {
@@ -179,12 +208,19 @@ public class MovementTaskRegistry {
 
         log.debug("[MovementRegistry] Checking {} active movement tasks", activeMovementTasks.size());
 
-        List<String> completedParticipants = new ArrayList<>();
+        List<MovementTaskInfo> completedTasks = new ArrayList<>();
 
         for (Map.Entry<String, MovementTaskInfo> entry : activeMovementTasks.entrySet()) {
             String participantId = entry.getKey();
             MovementTaskInfo taskInfo = entry.getValue();
             boolean destinationReached = false;
+
+            if (!executionExists(taskInfo.executionId())) {
+                log.warn("[MovementRegistry] Execution {} not found for participant {} | removing stale movement task",
+                        taskInfo.executionId(), participantId);
+                completedTasks.add(taskInfo);
+                continue;
+            }
 
             // Ottieni la posizione corrente del participant
             Optional<org.unicam.intermediate.models.pojo.Participant> participantOpt = 
@@ -208,7 +244,7 @@ public class MovementTaskRegistry {
 
             if (destinationReached) {
                 if (signalMovement(taskInfo, participantId, false)) {
-                    completedParticipants.add(participantId);
+                    completedTasks.add(taskInfo);
                 }
                 continue;
             }
@@ -227,13 +263,13 @@ public class MovementTaskRegistry {
                 );
 
                 if (signalMovement(taskInfo, participantId, true)) {
-                    completedParticipants.add(participantId);
+                    completedTasks.add(taskInfo);
                 }
             }
         }
 
         // Rimuovi i task completati dal registro
-        completedParticipants.forEach(this::removeTask);
+        completedTasks.forEach(task -> removeTask(task.participantId(), task.executionId()));
     }
 
     private boolean signalMovement(MovementTaskInfo taskInfo, String participantId, boolean timeout) {
@@ -252,10 +288,31 @@ public class MovementTaskRegistry {
             }
             return true;
         } catch (Exception e) {
+            if (isExecutionNotFoundError(e)) {
+                log.warn("[MovementRegistry] Execution {} already ended for participant {}. Cleaning up stale task.",
+                        taskInfo.executionId(), participantId);
+                return true;
+            }
             log.error("[MovementRegistry] Failed to signal execution {} for participant {}: {}",
                     taskInfo.executionId(), participantId, e.getMessage(), e);
             return false;
         }
+    }
+
+    private boolean executionExists(String executionId) {
+        if (executionId == null || executionId.isBlank()) {
+            return false;
+        }
+        return runtimeService.createExecutionQuery().executionId(executionId).singleResult() != null;
+    }
+
+    private boolean isExecutionNotFoundError(Exception e) {
+        String message = e.getMessage();
+        if (message == null) {
+            return false;
+        }
+        String normalized = message.toLowerCase();
+        return normalized.contains("doesn't exist") || normalized.contains("execution is null");
     }
 
     private boolean isMovementTimerExpired(MovementTaskInfo taskInfo) {

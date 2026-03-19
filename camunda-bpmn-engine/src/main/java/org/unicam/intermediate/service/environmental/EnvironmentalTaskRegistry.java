@@ -178,6 +178,13 @@ public class EnvironmentalTaskRegistry {
         List<EnvironmentalTaskInfo> completedTasks = new ArrayList<>();
 
         for (EnvironmentalTaskInfo taskInfo : activeEnvironmentalTasks.values()) {
+            if (!executionExists(taskInfo.executionId())) {
+                log.warn("[EnvironmentalRegistry] Execution {} not found for activity {} | removing stale environmental task",
+                        taskInfo.executionId(), taskInfo.activityId());
+                completedTasks.add(taskInfo);
+                continue;
+            }
+
             boolean guardSatisfied = evaluateGuard(taskInfo.guardExpression(), taskInfo.activityId(), taskInfo.participantId(), taskInfo.executionId());
             if (!guardSatisfied) {
                 continue;
@@ -199,8 +206,8 @@ public class EnvironmentalTaskRegistry {
                     );
                 }
 
-                completedTasks.add(taskInfo);
                 runtimeService.signal(taskInfo.executionId());
+                completedTasks.add(taskInfo);
                 if (actionCheckResult == ActionCheckResult.TIMEOUT) {
                     log.warn("[EnvironmentalRegistry] Action timer expired -> raised '{}' | activity={} | execution={} | action='{}' | timer={}",
                             FAILED_ACTION_ERROR_CODE,
@@ -216,12 +223,34 @@ public class EnvironmentalTaskRegistry {
                         taskInfo.action());
                 }
             } catch (Exception e) {
+                if (isExecutionNotFoundError(e)) {
+                    log.warn("[EnvironmentalRegistry] Execution {} already ended for activity {}. Cleaning up stale task.",
+                            taskInfo.executionId(), taskInfo.activityId());
+                    completedTasks.add(taskInfo);
+                    continue;
+                }
                 log.error("[EnvironmentalRegistry] Failed to signal execution {} for activity {}: {}",
                         taskInfo.executionId(), taskInfo.activityId(), e.getMessage(), e);
             }
         }
 
         completedTasks.forEach(task -> removeTask(task.executionId(), task.activityId()));
+    }
+
+    private boolean executionExists(String executionId) {
+        if (executionId == null || executionId.isBlank()) {
+            return false;
+        }
+        return runtimeService.createExecutionQuery().executionId(executionId).singleResult() != null;
+    }
+
+    private boolean isExecutionNotFoundError(Exception e) {
+        String message = e.getMessage();
+        if (message == null) {
+            return false;
+        }
+        String normalized = message.toLowerCase();
+        return normalized.contains("doesn't exist") || normalized.contains("execution is null");
     }
 
     private boolean evaluateGuard(String guardExpression, String activityId, String participantId, String executionId) {
@@ -231,6 +260,12 @@ public class EnvironmentalTaskRegistry {
         }
 
         String resolvedExpression = resolveMyPlace(guardExpression, participantId, activityId);
+        if (guardExpression.contains("myPlace()") && resolvedExpression.contains("myPlace()")) {
+            log.debug("[ENVIRONMENTAL] Waiting for participant position to resolve myPlace() for activity {} | participantId={}",
+                    activityId, participantId);
+            return false;
+        }
+
         Matcher matcher = GUARD_PATTERN.matcher(resolvedExpression.trim());
         if (!matcher.matches()) {
             log.warn("[ENVIRONMENTAL] Invalid guard format for activity {}: '{}'", activityId, guardExpression);
@@ -454,6 +489,8 @@ public class EnvironmentalTaskRegistry {
             case "waterarea" -> waterArea(activityId, participantId, executionId, notifyParticipant);
             case "leaveroom" -> leaveRoom(activityId, participantId, notifyParticipant);
             case "occupyroom" -> occupyRoom(activityId, participantId, notifyParticipant);
+            case "rentvehicle" -> rentVehicle(activityId, participantId, notifyParticipant);
+            case "leavevehicle" -> leaveVehicle(activityId, participantId, notifyParticipant);
             default -> {
                 log.warn("[ENVIRONMENTAL] Unknown action '{}' for activity {} -> action-check fails", action, activityId);
                 yield false;
@@ -826,6 +863,96 @@ public class EnvironmentalTaskRegistry {
         return true;
     }
 
+    /**
+     * rentVehicle is a system action.
+     * Check-only mode has no side effects and always returns true.
+     * Execute mode sets taken=false on the participant's current place.
+     */
+    private boolean rentVehicle(String activityId, String participantId, boolean execute) {
+        if (!execute) {
+            log.debug("[ENVIRONMENTAL] rentVehicle check-only (no side effects) | activity={} | participant={}",
+                    activityId, participantId);
+            return true;
+        }
+
+        if (participantId == null || participantId.isBlank()) {
+            log.warn("[ENVIRONMENTAL] rentVehicle: participantId missing for activity {} — completing without update", activityId);
+            return true;
+        }
+
+        String placeRef = participantDataService.getParticipant(participantId)
+                .map(p -> p.getPosition())
+                .orElse(null);
+
+        if (placeRef != null && !placeRef.isBlank()) {
+            String placeId = environmentDataService.resolvePhysicalPlaceId(placeRef).orElse(placeRef);
+            environmentDataService.getPhysicalPlace(placeId).ifPresentOrElse(
+                    place -> {
+                        if (place.getAttributes() != null) {
+                            place.getAttributes().put("taken", false);
+                            log.info("[ENVIRONMENTAL] rentVehicle executed | activity={} | participant={} | place={} | taken=false",
+                                    activityId, participantId, place.getId());
+                        } else {
+                            log.debug("[ENVIRONMENTAL] rentVehicle: place '{}' has no attributes map — skipping | activity={}",
+                                    placeId, activityId);
+                        }
+                    },
+                    () -> log.info("[ENVIRONMENTAL] rentVehicle: place '{}' not found — skipping | activity={} | participant={}",
+                            placeId, activityId, participantId)
+            );
+        } else {
+            log.info("[ENVIRONMENTAL] rentVehicle: participant '{}' has no current position — skipping | activity={}",
+                    participantId, activityId);
+        }
+
+        return true;
+    }
+
+    /**
+     * leaveVehicle is a system action.
+     * Check-only mode has no side effects and always returns true.
+     * Execute mode sets taken=true on the participant's current place.
+     */
+    private boolean leaveVehicle(String activityId, String participantId, boolean execute) {
+        if (!execute) {
+            log.debug("[ENVIRONMENTAL] leaveVehicle check-only (no side effects) | activity={} | participant={}",
+                    activityId, participantId);
+            return true;
+        }
+
+        if (participantId == null || participantId.isBlank()) {
+            log.warn("[ENVIRONMENTAL] leaveVehicle: participantId missing for activity {} — completing without update", activityId);
+            return true;
+        }
+
+        String placeRef = participantDataService.getParticipant(participantId)
+                .map(p -> p.getPosition())
+                .orElse(null);
+
+        if (placeRef != null && !placeRef.isBlank()) {
+            String placeId = environmentDataService.resolvePhysicalPlaceId(placeRef).orElse(placeRef);
+            environmentDataService.getPhysicalPlace(placeId).ifPresentOrElse(
+                    place -> {
+                        if (place.getAttributes() != null) {
+                            place.getAttributes().put("taken", true);
+                            log.info("[ENVIRONMENTAL] leaveVehicle executed | activity={} | participant={} | place={} | taken=true",
+                                    activityId, participantId, place.getId());
+                        } else {
+                            log.debug("[ENVIRONMENTAL] leaveVehicle: place '{}' has no attributes map — skipping | activity={}",
+                                    placeId, activityId);
+                        }
+                    },
+                    () -> log.info("[ENVIRONMENTAL] leaveVehicle: place '{}' not found — skipping | activity={} | participant={}",
+                            placeId, activityId, participantId)
+            );
+        } else {
+            log.info("[ENVIRONMENTAL] leaveVehicle: participant '{}' has no current position — skipping | activity={}",
+                    participantId, activityId);
+        }
+
+        return true;
+    }
+
     private void notifyParticipantAction(String executionId,
                                          String participantId,
                                          String actionKey,
@@ -919,6 +1046,8 @@ public class EnvironmentalTaskRegistry {
             case "waterarea" -> "Water that area";
             case "leaveroom" -> "Leave the room";
             case "occupyroom" -> "Occupy the room";
+            case "rentvehicle" -> "Rent the vehicle";
+            case "leavevehicle" -> "Leave the vehicle";
             default -> "Execute action: " + action;
         };
     }

@@ -1,0 +1,1720 @@
+{
+  "physicalPlaces": [
+    {
+      "id": "place1",
+      "name": "P1",
+      "coordinates": [
+        [
+          13.70799589965323,
+          43.16286202302106
+        ],
+        [
+          13.70805967885291,
+          43.16293762093582
+        ],
+        [
+          13.708146097030712,
+          43.162907535538665
+        ],
+        [
+          13.708083702115655,
+          43.16282352789739
+        ],
+        [
+          13.70799589965323,
+          43.16286202302106
+        ]
+      ],
+      "attributes": {
+        "type": "car",
+        "purpose": "toRent",
+        "taken": true,
+        "rain": null
+      }
+    },
+    {
+      "id": "place2",
+      "name": "Rental office",
+      "coordinates": [
+        [
+          13.708069358561023,
+          43.163106303930164
+        ],
+        [
+          13.70846685667322,
+          43.162957656845236
+        ],
+        [
+          13.70846868427348,
+          43.16283887001285
+        ],
+        [
+          13.707999919933263,
+          43.16300873626716
+        ],
+        [
+          13.708069358561023,
+          43.163106303930164
+        ]
+      ],
+      "attributes": {
+        "purpose": "rental office",
+        "rain": false
+      }
+    },
+    {
+      "id": "place3",
+      "name": "P3",
+      "coordinates": [
+        [
+          13.708083702115655,
+          43.16282352789739
+        ],
+        [
+          13.708146097030712,
+          43.162907535538665
+        ],
+        [
+          13.708232865692365,
+          43.16287042075365
+        ],
+        [
+          13.70816840317576,
+          43.16278917368501
+        ],
+        [
+          13.708083702115655,
+          43.16282352789739
+        ]
+      ],
+      "attributes": {
+        "type": "car",
+        "purpose": "toRent",
+        "taken": false,
+        "rain": null
+      }
+    },
+    {
+      "id": "place4",
+      "name": "P4",
+      "coordinates": [
+        [
+          13.70816840317576,
+          43.16278917368501
+        ],
+        [
+          13.708232865692365,
+          43.16287042075365
+        ],
+        [
+          13.708314141149346,
+          43.16284180903307
+        ],
+        [
+          13.708250712433516,
+          43.16275918161389
+        ],
+        [
+          13.70816840317576,
+          43.16278917368501
+        ]
+      ],
+      "attributes": {
+        "type": "bike",
+        "purpose": "toRent",
+        "taken": true,
+        "rain": null
+      }
+    },
+    {
+      "id": "place5",
+      "name": "P5",
+      "coordinates": [
+        [
+          13.708250712433516,
+          43.16275918161389
+        ],
+        [
+          13.708314141149346,
+          43.16284180903307
+        ],
+        [
+          13.708378183844815,
+          43.1628153532277
+        ],
+        [
+          13.708319748890917,
+          43.1627293389019
+        ],
+        [
+          13.708250712433516,
+          43.16275918161389
+        ]
+      ],
+      "attributes": {
+        "type": "car",
+        "purpose": "toCheck",
+        "taken": true,
+        "rain": null
+      }
+    },
+    {
+      "id": "place6",
+      "name": "P6",
+      "coordinates": [
+        [
+          13.708319748890917,
+          43.1627293389019
+        ],
+        [
+          13.708425791632589,
+          43.16269273530443
+        ],
+        [
+          13.708448762177982,
+          43.16279329399367
+        ],
+        [
+          13.708378183844815,
+          43.1628153532277
+        ],
+        [
+          13.708319748890917,
+          43.1627293389019
+        ]
+      ],
+      "attributes": {
+        "type": "bike",
+        "purpose": "toFix",
+        "taken": true,
+        "rain": null
+      }
+    },
+    {
+      "id": "place7",
+      "name": "P7",
+      "coordinates": [
+        [
+          13.707277671267523,
+          43.16321408142059
+        ],
+        [
+          13.707208284326278,
+          43.163250953225855
+        ],
+        [
+          13.707301482720991,
+          43.16333648127605
+        ],
+        [
+          13.707367260184922,
+          43.16329458673721
+        ],
+        [
+          13.707277671267523,
+          43.16321408142059
+        ]
+      ],
+      "attributes": {
+        "type": "car",
+        "purpose": "toRent",
+        "taken": false,
+        "rain": null
+      }
+    },
+    {
+      "id": "place8",
+      "name": "P8",
+      "coordinates": [
+        [
+          13.707208284326278,
+          43.163250953225855
+        ],
+        [
+          13.707125983700786,
+          43.16329522492737
+        ],
+        [
+          13.70722124969704,
+          43.1633779923186
+        ],
+        [
+          13.707301482720991,
+          43.16333648127605
+        ],
+        [
+          13.707208284326278,
+          43.163250953225855
+        ]
+      ],
+      "attributes": {
+        "type": "bike",
+        "purpose": "toCheck",
+        "taken": false,
+        "rain": null
+      }
+    },
+    {
+      "id": "place9",
+      "name": "P9",
+      "coordinates": [
+        [
+          13.707125983700786,
+          43.16329522492737
+        ],
+        [
+          13.707052461556454,
+          43.16333761788161
+        ],
+        [
+          13.70715047847117,
+          43.16342327363287
+        ],
+        [
+          13.70722124969704,
+          43.1633779923186
+        ],
+        [
+          13.707125983700786,
+          43.16329522492737
+        ]
+      ],
+      "attributes": {
+        "type": "car",
+        "purpose": "toFix",
+        "taken": true,
+        "rain": null
+      }
+    },
+    {
+      "id": "place10",
+      "name": "P10",
+      "coordinates": [
+        [
+          13.707052461556454,
+          43.16333761788161
+        ],
+        [
+          13.706973898518324,
+          43.16337689921036
+        ],
+        [
+          13.707071915433042,
+          43.163462554906545
+        ],
+        [
+          13.70715047847117,
+          43.16342327363287
+        ],
+        [
+          13.707052461556454,
+          43.16333761788161
+        ]
+      ],
+      "attributes": {
+        "type": "bike",
+        "purpose": "toRent",
+        "taken": true,
+        "rain": null
+      }
+    },
+    {
+      "id": "place11",
+      "name": "P11",
+      "coordinates": [
+        [
+          13.706973898518324,
+          43.16337689921036
+        ],
+        [
+          13.706879718009352,
+          43.16342719042552
+        ],
+        [
+          13.706982728686,
+          43.163509459223576
+        ],
+        [
+          13.707071915433042,
+          43.163462554906545
+        ],
+        [
+          13.706973898518324,
+          43.16337689921036
+        ]
+      ],
+      "attributes": {
+        "type": "car",
+        "purpose": "toCheck",
+        "taken": false,
+        "rain": null
+      }
+    },
+    {
+      "id": "place12",
+      "name": "P12",
+      "coordinates": [
+        [
+          13.706879718009352,
+          43.16342719042552
+        ],
+        [
+          13.706982728686,
+          43.163509459223576
+        ],
+        [
+          13.706897677141983,
+          43.163550842326345
+        ],
+        [
+          13.706800518786112,
+          43.16346732110986
+        ],
+        [
+          13.706879718009352,
+          43.16342719042552
+        ]
+      ],
+      "attributes": {
+        "type": "bike",
+        "purpose": "toFix",
+        "taken": false,
+        "rain": null
+      }
+    },
+    {
+      "id": "place13",
+      "name": "P13",
+      "coordinates": [
+        [
+          13.706800518786112,
+          43.16346732110986
+        ],
+        [
+          13.706733024204485,
+          43.16350494682126
+        ],
+        [
+          13.706833792037669,
+          43.16359349074733
+        ],
+        [
+          13.706897677141983,
+          43.163550842326345
+        ],
+        [
+          13.706800518786112,
+          43.16346732110986
+        ]
+      ],
+      "attributes": {
+        "type": "car",
+        "purpose": "toRent",
+        "taken": true,
+        "rain": null
+      }
+    },
+    {
+      "id": "place14",
+      "name": "P14",
+      "coordinates": [
+        [
+          13.706733024204485,
+          43.16350494682126
+        ],
+        [
+          13.70664711410168,
+          43.16354419557405
+        ],
+        [
+          13.706766122214116,
+          43.163634631023854
+        ],
+        [
+          13.706833792037669,
+          43.16359349074733
+        ],
+        [
+          13.706733024204485,
+          43.16350494682126
+        ]
+      ],
+      "attributes": {
+        "type": "bike",
+        "purpose": "toCheck",
+        "taken": true,
+        "rain": null
+      }
+    },
+    {
+      "id": "place15",
+      "name": "P15",
+      "coordinates": [
+        [
+          13.70664711410168,
+          43.16354419557405
+        ],
+        [
+          13.706563779675419,
+          43.163589847356775
+        ],
+        [
+          13.706680737837083,
+          43.163663335770906
+        ],
+        [
+          13.706766122214116,
+          43.163634631023854
+        ],
+        [
+          13.70664711410168,
+          43.16354419557405
+        ]
+      ],
+      "attributes": {
+        "type": "car",
+        "purpose": "toFix",
+        "taken": false,
+        "rain": null
+      }
+    },
+    {
+      "id": "place18",
+      "name": "P18",
+      "coordinates": [
+        [
+          13.707724290607771,
+          43.162980281263486
+        ],
+        [
+          13.707803716759386,
+          43.16307107526828
+        ],
+        [
+          13.707720732816972,
+          43.16310969805906
+        ],
+        [
+          13.707643882341893,
+          43.16302530722601
+        ],
+        [
+          13.707724290607771,
+          43.162980281263486
+        ]
+      ],
+      "attributes": {
+        "type": "bike",
+        "purpose": "toFix",
+        "taken": true,
+        "rain": null
+      }
+    },
+    {
+      "id": "place19",
+      "name": "P19",
+      "coordinates": [
+        [
+          13.707812443554038,
+          43.1629347568487
+        ],
+        [
+          13.70789255302258,
+          43.16303119996999
+        ],
+        [
+          13.707803716759386,
+          43.16307107526828
+        ],
+        [
+          13.707724290607771,
+          43.162980281263486
+        ],
+        [
+          13.707812443554038,
+          43.1629347568487
+        ]
+      ],
+      "attributes": {
+        "type": "car",
+        "purpose": "toRent",
+        "taken": false,
+        "rain": null
+      }
+    },
+    {
+      "id": "place21",
+      "name": "P21",
+      "coordinates": [
+        [
+          13.707922552750825,
+          43.16290090159103
+        ],
+        [
+          13.707971017831643,
+          43.16297398161453
+        ],
+        [
+          13.70805967885291,
+          43.16293762093582
+        ],
+        [
+          13.70799589965323,
+          43.16286202302106
+        ],
+        [
+          13.707922552750825,
+          43.16290090159103
+        ]
+      ],
+      "attributes": {
+        "type": "car",
+        "purpose": "toFix",
+        "taken": true,
+        "rain": null
+      }
+    },
+    {
+      "id": "place22",
+      "name": "Parking area",
+      "centroid": [
+        13.707682070860406,
+        43.163333437077
+      ],
+      "coordinates": [
+        [
+          13.707812443554038,
+          43.1629347568487
+        ],
+        [
+          13.707922552750825,
+          43.16290090159103
+        ],
+        [
+          13.707971017831643,
+          43.16297398161453
+        ],
+        [
+          13.708378183844815,
+          43.1628153532277
+        ],
+        [
+          13.708448762177982,
+          43.16279329399367
+        ],
+        [
+          13.70846868427348,
+          43.16283887001285
+        ],
+        [
+          13.707999919933263,
+          43.16300873626716
+        ],
+        [
+          13.708069358561023,
+          43.163106303930164
+        ],
+        [
+          13.707969010548972,
+          43.16312546174518
+        ],
+        [
+          13.70775193003789,
+          43.16339561730376
+        ],
+        [
+          13.706766122214116,
+          43.163634631023854
+        ],
+        [
+          13.706897677141983,
+          43.163550842326345
+        ],
+        [
+          13.70715047847117,
+          43.16342327363287
+        ],
+        [
+          13.707301482720991,
+          43.16333648127605
+        ],
+        [
+          13.70744731796705,
+          43.16325659030278
+        ],
+        [
+          13.707720732816972,
+          43.16310969805906
+        ],
+        [
+          13.70789255302258,
+          43.16303119996999
+        ],
+        [
+          13.707812443554038,
+          43.1629347568487
+        ]
+      ],
+      "attributes": {
+        "rain": null
+      }
+    },
+    {
+      "id": "place24",
+      "name": "P24",
+      "coordinates": [
+        [
+          13.707643882341893,
+          43.16302530722601
+        ],
+        [
+          13.707547982427199,
+          43.163076256115176
+        ],
+        [
+          13.707630860464977,
+          43.16315587972716
+        ],
+        [
+          13.707720732816972,
+          43.16310969805906
+        ],
+        [
+          13.707643882341893,
+          43.16302530722601
+        ]
+      ],
+      "attributes": {
+        "type": "bike",
+        "purpose": "toFix",
+        "taken": false,
+        "rain": null
+      }
+    },
+    {
+      "id": "place25",
+      "name": "P25",
+      "coordinates": [
+        [
+          13.707630860464977,
+          43.16315587972716
+        ],
+        [
+          13.707547982427199,
+          43.163076256115176
+        ],
+        [
+          13.707450875757848,
+          43.163127173818395
+        ],
+        [
+          13.707534612354474,
+          43.16320893172903
+        ],
+        [
+          13.707630860464977,
+          43.16315587972716
+        ]
+      ],
+      "attributes": {
+        "type": "car",
+        "purpose": "toRent",
+        "taken": true,
+        "rain": null
+      }
+    },
+    {
+      "id": "place26",
+      "name": "P26",
+      "coordinates": [
+        [
+          13.707534612354474,
+          43.16320893172903
+        ],
+        [
+          13.707450875757848,
+          43.163127173818395
+        ],
+        [
+          13.707362722811578,
+          43.163172698089795
+        ],
+        [
+          13.70744731796705,
+          43.16325659030278
+        ],
+        [
+          13.707534612354474,
+          43.16320893172903
+        ]
+      ],
+      "attributes": {
+        "type": "bike",
+        "purpose": "toCheck",
+        "taken": true,
+        "rain": null
+      }
+    },
+    {
+      "id": "place27",
+      "name": "P27",
+      "coordinates": [
+        [
+          13.707362722811578,
+          43.163172698089795
+        ],
+        [
+          13.70744731796705,
+          43.16325659030278
+        ],
+        [
+          13.707367260184922,
+          43.16329458673721
+        ],
+        [
+          13.707277671267523,
+          43.16321408142059
+        ],
+        [
+          13.707362722811578,
+          43.163172698089795
+        ]
+      ],
+      "attributes": {
+        "type": "car",
+        "purpose": "toFix",
+        "taken": false,
+        "rain": null
+      }
+    },
+    {
+      "id": "place28",
+      "name": "P28",
+      "coordinates": [
+        [
+          13.707812443554038,
+          43.1629347568487
+        ],
+        [
+          13.707730217702647,
+          43.16285943796413
+        ],
+        [
+          13.707835163910014,
+          43.16281086318787
+        ],
+        [
+          13.707922552750825,
+          43.16290090159103
+        ]
+      ],
+      "attributes": {
+        "purpose": "destination"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge_place22_place18",
+      "name": "Parking area>P18",
+      "source": "place22",
+      "target": "place18",
+      "coordinates": [
+        [
+          13.707765592856823,
+          43.1631205972208
+        ],
+        [
+          13.707723382626758,
+          43.163033328616066
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place18_place22",
+      "name": "P18>Parking area",
+      "source": "place18",
+      "target": "place22",
+      "coordinates": [
+        [
+          13.707723382626758,
+          43.163033328616066
+        ],
+        [
+          13.707765592856823,
+          43.1631205972208
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place9_place22",
+      "name": "P9>Parking area",
+      "source": "place9",
+      "target": "place22",
+      "coordinates": [
+        [
+          13.70713523142525,
+          43.163345866737565
+        ],
+        [
+          13.707765592856823,
+          43.1631205972208
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place22_place9",
+      "name": "Parking area>P9",
+      "source": "place22",
+      "target": "place9",
+      "coordinates": [
+        [
+          13.707765592856823,
+          43.1631205972208
+        ],
+        [
+          13.70713523142525,
+          43.163345866737565
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place8_place22",
+      "name": "P8>Parking area",
+      "source": "place8",
+      "target": "place22",
+      "coordinates": [
+        [
+          13.707213056954277,
+          43.163302320994745
+        ],
+        [
+          13.707765592856823,
+          43.1631205972208
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place22_place8",
+      "name": "Parking area>P8",
+      "source": "place22",
+      "target": "place8",
+      "coordinates": [
+        [
+          13.707765592856823,
+          43.1631205972208
+        ],
+        [
+          13.707213056954277,
+          43.163302320994745
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place7_place22",
+      "name": "P7>Parking area",
+      "source": "place7",
+      "target": "place22",
+      "coordinates": [
+        [
+          13.707286473953449,
+          43.16326203681606
+        ],
+        [
+          13.707765592856823,
+          43.1631205972208
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place22_place7",
+      "name": "Parking area>P7",
+      "source": "place22",
+      "target": "place7",
+      "coordinates": [
+        [
+          13.707765592856823,
+          43.1631205972208
+        ],
+        [
+          13.707286473953449,
+          43.16326203681606
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place27_place22",
+      "name": "P27>Parking area",
+      "source": "place27",
+      "target": "place22",
+      "coordinates": [
+        [
+          13.707363539008531,
+          43.163222130928034
+        ],
+        [
+          13.707765592856823,
+          43.1631205972208
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place22_place27",
+      "name": "Parking area>P27",
+      "source": "place22",
+      "target": "place27",
+      "coordinates": [
+        [
+          13.707765592856823,
+          43.1631205972208
+        ],
+        [
+          13.707363539008531,
+          43.163222130928034
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place28_place2",
+      "name": "P28>P",
+      "source": "place28",
+      "target": "place22",
+      "attributes": {}
+    },
+    {
+      "id": "edge_place3_place28",
+      "name": "P3>P28",
+      "source": "place22",
+      "target": "place28",
+      "attributes": {}
+    },
+    {
+      "id": "edge_place26_place22",
+      "name": "P26>Parking area",
+      "source": "place26",
+      "target": "place22",
+      "coordinates": [
+        [
+          13.707466028249087,
+          43.1631948651338
+        ],
+        [
+          13.707765592856823,
+          43.1631205972208
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place22_place26",
+      "name": "Parking area>P26",
+      "source": "place22",
+      "target": "place26",
+      "coordinates": [
+        [
+          13.707765592856823,
+          43.1631205972208
+        ],
+        [
+          13.707466028249087,
+          43.1631948651338
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place22_place25",
+      "name": "Parking area>P25",
+      "source": "place22",
+      "target": "place25",
+      "coordinates": [
+        [
+          13.707765592856823,
+          43.1631205972208
+        ],
+        [
+          13.707559038293894,
+          43.16314482422338
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place25_place22",
+      "name": "P25>Parking area",
+      "source": "place25",
+      "target": "place22",
+      "coordinates": [
+        [
+          13.707559038293894,
+          43.16314482422338
+        ],
+        [
+          13.707765592856823,
+          43.1631205972208
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place22_place24",
+      "name": "Parking area>P24",
+      "source": "place22",
+      "target": "place24",
+      "coordinates": [
+        [
+          13.707765592856823,
+          43.1631205972208
+        ],
+        [
+          13.707637468078588,
+          43.16307848967068
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place24_place22",
+      "name": "P24>Parking area",
+      "source": "place24",
+      "target": "place22",
+      "coordinates": [
+        [
+          13.707637468078588,
+          43.16307848967068
+        ],
+        [
+          13.707765592856823,
+          43.1631205972208
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place6_place22",
+      "name": "P6>Parking area",
+      "source": "place6",
+      "target": "place22",
+      "coordinates": [
+        [
+          13.708378447087444,
+          43.16275201206592
+        ],
+        [
+          13.707765592856823,
+          43.1631205972208
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place22_place6",
+      "name": "Parking area>P6",
+      "source": "place22",
+      "target": "place6",
+      "coordinates": [
+        [
+          13.707765592856823,
+          43.1631205972208
+        ],
+        [
+          13.708378447087444,
+          43.16275201206592
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place5_place22",
+      "name": "P5>Parking area",
+      "source": "place5",
+      "target": "place22",
+      "coordinates": [
+        [
+          13.708302699750423,
+          43.16278097287809
+        ],
+        [
+          13.707765592856823,
+          43.1631205972208
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place22_place5",
+      "name": "Parking area>P5",
+      "source": "place22",
+      "target": "place5",
+      "coordinates": [
+        [
+          13.707765592856823,
+          43.1631205972208
+        ],
+        [
+          13.708302699750423,
+          43.16278097287809
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place4_place22",
+      "name": "P4>Parking area",
+      "source": "place4",
+      "target": "place22",
+      "coordinates": [
+        [
+          13.708226905125349,
+          43.16280995175413
+        ],
+        [
+          13.707765592856823,
+          43.1631205972208
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place22_place4",
+      "name": "Parking area>P4",
+      "source": "place22",
+      "target": "place4",
+      "coordinates": [
+        [
+          13.707765592856823,
+          43.1631205972208
+        ],
+        [
+          13.708226905125349,
+          43.16280995175413
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place3_place22",
+      "name": "P3>Parking area",
+      "source": "place3",
+      "target": "place22",
+      "coordinates": [
+        [
+          13.70814295402603,
+          43.16284283715442
+        ],
+        [
+          13.707765592856823,
+          43.1631205972208
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place22_place3",
+      "name": "Parking area>P3",
+      "source": "place22",
+      "target": "place3",
+      "coordinates": [
+        [
+          13.707765592856823,
+          43.1631205972208
+        ],
+        [
+          13.70814295402603,
+          43.16284283715442
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place1_place22",
+      "name": "P1>Parking area",
+      "source": "place1",
+      "target": "place22",
+      "coordinates": [
+        [
+          13.708056255461148,
+          43.1628785460828
+        ],
+        [
+          13.707765592856823,
+          43.1631205972208
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place22_place1",
+      "name": "Parking area>P1",
+      "source": "place22",
+      "target": "place1",
+      "coordinates": [
+        [
+          13.707765592856823,
+          43.1631205972208
+        ],
+        [
+          13.708056255461148,
+          43.1628785460828
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place13_place22",
+      "name": "P13>Parking area",
+      "source": "place13",
+      "target": "place22",
+      "coordinates": [
+        [
+          13.706813106191273,
+          43.16351678442293
+        ],
+        [
+          13.707765592856823,
+          43.1631205972208
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place22_place13",
+      "name": "Parking area>P13",
+      "source": "place22",
+      "target": "place13",
+      "coordinates": [
+        [
+          13.707765592856823,
+          43.1631205972208
+        ],
+        [
+          13.706813106191273,
+          43.16351678442293
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place12_place22",
+      "name": "P12>Parking area",
+      "source": "place12",
+      "target": "place22",
+      "coordinates": [
+        [
+          13.70688807212656,
+          43.163476400702166
+        ],
+        [
+          13.707765592856823,
+          43.1631205972208
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place14_place22",
+      "name": "P14>Parking area",
+      "source": "place14",
+      "target": "place22",
+      "coordinates": [
+        [
+          13.706742615352487,
+          43.16355644219755
+        ],
+        [
+          13.707765592856823,
+          43.1631205972208
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place22_place14",
+      "name": "Parking area>P14",
+      "source": "place22",
+      "target": "place14",
+      "coordinates": [
+        [
+          13.707765592856823,
+          43.1631205972208
+        ],
+        [
+          13.706742615352487,
+          43.16355644219755
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place15_place22",
+      "name": "P15>Parking area",
+      "source": "place15",
+      "target": "place22",
+      "coordinates": [
+        [
+          13.706660973585997,
+          43.16359524105992
+        ],
+        [
+          13.707765592856823,
+          43.1631205972208
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place22_place15",
+      "name": "Parking area>P15",
+      "source": "place22",
+      "target": "place15",
+      "coordinates": [
+        [
+          13.707765592856823,
+          43.1631205972208
+        ],
+        [
+          13.706660973585997,
+          43.16359524105992
+        ]
+      ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place2_place22",
+      "name": "Parking area>Rental office",
+      "source": "place22",
+      "target": "place2",
+      "attributes": {}
+    },
+    {
+      "id": "edge_place22_place2",
+      "name": "Rental office>Parking area",
+      "source": "place2",
+      "target": "place22",
+      "attributes": {}
+    }
+  ],
+  "logicalPlaces": [
+    {
+      "id": "set1",
+      "name": "Available Cars For Rent",
+      "conditions": [
+        {
+          "attribute": "type",
+          "operator": "==",
+          "value": "car"
+        },
+        {
+          "attribute": "purpose",
+          "operator": "==",
+          "value": "toRent"
+        },
+        {
+          "attribute": "taken",
+          "operator": "==",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "set2",
+      "name": "Unavailable Cars For Rent",
+      "conditions": [
+        {
+          "attribute": "type",
+          "operator": "==",
+          "value": "car"
+        },
+        {
+          "attribute": "purpose",
+          "operator": "==",
+          "value": "toRent"
+        },
+        {
+          "attribute": "taken",
+          "operator": "==",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": "set3",
+      "name": "Available Cars For Check",
+      "conditions": [
+        {
+          "attribute": "type",
+          "operator": "==",
+          "value": "car"
+        },
+        {
+          "attribute": "purpose",
+          "operator": "==",
+          "value": "toCheck"
+        },
+        {
+          "attribute": "taken",
+          "operator": "==",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "set4",
+      "name": "Unavailable Cars For Check",
+      "conditions": [
+        {
+          "attribute": "type",
+          "operator": "==",
+          "value": "car"
+        },
+        {
+          "attribute": "purpose",
+          "operator": "==",
+          "value": "toCheck"
+        },
+        {
+          "attribute": "taken",
+          "operator": "==",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": "set5",
+      "name": "Available Cars For Fix",
+      "conditions": [
+        {
+          "attribute": "type",
+          "operator": "==",
+          "value": "car"
+        },
+        {
+          "attribute": "purpose",
+          "operator": "==",
+          "value": "toFix"
+        },
+        {
+          "attribute": "taken",
+          "operator": "==",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "set6",
+      "name": "Unavailable Cars For Fix",
+      "conditions": [
+        {
+          "attribute": "type",
+          "operator": "==",
+          "value": "car"
+        },
+        {
+          "attribute": "purpose",
+          "operator": "==",
+          "value": "toFix"
+        },
+        {
+          "attribute": "taken",
+          "operator": "==",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": "set7",
+      "name": "Available Bikes For Rent",
+      "conditions": [
+        {
+          "attribute": "type",
+          "operator": "==",
+          "value": "bike"
+        },
+        {
+          "attribute": "purpose",
+          "operator": "==",
+          "value": "toRent"
+        },
+        {
+          "attribute": "taken",
+          "operator": "==",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "set8",
+      "name": "Unavailable Bikes For Rent",
+      "conditions": [
+        {
+          "attribute": "type",
+          "operator": "==",
+          "value": "bike"
+        },
+        {
+          "attribute": "purpose",
+          "operator": "==",
+          "value": "toRent"
+        },
+        {
+          "attribute": "taken",
+          "operator": "==",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": "set9",
+      "name": "Available Bikes For Check",
+      "conditions": [
+        {
+          "attribute": "type",
+          "operator": "==",
+          "value": "bike"
+        },
+        {
+          "attribute": "purpose",
+          "operator": "==",
+          "value": "toCheck"
+        },
+        {
+          "attribute": "taken",
+          "operator": "==",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "set10",
+      "name": "Unavailable Bikes For Check",
+      "conditions": [
+        {
+          "attribute": "type",
+          "operator": "==",
+          "value": "bike"
+        },
+        {
+          "attribute": "purpose",
+          "operator": "==",
+          "value": "toCheck"
+        },
+        {
+          "attribute": "taken",
+          "operator": "==",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": "set11",
+      "name": "Available Bikes For Fix",
+      "conditions": [
+        {
+          "attribute": "type",
+          "operator": "==",
+          "value": "bike"
+        },
+        {
+          "attribute": "purpose",
+          "operator": "==",
+          "value": "toFix"
+        },
+        {
+          "attribute": "taken",
+          "operator": "==",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "set12",
+      "name": "Unavailable Bikes For Fix",
+      "conditions": [
+        {
+          "attribute": "type",
+          "operator": "==",
+          "value": "bike"
+        },
+        {
+          "attribute": "purpose",
+          "operator": "==",
+          "value": "toFix"
+        },
+        {
+          "attribute": "taken",
+          "operator": "==",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": "set13",
+      "name": "Rental Office",
+      "conditions": [
+        {
+          "attribute": "purpose",
+          "operator": "==",
+          "value": "rental office"
+        }
+      ]
+    },
+    {
+      "id": "set16",
+      "name": "Destination",
+      "conditions": [
+        {
+          "attribute": "purpose",
+          "operator": "==",
+          "value": "destination"
+        }
+      ]
+    }
+  ],
+  "views": [
+    {
+      "id": "view1",
+      "name": "Car Parkings",
+      "logicalPlaces": [
+        "set1",
+        "set2",
+        "set3",
+        "set4",
+        "set5",
+        "set6"
+      ],
+      "aggregations": {}
+    },
+    {
+      "id": "view2",
+      "name": "Parkings",
+      "logicalPlaces": [
+        "set7",
+        "set8",
+        "set9",
+        "set10",
+        "set11",
+        "set12"
+      ],
+      "aggregations": {}
+    },
+    {
+      "id": "view3",
+      "name": "Facilities",
+      "logicalPlaces": [
+        "set13",
+        "set16"
+      ],
+      "aggregations": {}
+    }
+  ]
+}

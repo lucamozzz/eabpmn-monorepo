@@ -159,8 +159,9 @@ public class MovementExecutionListener implements ExecutionListener {
         // Rimuovi il task dal registry quando termina
         Participant participant = participantService.resolveCurrentParticipant(execution);
         if (participant != null) {
-            movementTaskRegistry.removeTask(participant.getId());
-            log.info("[MOVEMENT] Task completed for participant {}", participant.getId());
+            movementTaskRegistry.removeTask(participant.getId(), execution.getId());
+            log.info("[MOVEMENT] Task completed for participant {} (execution={})",
+                    participant.getId(), execution.getId());
         }
 
         if (bpmnErrorCode != null && !bpmnErrorCode.isBlank()) {
