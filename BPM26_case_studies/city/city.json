@@ -27,7 +27,7 @@
       ],
       "attributes": {
         "type": "car",
-        "state": "available",
+        "purpose": "toRent",
         "taken": true,
         "rain": null
       }
@@ -89,7 +89,7 @@
       ],
       "attributes": {
         "type": "car",
-        "state": "unavailable",
+        "purpose": "toRent",
         "taken": false,
         "rain": null
       }
@@ -121,7 +121,7 @@
       ],
       "attributes": {
         "type": "bike",
-        "state": "available",
+        "purpose": "toRent",
         "taken": true,
         "rain": null
       }
@@ -153,7 +153,7 @@
       ],
       "attributes": {
         "type": "car",
-        "state": "available",
+        "purpose": "toCheck",
         "taken": true,
         "rain": null
       }
@@ -185,7 +185,7 @@
       ],
       "attributes": {
         "type": "bike",
-        "state": "available",
+        "purpose": "toFix",
         "taken": true,
         "rain": null
       }
@@ -217,7 +217,7 @@
       ],
       "attributes": {
         "type": "car",
-        "state": "unavailable",
+        "purpose": "toRent",
         "taken": false,
         "rain": null
       }
@@ -249,7 +249,7 @@
       ],
       "attributes": {
         "type": "bike",
-        "state": "unavailable",
+        "purpose": "toCheck",
         "taken": false,
         "rain": null
       }
@@ -281,7 +281,7 @@
       ],
       "attributes": {
         "type": "car",
-        "state": "unavailable",
+        "purpose": "toFix",
         "taken": true,
         "rain": null
       }
@@ -313,7 +313,7 @@
       ],
       "attributes": {
         "type": "bike",
-        "state": "unavailable",
+        "purpose": "toRent",
         "taken": true,
         "rain": null
       }
@@ -345,7 +345,7 @@
       ],
       "attributes": {
         "type": "car",
-        "state": "unavailable",
+        "purpose": "toCheck",
         "taken": false,
         "rain": null
       }
@@ -377,7 +377,7 @@
       ],
       "attributes": {
         "type": "bike",
-        "state": "unavailable",
+        "purpose": "toFix",
         "taken": false,
         "rain": null
       }
@@ -409,7 +409,7 @@
       ],
       "attributes": {
         "type": "car",
-        "state": "unavailable",
+        "purpose": "toRent",
         "taken": true,
         "rain": null
       }
@@ -441,7 +441,7 @@
       ],
       "attributes": {
         "type": "bike",
-        "state": "unavailable",
+        "purpose": "toCheck",
         "taken": true,
         "rain": null
       }
@@ -473,7 +473,7 @@
       ],
       "attributes": {
         "type": "car",
-        "state": "unavailable",
+        "purpose": "toFix",
         "taken": false,
         "rain": null
       }
@@ -505,7 +505,7 @@
       ],
       "attributes": {
         "type": "bike",
-        "state": null,
+        "purpose": "toFix",
         "taken": true,
         "rain": null
       }
@@ -537,7 +537,7 @@
       ],
       "attributes": {
         "type": "car",
-        "state": "unavailable",
+        "purpose": "toRent",
         "taken": false,
         "rain": null
       }
@@ -569,7 +569,7 @@
       ],
       "attributes": {
         "type": "car",
-        "state": null,
+        "purpose": "toFix",
         "taken": true,
         "rain": null
       }
@@ -686,7 +686,7 @@
       ],
       "attributes": {
         "type": "bike",
-        "state": "unavailable",
+        "purpose": "toFix",
         "taken": false,
         "rain": null
       }
@@ -718,7 +718,7 @@
       ],
       "attributes": {
         "type": "car",
-        "state": null,
+        "purpose": "toRent",
         "taken": true,
         "rain": null
       }
@@ -750,7 +750,7 @@
       ],
       "attributes": {
         "type": "bike",
-        "state": null,
+        "purpose": "toCheck",
         "taken": true,
         "rain": null
       }
@@ -782,9 +782,34 @@
       ],
       "attributes": {
         "type": "car",
-        "state": "unavailable",
+        "purpose": "toFix",
         "taken": false,
         "rain": null
+      }
+    },
+    {
+      "id": "place28",
+      "name": "P28",
+      "coordinates": [
+        [
+          13.707812443554038,
+          43.1629347568487
+        ],
+        [
+          13.707730217702647,
+          43.16285943796413
+        ],
+        [
+          13.707835163910014,
+          43.16281086318787
+        ],
+        [
+          13.707922552750825,
+          43.16290090159103
+        ]
+      ],
+      "attributes": {
+        "purpose": "destination"
       }
     }
   ],
@@ -957,6 +982,20 @@
           43.163222130928034
         ]
       ],
+      "attributes": {}
+    },
+    {
+      "id": "edge_place28_place2",
+      "name": "P28>P",
+      "source": "place28",
+      "target": "place22",
+      "attributes": {}
+    },
+    {
+      "id": "edge_place3_place28",
+      "name": "P3>P28",
+      "source": "place22",
+      "target": "place28",
       "attributes": {}
     },
     {
@@ -1368,7 +1407,7 @@
   "logicalPlaces": [
     {
       "id": "set1",
-      "name": "Available Cars",
+      "name": "Available Cars For Rent",
       "conditions": [
         {
           "attribute": "type",
@@ -1376,9 +1415,9 @@
           "value": "car"
         },
         {
-          "attribute": "state",
+          "attribute": "purpose",
           "operator": "==",
-          "value": "available"
+          "value": "toRent"
         },
         {
           "attribute": "taken",
@@ -1389,7 +1428,7 @@
     },
     {
       "id": "set2",
-      "name": "Unavailable Cars",
+      "name": "Unavailable Cars For Rent",
       "conditions": [
         {
           "attribute": "type",
@@ -1397,20 +1436,20 @@
           "value": "car"
         },
         {
-          "attribute": "state",
+          "attribute": "purpose",
           "operator": "==",
-          "value": "unavailable"
+          "value": "toRent"
         },
         {
           "attribute": "taken",
           "operator": "==",
-          "value": true
+          "value": false
         }
       ]
     },
     {
       "id": "set3",
-      "name": "Unchecked Cars",
+      "name": "Available Cars For Check",
       "conditions": [
         {
           "attribute": "type",
@@ -1418,9 +1457,9 @@
           "value": "car"
         },
         {
-          "attribute": "state",
+          "attribute": "purpose",
           "operator": "==",
-          "value": null
+          "value": "toCheck"
         },
         {
           "attribute": "taken",
@@ -1431,38 +1470,38 @@
     },
     {
       "id": "set4",
-      "name": "Available Bikes",
+      "name": "Unavailable Cars For Check",
       "conditions": [
         {
           "attribute": "type",
           "operator": "==",
-          "value": "bike"
+          "value": "car"
         },
         {
-          "attribute": "state",
+          "attribute": "purpose",
           "operator": "==",
-          "value": "available"
+          "value": "toCheck"
         },
         {
           "attribute": "taken",
           "operator": "==",
-          "value": true
+          "value": false
         }
       ]
     },
     {
       "id": "set5",
-      "name": "Unavailable Bikes",
+      "name": "Available Cars For Fix",
       "conditions": [
         {
           "attribute": "type",
           "operator": "==",
-          "value": "bike"
+          "value": "car"
         },
         {
-          "attribute": "state",
+          "attribute": "purpose",
           "operator": "==",
-          "value": "unavailable"
+          "value": "toFix"
         },
         {
           "attribute": "taken",
@@ -1473,33 +1512,17 @@
     },
     {
       "id": "set6",
-      "name": "Unchecked Bikes",
-      "conditions": [
-        {
-          "attribute": "type",
-          "operator": "==",
-          "value": "bike"
-        },
-        {
-          "attribute": "state",
-          "operator": "==",
-          "value": null
-        },
-        {
-          "attribute": "taken",
-          "operator": "==",
-          "value": true
-        }
-      ]
-    },
-    {
-      "id": "set7",
-      "name": "Free Car Parkings",
+      "name": "Unavailable Cars For Fix",
       "conditions": [
         {
           "attribute": "type",
           "operator": "==",
           "value": "car"
+        },
+        {
+          "attribute": "purpose",
+          "operator": "==",
+          "value": "toFix"
         },
         {
           "attribute": "taken",
@@ -1509,13 +1532,39 @@
       ]
     },
     {
-      "id": "set8",
-      "name": "Free Bike Parkings",
+      "id": "set7",
+      "name": "Available Bikes For Rent",
       "conditions": [
         {
           "attribute": "type",
           "operator": "==",
           "value": "bike"
+        },
+        {
+          "attribute": "purpose",
+          "operator": "==",
+          "value": "toRent"
+        },
+        {
+          "attribute": "taken",
+          "operator": "==",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "set8",
+      "name": "Unavailable Bikes For Rent",
+      "conditions": [
+        {
+          "attribute": "type",
+          "operator": "==",
+          "value": "bike"
+        },
+        {
+          "attribute": "purpose",
+          "operator": "==",
+          "value": "toRent"
         },
         {
           "attribute": "taken",
@@ -1526,12 +1575,107 @@
     },
     {
       "id": "set9",
+      "name": "Available Bikes For Check",
+      "conditions": [
+        {
+          "attribute": "type",
+          "operator": "==",
+          "value": "bike"
+        },
+        {
+          "attribute": "purpose",
+          "operator": "==",
+          "value": "toCheck"
+        },
+        {
+          "attribute": "taken",
+          "operator": "==",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "set10",
+      "name": "Unavailable Bikes For Check",
+      "conditions": [
+        {
+          "attribute": "type",
+          "operator": "==",
+          "value": "bike"
+        },
+        {
+          "attribute": "purpose",
+          "operator": "==",
+          "value": "toCheck"
+        },
+        {
+          "attribute": "taken",
+          "operator": "==",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": "set11",
+      "name": "Available Bikes For Fix",
+      "conditions": [
+        {
+          "attribute": "type",
+          "operator": "==",
+          "value": "bike"
+        },
+        {
+          "attribute": "purpose",
+          "operator": "==",
+          "value": "toFix"
+        },
+        {
+          "attribute": "taken",
+          "operator": "==",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "set12",
+      "name": "Unavailable Bikes For Fix",
+      "conditions": [
+        {
+          "attribute": "type",
+          "operator": "==",
+          "value": "bike"
+        },
+        {
+          "attribute": "purpose",
+          "operator": "==",
+          "value": "toFix"
+        },
+        {
+          "attribute": "taken",
+          "operator": "==",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": "set13",
       "name": "Rental Office",
       "conditions": [
         {
           "attribute": "purpose",
           "operator": "==",
           "value": "rental office"
+        }
+      ]
+    },
+    {
+      "id": "set16",
+      "name": "Destination",
+      "conditions": [
+        {
+          "attribute": "purpose",
+          "operator": "==",
+          "value": "destination"
         }
       ]
     }
@@ -1544,18 +1688,22 @@
         "set1",
         "set2",
         "set3",
-        "set4"
+        "set4",
+        "set5",
+        "set6"
       ],
       "aggregations": {}
     },
     {
       "id": "view2",
-      "name": "Bike Parkings",
+      "name": "Parkings",
       "logicalPlaces": [
-        "set5",
-        "set6",
         "set7",
-        "set8"
+        "set8",
+        "set9",
+        "set10",
+        "set11",
+        "set12"
       ],
       "aggregations": {}
     },
@@ -1563,7 +1711,8 @@
       "id": "view3",
       "name": "Facilities",
       "logicalPlaces": [
-        "set9"
+        "set13",
+        "set16"
       ],
       "aggregations": {}
     }

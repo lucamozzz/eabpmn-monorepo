@@ -1,0 +1,104 @@
+23:28:13.266 [http-nio-8082-exec-6] INFO  o.u.i.s.p.ParticipantService - [ParticipantService] Extracted collaboration with 3 participants
+23:28:13.268 [http-nio-8082-exec-6] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='place2' on Activity_139uv9k
+23:28:13.269 [http-nio-8082-exec-6] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_139uv9k - Move to Rental Office | Participant: Customer (Participant_1mdszue) | Destination: place2 | Timer: (empty)
+23:28:13.270 [http-nio-8082-exec-6] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_1mdszue | Activity: Activity_139uv9k | Destination: place2 | ExecutionId: eab64284-23e2-11f1-ae2c-4a84ddaf9f81 | Timer: (empty)
+23:28:13.270 [http-nio-8082-exec-6] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_139uv9k' has entered wait state.
+23:28:21.025 [http-nio-8082-exec-2] INFO  o.u.i.c.EnvironmentController - [Environment API] Participant 'Participant_1mdszue' position set to: place2
+23:28:21.511 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] ✓ Participant Participant_1mdszue reached destination place2 | Completing task
+23:28:21.513 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_139uv9k'. signalName=null, signalData=null
+23:28:21.514 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] restored <space:destination>='place2' on Activity_139uv9k
+23:28:21.515 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_1mdszue (execution=eab64284-23e2-11f1-ae2c-4a84ddaf9f81)
+23:28:21.515 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Task completed for participant Participant_1mdszue (execution=eab64284-23e2-11f1-ae2c-4a84ddaf9f81)
+23:28:21.521 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Registered gateway Gateway_0c2cfji (execution=eab64284-23e2-11f1-ae2c-4a84ddaf9f81) with 2 guarded outgoing flows
+23:28:21.521 [scheduling-1] INFO  o.u.i.l.e.ExclusiveGatewayExecutionListener - [ExclusiveGatewayListener] Gateway Gateway_0c2cfji entered wait mode with 2 guarded flows
+23:28:21.521 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Gateway_0c2cfji' has entered wait state.
+23:28:21.524 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Task completed successfully for participant Participant_1mdszue
+23:28:21.723 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_10ngm4s (myPlace().rain == true): false
+23:28:21.767 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_1j9bs26 (myPlace().rain == false): true
+23:28:21.773 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Gateway_0c2cfji'. signalName=null, signalData=null
+23:28:21.776 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Removed gateway Gateway_0c2cfji (execution=eab64284-23e2-11f1-ae2c-4a84ddaf9f81)
+23:28:21.778 [scheduling-1] INFO  o.u.i.d.StartProcessByMessageDelegate - [StartByMessage] Scheduled process start by message 'Message_3ue9pqu' after commit (businessKey='a')
+23:28:21.783 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Registered gateway Gateway_1ujw22y (execution=efcac446-23e2-11f1-ae2c-4a84ddaf9f81) with 2 guarded outgoing flows
+23:28:21.783 [scheduling-1] INFO  o.u.i.l.e.ExclusiveGatewayExecutionListener - [ExclusiveGatewayListener] Gateway Gateway_1ujw22y entered wait mode with 2 guarded flows
+23:28:21.783 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Gateway_1ujw22y' has entered wait state.
+23:28:21.784 [scheduling-1] INFO  o.u.i.d.StartProcessByMessageDelegate - [StartByMessage] Started process by message 'Message_3ue9pqu' with businessKey 'a'
+23:28:21.784 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Signaled gateway Gateway_0c2cfji (execution=eab64284-23e2-11f1-ae2c-4a84ddaf9f81) with selected flow Flow_1j9bs26
+23:28:23.512 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0qzdu8c (Available Bikes.count == 0): false
+23:28:23.514 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_16ykrk9 (Available Bikes.count > 0): true
+23:28:23.520 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Gateway_1ujw22y'. signalName=null, signalData=null
+23:28:23.521 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Removed gateway Gateway_1ujw22y (execution=efcac446-23e2-11f1-ae2c-4a84ddaf9f81)
+23:28:23.529 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='set4' on Activity_0doaz4d
+23:28:23.530 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_0doaz4d - Move to available bikes | Participant: Customer (Participant_1mdszue) | Destination: set4 | Timer: (empty)
+23:28:23.530 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_1mdszue | Activity: Activity_0doaz4d | Destination: set4 | ExecutionId: f0d4e151-23e2-11f1-ae2c-4a84ddaf9f81 | Timer: (empty)
+23:28:23.530 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0doaz4d' has entered wait state.
+23:28:23.530 [scheduling-1] INFO  o.u.i.l.MessageThrowExecutionListener - [MessageThrowExecutionListener] Delivered 'Message_1vkf9r4' from 'Event_1cg44bm' to execution 'efca2802-23e2-11f1-ae2c-4a84ddaf9f81' (businessKey=a)
+23:28:23.534 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Signaled gateway Gateway_1ujw22y (execution=efcac446-23e2-11f1-ae2c-4a84ddaf9f81) with selected flow Flow_16ykrk9
+23:28:31.091 [http-nio-8082-exec-3] INFO  o.u.i.c.EnvironmentController - [Environment API] Participant 'Participant_1mdszue' position set to: place4
+23:28:31.506 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] ✓ Participant Participant_1mdszue reached destination set4 | Completing task
+23:28:31.508 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0doaz4d'. signalName=null, signalData=null
+23:28:31.509 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] restored <space:destination>='set4' on Activity_0doaz4d
+23:28:31.510 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_1mdszue (execution=f0d4e151-23e2-11f1-ae2c-4a84ddaf9f81)
+23:28:31.510 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Task completed for participant Participant_1mdszue (execution=f0d4e151-23e2-11f1-ae2c-4a84ddaf9f81)
+23:28:31.512 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Registered environmental task | activity=Activity_1wilfda | execution=eab64284-23e2-11f1-ae2c-4a84ddaf9f81 | guard='(empty)' | action='rentVehicle' | participantId=Participant_1mdszue | timer=(empty)
+23:28:31.512 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] WAITING | Activity: Activity_1wilfda - Pick-up bike | Guard: (empty) | Action: rentVehicle | Timer: (empty)
+23:28:31.512 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_1wilfda' has entered wait state.
+23:28:31.514 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Task completed successfully for participant Participant_1mdszue
+23:28:31.515 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1wilfda -> auto-pass
+23:28:31.516 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] rentVehicle executed | activity=Activity_1wilfda | participant=Participant_1mdszue | place=place4 | taken=false | state=null
+23:28:31.517 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_1wilfda'. signalName=null, signalData=null
+23:28:31.518 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Removed environmental task | activity=Activity_1wilfda | execution=eab64284-23e2-11f1-ae2c-4a84ddaf9f81
+23:28:31.518 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] Task Activity_1wilfda ended
+23:28:31.520 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='set8' on Activity_1cvsw1r
+23:28:31.520 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_1cvsw1r - Move to free bike parking | Participant: Customer (Participant_1mdszue) | Destination: set8 | Timer: (empty)
+23:28:31.520 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_1mdszue | Activity: Activity_1cvsw1r | Destination: set8 | ExecutionId: eab64284-23e2-11f1-ae2c-4a84ddaf9f81 | Timer: (empty)
+23:28:31.520 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_1cvsw1r' has entered wait state.
+23:28:31.522 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Guard+Action satisfied -> task completed | activity=Activity_1wilfda | execution=eab64284-23e2-11f1-ae2c-4a84ddaf9f81 | guard='' | action='rentVehicle'
+23:28:33.507 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] ✓ Participant Participant_1mdszue reached destination set8 | Completing task
+23:28:33.509 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_1cvsw1r'. signalName=null, signalData=null
+23:28:33.510 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] restored <space:destination>='set8' on Activity_1cvsw1r
+23:28:33.510 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_1mdszue (execution=eab64284-23e2-11f1-ae2c-4a84ddaf9f81)
+23:28:33.510 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Task completed for participant Participant_1mdszue (execution=eab64284-23e2-11f1-ae2c-4a84ddaf9f81)
+23:28:33.511 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Registered environmental task | activity=Activity_09t8y0k | execution=eab64284-23e2-11f1-ae2c-4a84ddaf9f81 | guard='(empty)' | action='leaveVehicle' | participantId=Participant_1mdszue | timer=(empty)
+23:28:33.511 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] WAITING | Activity: Activity_09t8y0k - Park bike | Guard: (empty) | Action: leaveVehicle | Timer: (empty)
+23:28:33.512 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_09t8y0k' has entered wait state.
+23:28:33.515 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Task completed successfully for participant Participant_1mdszue
+23:28:33.517 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_09t8y0k -> auto-pass
+23:28:33.525 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] leaveVehicle executed | activity=Activity_09t8y0k | participant=Participant_1mdszue | place=place4 | taken=true
+23:28:33.526 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_09t8y0k'. signalName=null, signalData=null
+23:28:33.527 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Removed environmental task | activity=Activity_09t8y0k | execution=eab64284-23e2-11f1-ae2c-4a84ddaf9f81
+23:28:33.527 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] Task Activity_09t8y0k ended
+23:28:33.533 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Resolved 'Participant.Customer.position' to participant position 'place4'
+23:28:33.533 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='place4' on Activity_1hbymbe
+23:28:33.533 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_1hbymbe - Move to customer | Participant: Bike Rental Operator (Participant_1fejmk0) | Destination: place4 | Timer: (empty)
+23:28:33.534 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_1fejmk0 | Activity: Activity_1hbymbe | Destination: place4 | ExecutionId: efcac446-23e2-11f1-ae2c-4a84ddaf9f81 | Timer: (empty)
+23:28:33.534 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_1hbymbe' has entered wait state.
+23:28:33.534 [scheduling-1] INFO  o.u.i.l.MessageThrowExecutionListener - [MessageThrowExecutionListener] Delivered 'Message_1omkcp1' from 'Event_0ey7qdt' to execution 'f0d57d95-23e2-11f1-ae2c-4a84ddaf9f81' (businessKey=a)
+23:28:33.538 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Guard+Action satisfied -> task completed | activity=Activity_09t8y0k | execution=eab64284-23e2-11f1-ae2c-4a84ddaf9f81 | guard='' | action='leaveVehicle'
+23:28:59.616 [http-nio-8082-exec-1] INFO  o.u.i.c.EnvironmentController - [Environment API] Participant 'Participant_1fejmk0' position set to: place4
+23:29:01.507 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] ✓ Participant Participant_1fejmk0 reached destination place4 | Completing task
+23:29:01.508 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_1hbymbe'. signalName=null, signalData=null
+23:29:01.510 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] restored <space:destination>='place4' on Activity_1hbymbe
+23:29:01.511 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_1fejmk0 (execution=efcac446-23e2-11f1-ae2c-4a84ddaf9f81)
+23:29:01.511 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Task completed for participant Participant_1fejmk0 (execution=efcac446-23e2-11f1-ae2c-4a84ddaf9f81)
+23:29:01.515 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Registered environmental task | activity=Activity_056v3qa | execution=efcac446-23e2-11f1-ae2c-4a84ddaf9f81 | guard='(empty)' | action='checkVehicle' | participantId=Participant_1fejmk0 | timer=(empty)
+23:29:01.515 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] WAITING | Activity: Activity_056v3qa - Check bike | Guard: (empty) | Action: checkVehicle | Timer: (empty)
+23:29:01.515 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_056v3qa' has entered wait state.
+23:29:01.517 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Task completed successfully for participant Participant_1fejmk0
+23:29:01.517 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_056v3qa -> auto-pass
+23:29:01.519 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Participant 'Participant_1fejmk0' has no mapped user for businessKey 'a' (action='checkVehicle')
+23:29:03.504 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_056v3qa -> auto-pass
+23:29:05.504 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_056v3qa -> auto-pass
+23:29:07.510 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_056v3qa -> auto-pass
+23:29:09.510 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_056v3qa -> auto-pass
+23:29:11.507 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_056v3qa -> auto-pass
+23:29:13.507 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_056v3qa -> auto-pass
+23:29:15.508 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_056v3qa -> auto-pass
+23:29:17.505 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_056v3qa -> auto-pass
+23:29:17.586 [http-nio-8082-exec-8] INFO  o.u.i.c.EnvironmentController - [Environment API] Attribute 'state' for place 'place4' set to: unavailable
+23:29:19.516 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_056v3qa -> auto-pass
+23:29:19.518 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_056v3qa'. signalName=null, signalData=null
+23:29:19.523 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Removed environmental task | activity=Activity_056v3qa | execution=efcac446-23e2-11f1-ae2c-4a84ddaf9f81
+23:29:19.523 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] Task Activity_056v3qa ended
+23:29:19.553 [scheduling-1] WARN  o.u.i.l.MessageThrowExecutionListener - [MessageThrowExecutionListener] No receiver and no message start for 'Message_2lkfndn' from 'Event_1o7022b' (businessKey=a)
+23:29:19.555 [scheduling-1] INFO  o.u.i.l.MessageThrowExecutionListener - [MessageThrowExecutionListener] Delivered 'Message_0bdteu9' from 'Event_1wvk8pj' to execution 'f6cbf9e8-23e2-11f1-ae2c-4a84ddaf9f81' (businessKey=a)
+23:29:19.562 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Guard+Action satisfied -> task completed | activity=Activity_056v3qa | execution=efcac446-23e2-11f1-ae2c-4a84ddaf9f81 | guard='' | action='checkVehicle'

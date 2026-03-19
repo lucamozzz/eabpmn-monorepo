@@ -1,0 +1,26 @@
+16:58:58.490 [scheduling-1] INFO  o.u.i.s.p.ParticipantService - [ParticipantService] Extracted collaboration with 2 participants
+16:58:58.491 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Registered environmental task | activity=Activity_0pf8kqx | execution=5fc56b50-22e3-11f1-b6cc-6ee3202e5531 | guard='(empty)' | action='startEmergency' | participantId=Participant_0yrbhi5 | timer=(empty)
+16:58:58.491 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] WAITING | Activity: Activity_0pf8kqx - Activate
+alarm | Guard: (empty) | Action: startEmergency | Timer: (empty)
+16:58:58.491 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0pf8kqx' has entered wait state.
+16:58:58.493 [scheduling-1] INFO  o.u.i.s.EnvironmentConditionalStartService - [EnvironmentConditionalStart] Triggered process 'FireControlSystem' from StartEvent 'Event_0y0fjub' with guard 'Fire Areas.count > 0'
+16:59:00.434 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0pf8kqx -> auto-pass
+16:59:00.436 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] startEmergency executed | activity=Activity_0pf8kqx | execution=5fc56b50-22e3-11f1-b6cc-6ee3202e5531 | logicalPlace='set1' | matchedPlaces=1 | updatedPlaces=1 | alarm=true | emergency=true
+16:59:00.446 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0pf8kqx'. signalName=null, signalData=null
+16:59:00.449 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Removed environmental task | activity=Activity_0pf8kqx | execution=5fc56b50-22e3-11f1-b6cc-6ee3202e5531
+16:59:00.449 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] Task Activity_0pf8kqx ended
+16:59:00.452 [scheduling-1] INFO  o.u.i.d.StartProcessByMessageDelegate - [StartByMessage] Scheduled process start by message 'Message_0h8jngr' after commit (businessKey='null')
+16:59:00.463 [scheduling-1] INFO  o.u.i.s.p.ParticipantService - [ParticipantService] Extracted collaboration with 2 participants
+16:59:00.464 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='set1' on Activity_1p543za
+16:59:00.464 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_1p543za - Move to
+fire area | Participant: Fire-fighter robot (Participant_1fejmk0) | Destination: set1 | Timer: (empty)
+16:59:00.465 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_1fejmk0 | Activity: Activity_1p543za | Destination: set1 | ExecutionId: 60f1dd6c-22e3-11f1-b6cc-6ee3202e5531 | Timer: (empty)
+16:59:00.465 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_1p543za' has entered wait state.
+16:59:00.467 [scheduling-1] INFO  o.u.i.d.StartProcessByMessageDelegate - [StartByMessage] Started process by message 'Message_0h8jngr' without businessKey
+16:59:00.468 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Guard+Action satisfied -> task completed | activity=Activity_0pf8kqx | execution=5fc56b50-22e3-11f1-b6cc-6ee3202e5531 | guard='' | action='startEmergency'
+16:59:00.477 [scheduling-1] INFO  o.u.i.s.p.ParticipantService - [ParticipantService] Extracted collaboration with 3 participants
+16:59:00.478 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='null' on Activity_01vg59j
+16:59:00.478 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_01vg59j - Move to emergency area | Participant: Ambulance (Participant_1mdszue) | Destination: null | Timer: (empty)
+16:59:00.478 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_1mdszue | Activity: Activity_01vg59j | Destination: null | ExecutionId: 60f44e76-22e3-11f1-b6cc-6ee3202e5531 | Timer: (empty)
+16:59:00.478 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_01vg59j' has entered wait state.
+16:59:00.480 [scheduling-1] INFO  o.u.i.s.EnvironmentConditionalStartService - [EnvironmentConditionalStart] Triggered process 'Ambulance' from StartEvent 'Event_1gab403' with guard 'Rescue Areas.count > 0'

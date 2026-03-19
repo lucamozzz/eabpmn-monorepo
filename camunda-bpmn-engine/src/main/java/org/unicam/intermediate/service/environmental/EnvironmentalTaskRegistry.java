@@ -480,6 +480,8 @@ public class EnvironmentalTaskRegistry {
             case "turnlightsoff" -> turnLightsOff(activityId, participantId, executionId, notifyParticipant);
             case "cleanroom" -> cleanRoom(activityId, participantId, executionId, notifyParticipant);
             case "checkroom" -> checkRoom(activityId, participantId, executionId, notifyParticipant);
+            case "checkvehicle" -> checkVehicle(activityId, participantId, executionId, notifyParticipant);
+            case "fixvehicle" -> fixVehicle(activityId, participantId, executionId, notifyParticipant);
             case "assessalldirty" -> assessAllDirty(activityId, executionId, notifyParticipant);
             case "startemergency" -> startEmergency(activityId, executionId, notifyParticipant);
             case "endemergency" -> endEmergency(activityId, executionId, notifyParticipant);
@@ -543,6 +545,28 @@ public class EnvironmentalTaskRegistry {
     }
 
     /**
+     * Dedicated action handler for vehicle status check.
+     * Notification and guard evaluation are intentionally separate and ordered.
+     */
+    private boolean checkVehicle(String activityId, String participantId, String executionId, boolean notifyParticipant) {
+        if (notifyParticipant) {
+            notifyCheckVehicle(executionId, participantId);
+        }
+        return isCheckVehicleSatisfied(activityId, participantId);
+    }
+
+    /**
+     * Dedicated action handler for vehicle fixing.
+     * Notification and guard evaluation are intentionally separate and ordered.
+     */
+    private boolean fixVehicle(String activityId, String participantId, String executionId, boolean notifyParticipant) {
+        if (notifyParticipant) {
+            notifyFixVehicle(executionId, participantId);
+        }
+        return isFixVehicleSatisfied(activityId, participantId);
+    }
+
+    /**
      * Dedicated action handler for area preparation before planting.
      * Notification and guard evaluation are intentionally separate and ordered.
      */
@@ -583,6 +607,22 @@ public class EnvironmentalTaskRegistry {
 
     private boolean isCheckRoomSatisfied(String activityId, String participantId) {
         return evaluateGuard("myPlace().state != null", activityId + "#action:checkRoom", participantId, null);
+    }
+
+    private void notifyCheckVehicle(String executionId, String participantId) {
+        notifyParticipantAction(executionId, participantId, "checkVehicle", "Report the vehicle state");
+    }
+
+    private boolean isCheckVehicleSatisfied(String activityId, String participantId) {
+        return evaluateGuard("myPlace().state != null", activityId + "#action:checkVehicle", participantId, null);
+    }
+
+    private void notifyFixVehicle(String executionId, String participantId) {
+        notifyParticipantAction(executionId, participantId, "fixVehicle", "Fix the vehicle");
+    }
+
+    private boolean isFixVehicleSatisfied(String activityId, String participantId) {
+        return evaluateGuard("myPlace().state == available", activityId + "#action:fixVehicle", participantId, null);
     }
 
     /**
@@ -866,7 +906,7 @@ public class EnvironmentalTaskRegistry {
     /**
      * rentVehicle is a system action.
      * Check-only mode has no side effects and always returns true.
-     * Execute mode sets taken=false on the participant's current place.
+        * Execute mode sets taken=false and state=null on the participant's current place.
      */
     private boolean rentVehicle(String activityId, String participantId, boolean execute) {
         if (!execute) {
@@ -890,7 +930,8 @@ public class EnvironmentalTaskRegistry {
                     place -> {
                         if (place.getAttributes() != null) {
                             place.getAttributes().put("taken", false);
-                            log.info("[ENVIRONMENTAL] rentVehicle executed | activity={} | participant={} | place={} | taken=false",
+                            place.getAttributes().put("state", null);
+                            log.info("[ENVIRONMENTAL] rentVehicle executed | activity={} | participant={} | place={} | taken=false | state=null",
                                     activityId, participantId, place.getId());
                         } else {
                             log.debug("[ENVIRONMENTAL] rentVehicle: place '{}' has no attributes map — skipping | activity={}",
@@ -1037,6 +1078,8 @@ public class EnvironmentalTaskRegistry {
             case "turnlightsoff" -> "Turn the lights off";
             case "cleanroom" -> "Clean the room";
             case "checkroom" -> "Check the room";
+            case "checkvehicle" -> "Report the vehicle state";
+            case "fixvehicle" -> "Fix the vehicle";
             case "assessalldirty" -> "Assess all rooms as dirty";
             case "startemergency" -> "Start emergency";
             case "endemergency" -> "End emergency";

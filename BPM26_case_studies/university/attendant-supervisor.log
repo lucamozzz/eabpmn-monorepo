@@ -1,0 +1,206 @@
+10:33:41.635 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] ✓ Participant Participant_3def456 reached destination set3 | Completing task
+10:33:41.642 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0w4cow5'. signalName=null, signalData=null
+10:33:41.644 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] restored <space:destination>='set3' on Activity_0w4cow5
+10:33:41.645 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_3def456
+10:33:41.645 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Task completed for participant Participant_3def456
+10:33:41.647 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Registered environmental task | activity=Activity_0wox1x0 | execution=8be122d0-22ad-11f1-a061-6ee3202e5531 | guard='(empty)' | action='cleanRoom' | participantId=Participant_3def456 | timer=(empty)
+10:33:41.648 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] WAITING | Activity: Activity_0wox1x0 - Clean room | Guard: (empty) | Action: cleanRoom | Timer: (empty)
+10:33:41.648 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0wox1x0' has entered wait state.
+10:33:41.651 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Task completed successfully for participant Participant_3def456
+10:33:41.651 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:33:41.656 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Cannot notify participant 'Participant_3def456' for action 'cleanRoom' because businessKey is unavailable (execution=8be122d0-22ad-11f1-a061-6ee3202e5531)
+10:33:43.637 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:33:45.637 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:33:47.638 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:33:49.637 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:33:51.638 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:33:53.635 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:33:55.637 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:33:56.262 [http-nio-8082-exec-2] INFO  o.u.i.s.p.ParticipantService - [ParticipantService] Extracted collaboration with 2 participants
+10:33:56.263 [http-nio-8082-exec-2] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Registered gateway Gateway_0ccry5u (execution=95c506ef-22ad-11f1-a061-6ee3202e5531) with 2 guarded outgoing flows
+10:33:56.263 [http-nio-8082-exec-2] INFO  o.u.i.l.e.ExclusiveGatewayExecutionListener - [ExclusiveGatewayListener] Gateway Gateway_0ccry5u entered wait mode with 2 guarded flows
+10:33:56.263 [http-nio-8082-exec-2] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Gateway_0ccry5u' has entered wait state.
+10:33:57.637 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:33:57.643 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_1vw8ajq (Unchecked Rooms.count > 0): true
+10:33:57.648 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Gateway_0ccry5u'. signalName=null, signalData=null
+10:33:57.650 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Removed gateway Gateway_0ccry5u (execution=95c506ef-22ad-11f1-a061-6ee3202e5531)
+10:33:57.653 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Registered gateway Gateway_127yvx1 (execution=95c506ef-22ad-11f1-a061-6ee3202e5531) with 2 guarded outgoing flows
+10:33:57.653 [scheduling-1] INFO  o.u.i.l.e.ExclusiveGatewayExecutionListener - [ExclusiveGatewayListener] Gateway Gateway_127yvx1 entered wait mode with 2 guarded flows
+10:33:57.653 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Gateway_127yvx1' has entered wait state.
+10:33:57.656 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Signaled gateway Gateway_0ccry5u (execution=95c506ef-22ad-11f1-a061-6ee3202e5531) with selected flow Flow_1vw8ajq
+10:33:59.637 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:33:59.895 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0t6gld5 (myPlace().isRaining == false): false
+10:33:59.939 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_1cw01wd (myPlace().isRaining == true): true
+10:33:59.944 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Gateway_127yvx1'. signalName=null, signalData=null
+10:33:59.945 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Removed gateway Gateway_127yvx1 (execution=95c506ef-22ad-11f1-a061-6ee3202e5531)
+10:33:59.946 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Registered environmental task | activity=Activity_16drwuy | execution=95c506ef-22ad-11f1-a061-6ee3202e5531 | guard='(empty)' | action='assessAllDirty' | participantId=Participant_2abc123 | timer=(empty)
+10:33:59.946 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] WAITING | Activity: Activity_16drwuy - Assess all rooms as dirty | Guard: (empty) | Action: assessAllDirty | Timer: (empty)
+10:33:59.946 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_16drwuy' has entered wait state.
+10:33:59.947 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Signaled gateway Gateway_127yvx1 (execution=95c506ef-22ad-11f1-a061-6ee3202e5531) with selected flow Flow_1cw01wd
+10:34:01.633 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_16drwuy -> auto-pass
+10:34:01.636 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] assessAllDirty executed | activity=Activity_16drwuy | execution=95c506ef-22ad-11f1-a061-6ee3202e5531 | updatedPlaces=16
+10:34:01.637 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_16drwuy'. signalName=null, signalData=null
+10:34:01.638 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Removed environmental task | activity=Activity_16drwuy | execution=95c506ef-22ad-11f1-a061-6ee3202e5531
+10:34:01.638 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] Task Activity_16drwuy ended
+10:34:01.640 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Registered gateway Gateway_0duxg0z (execution=95c506ef-22ad-11f1-a061-6ee3202e5531) with 2 guarded outgoing flows
+10:34:01.641 [scheduling-1] INFO  o.u.i.l.e.ExclusiveGatewayExecutionListener - [ExclusiveGatewayListener] Gateway Gateway_0duxg0z entered wait mode with 2 guarded flows
+10:34:01.641 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Gateway_0duxg0z' has entered wait state.
+10:34:01.643 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Guard+Action satisfied -> task completed | activity=Activity_16drwuy | execution=95c506ef-22ad-11f1-a061-6ee3202e5531 | guard='' | action='assessAllDirty'
+10:34:01.643 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:01.643 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_09c8cry (Unchecked Rooms.count == 0): true
+10:34:01.645 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Gateway_0duxg0z'. signalName=null, signalData=null
+10:34:01.645 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Removed gateway Gateway_0duxg0z (execution=95c506ef-22ad-11f1-a061-6ee3202e5531)
+10:34:01.648 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Signaled gateway Gateway_0duxg0z (execution=95c506ef-22ad-11f1-a061-6ee3202e5531) with selected flow Flow_09c8cry
+10:34:03.637 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:05.634 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:07.635 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:09.637 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:11.633 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:13.633 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:15.637 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:17.632 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:19.637 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:21.637 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:23.637 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:25.637 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:27.636 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:29.637 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:31.636 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:33.634 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:35.636 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:37.636 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:39.636 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:41.637 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:43.632 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:45.632 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:47.632 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:49.631 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:51.631 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:53.632 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:55.632 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:57.636 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:34:59.634 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:35:01.635 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:35:03.635 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:35:05.635 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:35:06.942 [http-nio-8082-exec-5] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:35:07.631 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:35:09.635 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:35:11.077 [http-nio-8082-exec-10] INFO  o.u.i.c.EnvironmentController - [Environment API] Attribute 'state' for place 'place10' set to: clean
+10:35:11.632 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:35:11.636 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0wox1x0'. signalName=null, signalData=null
+10:35:11.639 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Removed environmental task | activity=Activity_0wox1x0 | execution=8be122d0-22ad-11f1-a061-6ee3202e5531
+10:35:11.639 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] Task Activity_0wox1x0 ended
+10:35:11.641 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Registered gateway Gateway_0boox7c (execution=8be122d0-22ad-11f1-a061-6ee3202e5531) with 2 guarded outgoing flows
+10:35:11.641 [scheduling-1] INFO  o.u.i.l.e.ExclusiveGatewayExecutionListener - [ExclusiveGatewayListener] Gateway Gateway_0boox7c entered wait mode with 2 guarded flows
+10:35:11.642 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Gateway_0boox7c' has entered wait state.
+10:35:11.646 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Guard+Action satisfied -> task completed | activity=Activity_0wox1x0 | execution=8be122d0-22ad-11f1-a061-6ee3202e5531 | guard='' | action='cleanRoom'
+10:35:11.647 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_1nrjmcw (Dirty Rooms.count == 0): false
+10:35:11.648 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_1nr55qy (Dirty Rooms.count > 0): true
+10:35:11.651 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Gateway_0boox7c'. signalName=null, signalData=null
+10:35:11.652 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Removed gateway Gateway_0boox7c (execution=8be122d0-22ad-11f1-a061-6ee3202e5531)
+10:35:11.655 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='set3' on Activity_0w4cow5
+10:35:11.656 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_0w4cow5 - Move to a
+dirty room | Participant: Attendant (Participant_3def456) | Destination: set3 | Timer: (empty)
+10:35:11.656 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_3def456 | Activity: Activity_0w4cow5 | Destination: set3 | ExecutionId: c2b53d37-22ad-11f1-a061-6ee3202e5531 | Timer: (empty)
+10:35:11.656 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0w4cow5' has entered wait state.
+10:35:11.659 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Signaled gateway Gateway_0boox7c (execution=8be122d0-22ad-11f1-a061-6ee3202e5531) with selected flow Flow_1nr55qy
+10:35:28.884 [http-nio-8082-exec-9] INFO  o.u.i.c.EnvironmentController - [Environment API] Participant 'Participant_3def456' position set to: place11
+10:35:29.631 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] ✓ Participant Participant_3def456 reached destination set3 | Completing task
+10:35:29.633 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0w4cow5'. signalName=null, signalData=null
+10:35:29.635 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] restored <space:destination>='set3' on Activity_0w4cow5
+10:35:29.635 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_3def456
+10:35:29.635 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Task completed for participant Participant_3def456
+10:35:29.636 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Registered environmental task | activity=Activity_0wox1x0 | execution=8be122d0-22ad-11f1-a061-6ee3202e5531 | guard='(empty)' | action='cleanRoom' | participantId=Participant_3def456 | timer=(empty)
+10:35:29.636 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] WAITING | Activity: Activity_0wox1x0 - Clean room | Guard: (empty) | Action: cleanRoom | Timer: (empty)
+10:35:29.637 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0wox1x0' has entered wait state.
+10:35:29.639 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Task completed successfully for participant Participant_3def456
+10:35:29.639 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:35:29.643 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Cannot notify participant 'Participant_3def456' for action 'cleanRoom' because businessKey is unavailable (execution=8be122d0-22ad-11f1-a061-6ee3202e5531)
+10:35:31.634 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:35:32.238 [http-nio-8082-exec-9] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:35:33.630 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:35:35.028 [http-nio-8082-exec-5] INFO  o.u.i.c.EnvironmentController - [Environment API] Attribute 'state' for place 'place11' set to: clean
+10:35:35.634 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:35:35.635 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0wox1x0'. signalName=null, signalData=null
+10:35:35.636 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Removed environmental task | activity=Activity_0wox1x0 | execution=8be122d0-22ad-11f1-a061-6ee3202e5531
+10:35:35.636 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] Task Activity_0wox1x0 ended
+10:35:35.638 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Registered gateway Gateway_0boox7c (execution=8be122d0-22ad-11f1-a061-6ee3202e5531) with 2 guarded outgoing flows
+10:35:35.638 [scheduling-1] INFO  o.u.i.l.e.ExclusiveGatewayExecutionListener - [ExclusiveGatewayListener] Gateway Gateway_0boox7c entered wait mode with 2 guarded flows
+10:35:35.639 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Gateway_0boox7c' has entered wait state.
+10:35:35.643 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Guard+Action satisfied -> task completed | activity=Activity_0wox1x0 | execution=8be122d0-22ad-11f1-a061-6ee3202e5531 | guard='' | action='cleanRoom'
+10:35:35.645 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_1nrjmcw (Dirty Rooms.count == 0): false
+10:35:35.646 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_1nr55qy (Dirty Rooms.count > 0): true
+10:35:35.649 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Gateway_0boox7c'. signalName=null, signalData=null
+10:35:35.650 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Removed gateway Gateway_0boox7c (execution=8be122d0-22ad-11f1-a061-6ee3202e5531)
+10:35:35.653 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='set3' on Activity_0w4cow5
+10:35:35.653 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_0w4cow5 - Move to a
+dirty room | Participant: Attendant (Participant_3def456) | Destination: set3 | Timer: (empty)
+10:35:35.653 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_3def456 | Activity: Activity_0w4cow5 | Destination: set3 | ExecutionId: d1030b24-22ad-11f1-a061-6ee3202e5531 | Timer: (empty)
+10:35:35.653 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0w4cow5' has entered wait state.
+10:35:35.657 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Signaled gateway Gateway_0boox7c (execution=8be122d0-22ad-11f1-a061-6ee3202e5531) with selected flow Flow_1nr55qy
+10:36:17.245 [http-nio-8082-exec-10] INFO  o.u.i.c.EnvironmentController - [Environment API] Participant 'Participant_3def456' position set to: place2
+10:36:17.633 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] ✓ Participant Participant_3def456 reached destination set3 | Completing task
+10:36:17.636 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0w4cow5'. signalName=null, signalData=null
+10:36:17.641 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] restored <space:destination>='set3' on Activity_0w4cow5
+10:36:17.641 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_3def456
+10:36:17.641 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Task completed for participant Participant_3def456
+10:36:17.644 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Registered environmental task | activity=Activity_0wox1x0 | execution=8be122d0-22ad-11f1-a061-6ee3202e5531 | guard='(empty)' | action='cleanRoom' | participantId=Participant_3def456 | timer=(empty)
+10:36:17.644 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] WAITING | Activity: Activity_0wox1x0 - Clean room | Guard: (empty) | Action: cleanRoom | Timer: (empty)
+10:36:17.644 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0wox1x0' has entered wait state.
+10:36:17.648 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Task completed successfully for participant Participant_3def456
+10:36:17.648 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:36:17.653 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Cannot notify participant 'Participant_3def456' for action 'cleanRoom' because businessKey is unavailable (execution=8be122d0-22ad-11f1-a061-6ee3202e5531)
+10:36:19.632 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:36:20.208 [http-nio-8082-exec-6] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:36:21.632 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:36:23.632 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:36:23.785 [http-nio-8082-exec-4] INFO  o.u.i.c.EnvironmentController - [Environment API] Attribute 'state' for place 'place2' set to: clean
+10:36:25.632 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:36:25.635 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0wox1x0'. signalName=null, signalData=null
+10:36:25.636 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Removed environmental task | activity=Activity_0wox1x0 | execution=8be122d0-22ad-11f1-a061-6ee3202e5531
+10:36:25.636 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] Task Activity_0wox1x0 ended
+10:36:25.639 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Registered gateway Gateway_0boox7c (execution=8be122d0-22ad-11f1-a061-6ee3202e5531) with 2 guarded outgoing flows
+10:36:25.639 [scheduling-1] INFO  o.u.i.l.e.ExclusiveGatewayExecutionListener - [ExclusiveGatewayListener] Gateway Gateway_0boox7c entered wait mode with 2 guarded flows
+10:36:25.640 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Gateway_0boox7c' has entered wait state.
+10:36:25.643 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Guard+Action satisfied -> task completed | activity=Activity_0wox1x0 | execution=8be122d0-22ad-11f1-a061-6ee3202e5531 | guard='' | action='cleanRoom'
+10:36:25.644 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_1nrjmcw (Dirty Rooms.count == 0): false
+10:36:25.645 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_1nr55qy (Dirty Rooms.count > 0): true
+10:36:25.649 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Gateway_0boox7c'. signalName=null, signalData=null
+10:36:25.650 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Removed gateway Gateway_0boox7c (execution=8be122d0-22ad-11f1-a061-6ee3202e5531)
+10:36:25.653 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='set3' on Activity_0w4cow5
+10:36:25.653 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_0w4cow5 - Move to a
+dirty room | Participant: Attendant (Participant_3def456) | Destination: set3 | Timer: (empty)
+10:36:25.653 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_3def456 | Activity: Activity_0w4cow5 | Destination: set3 | ExecutionId: eed07031-22ad-11f1-a061-6ee3202e5531 | Timer: (empty)
+10:36:25.653 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0w4cow5' has entered wait state.
+10:36:25.656 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Signaled gateway Gateway_0boox7c (execution=8be122d0-22ad-11f1-a061-6ee3202e5531) with selected flow Flow_1nr55qy
+10:36:32.454 [http-nio-8082-exec-5] INFO  o.u.i.c.EnvironmentController - [Environment API] Participant 'Participant_3def456' position set to: place7
+10:36:33.632 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] ✓ Participant Participant_3def456 reached destination set3 | Completing task
+10:36:33.633 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0w4cow5'. signalName=null, signalData=null
+10:36:33.635 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] restored <space:destination>='set3' on Activity_0w4cow5
+10:36:33.635 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_3def456
+10:36:33.635 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Task completed for participant Participant_3def456
+10:36:33.636 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Registered environmental task | activity=Activity_0wox1x0 | execution=8be122d0-22ad-11f1-a061-6ee3202e5531 | guard='(empty)' | action='cleanRoom' | participantId=Participant_3def456 | timer=(empty)
+10:36:33.636 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] WAITING | Activity: Activity_0wox1x0 - Clean room | Guard: (empty) | Action: cleanRoom | Timer: (empty)
+10:36:33.636 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0wox1x0' has entered wait state.
+10:36:33.637 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Task completed successfully for participant Participant_3def456
+10:36:33.637 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:36:33.641 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Cannot notify participant 'Participant_3def456' for action 'cleanRoom' because businessKey is unavailable (execution=8be122d0-22ad-11f1-a061-6ee3202e5531)
+10:36:35.631 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:36:37.279 [http-nio-8082-exec-4] INFO  o.u.i.c.EnvironmentController - [Environment API] Participant 'Participant_3def456' position set to: place7
+10:36:37.628 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:36:39.632 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:36:40.173 [http-nio-8082-exec-8] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:36:41.591 [http-nio-8082-exec-1] INFO  o.u.i.c.EnvironmentController - [Environment API] Attribute 'state' for place 'place7' set to: clean
+10:36:41.631 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wox1x0 -> auto-pass
+10:36:41.634 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0wox1x0'. signalName=null, signalData=null
+10:36:41.636 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Removed environmental task | activity=Activity_0wox1x0 | execution=8be122d0-22ad-11f1-a061-6ee3202e5531
+10:36:41.636 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] Task Activity_0wox1x0 ended
+10:36:41.638 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Registered gateway Gateway_0boox7c (execution=8be122d0-22ad-11f1-a061-6ee3202e5531) with 2 guarded outgoing flows
+10:36:41.638 [scheduling-1] INFO  o.u.i.l.e.ExclusiveGatewayExecutionListener - [ExclusiveGatewayListener] Gateway Gateway_0boox7c entered wait mode with 2 guarded flows
+10:36:41.639 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Gateway_0boox7c' has entered wait state.
+10:36:41.641 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Guard+Action satisfied -> task completed | activity=Activity_0wox1x0 | execution=8be122d0-22ad-11f1-a061-6ee3202e5531 | guard='' | action='cleanRoom'
+10:36:41.642 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_1nrjmcw (Dirty Rooms.count == 0): true
+10:36:41.646 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Gateway_0boox7c'. signalName=null, signalData=null
+10:36:41.647 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Removed gateway Gateway_0boox7c (execution=8be122d0-22ad-11f1-a061-6ee3202e5531)
+10:36:41.656 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Signaled gateway Gateway_0boox7c (execution=8be122d0-22ad-11f1-a061-6ee3202e5531) with selected flow Flow_1nrjmcw

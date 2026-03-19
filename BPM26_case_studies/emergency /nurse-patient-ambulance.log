@@ -1,0 +1,207 @@
+18:22:25.216 [scheduling-1] INFO  o.u.i.s.p.ParticipantService - [ParticipantService] Extracted collaboration with 3 participants
+18:22:25.217 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='set6' on Activity_01vg59j
+18:22:25.217 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_01vg59j - Move to emergency area | Participant: Ambulance (Participant_1mdszue) | Destination: set6 | Timer: (empty)
+18:22:25.217 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_1mdszue | Activity: Activity_01vg59j | Destination: set6 | ExecutionId: 0800bcd2-22ef-11f1-ac2f-6ee3202e5531 | Timer: (empty)
+18:22:25.218 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_01vg59j' has entered wait state.
+18:22:25.221 [scheduling-1] INFO  o.u.i.s.EnvironmentConditionalStartService - [EnvironmentConditionalStart] Triggered process 'Ambulance' from StartEvent 'Event_1gab403' with guard 'Rescue Areas.count > 0' | BK=a
+18:22:39.299 [http-nio-8082-exec-3] INFO  o.u.i.service.MessageFlowRegistry - [MessageFlowRegistry] Registered binding flow: Activity_10bide9 -> Activity_0046b8v (participants: Participant_3def456 -> Participant_1mdszue)
+18:22:39.299 [http-nio-8082-exec-3] INFO  o.u.i.service.MessageFlowRegistry - [MessageFlowRegistry] Registered binding flow: Activity_1jh86be -> Activity_0rc0d2n (participants: Participant_2abc123 -> Participant_3def456)
+18:22:39.299 [http-nio-8082-exec-3] INFO  o.u.i.service.MessageFlowRegistry - [MessageFlowRegistry] Registered unbinding flow: Activity_0zhyuds -> Activity_0p98ust (participants: Participant_2abc123 -> Participant_3def456)
+18:22:39.300 [http-nio-8082-exec-3] INFO  o.u.i.service.MessageFlowRegistry - [MessageFlowRegistry] Registered unbinding flow: Activity_0foii35 -> Activity_0zz15az (participants: Participant_3def456 -> Participant_1mdszue)
+18:22:39.300 [http-nio-8082-exec-3] INFO  o.u.i.service.MessageFlowRegistry - [MessageFlowRegistry] Late registration of flows for process: Nurse:1:07dfee5e-22ef-11f1-ac2f-6ee3202e5531
+18:22:39.300 [http-nio-8082-exec-3] INFO  o.u.i.l.e.BindingExecutionListener - [BINDING] Task Activity_1jh86be started - Participant Nurse (Participant_2abc123) waiting for Patient (Participant_3def456) | Timer: (empty)
+18:22:39.300 [http-nio-8082-exec-3] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Registering task: BK=a | Participant_2abc123 -> Participant_3def456 | exec=106776cb-22ef-11f1-ac2f-6ee3202e5531 | activity=Activity_1jh86be | timer=(empty)
+18:22:39.300 [http-nio-8082-exec-3] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Registered waiting binding task | BK: a | participant: Participant_2abc123 -> target: Participant_3def456
+18:22:39.300 [http-nio-8082-exec-3] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting tasks after registration: [Participant_2abc123=>Participant_3def456]
+18:22:39.300 [http-nio-8082-exec-3] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] tryActivatePair: Looking for counterpart for Participant_2abc123 -> Participant_3def456
+18:22:39.300 [http-nio-8082-exec-3] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] tryActivatePair: No counterpart found for Participant_3def456 (waiting set: [Participant_2abc123])
+18:22:39.300 [http-nio-8082-exec-3] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_1jh86be' has entered wait state.
+18:22:41.042 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:22:43.042 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:22:43.846 [http-nio-8082-exec-6] INFO  o.u.i.service.MessageFlowRegistry - [MessageFlowRegistry] Registered binding flow: Activity_10bide9 -> Activity_0046b8v (participants: Participant_3def456 -> Participant_1mdszue)
+18:22:43.847 [http-nio-8082-exec-6] INFO  o.u.i.service.MessageFlowRegistry - [MessageFlowRegistry] Registered binding flow: Activity_1jh86be -> Activity_0rc0d2n (participants: Participant_2abc123 -> Participant_3def456)
+18:22:43.847 [http-nio-8082-exec-6] INFO  o.u.i.service.MessageFlowRegistry - [MessageFlowRegistry] Registered unbinding flow: Activity_0zhyuds -> Activity_0p98ust (participants: Participant_2abc123 -> Participant_3def456)
+18:22:43.847 [http-nio-8082-exec-6] INFO  o.u.i.service.MessageFlowRegistry - [MessageFlowRegistry] Registered unbinding flow: Activity_0foii35 -> Activity_0zz15az (participants: Participant_3def456 -> Participant_1mdszue)
+18:22:43.847 [http-nio-8082-exec-6] INFO  o.u.i.service.MessageFlowRegistry - [MessageFlowRegistry] Late registration of flows for process: Patient:1:07e03c7f-22ef-11f1-ac2f-6ee3202e5531
+18:22:43.847 [http-nio-8082-exec-6] INFO  o.u.i.l.e.BindingExecutionListener - [BINDING] Task Activity_10bide9 started - Participant Patient (Participant_3def456) waiting for Ambulance (Participant_1mdszue) | Timer: (empty)
+18:22:43.847 [http-nio-8082-exec-6] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Registering task: BK=a | Participant_3def456 -> Participant_1mdszue | exec=131dbd33-22ef-11f1-ac2f-6ee3202e5531 | activity=Activity_10bide9 | timer=(empty)
+18:22:43.847 [http-nio-8082-exec-6] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Registered waiting binding task | BK: a | participant: Participant_3def456 -> target: Participant_1mdszue
+18:22:43.847 [http-nio-8082-exec-6] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting tasks after registration: [Participant_2abc123=>Participant_3def456, Participant_3def456=>Participant_1mdszue]
+18:22:43.847 [http-nio-8082-exec-6] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] tryActivatePair: Looking for counterpart for Participant_3def456 -> Participant_1mdszue
+18:22:43.847 [http-nio-8082-exec-6] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] tryActivatePair: No counterpart found for Participant_1mdszue (waiting set: [Participant_2abc123, Participant_3def456])
+18:22:43.847 [http-nio-8082-exec-6] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_10bide9' has entered wait state.
+18:22:45.039 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 2 participants in waiting | waiting=[Participant_2abc123->Participant_3def456, Participant_3def456->Participant_1mdszue]
+18:22:47.045 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 2 participants in waiting | waiting=[Participant_2abc123->Participant_3def456, Participant_3def456->Participant_1mdszue]
+18:22:49.040 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 2 participants in waiting | waiting=[Participant_2abc123->Participant_3def456, Participant_3def456->Participant_1mdszue]
+18:22:51.040 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 2 participants in waiting | waiting=[Participant_2abc123->Participant_3def456, Participant_3def456->Participant_1mdszue]
+18:22:53.044 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 2 participants in waiting | waiting=[Participant_2abc123->Participant_3def456, Participant_3def456->Participant_1mdszue]
+18:22:55.043 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 2 participants in waiting | waiting=[Participant_2abc123->Participant_3def456, Participant_3def456->Participant_1mdszue]
+18:22:57.044 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 2 participants in waiting | waiting=[Participant_2abc123->Participant_3def456, Participant_3def456->Participant_1mdszue]
+18:22:59.042 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 2 participants in waiting | waiting=[Participant_2abc123->Participant_3def456, Participant_3def456->Participant_1mdszue]
+18:23:01.042 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 2 participants in waiting | waiting=[Participant_2abc123->Participant_3def456, Participant_3def456->Participant_1mdszue]
+18:23:03.043 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 2 participants in waiting | waiting=[Participant_2abc123->Participant_3def456, Participant_3def456->Participant_1mdszue]
+18:23:05.043 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 2 participants in waiting | waiting=[Participant_2abc123->Participant_3def456, Participant_3def456->Participant_1mdszue]
+18:23:07.044 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 2 participants in waiting | waiting=[Participant_2abc123->Participant_3def456, Participant_3def456->Participant_1mdszue]
+18:23:09.043 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 2 participants in waiting | waiting=[Participant_2abc123->Participant_3def456, Participant_3def456->Participant_1mdszue]
+18:23:11.044 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 2 participants in waiting | waiting=[Participant_2abc123->Participant_3def456, Participant_3def456->Participant_1mdszue]
+18:23:13.044 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 2 participants in waiting | waiting=[Participant_2abc123->Participant_3def456, Participant_3def456->Participant_1mdszue]
+18:23:15.044 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 2 participants in waiting | waiting=[Participant_2abc123->Participant_3def456, Participant_3def456->Participant_1mdszue]
+18:23:17.044 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 2 participants in waiting | waiting=[Participant_2abc123->Participant_3def456, Participant_3def456->Participant_1mdszue]
+18:23:19.044 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 2 participants in waiting | waiting=[Participant_2abc123->Participant_3def456, Participant_3def456->Participant_1mdszue]
+18:23:21.044 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 2 participants in waiting | waiting=[Participant_2abc123->Participant_3def456, Participant_3def456->Participant_1mdszue]
+18:23:23.043 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 2 participants in waiting | waiting=[Participant_2abc123->Participant_3def456, Participant_3def456->Participant_1mdszue]
+18:23:25.043 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 2 participants in waiting | waiting=[Participant_2abc123->Participant_3def456, Participant_3def456->Participant_1mdszue]
+18:23:27.041 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 2 participants in waiting | waiting=[Participant_2abc123->Participant_3def456, Participant_3def456->Participant_1mdszue]
+18:23:29.043 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 2 participants in waiting | waiting=[Participant_2abc123->Participant_3def456, Participant_3def456->Participant_1mdszue]
+18:23:29.585 [http-nio-8082-exec-9] INFO  o.u.i.c.EnvironmentController - [Environment API] Participant 'Participant_1mdszue' position set to: place39
+18:23:31.043 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] ✓ Participant Participant_1mdszue reached destination set6 | Completing task
+18:23:31.055 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_01vg59j'. signalName=null, signalData=null
+18:23:31.059 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] restored <space:destination>='set6' on Activity_01vg59j
+18:23:31.060 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_1mdszue
+18:23:31.060 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Task completed for participant Participant_1mdszue
+18:23:31.064 [scheduling-1] INFO  o.u.i.service.MessageFlowRegistry - [MessageFlowRegistry] Registered binding flow: Activity_10bide9 -> Activity_0046b8v (participants: Participant_3def456 -> Participant_1mdszue)
+18:23:31.064 [scheduling-1] INFO  o.u.i.service.MessageFlowRegistry - [MessageFlowRegistry] Registered binding flow: Activity_1jh86be -> Activity_0rc0d2n (participants: Participant_2abc123 -> Participant_3def456)
+18:23:31.064 [scheduling-1] INFO  o.u.i.service.MessageFlowRegistry - [MessageFlowRegistry] Registered unbinding flow: Activity_0zhyuds -> Activity_0p98ust (participants: Participant_2abc123 -> Participant_3def456)
+18:23:31.064 [scheduling-1] INFO  o.u.i.service.MessageFlowRegistry - [MessageFlowRegistry] Registered unbinding flow: Activity_0foii35 -> Activity_0zz15az (participants: Participant_3def456 -> Participant_1mdszue)
+18:23:31.064 [scheduling-1] INFO  o.u.i.service.MessageFlowRegistry - [MessageFlowRegistry] Late registration of flows for process: Ambulance:1:07e06390-22ef-11f1-ac2f-6ee3202e5531
+18:23:31.064 [scheduling-1] INFO  o.u.i.l.e.BindingExecutionListener - [BINDING] Task Activity_0046b8v started - Participant Ambulance (Participant_1mdszue) waiting for Patient (Participant_3def456) | Timer: (empty)
+18:23:31.064 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Registering task: BK=a | Participant_1mdszue -> Participant_3def456 | exec=2f42a257-22ef-11f1-ac2f-6ee3202e5531 | activity=Activity_0046b8v | timer=(empty)
+18:23:31.064 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Registered waiting binding task | BK: a | participant: Participant_1mdszue -> target: Participant_3def456
+18:23:31.064 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting tasks after registration: [Participant_2abc123=>Participant_3def456, Participant_3def456=>Participant_1mdszue, Participant_1mdszue=>Participant_3def456]
+18:23:31.064 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] tryActivatePair: Looking for counterpart for Participant_1mdszue -> Participant_3def456
+18:23:31.064 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] tryActivatePair: Found potential counterpart Participant_3def456 -> Participant_1mdszue
+18:23:31.065 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] tryActivatePair: Same business key? a vs a = true
+18:23:31.065 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] tryActivatePair: Reciprocal check - current.id (Participant_1mdszue) == counterpart.target (Participant_1mdszue) ? true | current.target (Participant_3def456) == counterpart.id (Participant_3def456) ? true
+18:23:31.065 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] ✓ Activated pair a:Participant_1mdszue<->Participant_3def456 (Participant_1mdszue <-> Participant_3def456)
+18:23:31.065 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0046b8v' has entered wait state.
+18:23:31.072 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Task completed successfully for participant Participant_1mdszue
+18:23:31.073 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:23:31.073 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Checking pair a:Participant_1mdszue<->Participant_3def456: Participant_1mdszue at place39 vs Participant_3def456 at place39
+18:23:31.073 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Pair a:Participant_1mdszue<->Participant_3def456 reached same position 'place39' -> completing binding tasks
+18:23:31.077 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0046b8v'. signalName=null, signalData=null
+18:23:31.079 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Removed active pair a:Participant_1mdszue<->Participant_3def456 due to task end
+18:23:31.079 [scheduling-1] INFO  o.u.i.l.e.BindingExecutionListener - [BINDING] Task Activity_0046b8v ended
+18:23:31.083 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='set5' on Activity_0g763ea
+18:23:31.084 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_0g763ea - Move to
+hospital parking | Participant: Ambulance (Participant_1mdszue) | Destination: set5 | Timer: (empty)
+18:23:31.084 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_1mdszue | Activity: Activity_0g763ea | Destination: set5 | ExecutionId: 0800bcd2-22ef-11f1-ac2f-6ee3202e5531 | Timer: (empty)
+18:23:31.084 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0g763ea' has entered wait state.
+18:23:31.087 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_10bide9'. signalName=null, signalData=null
+18:23:31.088 [scheduling-1] INFO  o.u.i.l.e.BindingExecutionListener - [BINDING] Task Activity_10bide9 ended
+18:23:31.089 [scheduling-1] INFO  o.u.i.l.e.UnbindingExecutionListener - [UNBINDING] Task Activity_0foii35 started - Participant Patient (Participant_3def456) waiting for unbind with Ambulance (Participant_1mdszue) | Timer: (empty)
+18:23:31.089 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Registering task: BK=a | Participant_3def456 -> Participant_1mdszue | exec=131d9621-22ef-11f1-ac2f-6ee3202e5531 | activity=Activity_0foii35 | timer=(empty)
+18:23:31.089 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Registered waiting unbinding task | BK: a | participant: Participant_3def456 -> target: Participant_1mdszue
+18:23:31.090 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0foii35' has entered wait state.
+18:23:31.091 [scheduling-1] INFO  o.u.i.s.e.BoundParticipantsDiscordanceMonitor - [DiscordanceMonitor] Marked pair as bound: BK=a | PI=0800bcd2-22ef-11f1-ac2f-6ee3202e5531 | Participant_1mdszue <-> Participant_3def456 | Key: 0800bcd2-22ef-11f1-ac2f-6ee3202e5531:Participant_1mdszue<->Participant_3def456
+18:23:33.041 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:23:35.040 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:23:37.039 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:23:39.042 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:23:41.040 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:23:43.041 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:23:45.039 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:23:47.039 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:23:49.043 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:23:51.042 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:23:53.042 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:23:55.041 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:23:57.043 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:23:59.041 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:01.043 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:03.043 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:05.042 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:07.043 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:09.042 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:11.042 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:13.042 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:15.042 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:17.042 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:19.042 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:21.039 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:23.042 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:25.042 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:27.040 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:29.044 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:31.042 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:33.042 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:35.041 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:37.041 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:39.038 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:41.040 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:43.042 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:45.041 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:47.037 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:49.042 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:51.041 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:53.041 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:53.759 [http-nio-8082-exec-9] INFO  o.u.i.s.e.BoundParticipantsDiscordanceMonitor - [DiscordanceMonitor] Pair 0800bcd2-22ef-11f1-ac2f-6ee3202e5531:Participant_1mdszue<->Participant_3def456 detected discordant positions: place18 vs place39 | Grace window: 30000ms
+18:24:53.759 [http-nio-8082-exec-9] INFO  o.u.i.c.EnvironmentController - [Environment API] Participant 'Participant_1mdszue' position set to: place18
+18:24:55.041 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] ✓ Participant Participant_1mdszue reached destination set5 | Completing task
+18:24:55.045 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0g763ea'. signalName=null, signalData=null
+18:24:55.050 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] restored <space:destination>='set5' on Activity_0g763ea
+18:24:55.050 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_1mdszue
+18:24:55.050 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Task completed for participant Participant_1mdszue
+18:24:55.055 [scheduling-1] INFO  o.u.i.l.e.UnbindingExecutionListener - [UNBINDING] Task Activity_0zz15az started - Participant Ambulance (Participant_1mdszue) waiting for unbind with Patient (Participant_3def456) | Timer: (empty)
+18:24:55.055 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Registering task: BK=a | Participant_1mdszue -> Participant_3def456 | exec=0800bcd2-22ef-11f1-ac2f-6ee3202e5531 | activity=Activity_0zz15az | timer=(empty)
+18:24:55.055 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Registered waiting unbinding task | BK: a | participant: Participant_1mdszue -> target: Participant_3def456
+18:24:55.056 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Activated pair a:Participant_1mdszue<->Participant_3def456 (Participant_1mdszue <-> Participant_3def456)
+18:24:55.056 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0zz15az' has entered wait state.
+18:24:55.061 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Task completed successfully for participant Participant_1mdszue
+18:24:55.062 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:56.730 [http-nio-8082-exec-6] INFO  o.u.i.s.e.BoundParticipantsDiscordanceMonitor - [DiscordanceMonitor] Pair 0800bcd2-22ef-11f1-ac2f-6ee3202e5531:Participant_1mdszue<->Participant_3def456 positions are now concordant at position: place18
+18:24:56.731 [http-nio-8082-exec-6] INFO  o.u.i.c.EnvironmentController - [Environment API] Participant 'Participant_3def456' position set to: place18
+18:24:57.041 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting for counterpart: 1 participants in waiting | waiting=[Participant_2abc123->Participant_3def456]
+18:24:57.041 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Pair a:Participant_1mdszue<->Participant_3def456 reached same position 'place18' -> completing unbinding tasks
+18:24:57.047 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0zz15az'. signalName=null, signalData=null
+18:24:57.050 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Removed active pair a:Participant_1mdszue<->Participant_3def456 due to task end
+18:24:57.050 [scheduling-1] INFO  o.u.i.l.e.UnbindingExecutionListener - [UNBINDING] Task Activity_0zz15az ended
+18:24:57.073 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0foii35'. signalName=null, signalData=null
+18:24:57.073 [scheduling-1] INFO  o.u.i.l.e.UnbindingExecutionListener - [UNBINDING] Task Activity_0foii35 ended
+18:24:57.076 [scheduling-1] INFO  o.u.i.l.e.BindingExecutionListener - [BINDING] Task Activity_0rc0d2n started - Participant Patient (Participant_3def456) waiting for Nurse (Participant_2abc123) | Timer: (empty)
+18:24:57.076 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Registering task: BK=a | Participant_3def456 -> Participant_2abc123 | exec=131d9621-22ef-11f1-ac2f-6ee3202e5531 | activity=Activity_0rc0d2n | timer=(empty)
+18:24:57.076 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Registered waiting binding task | BK: a | participant: Participant_3def456 -> target: Participant_2abc123
+18:24:57.076 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting tasks after registration: [Participant_2abc123=>Participant_3def456, Participant_3def456=>Participant_2abc123]
+18:24:57.076 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] tryActivatePair: Looking for counterpart for Participant_3def456 -> Participant_2abc123
+18:24:57.077 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] tryActivatePair: Found potential counterpart Participant_2abc123 -> Participant_3def456
+18:24:57.077 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] tryActivatePair: Same business key? a vs a = true
+18:24:57.077 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] tryActivatePair: Reciprocal check - current.id (Participant_3def456) == counterpart.target (Participant_3def456) ? true | current.target (Participant_2abc123) == counterpart.id (Participant_2abc123) ? true
+18:24:57.077 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] ✓ Activated pair a:Participant_2abc123<->Participant_3def456 (Participant_3def456 <-> Participant_2abc123)
+18:24:57.077 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0rc0d2n' has entered wait state.
+18:24:57.080 [scheduling-1] INFO  o.u.i.s.e.BoundParticipantsDiscordanceMonitor - [DiscordanceMonitor] Removed bound pair: BK=a | PI=0800bcd2-22ef-11f1-ac2f-6ee3202e5531 | Participant_1mdszue <-> Participant_3def456 | Key: 0800bcd2-22ef-11f1-ac2f-6ee3202e5531:Participant_1mdszue<->Participant_3def456
+18:24:59.039 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Checking pair a:Participant_2abc123<->Participant_3def456: Participant_3def456 at place18 vs Participant_2abc123 at place18
+18:24:59.039 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Pair a:Participant_2abc123<->Participant_3def456 reached same position 'place18' -> completing binding tasks
+18:24:59.043 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0rc0d2n'. signalName=null, signalData=null
+18:24:59.043 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Removed active pair a:Participant_2abc123<->Participant_3def456 due to task end
+18:24:59.043 [scheduling-1] INFO  o.u.i.l.e.BindingExecutionListener - [BINDING] Task Activity_0rc0d2n ended
+18:24:59.045 [scheduling-1] INFO  o.u.i.l.e.UnbindingExecutionListener - [UNBINDING] Task Activity_0p98ust started - Participant Patient (Participant_3def456) waiting for unbind with Nurse (Participant_2abc123) | Timer: (empty)
+18:24:59.045 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Registering task: BK=a | Participant_3def456 -> Participant_2abc123 | exec=131d9621-22ef-11f1-ac2f-6ee3202e5531 | activity=Activity_0p98ust | timer=(empty)
+18:24:59.045 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Registered waiting unbinding task | BK: a | participant: Participant_3def456 -> target: Participant_2abc123
+18:24:59.045 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0p98ust' has entered wait state.
+18:24:59.047 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_1jh86be'. signalName=null, signalData=null
+18:24:59.047 [scheduling-1] INFO  o.u.i.l.e.BindingExecutionListener - [BINDING] Task Activity_1jh86be ended
+18:24:59.048 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='set3' on Activity_03fanyz
+18:24:59.049 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_03fanyz - Move to emergency department | Participant: Nurse (Participant_2abc123) | Destination: set3 | Timer: (empty)
+18:24:59.049 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_2abc123 | Activity: Activity_03fanyz | Destination: set3 | ExecutionId: 106776cb-22ef-11f1-ac2f-6ee3202e5531 | Timer: (empty)
+18:24:59.049 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_03fanyz' has entered wait state.
+18:24:59.050 [scheduling-1] INFO  o.u.i.s.e.BoundParticipantsDiscordanceMonitor - [DiscordanceMonitor] Marked pair as bound: BK=a | PI=131d9621-22ef-11f1-ac2f-6ee3202e5531 | Participant_3def456 <-> Participant_2abc123 | Key: 131d9621-22ef-11f1-ac2f-6ee3202e5531:Participant_2abc123<->Participant_3def456
+18:25:22.387 [http-nio-8082-exec-8] INFO  o.u.i.s.e.BoundParticipantsDiscordanceMonitor - [DiscordanceMonitor] Pair 131d9621-22ef-11f1-ac2f-6ee3202e5531:Participant_3def456<->Participant_2abc123 detected discordant positions: place18 vs place20 | Grace window: 30000ms
+18:25:22.388 [http-nio-8082-exec-8] INFO  o.u.i.c.EnvironmentController - [Environment API] Participant 'Participant_2abc123' position set to: place20
+18:25:23.041 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] ✓ Participant Participant_2abc123 reached destination set3 | Completing task
+18:25:23.044 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_03fanyz'. signalName=null, signalData=null
+18:25:23.047 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] restored <space:destination>='set3' on Activity_03fanyz
+18:25:23.048 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_2abc123
+18:25:23.049 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Task completed for participant Participant_2abc123
+18:25:23.051 [scheduling-1] INFO  o.u.i.l.e.UnbindingExecutionListener - [UNBINDING] Task Activity_0zhyuds started - Participant Nurse (Participant_2abc123) waiting for unbind with Patient (Participant_3def456) | Timer: (empty)
+18:25:23.052 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Registering task: BK=a | Participant_2abc123 -> Participant_3def456 | exec=106776cb-22ef-11f1-ac2f-6ee3202e5531 | activity=Activity_0zhyuds | timer=(empty)
+18:25:23.052 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Registered waiting unbinding task | BK: a | participant: Participant_2abc123 -> target: Participant_3def456
+18:25:23.052 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Activated pair a:Participant_2abc123<->Participant_3def456 (Participant_2abc123 <-> Participant_3def456)
+18:25:23.052 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0zhyuds' has entered wait state.
+18:25:23.056 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Task completed successfully for participant Participant_2abc123
+18:25:30.093 [http-nio-8082-exec-10] INFO  o.u.i.s.e.BoundParticipantsDiscordanceMonitor - [DiscordanceMonitor] Pair 131d9621-22ef-11f1-ac2f-6ee3202e5531:Participant_3def456<->Participant_2abc123 positions are now concordant at position: place20
+18:25:30.094 [http-nio-8082-exec-10] INFO  o.u.i.c.EnvironmentController - [Environment API] Participant 'Participant_3def456' position set to: place20
+18:25:31.035 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Pair a:Participant_2abc123<->Participant_3def456 reached same position 'place20' -> completing unbinding tasks
+18:25:31.045 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0zhyuds'. signalName=null, signalData=null
+18:25:31.048 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Removed active pair a:Participant_2abc123<->Participant_3def456 due to task end
+18:25:31.048 [scheduling-1] INFO  o.u.i.l.e.UnbindingExecutionListener - [UNBINDING] Task Activity_0zhyuds ended
+18:25:31.070 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0p98ust'. signalName=null, signalData=null
+18:25:31.070 [scheduling-1] INFO  o.u.i.l.e.UnbindingExecutionListener - [UNBINDING] Task Activity_0p98ust ended

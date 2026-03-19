@@ -1,0 +1,24 @@
+
+10:18:59.279 [http-nio-8082-exec-7] INFO  o.u.i.d.StartProcessByMessageDelegate - [StartByMessage] Scheduled process start by message 'Message_22c4h1s' after commit (businessKey='a')
+10:18:59.302 [http-nio-8082-exec-7] INFO  o.u.i.s.p.ParticipantService - [ParticipantService] Extracted collaboration with 2 participants
+10:18:59.304 [http-nio-8082-exec-7] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='set5' on Activity_0s0tcjp
+10:18:59.305 [http-nio-8082-exec-7] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_0s0tcjp - Move to library | Participant: Student (Participant_0yrbhi5) | Destination: set5 | Timer: (empty)
+10:18:59.305 [http-nio-8082-exec-7] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_0yrbhi5 | Activity: Activity_0s0tcjp | Destination: set5 | ExecutionId: 7f1f8536-22ab-11f1-a061-6ee3202e5531 | Timer: (empty)
+10:18:59.305 [http-nio-8082-exec-7] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0s0tcjp' has entered wait state.
+10:18:59.305 [http-nio-8082-exec-7] INFO  o.u.i.l.MessageThrowExecutionListener - [MessageThrowExecutionListener] Delivered 'Message_1ggg47s' from 'Event_0j6dpnd' to execution '7f20bdbe-22ab-11f1-a061-6ee3202e5531' (businessKey=a)
+10:18:59.307 [http-nio-8082-exec-7] WARN  o.u.i.l.MessageThrowExecutionListener - [MessageThrowExecutionListener] Delivery failed for 'Message_3mn98vv' from 'Event_1tn568l' to execution '7f20bdbe-22ab-11f1-a061-6ee3202e5531' (businessKey=a): Execution with id '7f20bdbe-22ab-11f1-a061-6ee3202e5531' does not have a subscription to a message event with name 'Message_3mn98vv': eventSubscriptions is empty
+10:18:59.308 [http-nio-8082-exec-7] WARN  o.u.i.l.MessageThrowExecutionListener - [MessageThrowExecutionListener] No receiver and no message start for 'Message_3mn98vv' from 'Event_1tn568l' (businessKey=a)
+10:18:59.312 [http-nio-8082-exec-7] INFO  o.u.i.d.StartProcessByMessageDelegate - [StartByMessage] Started process by message 'Message_22c4h1s' with businessKey 'a'
+10:19:10.223 [http-nio-8082-exec-9] INFO  o.u.i.c.EnvironmentController - [Environment API] Participant 'Participant_0yrbhi5' position set to: place8
+10:19:11.396 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] ✓ Participant Participant_0yrbhi5 reached destination set5 | Completing task
+10:19:11.398 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0s0tcjp'. signalName=null, signalData=null
+10:19:11.400 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] restored <space:destination>='set5' on Activity_0s0tcjp
+10:19:11.401 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_0yrbhi5
+10:19:11.401 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Task completed for participant Participant_0yrbhi5
+10:19:11.406 [scheduling-1] INFO  o.u.i.l.MessageThrowExecutionListener - [MessageThrowExecutionListener] Delivered 'Message_17ecocu' from 'Event_1cki2ea' to execution '7f248e61-22ab-11f1-a061-6ee3202e5531' (businessKey=a)
+10:19:11.408 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='set6' on Activity_1ce5cob
+10:19:11.408 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_1ce5cob - Move to reading room | Participant: Student (Participant_0yrbhi5) | Destination: set6 | Timer: (empty)
+10:19:11.408 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_0yrbhi5 | Activity: Activity_1ce5cob | Destination: set6 | ExecutionId: 865b2ccc-22ab-11f1-a061-6ee3202e5531 | Timer: (empty)
+10:19:11.408 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_1ce5cob' has entered wait state.
+10:19:11.415 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Task completed successfully for participant Participant_0yrbhi5
+10:19:11.415 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_0yrbhi5

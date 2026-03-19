@@ -1,0 +1,130 @@
+23:34:58.590 [scheduling-1] INFO  o.u.i.s.p.ParticipantService - [ParticipantService] Extracted collaboration with 2 participants
+23:34:58.590 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='set5' on Activity_146yt2b
+23:34:58.591 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_146yt2b - Move to Broken Bike Area | Participant: Bike Fixer (Participant_3def456) | Destination: set5 | Timer: (empty)
+23:34:58.591 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_3def456 | Activity: Activity_146yt2b | Destination: set5 | ExecutionId: dc4c6b4d-23e3-11f1-a97b-f60c394fe661 | Timer: (empty)
+23:34:58.591 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_146yt2b' has entered wait state.
+23:34:58.595 [scheduling-1] INFO  o.u.i.s.EnvironmentConditionalStartService - [EnvironmentConditionalStart] Triggered process 'BikeFixer' from StartEvent 'Event_0bdzq37' with guard 'Unavailable Bikes.count > 0' | BK=a
+23:34:58.605 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='set2' on Activity_0cugjq3
+23:34:58.606 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_0cugjq3 - Move to Broken Car Area | Participant: Car Fixer (Participant_2abc123) | Destination: set2 | Timer: (empty)
+23:34:58.606 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_2abc123 | Activity: Activity_0cugjq3 | Destination: set2 | ExecutionId: dc50d82a-23e3-11f1-a97b-f60c394fe661 | Timer: (empty)
+23:34:58.606 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0cugjq3' has entered wait state.
+23:34:58.608 [scheduling-1] INFO  o.u.i.s.EnvironmentConditionalStartService - [EnvironmentConditionalStart] Triggered process 'CarFixer' from StartEvent 'Event_17dn21k' with guard 'Unavailable Cars.count > 0' | BK=a
+23:35:00.444 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] ✓ Participant Participant_2abc123 reached destination set2 | Completing task
+23:35:00.447 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0cugjq3'. signalName=null, signalData=null
+23:35:00.453 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] restored <space:destination>='set2' on Activity_0cugjq3
+23:35:00.453 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_2abc123 (execution=dc50d82a-23e3-11f1-a97b-f60c394fe661)
+23:35:00.453 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Task completed for participant Participant_2abc123 (execution=dc50d82a-23e3-11f1-a97b-f60c394fe661)
+23:35:00.458 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Registered environmental task | activity=Activity_1rndtc4 | execution=dc50d82a-23e3-11f1-a97b-f60c394fe661 | guard='(empty)' | action='fixVehicle' | participantId=Participant_2abc123 | timer=(empty)
+23:35:00.458 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] WAITING | Activity: Activity_1rndtc4 - Fix car | Guard: (empty) | Action: fixVehicle | Timer: (empty)
+23:35:00.458 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_1rndtc4' has entered wait state.
+23:35:00.464 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Task completed successfully for participant Participant_2abc123
+23:35:00.466 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:00.471 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Participant 'Participant_2abc123' has no mapped user for businessKey 'a' (action='fixVehicle')
+23:35:02.430 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:04.430 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:06.420 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:08.424 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:10.429 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:12.462 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:14.429 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:16.427 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:18.424 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:20.419 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:22.422 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:24.430 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:26.418 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:28.423 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:30.432 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:32.419 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:34.430 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:36.425 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:38.424 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:40.430 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:42.425 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:44.422 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:46.429 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:47.435 [http-nio-8082-exec-3] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:48.421 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:50.421 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:50.576 [http-nio-8082-exec-10] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:52.430 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:54.063 [http-nio-8082-exec-9] INFO  o.u.i.c.EnvironmentController - [Environment API] Participant 'Participant_2abc123' position set to: place9
+23:35:54.420 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:56.429 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:35:58.421 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:36:00.424 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:36:02.422 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:36:04.424 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:36:06.423 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:36:07.519 [http-nio-8082-exec-6] INFO  o.u.i.c.EnvironmentController - [Environment API] Attribute 'state' for place 'place9' set to: available
+23:36:08.419 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:36:08.421 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_1rndtc4'. signalName=null, signalData=null
+23:36:08.424 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Removed environmental task | activity=Activity_1rndtc4 | execution=dc50d82a-23e3-11f1-a97b-f60c394fe661
+23:36:08.424 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] Task Activity_1rndtc4 ended
+23:36:08.429 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Registered gateway Gateway_00rt8tg (execution=dc50d82a-23e3-11f1-a97b-f60c394fe661) with 2 guarded outgoing flows
+23:36:08.429 [scheduling-1] INFO  o.u.i.l.e.ExclusiveGatewayExecutionListener - [ExclusiveGatewayListener] Gateway Gateway_00rt8tg entered wait mode with 2 guarded flows
+23:36:08.430 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Gateway_00rt8tg' has entered wait state.
+23:36:08.435 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Guard+Action satisfied -> task completed | activity=Activity_1rndtc4 | execution=dc50d82a-23e3-11f1-a97b-f60c394fe661 | guard='' | action='fixVehicle'
+23:36:08.437 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_1tobsxx (Unavailable Cars.count > 0): true
+23:36:08.446 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Gateway_00rt8tg'. signalName=null, signalData=null
+23:36:08.448 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Removed gateway Gateway_00rt8tg (execution=dc50d82a-23e3-11f1-a97b-f60c394fe661)
+23:36:08.451 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='set2' on Activity_0cugjq3
+23:36:08.452 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_0cugjq3 - Move to Broken Car Area | Participant: Car Fixer (Participant_2abc123) | Destination: set2 | Timer: (empty)
+23:36:08.452 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_2abc123 | Activity: Activity_0cugjq3 | Destination: set2 | ExecutionId: dc50d82a-23e3-11f1-a97b-f60c394fe661 | Timer: (empty)
+23:36:08.452 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0cugjq3' has entered wait state.
+23:36:08.456 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Signaled gateway Gateway_00rt8tg (execution=dc50d82a-23e3-11f1-a97b-f60c394fe661) with selected flow Flow_1tobsxx
+23:36:17.714 [http-nio-8082-exec-9] INFO  o.u.i.c.EnvironmentController - [Environment API] Participant 'Participant_2abc123' position set to: place13
+23:36:18.424 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] ✓ Participant Participant_2abc123 reached destination set2 | Completing task
+23:36:18.426 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0cugjq3'. signalName=null, signalData=null
+23:36:18.428 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] restored <space:destination>='set2' on Activity_0cugjq3
+23:36:18.429 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_2abc123 (execution=dc50d82a-23e3-11f1-a97b-f60c394fe661)
+23:36:18.429 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Task completed for participant Participant_2abc123 (execution=dc50d82a-23e3-11f1-a97b-f60c394fe661)
+23:36:18.431 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Registered environmental task | activity=Activity_1rndtc4 | execution=dc50d82a-23e3-11f1-a97b-f60c394fe661 | guard='(empty)' | action='fixVehicle' | participantId=Participant_2abc123 | timer=(empty)
+23:36:18.431 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] WAITING | Activity: Activity_1rndtc4 - Fix car | Guard: (empty) | Action: fixVehicle | Timer: (empty)
+23:36:18.431 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_1rndtc4' has entered wait state.
+23:36:18.438 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Task completed successfully for participant Participant_2abc123
+23:36:18.439 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:36:18.443 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Participant 'Participant_2abc123' has no mapped user for businessKey 'a' (action='fixVehicle')
+23:36:20.153 [http-nio-8082-exec-2] INFO  o.u.i.c.EnvironmentController - [Environment API] Attribute 'state' for place 'place13' set to: available
+23:36:20.419 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1rndtc4 -> auto-pass
+23:36:20.421 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_1rndtc4'. signalName=null, signalData=null
+23:36:20.422 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Removed environmental task | activity=Activity_1rndtc4 | execution=dc50d82a-23e3-11f1-a97b-f60c394fe661
+23:36:20.422 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] Task Activity_1rndtc4 ended
+23:36:20.425 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Registered gateway Gateway_00rt8tg (execution=dc50d82a-23e3-11f1-a97b-f60c394fe661) with 2 guarded outgoing flows
+23:36:20.425 [scheduling-1] INFO  o.u.i.l.e.ExclusiveGatewayExecutionListener - [ExclusiveGatewayListener] Gateway Gateway_00rt8tg entered wait mode with 2 guarded flows
+23:36:20.426 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Gateway_00rt8tg' has entered wait state.
+23:36:20.429 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Guard+Action satisfied -> task completed | activity=Activity_1rndtc4 | execution=dc50d82a-23e3-11f1-a97b-f60c394fe661 | guard='' | action='fixVehicle'
+23:36:20.431 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_1tobsxx (Unavailable Cars.count > 0): false
+23:36:20.432 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_1kprtle (Unavailable Cars.count == 0): true
+23:36:20.436 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Gateway_00rt8tg'. signalName=null, signalData=null
+23:36:20.437 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Removed gateway Gateway_00rt8tg (execution=dc50d82a-23e3-11f1-a97b-f60c394fe661)
+23:36:20.459 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Signaled gateway Gateway_00rt8tg (execution=dc50d82a-23e3-11f1-a97b-f60c394fe661) with selected flow Flow_1kprtle
+23:36:37.728 [http-nio-8082-exec-9] INFO  o.u.i.c.EnvironmentController - [Environment API] Participant 'Participant_3def456' position set to: place10
+23:36:38.419 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] ✓ Participant Participant_3def456 reached destination set5 | Completing task
+23:36:38.421 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_146yt2b'. signalName=null, signalData=null
+23:36:38.423 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] restored <space:destination>='set5' on Activity_146yt2b
+23:36:38.423 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_3def456 (execution=dc4c6b4d-23e3-11f1-a97b-f60c394fe661)
+23:36:38.423 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Task completed for participant Participant_3def456 (execution=dc4c6b4d-23e3-11f1-a97b-f60c394fe661)
+23:36:38.424 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Registered environmental task | activity=Activity_0z0s6ec | execution=dc4c6b4d-23e3-11f1-a97b-f60c394fe661 | guard='(empty)' | action='fixVehicle' | participantId=Participant_3def456 | timer=(empty)
+23:36:38.424 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] WAITING | Activity: Activity_0z0s6ec - Fix bike | Guard: (empty) | Action: fixVehicle | Timer: (empty)
+23:36:38.425 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0z0s6ec' has entered wait state.
+23:36:38.427 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Task completed successfully for participant Participant_3def456
+23:36:38.428 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0z0s6ec -> auto-pass
+23:36:38.432 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Participant 'Participant_3def456' has no mapped user for businessKey 'a' (action='fixVehicle')
+23:36:40.418 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0z0s6ec -> auto-pass
+23:36:40.550 [http-nio-8082-exec-8] INFO  o.u.i.c.EnvironmentController - [Environment API] Attribute 'state' for place 'place10' set to: available
+23:36:42.417 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0z0s6ec -> auto-pass
+23:36:42.418 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0z0s6ec'. signalName=null, signalData=null
+23:36:42.420 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Removed environmental task | activity=Activity_0z0s6ec | execution=dc4c6b4d-23e3-11f1-a97b-f60c394fe661
+23:36:42.420 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] Task Activity_0z0s6ec ended
+23:36:42.422 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Registered gateway Gateway_06jl7ac (execution=dc4c6b4d-23e3-11f1-a97b-f60c394fe661) with 2 guarded outgoing flows
+23:36:42.423 [scheduling-1] INFO  o.u.i.l.e.ExclusiveGatewayExecutionListener - [ExclusiveGatewayListener] Gateway Gateway_06jl7ac entered wait mode with 2 guarded flows
+23:36:42.423 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Gateway_06jl7ac' has entered wait state.
+23:36:42.427 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Guard+Action satisfied -> task completed | activity=Activity_0z0s6ec | execution=dc4c6b4d-23e3-11f1-a97b-f60c394fe661 | guard='' | action='fixVehicle'
+23:36:42.428 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0aiyehd (Unavailable Cars.count > 0): false
+23:36:42.430 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0t2xbty (Unavailable Cars.count == 0): true
+23:36:42.434 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Gateway_06jl7ac'. signalName=null, signalData=null
+23:36:42.435 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Removed gateway Gateway_06jl7ac (execution=dc4c6b4d-23e3-11f1-a97b-f60c394fe661)
+23:36:42.443 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Signaled gateway Gateway_06jl7ac (execution=dc4c6b4d-23e3-11f1-a97b-f60c394fe661) with selected flow Flow_0t2xbty
+23:36:45.820 [http-nio-8082-exec-6] INFO  o.u.i.c.EnvironmentController - [Environment API] Participant 'Participant_3def456' position set to: place14
+23:36:47.824 [http-nio-8082-exec-4] INFO  o.u.i.c.EnvironmentController - [Environment API] Attribute 'state' for place 'place14' set to: available

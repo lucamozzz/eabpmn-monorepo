@@ -1,0 +1,145 @@
+10:43:59.252 [scheduling-1] INFO  o.u.i.s.p.ParticipantService - [ParticipantService] Extracted collaboration with 2 participants
+10:43:59.253 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='Lp_1yqx9h' on Activity_1ucrz0n
+10:43:59.254 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_1ucrz0n - Move to crop area | Participant: Robot Planter (Participant_1fejmk0) | Destination: Lp_1yqx9h | Timer: 60.0
+10:43:59.254 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_1fejmk0 | Activity: Activity_1ucrz0n | Destination: Lp_1yqx9h | ExecutionId: fd2db158-22ae-11f1-a061-6ee3202e5531 | Timer: 60.0
+10:43:59.254 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_1ucrz0n' has entered wait state.
+10:43:59.261 [scheduling-1] INFO  o.u.i.s.EnvironmentConditionalStartService - [EnvironmentConditionalStart] Triggered process 'RobotPlanter' from StartEvent 'Event_06p37pb' with guard 'Crop Areas.count > 0'
+10:44:01.131 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Movement timer started | participant=Participant_1fejmk0 | activity=Activity_1ucrz0n | execution=fd2db158-22ae-11f1-a061-6ee3202e5531 | destination=Lp_1yqx9h | timer=60.0s
+10:44:20.950 [http-nio-8082-exec-2] INFO  o.u.i.c.EnvironmentController - [Environment API] Participant 'Participant_1fejmk0' position set to: place2
+10:44:39.850 [http-nio-8082-exec-4] INFO  o.u.i.c.EnvironmentController - [Environment API] Participant 'Participant_1fejmk0' position set to: place4
+10:44:41.126 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] ✓ Participant Participant_1fejmk0 reached destination Lp_1yqx9h | Completing task
+10:44:41.130 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_1ucrz0n'. signalName=null, signalData=null
+10:44:41.136 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] restored <space:destination>='Lp_1yqx9h' on Activity_1ucrz0n
+10:44:41.137 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_1fejmk0
+10:44:41.137 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Task completed for participant Participant_1fejmk0
+10:44:41.139 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Registered environmental task | activity=Activity_0x4uste | execution=1625726c-22af-11f1-a061-6ee3202e5531 | guard='(empty)' | action='plantArea' | participantId=Participant_1fejmk0 | timer=60.0
+10:44:41.139 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] WAITING | Activity: Activity_0x4uste - Plant area | Guard: (empty) | Action: plantArea | Timer: 60.0
+10:44:41.139 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0x4uste' has entered wait state.
+10:44:41.142 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Task completed successfully for participant Participant_1fejmk0
+10:44:41.142 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0x4uste -> auto-pass
+10:44:41.146 [scheduling-1] WARN  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Cannot notify participant 'Participant_1fejmk0' for action 'plantArea' because businessKey is unavailable (execution=1625726c-22af-11f1-a061-6ee3202e5531)
+10:44:41.149 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Action timer started | activity=Activity_0x4uste | execution=1625726c-22af-11f1-a061-6ee3202e5531 | action='plantArea' | timer=60.0s
+10:44:43.127 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0x4uste -> auto-pass
+10:44:45.127 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0x4uste -> auto-pass
+10:44:47.129 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0x4uste -> auto-pass
+10:44:49.127 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0x4uste -> auto-pass
+10:44:51.126 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0x4uste -> auto-pass
+10:44:53.127 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0x4uste -> auto-pass
+10:44:55.127 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0x4uste -> auto-pass
+10:44:57.127 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0x4uste -> auto-pass
+10:44:59.127 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0x4uste -> auto-pass
+10:45:01.127 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0x4uste -> auto-pass
+10:45:02.727 [http-nio-8082-exec-10] INFO  o.u.i.c.EnvironmentController - [Environment API] Attribute 'state' for place 'place4' set to: planted
+10:45:03.130 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0x4uste -> auto-pass
+10:45:03.135 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0x4uste'. signalName=null, signalData=null
+10:45:03.140 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Removed environmental task | activity=Activity_0x4uste | execution=1625726c-22af-11f1-a061-6ee3202e5531
+10:45:03.140 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] Task Activity_0x4uste ended
+10:45:03.145 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='place7' on Activity_0c4vv6j
+10:45:03.146 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_0c4vv6j - Move to base station | Participant: Robot Planter (Participant_1fejmk0) | Destination: place7 | Timer: (empty)
+10:45:03.146 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_1fejmk0 | Activity: Activity_0c4vv6j | Destination: place7 | ExecutionId: fd2d8a42-22ae-11f1-a061-6ee3202e5531 | Timer: (empty)
+10:45:03.146 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0c4vv6j' has entered wait state.
+10:45:03.151 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Guard+Action satisfied -> task completed | activity=Activity_0x4uste | execution=1625726c-22af-11f1-a061-6ee3202e5531 | guard='' | action='plantArea'
+10:45:20.755 [http-nio-8082-exec-9] INFO  o.u.i.c.EnvironmentController - [Environment API] Participant 'Participant_1fejmk0' position set to: place7
+10:45:21.128 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] ✓ Participant Participant_1fejmk0 reached destination place7 | Completing task
+10:45:21.131 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0c4vv6j'. signalName=null, signalData=null
+10:45:21.134 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] restored <space:destination>='place7' on Activity_0c4vv6j
+10:45:21.135 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_1fejmk0
+10:45:21.135 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Task completed for participant Participant_1fejmk0
+10:45:21.152 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Task completed successfully for participant Participant_1fejmk0
+10:46:06.674 [http-nio-8082-exec-7] INFO  o.u.i.s.p.ParticipantService - [ParticipantService] Extracted collaboration with 2 participants
+10:46:06.677 [http-nio-8082-exec-7] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='Lp_bkw2w6' on Activity_0bueab4
+10:46:06.677 [http-nio-8082-exec-7] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_0bueab4 - Move to
+free area | Participant: Farmer (Participant_2abc123) | Destination: Lp_bkw2w6 | Timer: (empty)
+10:46:06.677 [http-nio-8082-exec-7] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_2abc123 | Activity: Activity_0bueab4 | Destination: Lp_bkw2w6 | ExecutionId: 4920bf42-22af-11f1-a061-6ee3202e5531 | Timer: (empty)
+10:46:06.677 [http-nio-8082-exec-7] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0bueab4' has entered wait state.
+10:46:07.126 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] ✓ Participant Participant_2abc123 reached destination Lp_bkw2w6 | Completing task
+10:46:07.129 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0bueab4'. signalName=null, signalData=null
+10:46:07.131 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] restored <space:destination>='Lp_bkw2w6' on Activity_0bueab4
+10:46:07.131 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_2abc123
+10:46:07.131 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Task completed for participant Participant_2abc123
+10:46:07.133 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Registered environmental task | activity=Activity_1jf86rf | execution=4920bf42-22af-11f1-a061-6ee3202e5531 | guard='(empty)' | action='prepareArea' | participantId=Participant_2abc123 | timer=(empty)
+10:46:07.133 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] WAITING | Activity: Activity_1jf86rf - Prepare area | Guard: (empty) | Action: prepareArea | Timer: (empty)
+10:46:07.133 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_1jf86rf' has entered wait state.
+10:46:07.136 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Task completed successfully for participant Participant_2abc123
+10:46:07.136 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+10:46:07.140 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Participant 'Participant_2abc123' has no mapped user for businessKey 'a' (action='prepareArea')
+10:46:09.127 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+10:46:11.126 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+10:46:13.127 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+10:46:15.127 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+10:46:17.127 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+10:46:19.126 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+10:46:21.125 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+10:46:23.126 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+10:46:24.251 [http-nio-8082-exec-9] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+10:46:25.126 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+10:46:27.126 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+10:46:29.124 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+10:46:31.125 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+10:46:32.199 [http-nio-8082-exec-3] INFO  o.u.i.c.EnvironmentController - [Environment API] Attribute 'state' for place 'place13' set to: crop
+10:46:33.126 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1jf86rf -> auto-pass
+10:46:33.130 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_1jf86rf'. signalName=null, signalData=null
+10:46:33.133 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Removed environmental task | activity=Activity_1jf86rf | execution=4920bf42-22af-11f1-a061-6ee3202e5531
+10:46:33.133 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] Task Activity_1jf86rf ended
+10:46:33.138 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Guard+Action satisfied -> task completed | activity=Activity_1jf86rf | execution=4920bf42-22af-11f1-a061-6ee3202e5531 | guard='' | action='prepareArea'
+10:46:43.777 [http-nio-8082-exec-4] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='Lp_1yqx9h' on Activity_1ucrz0n
+10:46:43.778 [http-nio-8082-exec-4] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_1ucrz0n - Move to crop area | Participant: Robot Planter (Participant_1fejmk0) | Destination: Lp_1yqx9h | Timer: 60.0
+10:46:43.778 [http-nio-8082-exec-4] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_1fejmk0 | Activity: Activity_1ucrz0n | Destination: Lp_1yqx9h | ExecutionId: 5f3e5e54-22af-11f1-a061-6ee3202e5531 | Timer: 60.0
+10:46:43.779 [http-nio-8082-exec-4] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_1ucrz0n' has entered wait state.
+10:46:45.123 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Movement timer started | participant=Participant_1fejmk0 | activity=Activity_1ucrz0n | execution=5f3e5e54-22af-11f1-a061-6ee3202e5531 | destination=Lp_1yqx9h | timer=60.0s
+10:47:45.134 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_1ucrz0n'. signalName=null, signalData=null
+10:47:45.139 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] restored <space:destination>='Lp_1yqx9h' on Activity_1ucrz0n
+10:47:45.139 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_1fejmk0
+10:47:45.139 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Task completed for participant Participant_1fejmk0
+10:47:45.155 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='Lp_1yqx9h' on Activity_0itk1iz
+10:47:45.155 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_0itk1iz - Move to crop area | Participant: Farmer (Participant_2abc123) | Destination: Lp_1yqx9h | Timer: (empty)
+10:47:45.155 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_2abc123 | Activity: Activity_0itk1iz | Destination: Lp_1yqx9h | ExecutionId: 4920bf42-22af-11f1-a061-6ee3202e5531 | Timer: (empty)
+10:47:45.155 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0itk1iz' has entered wait state.
+10:47:45.155 [scheduling-1] INFO  o.u.i.l.MessageThrowExecutionListener - [MessageThrowExecutionListener] Delivered 'Message_2r15urd' from 'Event_198we43' to execution '58e6d54e-22af-11f1-a061-6ee3202e5531' (businessKey=a)
+10:47:45.162 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Movement timer expired -> raised 'failedMovement' | participant=Participant_1fejmk0 | activity=Activity_1ucrz0n | execution=5f3e5e54-22af-11f1-a061-6ee3202e5531 | destination=Lp_1yqx9h | timer=60.0s
+10:47:47.124 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] ✓ Participant Participant_2abc123 reached destination Lp_1yqx9h | Completing task
+10:47:47.127 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0itk1iz'. signalName=null, signalData=null
+10:47:47.129 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] restored <space:destination>='Lp_1yqx9h' on Activity_0itk1iz
+10:47:47.129 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_2abc123
+10:47:47.129 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Task completed for participant Participant_2abc123
+10:47:47.131 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Registered environmental task | activity=Activity_0wbdy0w | execution=4920bf42-22af-11f1-a061-6ee3202e5531 | guard='(empty)' | action='plantArea' | participantId=Participant_2abc123 | timer=(empty)
+10:47:47.131 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] WAITING | Activity: Activity_0wbdy0w - Plant area | Guard: (empty) | Action: plantArea | Timer: (empty)
+10:47:47.131 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0wbdy0w' has entered wait state.
+10:47:47.134 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Task completed successfully for participant Participant_2abc123
+10:47:47.134 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wbdy0w -> auto-pass
+10:47:47.138 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Participant 'Participant_2abc123' has no mapped user for businessKey 'a' (action='plantArea')
+10:47:49.124 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wbdy0w -> auto-pass
+10:47:51.121 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wbdy0w -> auto-pass
+10:47:53.123 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wbdy0w -> auto-pass
+10:47:55.123 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wbdy0w -> auto-pass
+10:47:57.120 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wbdy0w -> auto-pass
+10:47:59.118 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wbdy0w -> auto-pass
+10:48:01.120 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wbdy0w -> auto-pass
+10:48:02.566 [http-nio-8082-exec-10] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wbdy0w -> auto-pass
+10:48:03.118 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wbdy0w -> auto-pass
+10:48:05.120 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wbdy0w -> auto-pass
+10:48:07.121 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wbdy0w -> auto-pass
+10:48:09.119 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wbdy0w -> auto-pass
+10:48:11.122 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wbdy0w -> auto-pass
+10:48:13.122 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wbdy0w -> auto-pass
+10:48:15.118 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wbdy0w -> auto-pass
+10:48:17.122 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wbdy0w -> auto-pass
+10:48:18.438 [http-nio-8082-exec-8] INFO  o.u.i.c.EnvironmentController - [Environment API] Attribute 'state' for place 'place13' set to: planted
+10:48:19.119 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0wbdy0w -> auto-pass
+10:48:19.122 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0wbdy0w'. signalName=null, signalData=null
+10:48:19.125 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Removed environmental task | activity=Activity_0wbdy0w | execution=4920bf42-22af-11f1-a061-6ee3202e5531
+10:48:19.125 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] Task Activity_0wbdy0w ended
+10:48:19.132 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Registered gateway Gateway_079n828 (execution=4920bf42-22af-11f1-a061-6ee3202e5531) with 2 guarded outgoing flows
+10:48:19.132 [scheduling-1] INFO  o.u.i.l.e.ExclusiveGatewayExecutionListener - [ExclusiveGatewayListener] Gateway Gateway_079n828 entered wait mode with 2 guarded flows
+10:48:19.132 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Gateway_079n828' has entered wait state.
+10:48:19.137 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Guard+Action satisfied -> task completed | activity=Activity_0wbdy0w | execution=4920bf42-22af-11f1-a061-6ee3202e5531 | guard='' | action='plantArea'
+10:48:19.139 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0hqo9af (Free Areas.count == 0): false
+10:48:19.140 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_1toad1x (Free Areas.count > 0): true
+10:48:19.143 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Gateway_079n828'. signalName=null, signalData=null
+10:48:19.145 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Removed gateway Gateway_079n828 (execution=4920bf42-22af-11f1-a061-6ee3202e5531)
+10:48:19.147 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='Lp_bkw2w6' on Activity_0bueab4
+10:48:19.147 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_0bueab4 - Move to
+free area | Participant: Farmer (Participant_2abc123) | Destination: Lp_bkw2w6 | Timer: (empty)
+10:48:19.147 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_2abc123 | Activity: Activity_0bueab4 | Destination: Lp_bkw2w6 | ExecutionId: 4920bf42-22af-11f1-a061-6ee3202e5531 | Timer: (empty)
+10:48:19.147 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0bueab4' has entered wait state.
+10:48:19.150 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Signaled gateway Gateway_079n828 (execution=4920bf42-22af-11f1-a061-6ee3202e5531) with selected flow Flow_1toad1x

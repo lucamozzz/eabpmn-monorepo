@@ -1,0 +1,150 @@
+10:22:38.658 [http-nio-8082-exec-6] INFO  o.u.i.s.p.ParticipantService - [ParticipantService] Extracted collaboration with 2 participants
+10:22:38.661 [http-nio-8082-exec-6] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='set2' on Activity_0pux44l
+10:22:38.663 [http-nio-8082-exec-6] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_0pux44l - Move to
+tutor's room | Participant: Student (Participant_0yrbhi5) | Destination: set2 | Timer: (empty)
+10:22:38.663 [http-nio-8082-exec-6] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_0yrbhi5 | Activity: Activity_0pux44l | Destination: set2 | ExecutionId: 01e1f1a0-22ac-11f1-a061-6ee3202e5531 | Timer: (empty)
+10:22:38.664 [http-nio-8082-exec-6] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0pux44l' has entered wait state.
+10:23:25.496 [http-nio-8082-exec-10] INFO  o.u.i.c.EnvironmentController - [Environment API] Participant 'Participant_0yrbhi5' position set to: place1
+10:23:26.559 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] ✓ Participant Participant_0yrbhi5 reached destination set2 | Completing task
+10:23:26.561 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0pux44l'. signalName=null, signalData=null
+10:23:26.563 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] restored <space:destination>='set2' on Activity_0pux44l
+10:23:26.563 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_0yrbhi5
+10:23:26.563 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Task completed for participant Participant_0yrbhi5
+10:23:26.568 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Registered environmental task | activity=Activity_053u9k9 | execution=01e1f1a0-22ac-11f1-a061-6ee3202e5531 | guard='Tutor.position == Tutors Room' | action='(empty)' | participantId=Participant_0yrbhi5 | timer=(empty)
+10:23:26.568 [scheduling-1] INFO  o.u.i.a.GuardedSendTaskActivity - [GUARDED_SEND_TASK] WAITING | Activity: Activity_053u9k9 - Ask for explanation | Guard: Tutor.position == Tutors Room
+10:23:26.570 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Task completed successfully for participant Participant_0yrbhi5
+10:23:26.578 [scheduling-1] INFO  o.u.i.a.GuardedSendTaskActivity - [GUARDED_SEND_TASK] Guard satisfied for activity 'Activity_053u9k9', executing send task delegate
+10:23:26.579 [scheduling-1] INFO  o.u.i.d.StartProcessByMessageDelegate - [StartByMessage] Scheduled process start by message 'askForExplanation' after commit (businessKey='a')
+10:23:26.584 [scheduling-1] INFO  o.u.i.service.MessageFlowRegistry - [MessageFlowRegistry] Registered binding flow: Activity_0r4gaqa -> Activity_0t7ecrn (participants: null -> null)
+10:23:26.584 [scheduling-1] INFO  o.u.i.service.MessageFlowRegistry - [MessageFlowRegistry] Registered unbinding flow: Activity_1b8dtmr -> Activity_1t301f5 (participants: null -> null)
+10:23:26.584 [scheduling-1] INFO  o.u.i.service.MessageFlowRegistry - [MessageFlowRegistry] Late registration of flows for process: Student:1:fa06d6dd-22ab-11f1-a061-6ee3202e5531
+10:23:26.584 [scheduling-1] INFO  o.u.i.l.e.BindingExecutionListener - [BINDING] Task Activity_0r4gaqa started - Participant Student (Participant_0yrbhi5) waiting for Tutor (Participant_1fejmk0) | Timer: (empty)
+10:23:26.584 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Registering task: BK=a | Participant_0yrbhi5 -> Participant_1fejmk0 | exec=01e1f1a0-22ac-11f1-a061-6ee3202e5531 | activity=Activity_0r4gaqa | timer=(empty)
+10:23:26.584 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Registered waiting binding task | BK: a | participant: Participant_0yrbhi5 -> target: Participant_1fejmk0
+10:23:26.586 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting tasks after registration: [Participant_0yrbhi5=>Participant_1fejmk0]
+10:23:26.586 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] tryActivatePair: Looking for counterpart for Participant_0yrbhi5 -> Participant_1fejmk0
+10:23:26.586 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] tryActivatePair: No counterpart found for Participant_1fejmk0 (waiting set: [Participant_0yrbhi5])
+10:23:26.586 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0r4gaqa' has entered wait state.
+10:23:26.588 [scheduling-1] INFO  o.u.i.service.MessageFlowRegistry - [MessageFlowRegistry] Registered binding flow: Activity_0r4gaqa -> Activity_0t7ecrn (participants: null -> null)
+10:23:26.588 [scheduling-1] INFO  o.u.i.service.MessageFlowRegistry - [MessageFlowRegistry] Registered unbinding flow: Activity_1b8dtmr -> Activity_1t301f5 (participants: null -> null)
+10:23:26.588 [scheduling-1] INFO  o.u.i.service.MessageFlowRegistry - [MessageFlowRegistry] Late registration of flows for process: Tutor:1:fa074c0e-22ab-11f1-a061-6ee3202e5531
+10:23:26.589 [scheduling-1] INFO  o.u.i.l.e.BindingExecutionListener - [BINDING] Task Activity_0t7ecrn started - Participant Tutor (Participant_1fejmk0) waiting for Student (Participant_0yrbhi5) | Timer: (empty)
+10:23:26.589 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Registering task: BK=a | Participant_1fejmk0 -> Participant_0yrbhi5 | exec=1e74b3ca-22ac-11f1-a061-6ee3202e5531 | activity=Activity_0t7ecrn | timer=(empty)
+10:23:26.589 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Registered waiting binding task | BK: a | participant: Participant_1fejmk0 -> target: Participant_0yrbhi5
+10:23:26.589 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Waiting tasks after registration: [Participant_0yrbhi5=>Participant_1fejmk0, Participant_1fejmk0=>Participant_0yrbhi5]
+10:23:26.589 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] tryActivatePair: Looking for counterpart for Participant_1fejmk0 -> Participant_0yrbhi5
+10:23:26.589 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] tryActivatePair: Found potential counterpart Participant_0yrbhi5 -> Participant_1fejmk0
+10:23:26.589 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] tryActivatePair: Same business key? a vs a = true
+10:23:26.589 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] tryActivatePair: Reciprocal check - current.id (Participant_1fejmk0) == counterpart.target (Participant_1fejmk0) ? true | current.target (Participant_0yrbhi5) == counterpart.id (Participant_0yrbhi5) ? true
+10:23:26.589 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] ✓ Activated pair a:Participant_0yrbhi5<->Participant_1fejmk0 (Participant_1fejmk0 <-> Participant_0yrbhi5)
+10:23:26.590 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0t7ecrn' has entered wait state.
+10:23:26.590 [scheduling-1] INFO  o.u.i.d.StartProcessByMessageDelegate - [StartByMessage] Started process by message 'askForExplanation' with businessKey 'a'
+10:23:26.590 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Guard+Action satisfied -> task completed | activity=Activity_053u9k9 | execution=01e1f1a0-22ac-11f1-a061-6ee3202e5531 | guard='Tutor.position == Tutors Room' | action=''
+10:23:26.590 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Removed environmental task | activity=Activity_053u9k9 | execution=01e1f1a0-22ac-11f1-a061-6ee3202e5531
+10:23:26.591 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Checking pair a:Participant_0yrbhi5<->Participant_1fejmk0: Participant_1fejmk0 at place1 vs Participant_0yrbhi5 at place1
+10:23:26.591 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Pair a:Participant_0yrbhi5<->Participant_1fejmk0 reached same position 'place1' -> completing binding tasks
+10:23:26.591 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0t7ecrn'. signalName=null, signalData=null
+10:23:26.592 [scheduling-1] INFO  o.u.i.s.e.b.BindingTaskRegistry - [BindingRegistry] Removed active pair a:Participant_0yrbhi5<->Participant_1fejmk0 due to task end
+10:23:26.592 [scheduling-1] INFO  o.u.i.l.e.BindingExecutionListener - [BINDING] Task Activity_0t7ecrn ended
+10:23:26.592 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='set1' on Activity_134ot6o
+10:23:26.593 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_134ot6o - Move to
+meeting room | Participant: Tutor (Participant_1fejmk0) | Destination: set1 | Timer: (empty)
+10:23:26.593 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_1fejmk0 | Activity: Activity_134ot6o | Destination: set1 | ExecutionId: 1e75500d-22ac-11f1-a061-6ee3202e5531 | Timer: (empty)
+10:23:26.593 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_134ot6o' has entered wait state.
+10:23:26.594 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0r4gaqa'. signalName=null, signalData=null
+10:23:26.595 [scheduling-1] INFO  o.u.i.l.e.BindingExecutionListener - [BINDING] Task Activity_0r4gaqa ended
+10:23:26.596 [scheduling-1] INFO  o.u.i.l.e.UnbindingExecutionListener - [UNBINDING] Task Activity_1t301f5 started - Participant Student (Participant_0yrbhi5) waiting for unbind with Tutor (Participant_1fejmk0) | Timer: (empty)
+10:23:26.596 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Registering task: BK=a | Participant_0yrbhi5 -> Participant_1fejmk0 | exec=01e1f1a0-22ac-11f1-a061-6ee3202e5531 | activity=Activity_1t301f5 | timer=(empty)
+10:23:26.596 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Registered waiting unbinding task | BK: a | participant: Participant_0yrbhi5 -> target: Participant_1fejmk0
+10:23:26.596 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_1t301f5' has entered wait state.
+10:23:26.597 [scheduling-1] INFO  o.u.i.s.e.BoundParticipantsDiscordanceMonitor - [DiscordanceMonitor] Marked pair as bound: BK=a | PI=1e74b3ca-22ac-11f1-a061-6ee3202e5531 | Participant_1fejmk0 <-> Participant_0yrbhi5 | Key: 1e74b3ca-22ac-11f1-a061-6ee3202e5531:Participant_0yrbhi5<->Participant_1fejmk0
+10:23:40.264 [http-nio-8082-exec-8] INFO  o.u.i.s.e.BoundParticipantsDiscordanceMonitor - [DiscordanceMonitor] Pair 1e74b3ca-22ac-11f1-a061-6ee3202e5531:Participant_1fejmk0<->Participant_0yrbhi5 detected discordant positions: place2 vs place1 | Grace window: 30000ms
+10:23:40.266 [http-nio-8082-exec-8] INFO  o.u.i.c.EnvironmentController - [Environment API] Participant 'Participant_1fejmk0' position set to: place2
+10:23:40.558 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] ✓ Participant Participant_1fejmk0 reached destination set1 | Completing task
+10:23:40.561 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_134ot6o'. signalName=null, signalData=null
+10:23:40.565 [scheduling-1] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] restored <space:destination>='set1' on Activity_134ot6o
+10:23:40.566 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Removed movement task for participant: Participant_1fejmk0
+10:23:40.566 [scheduling-1] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] Task completed for participant Participant_1fejmk0
+10:23:40.573 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Registered gateway Gateway_1vxzxud (execution=1e74b3ca-22ac-11f1-a061-6ee3202e5531) with 2 guarded outgoing flows
+10:23:40.573 [scheduling-1] INFO  o.u.i.l.e.ExclusiveGatewayExecutionListener - [ExclusiveGatewayListener] Gateway Gateway_1vxzxud entered wait mode with 2 guarded flows
+10:23:40.573 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Gateway_1vxzxud' has entered wait state.
+10:23:40.578 [scheduling-1] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Task completed successfully for participant Participant_1fejmk0
+10:23:40.581 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:23:40.582 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): false
+10:23:42.560 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:23:42.561 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): false
+10:23:44.238 [http-nio-8082-exec-4] INFO  o.u.i.s.e.BoundParticipantsDiscordanceMonitor - [DiscordanceMonitor] Pair 1e74b3ca-22ac-11f1-a061-6ee3202e5531:Participant_1fejmk0<->Participant_0yrbhi5 positions are now concordant at position: place2
+10:23:44.239 [http-nio-8082-exec-4] INFO  o.u.i.c.EnvironmentController - [Environment API] Participant 'Participant_0yrbhi5' position set to: place2
+10:23:44.560 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:23:44.561 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): false
+10:23:46.559 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:23:46.567 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): false
+10:23:48.559 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:23:48.560 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): false
+10:23:50.560 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:23:50.562 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): false
+10:23:52.557 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:23:52.557 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): false
+10:23:54.559 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:23:54.562 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): false
+10:23:56.559 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:23:56.560 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): false
+10:23:58.538 [http-nio-8082-exec-7] INFO  o.u.i.c.EnvironmentController - [Environment API] Attribute 'lights' for place 'place2' set to: on
+10:23:58.560 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_0yacvzk (myPlace().lights == off): false
+10:23:58.561 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_02i8y5s (myPlace().lights == on): true
+10:23:58.572 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Gateway_1vxzxud'. signalName=null, signalData=null
+10:23:58.575 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Removed gateway Gateway_1vxzxud (execution=1e74b3ca-22ac-11f1-a061-6ee3202e5531)
+10:23:58.578 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Registered environmental task | activity=Activity_1nycl57 | execution=1e74b3ca-22ac-11f1-a061-6ee3202e5531 | guard='(empty)' | action='occupyRoom' | participantId=Participant_1fejmk0 | timer=(empty)
+10:23:58.578 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] WAITING | Activity: Activity_1nycl57 - Explain topic | Guard: (empty) | Action: occupyRoom | Timer: (empty)
+10:23:58.579 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_1nycl57' has entered wait state.
+10:23:58.582 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Signaled gateway Gateway_1vxzxud (execution=1e74b3ca-22ac-11f1-a061-6ee3202e5531) with selected flow Flow_02i8y5s
+10:24:00.556 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_1nycl57 -> auto-pass
+10:24:00.560 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] occupyRoom executed | activity=Activity_1nycl57 | participant=Participant_1fejmk0 | place=place2 | occupied=true
+10:24:00.562 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_1nycl57'. signalName=null, signalData=null
+10:24:00.564 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Removed environmental task | activity=Activity_1nycl57 | execution=1e74b3ca-22ac-11f1-a061-6ee3202e5531
+10:24:00.564 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] Task Activity_1nycl57 ended
+10:24:00.566 [scheduling-1] INFO  o.u.i.l.e.UnbindingExecutionListener - [UNBINDING] Task Activity_1b8dtmr started - Participant Tutor (Participant_1fejmk0) waiting for unbind with Student (Participant_0yrbhi5) | Timer: (empty)
+10:24:00.566 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Registering task: BK=a | Participant_1fejmk0 -> Participant_0yrbhi5 | exec=1e74b3ca-22ac-11f1-a061-6ee3202e5531 | activity=Activity_1b8dtmr | timer=(empty)
+10:24:00.566 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Registered waiting unbinding task | BK: a | participant: Participant_1fejmk0 -> target: Participant_0yrbhi5
+10:24:00.566 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Activated pair a:Participant_0yrbhi5<->Participant_1fejmk0 (Participant_1fejmk0 <-> Participant_0yrbhi5)
+10:24:00.566 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_1b8dtmr' has entered wait state.
+10:24:00.568 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Guard+Action satisfied -> task completed | activity=Activity_1nycl57 | execution=1e74b3ca-22ac-11f1-a061-6ee3202e5531 | guard='' | action='occupyRoom'
+10:24:00.569 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Pair a:Participant_0yrbhi5<->Participant_1fejmk0 reached same position 'place2' -> completing unbinding tasks
+10:24:00.571 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_1b8dtmr'. signalName=null, signalData=null
+10:24:00.572 [scheduling-1] INFO  o.u.i.s.e.u.UnbindingTaskRegistry - [UnbindingRegistry] Removed active pair a:Participant_0yrbhi5<->Participant_1fejmk0 due to task end
+10:24:00.572 [scheduling-1] INFO  o.u.i.l.e.UnbindingExecutionListener - [UNBINDING] Task Activity_1b8dtmr ended
+10:24:00.575 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Registered gateway Gateway_1xbm01q (execution=1e74b3ca-22ac-11f1-a061-6ee3202e5531) with 2 guarded outgoing flows
+10:24:00.575 [scheduling-1] INFO  o.u.i.l.e.ExclusiveGatewayExecutionListener - [ExclusiveGatewayListener] Gateway Gateway_1xbm01q entered wait mode with 2 guarded flows
+10:24:00.575 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Gateway_1xbm01q' has entered wait state.
+10:24:00.578 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_1t301f5'. signalName=null, signalData=null
+10:24:00.578 [scheduling-1] INFO  o.u.i.l.e.UnbindingExecutionListener - [UNBINDING] Task Activity_1t301f5 ended
+10:24:00.585 [scheduling-1] INFO  o.u.i.s.e.BoundParticipantsDiscordanceMonitor - [DiscordanceMonitor] Removed bound pair: BK=a | PI=1e74b3ca-22ac-11f1-a061-6ee3202e5531 | Participant_1fejmk0 <-> Participant_0yrbhi5 | Key: 1e74b3ca-22ac-11f1-a061-6ee3202e5531:Participant_0yrbhi5<->Participant_1fejmk0
+10:24:00.586 [scheduling-1] INFO  o.u.i.s.SequenceFlowGuardEvaluator - [SequenceFlowGuardEvaluator] Guard evaluation for Flow_1inu7lz (myPlace().lights == on): true
+10:24:00.588 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Gateway_1xbm01q'. signalName=null, signalData=null
+10:24:00.589 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Removed gateway Gateway_1xbm01q (execution=1e74b3ca-22ac-11f1-a061-6ee3202e5531)
+10:24:00.590 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Registered environmental task | activity=Activity_146u96e | execution=1e74b3ca-22ac-11f1-a061-6ee3202e5531 | guard='(empty)' | action='turnLightsOff' | participantId=Participant_1fejmk0 | timer=(empty)
+10:24:00.590 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] WAITING | Activity: Activity_146u96e - Turn off lights | Guard: (empty) | Action: turnLightsOff | Timer: (empty)
+10:24:00.590 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_146u96e' has entered wait state.
+10:24:00.591 [scheduling-1] INFO  o.u.i.s.ExclusiveGatewayGuardRegistry - [ExclusiveGatewayRegistry] Signaled gateway Gateway_1xbm01q (execution=1e74b3ca-22ac-11f1-a061-6ee3202e5531) with selected flow Flow_1inu7lz
+10:24:02.556 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_146u96e -> auto-pass
+10:24:02.562 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Participant 'Participant_1fejmk0' has no mapped user for businessKey 'a' (action='turnLightsOff')
+10:24:04.556 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_146u96e -> auto-pass
+10:24:06.557 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_146u96e -> auto-pass
+10:24:08.556 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_146u96e -> auto-pass
+10:24:10.552 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_146u96e -> auto-pass
+10:24:11.742 [http-nio-8082-exec-10] INFO  o.u.i.c.EnvironmentController - [Environment API] Attribute 'lights' for place 'place2' set to: off
+10:24:12.557 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_146u96e -> auto-pass
+10:24:12.560 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_146u96e'. signalName=null, signalData=null
+10:24:12.563 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Removed environmental task | activity=Activity_146u96e | execution=1e74b3ca-22ac-11f1-a061-6ee3202e5531
+10:24:12.563 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] Task Activity_146u96e ended
+10:24:12.568 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Registered environmental task | activity=Activity_0ni6qyx | execution=1e74b3ca-22ac-11f1-a061-6ee3202e5531 | guard='(empty)' | action='leaveRoom' | participantId=Participant_1fejmk0 | timer=(empty)
+10:24:12.568 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] WAITING | Activity: Activity_0ni6qyx - Leave
+meeting room | Guard: (empty) | Action: leaveRoom | Timer: (empty)
+10:24:12.568 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0ni6qyx' has entered wait state.
+10:24:12.572 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Guard+Action satisfied -> task completed | activity=Activity_146u96e | execution=1e74b3ca-22ac-11f1-a061-6ee3202e5531 | guard='' | action='turnLightsOff'
+10:24:14.556 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] Empty guard expression for activity Activity_0ni6qyx -> auto-pass
+10:24:14.559 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [ENVIRONMENTAL] leaveRoom executed | activity=Activity_0ni6qyx | participant=Participant_1fejmk0 | place=place2 | state=null | occupied=false
+10:24:14.560 [scheduling-1] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Signal received for activity 'Activity_0ni6qyx'. signalName=null, signalData=null
+10:24:14.561 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Removed environmental task | activity=Activity_0ni6qyx | execution=1e74b3ca-22ac-11f1-a061-6ee3202e5531
+10:24:14.561 [scheduling-1] INFO  o.u.i.l.e.EnvironmentalExecutionListener - [ENVIRONMENTAL] Task Activity_0ni6qyx ended
+10:24:14.571 [scheduling-1] INFO  o.u.i.s.e.EnvironmentalTaskRegistry - [EnvironmentalRegistry] Guard+Action satisfied -> task completed | activity=Activity_0ni6qyx | execution=1e74b3ca-22ac-11f1-a061-6ee3202e5531 | guard='' | action='leaveRoom'
