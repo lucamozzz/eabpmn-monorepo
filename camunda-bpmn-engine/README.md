@@ -35,7 +35,7 @@ Go to: http://localhost:8082/gps.html
 
 2. Connect to Process
 
-User ID: acataluffi (matches participantId)
+User ID: a (matches participantId)
 Business Key: defined bk (matches process businessKey)
 Click Connect
 

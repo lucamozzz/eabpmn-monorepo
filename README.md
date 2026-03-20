@@ -99,7 +99,8 @@ mvn spring-boot:run
 | BEE Environment Cockpit | http://localhost:8082/environment.html |
 | BEE Mobile App | http://localhost:8082/mobile.html |
 
-To run one of the available scenarios, set the scenario value in `camunda-bpmn-engine/src/main/resources/application.properties` (for example `app.scenario=university`). The engine will load the corresponding configuration from the available case studies in `BPM26_case_studies/`. If the scenario value is left empty, you can model and use your own custom environment configuration.
+To run one of the available scenarios, set the scenario value in `camunda-bpmn-engine/src/main/resources/application.properties` (for example `app.scenario=university`). The engine will load the corresponding configuration from the available case studies in `BPM26_case_studies/`.
+If `app.scenario` is not specified in `camunda-bpmn-engine/src/main/resources/application.properties`, you can use the provided environment modeler create your own environment, export it as a JSON file, and include it in the process deployment as an additional file.
 
 **GPS Disclaimer**: when testing the BEE Mobile App from a mobile phone, GPS coordinates are sent from the browser and require an HTTPS connection. For this reason, you will need to expose your local engine through a tunneling tool (for example `ngrok` or similar). As an alternative, you can set the position manually in the app.
 

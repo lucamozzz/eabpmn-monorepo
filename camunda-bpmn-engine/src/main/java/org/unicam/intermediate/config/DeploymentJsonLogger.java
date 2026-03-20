@@ -3,6 +3,9 @@ package org.unicam.intermediate.config;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.RepositoryService;
 import org.camunda.bpm.engine.repository.Deployment;
+import org.camunda.bpm.model.bpmn.Bpmn;
+import org.camunda.bpm.model.bpmn.BpmnModelInstance;
+import org.camunda.bpm.model.bpmn.instance.Participant;
 import org.unicam.intermediate.service.environmental.EnvironmentDataService;
 import org.unicam.intermediate.service.participant.ParticipantDataService;
 import org.springframework.context.event.EventListener;
@@ -75,16 +78,22 @@ public class DeploymentJsonLogger {
         newDeployments.sort(Comparator.comparing(Deployment::getDeploymentTime));
 
         for (Deployment deployment : newDeployments) {
-            logJsonResources(deployment);
+            processDeploymentResources(deployment);
         }
     }
 
-    private void logJsonResources(Deployment deployment) {
+    private void processDeploymentResources(Deployment deployment) {
         List<String> resourceNames = repositoryService.getDeploymentResourceNames(deployment.getId());
 
         if (resourceNames == null || resourceNames.isEmpty()) {
             return;
         }
+
+        logJsonResources(deployment, resourceNames);
+        logCollaborationParticipants(deployment, resourceNames);
+    }
+
+    private void logJsonResources(Deployment deployment, List<String> resourceNames) {
 
         List<String> jsonResources = resourceNames.stream()
                 .filter(name -> name != null && name.toLowerCase().endsWith(".json"))
@@ -106,22 +115,80 @@ public class DeploymentJsonLogger {
                 }
 
                 String content = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
-            String source = deployment.getId() + "/" + resourceName;
+                String source = deployment.getId() + "/" + resourceName;
 
-            boolean environmentApplied = environmentDataService.loadEnvironmentFromJsonContent(content, source);
-            int loadedParticipants = participantDataService.loadParticipantsFromJsonContent(content, source);
+                boolean environmentApplied = environmentDataService.loadEnvironmentFromJsonContent(content, source);
+                int loadedParticipants = participantDataService.loadParticipantsFromJsonContent(content, source);
 
-            if (environmentApplied || loadedParticipants > 0) {
-                log.info("[DeploymentJsonLogger] Applied deployment JSON '{}' (environmentApplied={}, participantsLoaded={})",
-                    source, environmentApplied, loadedParticipants);
-            } else {
-                log.info("[DeploymentJsonLogger] JSON '{}' does not contain environment/participants sections to apply",
-                    source);
-            }
+                if (environmentApplied || loadedParticipants > 0) {
+                    log.info("[DeploymentJsonLogger] Applied deployment JSON '{}' (environmentApplied={}, participantsLoaded={})",
+                            source, environmentApplied, loadedParticipants);
+                } else {
+                    log.info("[DeploymentJsonLogger] JSON '{}' does not contain environment/participants sections to apply",
+                            source);
+                }
             } catch (Exception e) {
                 log.error("[DeploymentJsonLogger] Failed reading JSON resource '{}' from deployment {}: {}",
                         resourceName, deployment.getId(), e.getMessage(), e);
             }
+        }
+    }
+
+    private void logCollaborationParticipants(Deployment deployment, List<String> resourceNames) {
+        List<String> bpmnResources = resourceNames.stream()
+                .filter(name -> name != null && name.toLowerCase().endsWith(".bpmn"))
+                .toList();
+
+        if (bpmnResources.isEmpty()) {
+            return;
+        }
+
+        List<org.unicam.intermediate.models.pojo.Participant> extractedParticipants = new ArrayList<>();
+
+        for (String resourceName : bpmnResources) {
+            try (InputStream inputStream = repositoryService.getResourceAsStream(deployment.getId(), resourceName)) {
+                if (inputStream == null) {
+                    continue;
+                }
+
+                BpmnModelInstance modelInstance = Bpmn.readModelFromStream(inputStream);
+                var participants = modelInstance.getModelElementsByType(Participant.class);
+
+                if (participants == null || participants.isEmpty()) {
+                    continue;
+                }
+
+                log.info("[DeploymentJsonLogger] Collaboration participants in '{}' (deployment={}):",
+                        resourceName, deployment.getId());
+
+                for (Participant participant : participants) {
+                    String participantId = participant.getId();
+                    String participantName = participant.getName();
+                    log.info("[DeploymentJsonLogger] - participantId='{}', participantName='{}'",
+                            participantId, participantName);
+
+                    if (participantId == null || participantId.isBlank()) {
+                        continue;
+                    }
+
+                    org.unicam.intermediate.models.pojo.Participant runtimeParticipant =
+                            new org.unicam.intermediate.models.pojo.Participant();
+                    runtimeParticipant.setId(participantId);
+                    runtimeParticipant.setName(participantName);
+                    runtimeParticipant.setPosition(null);
+                    extractedParticipants.add(runtimeParticipant);
+                }
+            } catch (Exception e) {
+                log.warn("[DeploymentJsonLogger] Failed to parse BPMN '{}' for participants: {}",
+                        resourceName, e.getMessage());
+            }
+        }
+
+        if (!extractedParticipants.isEmpty()) {
+            String source = deployment.getId() + "/collaboration-participants";
+            int loaded = participantDataService.replaceParticipants(extractedParticipants, source);
+            log.info("[DeploymentJsonLogger] Loaded {} participants from BPMN collaboration in deployment {}",
+                    loaded, deployment.getId());
         }
     }
 }

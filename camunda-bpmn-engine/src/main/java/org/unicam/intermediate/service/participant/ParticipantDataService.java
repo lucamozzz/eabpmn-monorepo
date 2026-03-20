@@ -223,4 +223,28 @@ public class ParticipantDataService {
             return 0;
         }
     }
+
+    /**
+     * Replaces current participants with the given list (typically extracted from BPMN collaboration participants).
+     * Participants with null/blank IDs are ignored.
+     */
+    public synchronized int replaceParticipants(List<Participant> participants, String source) {
+        participantsMap.clear();
+
+        if (participants == null || participants.isEmpty()) {
+            log.info("[ParticipantDataService] Cleared participants from source '{}' (no participants provided)", source);
+            return 0;
+        }
+
+        for (Participant participant : participants) {
+            if (participant == null || participant.getId() == null || participant.getId().isBlank()) {
+                continue;
+            }
+            participantsMap.put(participant.getId(), participant);
+        }
+
+        log.info("[ParticipantDataService] Replaced participants from source '{}' -> total {}",
+                source, participantsMap.size());
+        return participantsMap.size();
+    }
 }
