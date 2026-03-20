@@ -919,5 +919,28 @@
       ],
       "attributes": {}
     }
+  ],
+  "scenario": "university",
+  "participants": [
+    {
+      "id": "Participant_0yrbhi5",
+      "name": "Student"
+    },
+    {
+      "id": "Participant_1fejmk0",
+      "name": "Tutor"
+    },
+    {
+      "id": "Participant_2abc123",
+      "name": "Supervisor"
+    },
+    {
+      "id": "Participant_3def456",
+      "name": "Attendant"
+    },
+    {
+      "id": "Participant_1mdszue",
+      "name": "Librarian"
+    }
   ]
 }

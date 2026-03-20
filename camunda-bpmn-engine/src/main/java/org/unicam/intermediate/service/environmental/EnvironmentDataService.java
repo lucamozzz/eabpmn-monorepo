@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.RepositoryService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.unicam.intermediate.models.pojo.EnvironmentData;
@@ -38,6 +39,9 @@ public class EnvironmentDataService {
     private final RepositoryService repositoryService;
     private final ObjectMapper objectMapper;
     private final ExternalAttributeRefreshService externalAttributeRefreshService;
+
+    @Value("${app.scenario:university}")
+    private String environmentScenario;
 
     // Hold the data directly in the service
     private EnvironmentData data = new EnvironmentData();
@@ -402,24 +406,31 @@ public class EnvironmentDataService {
     }
 
     /**
-     * Loads environment.json from the local filesystem (src/main/resources/environment.json)
+     * Loads environment data from scenario-specific JSON file.
+     * Filename is determined by the configured scenario property (university, farm, emergency, rental).
+     * Files should be named envs/{scenario}.json in src/main/resources/
      * This is an alternative to deployments, useful for development/testing
      */
     public void loadEnvironmentFromFile() {
         try {
+            // Determine filename based on the scenario
+            String scenario = environmentScenario != null ? environmentScenario.toLowerCase() : "university";
+            String filename = String.format("envs/%s.json", scenario);
+            
             // Try to load from classpath first (standard location in packaged app)
-            InputStream is = this.getClass().getClassLoader().getResourceAsStream("city.json");
+            InputStream is = this.getClass().getClassLoader().getResourceAsStream(filename);
             
             if (is != null) {
                 this.data = objectMapper.readValue(is, EnvironmentData.class);
-                log.info("[EnvironmentDataService] Environment loaded from classpath resource with {} places, {} logical places",
+                log.info("[EnvironmentDataService] Environment loaded from classpath resource '{}' with {} places, {} logical places",
+                    filename,
                     data.getPhysicalPlaces() != null ? data.getPhysicalPlaces().size() : 0,
                         data.getLogicalPlaces() != null ? data.getLogicalPlaces().size() : 0);
                 return;
             }
 
             // Fallback: try to load from project directory (for development)
-            Path filePath = Paths.get("camunda-bpmn-engine/src/main/resources/city.json");
+            Path filePath = Paths.get(String.format("camunda-bpmn-engine/src/main/resources/envs/%s.json", scenario));
             if (Files.exists(filePath)) {
                 byte[] fileBytes = Files.readAllBytes(filePath);
                 this.data = objectMapper.readValue(fileBytes, EnvironmentData.class);
@@ -437,7 +448,8 @@ public class EnvironmentDataService {
             this.data.setLogicalPlaces(List.of());
             this.data.setViews(List.of());
 
-            log.warn("[EnvironmentDataService] No local environment.json file found, initialized with empty data");
+            log.warn("[EnvironmentDataService] Environment file '{}' for scenario '{}' not found, initialized with empty data", 
+                filename, scenario);
 
         } catch (IOException e) {
             log.error("[EnvironmentDataService] Failed to load environment from file: {}", e.getMessage(), e);

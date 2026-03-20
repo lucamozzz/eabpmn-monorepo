@@ -1409,5 +1409,28 @@
       ],
       "aggregations": {}
     }
+  ],
+  "scenario": "emergency",
+  "participants": [
+    {
+      "id": "Participant_0yrbhi5",
+      "name": "Fire control system"
+    },
+    {
+      "id": "Participant_1fejmk0",
+      "name": "Fire-fighter robot"
+    },
+    {
+      "id": "Participant_2abc123",
+      "name": "Nurse"
+    },
+    {
+      "id": "Participant_3def456",
+      "name": "Patient"
+    },
+    {
+      "id": "Participant_1mdszue",
+      "name": "Ambulance"
+    }
   ]
 }

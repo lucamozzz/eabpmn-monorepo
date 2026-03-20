@@ -1567,5 +1567,28 @@
       ],
       "aggregations": {}
     }
+  ],
+  "scenario": "city",
+  "participants": [
+    {
+      "id": "Participant_0yrbhi5",
+      "name": "Vehicle Rental Manager"
+    },
+    {
+      "id": "Participant_1fejmk0",
+      "name": "Maintenance Staff"
+    },
+    {
+      "id": "Participant_2abc123",
+      "name": "Customer Service"
+    },
+    {
+      "id": "Participant_3def456",
+      "name": "Fleet Manager"
+    },
+    {
+      "id": "Participant_1mdszue",
+      "name": "Customer"
+    }
   ]
 }

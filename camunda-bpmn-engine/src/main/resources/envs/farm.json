@@ -1026,5 +1026,20 @@
       ],
       "aggregations": {}
     }
+  ],
+  "scenario": "farm",
+  "participants": [
+    {
+      "id": "Participant_0yrbhi5",
+      "name": "Robot Sprinkler"
+    },
+    {
+      "id": "Participant_1fejmk0",
+      "name": "Robot Planter"
+    },
+    {
+      "id": "Participant_2abc123",
+      "name": "Farmer"
+    }
   ]
 }

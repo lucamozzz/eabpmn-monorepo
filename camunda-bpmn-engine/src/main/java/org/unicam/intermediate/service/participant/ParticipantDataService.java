@@ -1,10 +1,15 @@
 package org.unicam.intermediate.service.participant;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Scope;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
+import org.unicam.intermediate.config.ParticipantConfiguration;
 import org.unicam.intermediate.events.ParticipantPositionChangedEvent;
 import org.unicam.intermediate.models.pojo.Participant;
 
@@ -26,9 +31,14 @@ import java.util.Map;
 public class ParticipantDataService {
 
     private final ApplicationEventPublisher eventPublisher;
+    private final ResourceLoader resourceLoader;
 
-    public ParticipantDataService(ApplicationEventPublisher eventPublisher) {
+    @Value("${app.scenario:university}")
+    private String participantScenario;
+
+    public ParticipantDataService(ApplicationEventPublisher eventPublisher, ResourceLoader resourceLoader) {
         this.eventPublisher = eventPublisher;
+        this.resourceLoader = resourceLoader;
     }
 
     // Store participants in a concurrent map for thread-safe updates
@@ -36,101 +46,58 @@ public class ParticipantDataService {
 
     @PostConstruct
     public void initialize() {
-        loadStaticParticipants();
+        loadParticipantsFromConfiguration();
     }
 
     /**
-     * Loads static participant data.
-     * In the future, this could be replaced with database loading or external configuration.
+     * Loads participants from scenario-specific environment file.
+     * Based on app.scenario property (university, farm, emergency, city).
+     * Falls back to creating empty map if file not found.
      */
-    private void loadStaticParticipants() {
-        // Create farm participants
-        // Participant p1 = new Participant();
-        // p1.setId("Participant_0yrbhi5");
-        // p1.setName("Robot Sprinkler");
-        // p1.setPosition("place7");
-
-        // Participant p2 = new Participant();
-        // p2.setId("Participant_1fejmk0");
-        // p2.setName("Robot Planter");
-        // p2.setPosition("place7");
-
-        // Participant p3 = new Participant();
-        // p3.setId("Participant_2abc123");
-        // p3.setName("Farmer");
-        // p3.setPosition("place13");
-
-        // // Add to map
-        // participantsMap.put(p1.getId(), p1);
-        // participantsMap.put(p2.getId(), p2);
-        // participantsMap.put(p3.getId(), p3);
-
-        // Create university participants
-        Participant p1 = new Participant();
-        p1.setId("Participant_0yrbhi5");
-        p1.setName("Car Rental Operator");
-        p1.setPosition("place13");
-
-        Participant p2 = new Participant();
-        p2.setId("Participant_1fejmk0");
-        p2.setName("Bike Rental Operator");
-        p2.setPosition("place13");
-
-        Participant p3 = new Participant();
-        p3.setId("Participant_2abc123");
-        p3.setName("Car Fixer");
-        p3.setPosition("place13");
-
-        Participant p4 = new Participant();
-        p4.setId("Participant_3def456");
-        p4.setName("Bike Fixer");
-        p4.setPosition("place13");
-
-        Participant p5 = new Participant();
-        p5.setId("Participant_1mdszue");
-        p5.setName("Customer");
-        p5.setPosition("place13");
-
-        // Add to map
-        participantsMap.put(p1.getId(), p1);
-        participantsMap.put(p2.getId(), p2);
-        participantsMap.put(p3.getId(), p3);
-        participantsMap.put(p4.getId(), p4);
-        participantsMap.put(p5.getId(), p5);
-        // Create university participants
-        // Participant p1 = new Participant();
-        // p1.setId("Participant_0yrbhi5");
-        // p1.setName("Fire control system");
-        // p1.setPosition(null);
-
-        // Participant p2 = new Participant();
-        // p2.setId("Participant_1fejmk0");
-        // p2.setName("Fire-fighter robot");
-        // p2.setPosition("place37");
-
-        // Participant p3 = new Participant();
-        // p3.setId("Participant_2abc123");
-        // p3.setName("Nurse");
-        // p3.setPosition("place18");
-
-        // Participant p4 = new Participant();
-        // p4.setId("Participant_3def456");
-        // p4.setName("Patient");
-        // p4.setPosition("place39");
+    private void loadParticipantsFromConfiguration() {
+        try {
+            // Determine the filename based on the scenario
+            String scenario = participantScenario != null ? participantScenario.toLowerCase() : "university";
+            String filename = String.format("classpath:envs/%s.json", scenario);
+            
+            log.info("[ParticipantDataService] Attempting to load participants from scenario: {}", scenario);
+            log.info("[ParticipantDataService] Resource filename: {}", filename);
+            
+            Resource resource = resourceLoader.getResource(filename);
+            log.info("[ParticipantDataService] Resource exists: {}", resource.exists());
+            log.info("[ParticipantDataService] Resource URL: {}", resource.getURL());
+            
+            if (resource.exists()) {
+                ObjectMapper mapper = new ObjectMapper();
+                ParticipantConfiguration config = mapper.readValue(resource.getInputStream(), ParticipantConfiguration.class);
+                
+                log.info("[ParticipantDataService] ParticipantConfiguration loaded. Participants count: {}", 
+                    config.getParticipants() != null ? config.getParticipants().size() : 0);
+                
+                if (config.getParticipants() != null) {
+                    List<Participant> participants = config.toParticipants();
+                    for (Participant participant : participants) {
+                        if (participant != null && participant.getId() != null) {
+                            participantsMap.put(participant.getId(), participant);
+                            log.debug("[ParticipantDataService] Added participant: {} - {}", 
+                                participant.getId(), participant.getName());
+                        }
+                    }
+                    log.info("[ParticipantDataService] Successfully loaded {} participants from scenario '{}' (file: {})", 
+                        participants.size(), scenario, filename);
+                } else {
+                    log.warn("[ParticipantDataService] ParticipantConfiguration has null participants list");
+                }
+            } else {
+                log.warn("[ParticipantDataService] Configuration file '{}' for scenario '{}' NOT FOUND", 
+                    filename, scenario);
+                log.warn("[ParticipantDataService] Available resources should include: envs/university.json, envs/farm.json, envs/emergency.json, envs/city.json");
+            }
+        } catch (Exception e) {
+            log.error("[ParticipantDataService] Error loading participants from configuration: {}", e.getMessage(), e);
+        }
         
-        // Participant p5 = new Participant();
-        // p5.setId("Participant_1mdszue");
-        // p5.setName("Ambulance");
-        // p5.setPosition("place18");
-
-        // // Add to map
-        // participantsMap.put(p1.getId(), p1);
-        // participantsMap.put(p2.getId(), p2);
-        // participantsMap.put(p3.getId(), p3);
-        // participantsMap.put(p4.getId(), p4);
-        // participantsMap.put(p5.getId(), p5);
-
-        log.info("[ParticipantDataService] Initialized with {} static participants", participantsMap.size());
+        log.info("[ParticipantDataService] Total participants in map after loading: {}", participantsMap.size());
     }
 
     /**
