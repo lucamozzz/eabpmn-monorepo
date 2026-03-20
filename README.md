@@ -1,12 +1,24 @@
-# EABPMN Monorepo
+# BEE (BPMN Environmental Enactor)
+<table>
+   <tr>
+      <td align="right" valign="top" width="200">
+         <img src="BEE.png" alt="BEE logo" width="200" />
+      </td>
+      <td valign="top">
+         BEE enacts BPMN with environment-aware capabilities, allowing processes to react to a dynamic environment model that processes can reference throughout execution.
+         By extending the Camunda 7 platform, BEE includes a BPMN modeler extended with an environment modeler and a BPMN engine capable of interpreting environment-aware BPMN constructs.
+         In addition to these, BEE provides a dedicated BEE Environment Cockpit and a companion BEE Mobile App.
+      </td>
+   </tr>
+</table>
 
-This monorepo contains the complete EABPMN (Environment-Aware BPMN) ecosystem, including the Camunda Modeler with custom plugins, the BPENV Modeler library, and supporting infrastructure.
+<img src="app.png" alt="BEE app" width="auto" />
 
 ## 📁 Project Structure
 
 ```
-eabpmn-monorepo/
-├── camunda-modeler/          # Camunda Modeler fork with EABPMN plugins
+BEE/
+├── camunda-modeler/          # Extended Camunda Modeler
 │   ├── resources/
 │   │   └── plugins/
 │   │       └── BPMNEnv-Aware-Plugins/  # Custom BPMN plugin
@@ -40,7 +52,7 @@ npm install
 npm run build
 ```
 
-#### Camunda Modeler with EABPMN Plugin
+#### Extended Camunda Modeler
 
 ```bash
 cd camunda-modeler
@@ -48,7 +60,7 @@ npm run install-all
 ```
 
 This will:
-1. Install dependencies for the EABPMN plugin (`resources/plugins/BPMNEnv-Aware-Plugins`)
+1. Install dependencies for the BEE plugin (`resources/plugins/BPMNEnv-Aware-Plugins`)
 2. Install dependencies for the Camunda Modeler
 
 **Note:** Make sure `bpenv-modeler` is built before running `install-all`, as the Camunda Modeler references it via local file path.
@@ -60,11 +72,42 @@ cd camunda-bpmn-engine
 mvn clean install
 ```
 
+### 2. Usage
+
+Run these commands in two separate terminals.
+
+**Extended Camunda Modeler**
+
+```bash
+cd camunda-modeler
+npm run dev:plugin
+```
+
+**BEE BPMN Engine**
+
+```bash
+cd camunda-bpmn-engine
+mvn spring-boot:run
+```
+
+### Web Access
+
+| Page | URL |
+|---|---|
+| Camunda Cockpit | http://localhost:8082/camunda/app/cockpit |
+| Camunda Tasklist | http://localhost:8082/camunda/app/tasklist |
+| BEE Environment Cockpit | http://localhost:8082/environment.html |
+| BEE Mobile App | http://localhost:8082/mobile.html |
+
+To run one of the available scenarios, set the scenario value in `camunda-bpmn-engine/src/main/resources/application.properties` (for example `app.scenario=university`). The engine will load the corresponding configuration from the available case studies in `BPM26_case_studies/`. If the scenario value is left empty, you can model and use your own custom environment configuration.
+
+**GPS Disclaimer**: when testing the BEE Mobile App from a mobile phone, GPS coordinates are sent from the browser and require an HTTPS connection. For this reason, you will need to expose your local engine through a tunneling tool (for example `ngrok` or similar). As an alternative, you can set the position manually in the app.
+
 ## 🛠️ Development
 
 ### Camunda Modeler
 
-#### Development with EABPMN Plugin
+#### Development with BEE Plugin
 
 **⚠️ Windows Users:** If you're on Windows, use **Git Bash** to run these commands, as there is a bug when building on Windows devices with PowerShell/CMD. See [this forum discussion](https://forum.camunda.io/t/cant-build-camunda-modeler/15177/4) for more details.
 
@@ -85,8 +128,8 @@ npm run dev:plugin:watch
 ```
 
 This will:
-1. **First** (sequentially): Build the EABPMN plugin, build `bpenv-modeler`, and build the preload script
-2. **Then** (in parallel): Start watch modes for `bpenv-modeler` and the EABPMN plugin, and start the Electron app and React client in dev mode
+1. **First** (sequentially): Build the BEE plugin, build `bpenv-modeler`, and build the preload script
+2. **Then** (in parallel): Start watch modes for `bpenv-modeler` and the BEE plugin, and start the Electron app and React client in dev mode
 
 **Note:** The `dev:plugin:watch` command ensures all dependencies are built first, then runs all watch processes in parallel. Changes to `bpenv-modeler` will automatically rebuild and be available in the Camunda Modeler without manual rebuilds. The initial sequential build prevents race conditions during startup.
 
@@ -103,7 +146,7 @@ npm run test     # Run tests
 
 ### Plugin Development
 
-The EABPMN plugin is located at `camunda-modeler/resources/plugins/BPMNEnv-Aware-Plugins/`.
+The BEE plugin is located at `camunda-modeler/resources/plugins/BPMNEnv-Aware-Plugins/`.
 
 **Building the plugin:**
 
@@ -120,7 +163,7 @@ npm run dev          # Watch mode for development
 
 ### Camunda Modeler
 
-A fork of Camunda Modeler 5.38+ with custom EABPMN extensions:
+A fork of Camunda Modeler 5.38+ with custom BEE extensions:
 - Custom task types (MOVEMENT, BINDING, UNBINDING)
 - Environment-aware properties panel
 - Spatial BPMN modeling capabilities
@@ -138,7 +181,7 @@ A React component library for environment-aware BPMN modeling:
 
 **Version:** 0.0.23
 
-### EABPMN Plugin
+### BEE Plugin
 
 Custom Camunda Modeler plugin that extends BPMN modeling with:
 - Space-aware task types
@@ -215,7 +258,7 @@ Database data is stored locally in the `./postgres_data` folder.
 
 ### Local Package References
 
-The `camunda-modeler` and the EABPMN plugin reference `bpenv-modeler` using the `file:` protocol:
+The `camunda-modeler` and the BEE plugin reference `bpenv-modeler` using the `file:` protocol:
 
 - `camunda-modeler/package.json`: `"bpenv-modeler": "file:../bpenv-modeler"`
 - `camunda-modeler/resources/plugins/BPMNEnv-Aware-Plugins/package.json`: `"bpenv-modeler": "file:../../../../bpenv-modeler"`
