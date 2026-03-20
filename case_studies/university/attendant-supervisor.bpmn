@@ -3,10 +3,6 @@
   <bpmn:collaboration id="Collaboration_138lu8k">
     <bpmn:participant id="Participant_3def456" name="Attendant" processRef="Attendant" />
     <bpmn:participant id="Participant_2abc123" name="Maintenance Supervisor" processRef="Supervisor" />
-    <bpmn:textAnnotation id="TextAnnotation_0nveql9">
-      <bpmn:text>timer: every hour</bpmn:text>
-    </bpmn:textAnnotation>
-    <bpmn:association id="Association_16pc76c" associationDirection="None" sourceRef="Event_1d7gvne" targetRef="TextAnnotation_0nveql9" />
   </bpmn:collaboration>
   <bpmn:process id="Attendant" isExecutable="true" camunda:historyTimeToLive="0">
     <bpmn:task id="Activity_0w4cow5" name="Move to a&#10;dirty room">
@@ -114,9 +110,6 @@
       <bpmn:outgoing>Flow_1vw8ajq</bpmn:outgoing>
       <bpmn:outgoing>Flow_1r5wr3y</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:startEvent id="Event_1d7gvne">
-      <bpmn:outgoing>Flow_0rp6ycu</bpmn:outgoing>
-    </bpmn:startEvent>
     <bpmn:exclusiveGateway id="Gateway_0qtpk5j">
       <bpmn:incoming>Flow_09c8cry</bpmn:incoming>
       <bpmn:incoming>Flow_1r5wr3y</bpmn:incoming>
@@ -180,6 +173,12 @@
       <bpmn:incoming>Flow_1cw01wd</bpmn:incoming>
       <bpmn:outgoing>Flow_0em0t2y</bpmn:outgoing>
     </bpmn:task>
+    <bpmn:startEvent id="Event_1d7gvne" name="every hour">
+      <bpmn:outgoing>Flow_0rp6ycu</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_0w9ibc0">
+        <bpmn:timeCycle xsi:type="bpmn:tFormalExpression">R/PT1H</bpmn:timeCycle>
+      </bpmn:timerEventDefinition>
+    </bpmn:startEvent>
   </bpmn:process>
   <bpmn:error id="Error_09l52ee" name="unreachableDestination" errorCode="unreachableDestination" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -297,9 +296,6 @@
           <dc:Bounds x="237" y="370" width="65" height="40" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_0cjqrwp" bpmnElement="Event_1d7gvne">
-        <dc:Bounds x="204" y="317" width="36" height="36" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_0qtpk5j_di" bpmnElement="Gateway_0qtpk5j" isMarkerVisible="true">
         <dc:Bounds x="1195" y="310" width="50" height="50" />
         <bpmndi:BPMNLabel>
@@ -312,6 +308,12 @@
       <bpmndi:BPMNShape id="Activity_16drwuy_di" bpmnElement="Activity_16drwuy">
         <dc:Bounds x="610" y="400" width="100" height="80" />
         <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0cunduc_di" bpmnElement="Event_1d7gvne">
+        <dc:Bounds x="204" y="317" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="196" y="360" width="53" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1vw8ajq_di" bpmnElement="Flow_1vw8ajq">
         <di:waypoint x="337" y="335" />
@@ -394,14 +396,6 @@
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1267" y="317" width="13" height="14" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="TextAnnotation_0nveql9_di" bpmnElement="TextAnnotation_0nveql9">
-        <dc:Bounds x="190" y="420" width="100" height="41" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Association_16pc76c_di" bpmnElement="Association_16pc76c">
-        <di:waypoint x="225" y="352" />
-        <di:waypoint x="237" y="420" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

@@ -186,9 +186,9 @@ public class DeploymentJsonLogger {
 
         if (!extractedParticipants.isEmpty()) {
             String source = deployment.getId() + "/collaboration-participants";
-            int loaded = participantDataService.replaceParticipants(extractedParticipants, source);
-            log.info("[DeploymentJsonLogger] Loaded {} participants from BPMN collaboration in deployment {}",
-                    loaded, deployment.getId());
+            int added = participantDataService.mergeParticipants(extractedParticipants, source);
+            log.info("[DeploymentJsonLogger] Merged BPMN collaboration participants for deployment {} (added={})",
+                    deployment.getId(), added);
         }
     }
 }

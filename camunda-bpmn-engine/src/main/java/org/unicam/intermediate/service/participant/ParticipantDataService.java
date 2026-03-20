@@ -247,4 +247,33 @@ public class ParticipantDataService {
                 source, participantsMap.size());
         return participantsMap.size();
     }
+
+    /**
+     * Merges participants into the current set without overwriting existing ones.
+     * Only participants with new IDs are added.
+     *
+     * @return number of newly added participants
+     */
+    public synchronized int mergeParticipants(List<Participant> participants, String source) {
+        if (participants == null || participants.isEmpty()) {
+            log.info("[ParticipantDataService] No participants to merge from source '{}'", source);
+            return 0;
+        }
+
+        int added = 0;
+        for (Participant participant : participants) {
+            if (participant == null || participant.getId() == null || participant.getId().isBlank()) {
+                continue;
+            }
+
+            Participant existing = participantsMap.putIfAbsent(participant.getId(), participant);
+            if (existing == null) {
+                added++;
+            }
+        }
+
+        log.info("[ParticipantDataService] Merged participants from source '{}' -> added {}, total {}",
+                source, added, participantsMap.size());
+        return added;
+    }
 }
