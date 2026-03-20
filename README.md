@@ -12,7 +12,7 @@
    </tr>
 </table>
 
-<img src="app.png" alt="BEE app" width="auto" />
+<img src="cpapp.png" alt="BEE app" width="auto" />
 
 ## 📁 Project Structure
 
