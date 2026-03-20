@@ -78,34 +78,6 @@ public class UserInitializer {
                     log.info("[UserInitializer] acataluffi already in students group");
                 }
 
-                // Create or update Luca Mozzoni
-                User luca = identityService.createUserQuery().userId("lmozzoni").singleResult();
-                if (luca == null) {
-                    luca = identityService.newUser("lmozzoni");
-                    luca.setFirstName("Luca");
-                    luca.setLastName("Mozzoni");
-                    luca.setPassword("a");
-                    luca.setEmail("luca.mozzoni@unicam.it");
-                    identityService.saveUser(luca);
-                    log.info("[UserInitializer] Created NEW user: lmozzoni (Luca Mozzoni)");
-                } else {
-                    // Update existing user
-                    luca.setFirstName("Luca");
-                    luca.setLastName("Mozzoni");
-                    luca.setPassword("tutor456");
-                    luca.setEmail("luca.mozzoni@unicam.it");
-                    identityService.saveUser(luca);
-                    log.info("[UserInitializer] UPDATED existing user: lmozzoni");
-                }
-
-                // Check and add Luca to tutors group
-                if (!isUserInGroup("lmozzoni", "tutors")) {
-                    identityService.createMembership("lmozzoni", "tutors");
-                    log.info("[UserInitializer] Added lmozzoni to tutors group");
-                } else {
-                    log.info("[UserInitializer] lmozzoni already in tutors group");
-                }
-
                 // Create admins group if needed
                 Group adminGroup = identityService.createGroupQuery().groupId("admins").singleResult();
                 if (adminGroup == null) {
@@ -127,13 +99,12 @@ public class UserInitializer {
                     }
                 }
 
-                identityService.createMembership("lmozzoni", "admins");
                 identityService.createMembership("acataluffi", "admins");
 
                 // Print summary
                 log.info("[UserInitializer] ========================================");
                 log.info("[UserInitializer] Initialization completed successfully!");
-                log.info("[UserInitializer] ========================================");
+                log.info("[UserInitializer] ========================================.");
                 log.info("[UserInitializer] Current users count: {}",
                         identityService.createUserQuery().count());
                 log.info("[UserInitializer] Current groups count: {}",
@@ -141,11 +112,6 @@ public class UserInitializer {
                 log.info("[UserInitializer] ");
                 log.info("[UserInitializer] Camunda Cockpit: http://localhost:8082/camunda");
                 log.info("[UserInitializer] ");
-                log.info("[UserInitializer] Login credentials:");
-                log.info("[UserInitializer]   Admin    : a / a");
-                log.info("[UserInitializer]   Student  : acataluffi / a");
-                log.info("[UserInitializer]   Tutor    : lmozzoni / a");
-                log.info("[UserInitializer] ========================================");
 
                 // Debug: List all users and their groups
                 log.info("[UserInitializer] All users in system:");

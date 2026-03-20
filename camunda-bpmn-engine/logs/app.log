@@ -18402,3 +18402,1308 @@ This generated password is for development use only. Your security configuration
 23:46:31.273 [http-nio-8082-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
 23:46:31.274 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
 23:46:31.283 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 9 ms
+00:54:33.479 [restartedMain] INFO  org.unicam.intermediate.Application - Starting Application using Java 21.0.2 with PID 53995 (/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes started by lucamoz in /Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine)
+00:54:33.480 [restartedMain] INFO  org.unicam.intermediate.Application - No active profile set, falling back to 1 default profile: "default"
+00:54:33.717 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
+00:54:33.717 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+00:54:33.717 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+00:54:33.717 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+00:54:33.724 [restartedMain] INFO  o.a.c.c.C.[Tomcat-7].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+00:54:33.724 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 243 ms
+00:54:33.725 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Configuring camunda rest api.
+00:54:33.726 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Finished configuring camunda rest api.
+00:54:33.746 [restartedMain] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:0227fab8-37d8-4f4d-9a9a-464eed573e8f;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+00:54:33.747 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:0227fab8-37d8-4f4d-9a9a-464eed573e8f'
+00:54:33.774 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB040 Setting up jobExecutor with corePoolSize=3, maxPoolSize:10
+00:54:33.791 [restartedMain] INFO  org.camunda.bpm.engine.cfg - ENGINE-12003 Plugin 'CompositeProcessEnginePlugin[genericPropertiesConfiguration, camundaConfig, camundaProcessEngineConfiguration, camundaDatasourceConfiguration, camundaJobConfiguration, camundaHistoryConfiguration, camundaMetricsConfiguration, camundaAuthorizationConfiguration, camundaDeploymentConfiguration, createAdminUserConfiguration, failedJobConfiguration, , eventPublisherPlugin, ApplicationContextClassloaderSwitchPlugin]' activated on process engine 'default'
+00:54:34.263 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB021 Auto-Deploying resources: []
+00:54:34.263 [restartedMain] INFO  o.u.i.config.CamundaConfig - [CamundaConfig] Registered parse listeners
+00:54:34.263 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-001: Initialized Camunda Spring Boot Eventing Engine Plugin.
+00:54:34.263 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-003: Task events will be published as Spring Events.
+00:54:34.263 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-005: Execution events will be published as Spring Events.
+00:54:34.263 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-009: Listeners will not be invoked if a skipCustomListeners API parameter is set to true by user.
+00:54:34.263 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-007: History events will be published as Spring events.
+00:54:34.969 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.engine.sql'
+00:54:34.974 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.history.sql'
+00:54:34.976 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'identity' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.identity.sql'
+00:54:34.977 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.engine.sql'
+00:54:34.978 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.history.sql'
+00:54:34.978 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.engine.sql'
+00:54:34.979 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.history.sql'
+00:54:34.979 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03067 No history level property found in database
+00:54:34.980 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03065 Creating historyLevel property in database for level: HistoryLevelFull(name=full, id=3)
+00:54:34.981 [restartedMain] INFO  org.camunda.bpm.engine - ENGINE-00001 Process Engine default created.
+00:54:35.030 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 23 places, 9 logical places
+00:54:35.048 [restartedMain] INFO  o.u.i.service.TaskTypeRegistry - [TaskTypeRegistry] Initialized with 3 task types
+00:54:35.055 [restartedMain] INFO  o.u.i.s.p.ParticipantDataService - [ParticipantDataService] Initialized with 5 static participants
+00:54:35.080 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 27b22f8b-7dac-4f60-8324-07cb92a8c931
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+00:54:35.126 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+00:54:35.137 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@67b59098, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@11edab61, org.springframework.security.web.context.SecurityContextHolderFilter@e34b2a5, org.springframework.security.web.header.HeaderWriterFilter@295bc960, org.springframework.web.filter.CorsFilter@76fcd8bd, org.springframework.security.web.authentication.logout.LogoutFilter@4366a916, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4d6414c8, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1f0b456c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7ce1c693, org.springframework.security.web.access.ExceptionTranslationFilter@46d28ded, org.springframework.security.web.access.intercept.AuthorizationFilter@6b2c3776]
+00:54:35.165 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazyProcessEnginesFilter@6ba234b6
+00:54:35.167 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazySecurityFilter@1ab3f1a7
+00:54:35.182 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+00:54:35.194 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8082"]
+00:54:35.195 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8082 (http) with context path ''
+00:54:35.200 [restartedMain] INFO  org.unicam.intermediate.Application - Started Application in 1.744 seconds (process running for 2409.484)
+00:54:35.200 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Initializing Environment on startup
+00:54:35.201 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 23 places, 9 logical places
+00:54:35.201 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Environment loaded with 23 physical places
+00:54:35.201 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Starting user and group initialization...
+00:54:35.202 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: students
+00:54:35.203 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: tutors
+00:54:35.203 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: acataluffi (Andrea Cataluffi)
+00:54:35.204 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added acataluffi to students group
+00:54:35.205 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: lmozzoni (Luca Mozzoni)
+00:54:35.205 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added lmozzoni to tutors group
+00:54:35.206 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: admins
+00:54:35.207 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+00:54:35.207 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Initialization completed successfully!
+00:54:35.207 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+00:54:35.207 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current users count: 3
+00:54:35.207 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current groups count: 4
+00:54:35.207 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+00:54:35.207 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Camunda Cockpit: http://localhost:8082/camunda
+00:54:35.207 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+00:54:35.207 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Login credentials:
+00:54:35.207 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Admin    : a / a
+00:54:35.207 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Student  : acataluffi / a
+00:54:35.207 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Tutor    : lmozzoni / a
+00:54:35.207 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+00:54:35.207 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] All users in system:
+00:54:35.208 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - acataluffi (Andrea Cataluffi) - Groups: [admins, students]
+00:54:35.209 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - demo (demo Demo) - Groups: [camunda-admin]
+00:54:35.209 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - lmozzoni (Luca Mozzoni) - Groups: [admins, tutors]
+00:54:35.210 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+00:54:35.210 [restartedMain] INFO  o.u.i.config.MessageFlowRegistrar - [MessageFlowRegistrar] Application ready - registering message flows for all deployed processes
+00:54:35.210 [restartedMain] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14014 Starting up the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor].
+00:54:35.210 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14018 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] starting to acquire jobs
+00:54:36.355 [http-nio-8082-exec-4] INFO  o.a.c.c.C.[Tomcat-7].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+00:54:36.355 [http-nio-8082-exec-4] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+00:54:36.360 [http-nio-8082-exec-4] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 5 ms
+00:55:20.217 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+00:55:20.234 [Thread-59] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8082"]
+00:55:20.242 [Thread-59] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14015 Shutting down the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]
+00:55:20.242 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14020 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] stopped job acquisition
+00:55:20.243 [Thread-59] INFO  org.camunda.bpm.engine - ENGINE-00007 Process Engine default closed
+00:55:20.243 [Thread-59] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Shutting down embedded database: url='jdbc:h2:mem:0227fab8-37d8-4f4d-9a9a-464eed573e8f;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false'
+00:55:20.387 [restartedMain] INFO  org.unicam.intermediate.Application - Starting Application using Java 21.0.2 with PID 53995 (/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes started by lucamoz in /Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine)
+00:55:20.387 [restartedMain] INFO  org.unicam.intermediate.Application - No active profile set, falling back to 1 default profile: "default"
+00:55:20.606 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
+00:55:20.607 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+00:55:20.607 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+00:55:20.607 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+00:55:20.612 [restartedMain] INFO  o.a.c.c.C.[Tomcat-7].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+00:55:20.612 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 224 ms
+00:55:20.614 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Configuring camunda rest api.
+00:55:20.614 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Finished configuring camunda rest api.
+00:55:20.635 [restartedMain] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:5a94d8fa-32d1-4aff-9646-613f675dfcde;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+00:55:20.636 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:5a94d8fa-32d1-4aff-9646-613f675dfcde'
+00:55:20.664 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB040 Setting up jobExecutor with corePoolSize=3, maxPoolSize:10
+00:55:20.680 [restartedMain] INFO  org.camunda.bpm.engine.cfg - ENGINE-12003 Plugin 'CompositeProcessEnginePlugin[genericPropertiesConfiguration, camundaConfig, camundaProcessEngineConfiguration, camundaDatasourceConfiguration, camundaJobConfiguration, camundaHistoryConfiguration, camundaMetricsConfiguration, camundaAuthorizationConfiguration, camundaDeploymentConfiguration, createAdminUserConfiguration, failedJobConfiguration, , eventPublisherPlugin, ApplicationContextClassloaderSwitchPlugin]' activated on process engine 'default'
+00:55:21.141 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB021 Auto-Deploying resources: []
+00:55:21.141 [restartedMain] INFO  o.u.i.config.CamundaConfig - [CamundaConfig] Registered parse listeners
+00:55:21.141 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-001: Initialized Camunda Spring Boot Eventing Engine Plugin.
+00:55:21.141 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-003: Task events will be published as Spring Events.
+00:55:21.141 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-005: Execution events will be published as Spring Events.
+00:55:21.141 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-009: Listeners will not be invoked if a skipCustomListeners API parameter is set to true by user.
+00:55:21.141 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-007: History events will be published as Spring events.
+00:55:21.842 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.engine.sql'
+00:55:21.846 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.history.sql'
+00:55:21.847 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'identity' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.identity.sql'
+00:55:21.848 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.engine.sql'
+00:55:21.848 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.history.sql'
+00:55:21.849 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.engine.sql'
+00:55:21.849 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.history.sql'
+00:55:21.850 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03067 No history level property found in database
+00:55:21.850 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03065 Creating historyLevel property in database for level: HistoryLevelFull(name=full, id=3)
+00:55:21.851 [restartedMain] INFO  org.camunda.bpm.engine - ENGINE-00001 Process Engine default created.
+00:55:21.883 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 23 places, 9 logical places
+00:55:21.899 [restartedMain] INFO  o.u.i.service.TaskTypeRegistry - [TaskTypeRegistry] Initialized with 3 task types
+00:55:21.905 [restartedMain] INFO  o.u.i.s.p.ParticipantDataService - [ParticipantDataService] Initialized with 5 static participants
+00:55:21.939 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 571971a9-0805-4e20-9ee5-dd4e940ec6a3
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+00:55:22.056 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+00:55:22.076 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7dfc23f8, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3709bc00, org.springframework.security.web.context.SecurityContextHolderFilter@915bac6, org.springframework.security.web.header.HeaderWriterFilter@693bdbea, org.springframework.web.filter.CorsFilter@74fe74ce, org.springframework.security.web.authentication.logout.LogoutFilter@49c07ff8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5cc8965b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5a744f3f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@62ac1482, org.springframework.security.web.access.ExceptionTranslationFilter@70bec095, org.springframework.security.web.access.intercept.AuthorizationFilter@2957f269]
+00:55:22.126 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazySecurityFilter@12c74775
+00:55:22.126 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazyProcessEnginesFilter@61807988
+00:55:22.162 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+00:55:22.242 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8082"]
+00:55:22.275 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8082 (http) with context path ''
+00:55:22.336 [restartedMain] INFO  org.unicam.intermediate.Application - Started Application in 1.96 seconds (process running for 2456.622)
+00:55:22.342 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Initializing Environment on startup
+00:55:22.343 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 23 places, 9 logical places
+00:55:22.343 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Environment loaded with 23 physical places
+00:55:22.343 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Starting user and group initialization...
+00:55:22.433 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: students
+00:55:22.435 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: tutors
+00:55:22.436 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: acataluffi (Andrea Cataluffi)
+00:55:22.441 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added acataluffi to students group
+00:55:22.442 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: lmozzoni (Luca Mozzoni)
+00:55:22.443 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added lmozzoni to tutors group
+00:55:22.444 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: admins
+00:55:22.448 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+00:55:22.448 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Initialization completed successfully!
+00:55:22.448 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+00:55:22.448 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current users count: 3
+00:55:22.448 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current groups count: 4
+00:55:22.448 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+00:55:22.448 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Camunda Cockpit: http://localhost:8082/camunda
+00:55:22.448 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+00:55:22.448 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Login credentials:
+00:55:22.449 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Admin    : a / a
+00:55:22.449 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Student  : acataluffi / a
+00:55:22.449 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Tutor    : lmozzoni / a
+00:55:22.449 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+00:55:22.449 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] All users in system:
+00:55:22.450 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - acataluffi (Andrea Cataluffi) - Groups: [admins, students]
+00:55:22.451 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - demo (demo Demo) - Groups: [camunda-admin]
+00:55:22.451 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - lmozzoni (Luca Mozzoni) - Groups: [admins, tutors]
+00:55:22.454 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+00:55:22.456 [restartedMain] INFO  o.u.i.config.MessageFlowRegistrar - [MessageFlowRegistrar] Application ready - registering message flows for all deployed processes
+00:55:22.466 [restartedMain] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14014 Starting up the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor].
+00:55:22.472 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14018 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] starting to acquire jobs
+00:56:04.364 [http-nio-8082-exec-1] INFO  o.a.c.c.C.[Tomcat-7].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+00:56:04.365 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+00:56:04.374 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 9 ms
+00:57:13.122 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 2 class path changes (0 additions, 0 deletions, 2 modifications)
+00:57:13.134 [Thread-63] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8082"]
+00:57:13.144 [Thread-63] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14015 Shutting down the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]
+00:57:13.144 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14020 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] stopped job acquisition
+00:57:13.145 [Thread-63] INFO  org.camunda.bpm.engine - ENGINE-00007 Process Engine default closed
+00:57:13.145 [Thread-63] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Shutting down embedded database: url='jdbc:h2:mem:5a94d8fa-32d1-4aff-9646-613f675dfcde;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false'
+00:57:13.395 [restartedMain] INFO  org.unicam.intermediate.Application - Starting Application using Java 21.0.2 with PID 53995 (/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes started by lucamoz in /Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine)
+00:57:13.395 [restartedMain] INFO  org.unicam.intermediate.Application - No active profile set, falling back to 1 default profile: "default"
+00:57:13.662 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
+00:57:13.663 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+00:57:13.663 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+00:57:13.663 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+00:57:13.670 [restartedMain] INFO  o.a.c.c.C.[Tomcat-7].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+00:57:13.671 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 274 ms
+00:57:13.673 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Configuring camunda rest api.
+00:57:13.674 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Finished configuring camunda rest api.
+00:57:13.699 [restartedMain] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:d81c16fc-da35-43c9-82c0-d619962f236a;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+00:57:13.700 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:d81c16fc-da35-43c9-82c0-d619962f236a'
+00:57:13.735 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB040 Setting up jobExecutor with corePoolSize=3, maxPoolSize:10
+00:57:13.753 [restartedMain] INFO  org.camunda.bpm.engine.cfg - ENGINE-12003 Plugin 'CompositeProcessEnginePlugin[genericPropertiesConfiguration, camundaConfig, camundaProcessEngineConfiguration, camundaDatasourceConfiguration, camundaJobConfiguration, camundaHistoryConfiguration, camundaMetricsConfiguration, camundaAuthorizationConfiguration, camundaDeploymentConfiguration, createAdminUserConfiguration, failedJobConfiguration, , eventPublisherPlugin, ApplicationContextClassloaderSwitchPlugin]' activated on process engine 'default'
+00:57:14.260 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB021 Auto-Deploying resources: []
+00:57:14.261 [restartedMain] INFO  o.u.i.config.CamundaConfig - [CamundaConfig] Registered parse listeners
+00:57:14.261 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-001: Initialized Camunda Spring Boot Eventing Engine Plugin.
+00:57:14.261 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-003: Task events will be published as Spring Events.
+00:57:14.261 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-005: Execution events will be published as Spring Events.
+00:57:14.261 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-009: Listeners will not be invoked if a skipCustomListeners API parameter is set to true by user.
+00:57:14.261 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-007: History events will be published as Spring events.
+00:57:14.977 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.engine.sql'
+00:57:14.986 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.history.sql'
+00:57:14.987 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'identity' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.identity.sql'
+00:57:14.989 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.engine.sql'
+00:57:14.990 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.history.sql'
+00:57:14.990 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.engine.sql'
+00:57:14.991 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.history.sql'
+00:57:14.992 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03067 No history level property found in database
+00:57:14.992 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03065 Creating historyLevel property in database for level: HistoryLevelFull(name=full, id=3)
+00:57:14.994 [restartedMain] INFO  org.camunda.bpm.engine - ENGINE-00001 Process Engine default created.
+00:57:15.018 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 23 places, 9 logical places
+00:57:15.031 [restartedMain] INFO  o.u.i.service.TaskTypeRegistry - [TaskTypeRegistry] Initialized with 3 task types
+00:57:15.036 [restartedMain] INFO  o.u.i.s.p.ParticipantDataService - [ParticipantDataService] Initialized with 5 static participants
+00:57:15.059 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 2384bdb9-c4c6-45c6-ab4c-fd065175806b
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+00:57:15.104 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+00:57:15.115 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@792d1a66, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@545c5592, org.springframework.security.web.context.SecurityContextHolderFilter@7e45aae0, org.springframework.security.web.header.HeaderWriterFilter@5cbc36c1, org.springframework.web.filter.CorsFilter@47d7f181, org.springframework.security.web.authentication.logout.LogoutFilter@7a7ae4dd, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@747e75d1, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@148c6fce, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@c9283d5, org.springframework.security.web.access.ExceptionTranslationFilter@71223616, org.springframework.security.web.access.intercept.AuthorizationFilter@aa834ca]
+00:57:15.142 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazyProcessEnginesFilter@1af6cc01
+00:57:15.144 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazySecurityFilter@65942a98
+00:57:15.159 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+00:57:15.171 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8082"]
+00:57:15.172 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8082 (http) with context path ''
+00:57:15.178 [restartedMain] INFO  org.unicam.intermediate.Application - Started Application in 1.799 seconds (process running for 2569.467)
+00:57:15.178 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Initializing Environment on startup
+00:57:15.179 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 23 places, 9 logical places
+00:57:15.179 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Environment loaded with 23 physical places
+00:57:15.179 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Starting user and group initialization...
+00:57:15.180 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: students
+00:57:15.180 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: tutors
+00:57:15.180 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: acataluffi (Andrea Cataluffi)
+00:57:15.181 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added acataluffi to students group
+00:57:15.181 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: lmozzoni (Luca Mozzoni)
+00:57:15.182 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added lmozzoni to tutors group
+00:57:15.182 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: admins
+00:57:15.183 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+00:57:15.183 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Initialization completed successfully!
+00:57:15.183 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+00:57:15.183 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current users count: 3
+00:57:15.183 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current groups count: 4
+00:57:15.183 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+00:57:15.183 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Camunda Cockpit: http://localhost:8082/camunda
+00:57:15.183 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+00:57:15.183 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Login credentials:
+00:57:15.183 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Admin    : a / a
+00:57:15.183 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Student  : acataluffi / a
+00:57:15.183 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Tutor    : lmozzoni / a
+00:57:15.183 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+00:57:15.183 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] All users in system:
+00:57:15.184 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - acataluffi (Andrea Cataluffi) - Groups: [admins, students]
+00:57:15.184 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - demo (demo Demo) - Groups: [camunda-admin]
+00:57:15.184 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - lmozzoni (Luca Mozzoni) - Groups: [admins, tutors]
+00:57:15.185 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+00:57:15.186 [restartedMain] INFO  o.u.i.config.MessageFlowRegistrar - [MessageFlowRegistrar] Application ready - registering message flows for all deployed processes
+00:57:15.186 [restartedMain] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14014 Starting up the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor].
+00:57:15.186 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14018 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] starting to acquire jobs
+00:57:19.619 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+00:57:19.635 [Thread-67] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8082"]
+00:57:19.645 [Thread-67] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14015 Shutting down the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]
+00:57:19.645 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14020 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] stopped job acquisition
+00:57:19.645 [Thread-67] INFO  org.camunda.bpm.engine - ENGINE-00007 Process Engine default closed
+00:57:19.646 [Thread-67] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Shutting down embedded database: url='jdbc:h2:mem:d81c16fc-da35-43c9-82c0-d619962f236a;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false'
+00:57:19.897 [restartedMain] INFO  org.unicam.intermediate.Application - Starting Application using Java 21.0.2 with PID 53995 (/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes started by lucamoz in /Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine)
+00:57:19.897 [restartedMain] INFO  org.unicam.intermediate.Application - No active profile set, falling back to 1 default profile: "default"
+00:57:20.135 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
+00:57:20.136 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+00:57:20.136 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+00:57:20.136 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+00:57:20.146 [restartedMain] INFO  o.a.c.c.C.[Tomcat-7].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+00:57:20.146 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 248 ms
+00:57:20.149 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Configuring camunda rest api.
+00:57:20.149 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Finished configuring camunda rest api.
+00:57:20.176 [restartedMain] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:ee705720-e80a-460d-9756-ef4e2da6f6c1;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+00:57:20.177 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:ee705720-e80a-460d-9756-ef4e2da6f6c1'
+00:57:20.215 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB040 Setting up jobExecutor with corePoolSize=3, maxPoolSize:10
+00:57:20.246 [restartedMain] INFO  org.camunda.bpm.engine.cfg - ENGINE-12003 Plugin 'CompositeProcessEnginePlugin[genericPropertiesConfiguration, camundaConfig, camundaProcessEngineConfiguration, camundaDatasourceConfiguration, camundaJobConfiguration, camundaHistoryConfiguration, camundaMetricsConfiguration, camundaAuthorizationConfiguration, camundaDeploymentConfiguration, createAdminUserConfiguration, failedJobConfiguration, , eventPublisherPlugin, ApplicationContextClassloaderSwitchPlugin]' activated on process engine 'default'
+00:57:20.780 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB021 Auto-Deploying resources: []
+00:57:20.782 [restartedMain] INFO  o.u.i.config.CamundaConfig - [CamundaConfig] Registered parse listeners
+00:57:20.782 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-001: Initialized Camunda Spring Boot Eventing Engine Plugin.
+00:57:20.782 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-003: Task events will be published as Spring Events.
+00:57:20.782 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-005: Execution events will be published as Spring Events.
+00:57:20.782 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-009: Listeners will not be invoked if a skipCustomListeners API parameter is set to true by user.
+00:57:20.782 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-007: History events will be published as Spring events.
+00:57:21.624 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.engine.sql'
+00:57:21.629 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.history.sql'
+00:57:21.630 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'identity' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.identity.sql'
+00:57:21.632 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.engine.sql'
+00:57:21.632 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.history.sql'
+00:57:21.633 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.engine.sql'
+00:57:21.634 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.history.sql'
+00:57:21.634 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03067 No history level property found in database
+00:57:21.634 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03065 Creating historyLevel property in database for level: HistoryLevelFull(name=full, id=3)
+00:57:21.635 [restartedMain] INFO  org.camunda.bpm.engine - ENGINE-00001 Process Engine default created.
+00:57:21.654 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 23 places, 9 logical places
+00:57:21.678 [restartedMain] INFO  o.u.i.service.TaskTypeRegistry - [TaskTypeRegistry] Initialized with 3 task types
+00:57:21.688 [restartedMain] INFO  o.u.i.s.p.ParticipantDataService - [ParticipantDataService] Initialized - participants will be loaded dynamically at process start
+00:57:21.712 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 59cbaa16-9c94-4b08-baaa-9163612f484b
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+00:57:21.759 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+00:57:21.772 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@250cfb9e, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@41f1f01d, org.springframework.security.web.context.SecurityContextHolderFilter@75678d3, org.springframework.security.web.header.HeaderWriterFilter@5a145f83, org.springframework.web.filter.CorsFilter@2ad17ccb, org.springframework.security.web.authentication.logout.LogoutFilter@25282624, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5295e6c0, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@699cf6c1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6904e71f, org.springframework.security.web.access.ExceptionTranslationFilter@34b1f07b, org.springframework.security.web.access.intercept.AuthorizationFilter@56d2a896]
+00:57:21.822 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazySecurityFilter@7813e033
+00:57:21.822 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazyProcessEnginesFilter@4f3975e
+00:57:21.843 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+00:57:21.856 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8082"]
+00:57:21.858 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8082 (http) with context path ''
+00:57:21.864 [restartedMain] INFO  org.unicam.intermediate.Application - Started Application in 1.98 seconds (process running for 2576.154)
+00:57:21.865 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Initializing Environment on startup
+00:57:21.866 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 23 places, 9 logical places
+00:57:21.866 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Environment loaded with 23 physical places
+00:57:21.866 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Starting user and group initialization...
+00:57:21.867 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: students
+00:57:21.868 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: tutors
+00:57:21.869 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: acataluffi (Andrea Cataluffi)
+00:57:21.872 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added acataluffi to students group
+00:57:21.873 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: lmozzoni (Luca Mozzoni)
+00:57:21.874 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added lmozzoni to tutors group
+00:57:21.874 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: admins
+00:57:21.875 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+00:57:21.875 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Initialization completed successfully!
+00:57:21.875 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+00:57:21.876 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current users count: 3
+00:57:21.876 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current groups count: 4
+00:57:21.876 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+00:57:21.876 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Camunda Cockpit: http://localhost:8082/camunda
+00:57:21.876 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+00:57:21.876 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Login credentials:
+00:57:21.876 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Admin    : a / a
+00:57:21.876 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Student  : acataluffi / a
+00:57:21.876 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Tutor    : lmozzoni / a
+00:57:21.876 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+00:57:21.876 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] All users in system:
+00:57:21.877 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - acataluffi (Andrea Cataluffi) - Groups: [admins, students]
+00:57:21.878 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - demo (demo Demo) - Groups: [camunda-admin]
+00:57:21.878 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - lmozzoni (Luca Mozzoni) - Groups: [admins, tutors]
+00:57:21.879 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+00:57:21.879 [restartedMain] INFO  o.u.i.config.MessageFlowRegistrar - [MessageFlowRegistrar] Application ready - registering message flows for all deployed processes
+00:57:21.880 [restartedMain] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14014 Starting up the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor].
+00:57:21.880 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14018 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] starting to acquire jobs
+00:57:42.540 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+00:57:42.557 [Thread-71] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8082"]
+00:57:53.571 [Thread-71] WARN  org.apache.tomcat.util.net.Acceptor - The acceptor thread [http-nio-8082-Acceptor] did not stop cleanly
+00:57:53.594 [Thread-71] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14015 Shutting down the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]
+00:57:53.594 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14020 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] stopped job acquisition
+00:57:53.596 [Thread-71] INFO  org.camunda.bpm.engine - ENGINE-00007 Process Engine default closed
+00:57:53.597 [Thread-71] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Shutting down embedded database: url='jdbc:h2:mem:ee705720-e80a-460d-9756-ef4e2da6f6c1;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false'
+00:57:53.797 [restartedMain] INFO  org.unicam.intermediate.Application - Starting Application using Java 21.0.2 with PID 53995 (/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes started by lucamoz in /Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine)
+00:57:53.797 [restartedMain] INFO  org.unicam.intermediate.Application - No active profile set, falling back to 1 default profile: "default"
+00:57:54.026 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
+00:57:54.026 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+00:57:54.026 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+00:57:54.026 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+00:57:54.032 [restartedMain] INFO  o.a.c.c.C.[Tomcat-7].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+00:57:54.032 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 234 ms
+00:57:54.034 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Configuring camunda rest api.
+00:57:54.034 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Finished configuring camunda rest api.
+00:57:54.055 [restartedMain] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:08635e94-c1dc-4997-8004-9c71546fdd89;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+00:57:54.056 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:08635e94-c1dc-4997-8004-9c71546fdd89'
+00:57:54.084 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB040 Setting up jobExecutor with corePoolSize=3, maxPoolSize:10
+00:57:54.100 [restartedMain] INFO  org.camunda.bpm.engine.cfg - ENGINE-12003 Plugin 'CompositeProcessEnginePlugin[genericPropertiesConfiguration, camundaConfig, camundaProcessEngineConfiguration, camundaDatasourceConfiguration, camundaJobConfiguration, camundaHistoryConfiguration, camundaMetricsConfiguration, camundaAuthorizationConfiguration, camundaDeploymentConfiguration, createAdminUserConfiguration, failedJobConfiguration, , eventPublisherPlugin, ApplicationContextClassloaderSwitchPlugin]' activated on process engine 'default'
+00:57:54.533 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB021 Auto-Deploying resources: []
+00:57:54.533 [restartedMain] INFO  o.u.i.config.CamundaConfig - [CamundaConfig] Registered parse listeners
+00:57:54.533 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-001: Initialized Camunda Spring Boot Eventing Engine Plugin.
+00:57:54.533 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-003: Task events will be published as Spring Events.
+00:57:54.533 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-005: Execution events will be published as Spring Events.
+00:57:54.533 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-009: Listeners will not be invoked if a skipCustomListeners API parameter is set to true by user.
+00:57:54.533 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-007: History events will be published as Spring events.
+00:57:55.561 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.engine.sql'
+00:57:55.565 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.history.sql'
+00:57:55.566 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'identity' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.identity.sql'
+00:57:55.567 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.engine.sql'
+00:57:55.567 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.history.sql'
+00:57:55.568 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.engine.sql'
+00:57:55.569 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.history.sql'
+00:57:55.570 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03067 No history level property found in database
+00:57:55.570 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03065 Creating historyLevel property in database for level: HistoryLevelFull(name=full, id=3)
+00:57:55.571 [restartedMain] INFO  org.camunda.bpm.engine - ENGINE-00001 Process Engine default created.
+00:57:55.588 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 23 places, 9 logical places
+00:57:55.601 [restartedMain] INFO  o.u.i.service.TaskTypeRegistry - [TaskTypeRegistry] Initialized with 3 task types
+00:57:55.607 [restartedMain] INFO  o.u.i.s.p.ParticipantDataService - [ParticipantDataService] Initialized - participants will be loaded dynamically at process start
+00:57:55.628 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 88333b63-e15b-4d3f-940f-d020d8209778
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+00:57:55.673 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+00:57:55.684 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@46a43f8, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4b757754, org.springframework.security.web.context.SecurityContextHolderFilter@592b3562, org.springframework.security.web.header.HeaderWriterFilter@1b081bec, org.springframework.web.filter.CorsFilter@2458bfbe, org.springframework.security.web.authentication.logout.LogoutFilter@7d365cd5, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@66b43bf7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@263a5e74, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5653a980, org.springframework.security.web.access.ExceptionTranslationFilter@497137f2, org.springframework.security.web.access.intercept.AuthorizationFilter@4ea79bde]
+00:57:55.713 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazySecurityFilter@96990b5
+00:57:55.713 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazyProcessEnginesFilter@2449cad4
+00:57:55.728 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+00:57:55.740 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8082"]
+00:57:55.741 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8082 (http) with context path ''
+00:57:55.746 [restartedMain] INFO  org.unicam.intermediate.Application - Started Application in 1.959 seconds (process running for 2610.036)
+00:57:55.746 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Initializing Environment on startup
+00:57:55.747 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 23 places, 9 logical places
+00:57:55.747 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Environment loaded with 23 physical places
+00:57:55.747 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Starting user and group initialization...
+00:57:55.748 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: students
+00:57:55.748 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: tutors
+00:57:55.748 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: acataluffi (Andrea Cataluffi)
+00:57:55.749 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added acataluffi to students group
+00:57:55.749 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: lmozzoni (Luca Mozzoni)
+00:57:55.750 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added lmozzoni to tutors group
+00:57:55.750 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: admins
+00:57:55.751 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+00:57:55.751 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Initialization completed successfully!
+00:57:55.751 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+00:57:55.751 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current users count: 3
+00:57:55.751 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current groups count: 4
+00:57:55.751 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+00:57:55.751 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Camunda Cockpit: http://localhost:8082/camunda
+00:57:55.751 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+00:57:55.751 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Login credentials:
+00:57:55.751 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Admin    : a / a
+00:57:55.751 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Student  : acataluffi / a
+00:57:55.751 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Tutor    : lmozzoni / a
+00:57:55.751 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+00:57:55.751 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] All users in system:
+00:57:55.753 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - acataluffi (Andrea Cataluffi) - Groups: [admins, students]
+00:57:55.753 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - demo (demo Demo) - Groups: [camunda-admin]
+00:57:55.754 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - lmozzoni (Luca Mozzoni) - Groups: [admins, tutors]
+00:57:55.754 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+00:57:55.755 [restartedMain] INFO  o.u.i.config.MessageFlowRegistrar - [MessageFlowRegistrar] Application ready - registering message flows for all deployed processes
+00:57:55.755 [restartedMain] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14014 Starting up the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor].
+00:57:55.755 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14018 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] starting to acquire jobs
+00:58:01.190 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+00:58:01.200 [Thread-75] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8082"]
+00:58:01.215 [Thread-75] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14015 Shutting down the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]
+00:58:01.216 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14020 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] stopped job acquisition
+00:58:01.216 [Thread-75] INFO  org.camunda.bpm.engine - ENGINE-00007 Process Engine default closed
+00:58:01.217 [Thread-75] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Shutting down embedded database: url='jdbc:h2:mem:08635e94-c1dc-4997-8004-9c71546fdd89;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false'
+00:58:01.439 [restartedMain] INFO  org.unicam.intermediate.Application - Starting Application using Java 21.0.2 with PID 53995 (/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes started by lucamoz in /Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine)
+00:58:01.439 [restartedMain] INFO  org.unicam.intermediate.Application - No active profile set, falling back to 1 default profile: "default"
+00:58:01.657 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
+00:58:01.658 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+00:58:01.658 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+00:58:01.658 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+00:58:01.663 [restartedMain] INFO  o.a.c.c.C.[Tomcat-7].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+00:58:01.663 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 223 ms
+00:58:01.665 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Configuring camunda rest api.
+00:58:01.665 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Finished configuring camunda rest api.
+00:58:01.689 [restartedMain] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:36d2f9c7-08e3-4830-9c73-924dc5183473;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+00:58:01.690 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:36d2f9c7-08e3-4830-9c73-924dc5183473'
+00:58:01.718 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB040 Setting up jobExecutor with corePoolSize=3, maxPoolSize:10
+00:58:01.735 [restartedMain] INFO  org.camunda.bpm.engine.cfg - ENGINE-12003 Plugin 'CompositeProcessEnginePlugin[genericPropertiesConfiguration, camundaConfig, camundaProcessEngineConfiguration, camundaDatasourceConfiguration, camundaJobConfiguration, camundaHistoryConfiguration, camundaMetricsConfiguration, camundaAuthorizationConfiguration, camundaDeploymentConfiguration, createAdminUserConfiguration, failedJobConfiguration, , eventPublisherPlugin, ApplicationContextClassloaderSwitchPlugin]' activated on process engine 'default'
+00:58:02.206 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB021 Auto-Deploying resources: []
+00:58:02.206 [restartedMain] INFO  o.u.i.config.CamundaConfig - [CamundaConfig] Registered parse listeners
+00:58:02.206 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-001: Initialized Camunda Spring Boot Eventing Engine Plugin.
+00:58:02.206 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-003: Task events will be published as Spring Events.
+00:58:02.206 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-005: Execution events will be published as Spring Events.
+00:58:02.206 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-009: Listeners will not be invoked if a skipCustomListeners API parameter is set to true by user.
+00:58:02.206 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-007: History events will be published as Spring events.
+00:58:02.925 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.engine.sql'
+00:58:02.929 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.history.sql'
+00:58:02.930 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'identity' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.identity.sql'
+00:58:02.932 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.engine.sql'
+00:58:02.932 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.history.sql'
+00:58:02.933 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.engine.sql'
+00:58:02.934 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.history.sql'
+00:58:02.935 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03067 No history level property found in database
+00:58:02.935 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03065 Creating historyLevel property in database for level: HistoryLevelFull(name=full, id=3)
+00:58:02.936 [restartedMain] INFO  org.camunda.bpm.engine - ENGINE-00001 Process Engine default created.
+00:58:02.954 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 23 places, 9 logical places
+00:58:02.970 [restartedMain] INFO  o.u.i.service.TaskTypeRegistry - [TaskTypeRegistry] Initialized with 3 task types
+00:58:02.975 [restartedMain] INFO  o.u.i.s.p.ParticipantDataService - [ParticipantDataService] Initialized - participants will be loaded dynamically at process start
+00:58:03.000 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: e5ff2251-1083-4a1a-9019-3f8bd708b00a
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+00:58:03.051 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+00:58:03.067 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@66413204, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3d9be599, org.springframework.security.web.context.SecurityContextHolderFilter@150d064f, org.springframework.security.web.header.HeaderWriterFilter@3330ac3, org.springframework.web.filter.CorsFilter@5bc4076e, org.springframework.security.web.authentication.logout.LogoutFilter@5291220f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@61f7bcf1, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@34ad1780, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@958e969, org.springframework.security.web.access.ExceptionTranslationFilter@150800f7, org.springframework.security.web.access.intercept.AuthorizationFilter@52100bd4]
+00:58:03.103 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazySecurityFilter@4f2695af
+00:58:03.103 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazyProcessEnginesFilter@78698e02
+00:58:03.119 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+00:58:03.131 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8082"]
+00:58:03.132 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8082 (http) with context path ''
+00:58:03.137 [restartedMain] INFO  org.unicam.intermediate.Application - Started Application in 1.711 seconds (process running for 2617.427)
+00:58:03.137 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Initializing Environment on startup
+00:58:03.138 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 23 places, 9 logical places
+00:58:03.138 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Environment loaded with 23 physical places
+00:58:03.138 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Starting user and group initialization...
+00:58:03.139 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: students
+00:58:03.139 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: tutors
+00:58:03.140 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: acataluffi (Andrea Cataluffi)
+00:58:03.141 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added acataluffi to students group
+00:58:03.141 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: lmozzoni (Luca Mozzoni)
+00:58:03.141 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added lmozzoni to tutors group
+00:58:03.142 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: admins
+00:58:03.143 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+00:58:03.143 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Initialization completed successfully!
+00:58:03.143 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+00:58:03.143 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current users count: 3
+00:58:03.143 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current groups count: 4
+00:58:03.143 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+00:58:03.143 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Camunda Cockpit: http://localhost:8082/camunda
+00:58:03.143 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+00:58:03.143 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Login credentials:
+00:58:03.143 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Admin    : a / a
+00:58:03.143 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Student  : acataluffi / a
+00:58:03.143 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Tutor    : lmozzoni / a
+00:58:03.143 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+00:58:03.143 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] All users in system:
+00:58:03.144 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - acataluffi (Andrea Cataluffi) - Groups: [admins, students]
+00:58:03.144 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - demo (demo Demo) - Groups: [camunda-admin]
+00:58:03.144 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - lmozzoni (Luca Mozzoni) - Groups: [admins, tutors]
+00:58:03.145 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+00:58:03.145 [restartedMain] INFO  o.u.i.config.MessageFlowRegistrar - [MessageFlowRegistrar] Application ready - registering message flows for all deployed processes
+00:58:03.145 [restartedMain] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14014 Starting up the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor].
+00:58:03.146 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14018 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] starting to acquire jobs
+00:58:04.367 [http-nio-8082-exec-3] INFO  o.a.c.c.C.[Tomcat-7].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+00:58:04.367 [http-nio-8082-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+00:58:04.370 [http-nio-8082-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+00:58:17.710 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+00:58:17.729 [Thread-79] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8082"]
+00:58:17.735 [Thread-79] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14015 Shutting down the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]
+00:58:17.735 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14020 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] stopped job acquisition
+00:58:17.735 [Thread-79] INFO  org.camunda.bpm.engine - ENGINE-00007 Process Engine default closed
+00:58:17.736 [Thread-79] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Shutting down embedded database: url='jdbc:h2:mem:36d2f9c7-08e3-4830-9c73-924dc5183473;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false'
+00:58:18.047 [restartedMain] INFO  org.unicam.intermediate.Application - Starting Application using Java 21.0.2 with PID 53995 (/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes started by lucamoz in /Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine)
+00:58:18.048 [restartedMain] INFO  org.unicam.intermediate.Application - No active profile set, falling back to 1 default profile: "default"
+00:58:18.355 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
+00:58:18.355 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+00:58:18.355 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+00:58:18.355 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+00:58:18.361 [restartedMain] INFO  o.a.c.c.C.[Tomcat-7].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+00:58:18.361 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 313 ms
+00:58:18.364 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Configuring camunda rest api.
+00:58:18.364 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Finished configuring camunda rest api.
+00:58:18.384 [restartedMain] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:cdc4581d-bafc-482c-be25-9d9fdb91d4dc;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+00:58:18.385 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:cdc4581d-bafc-482c-be25-9d9fdb91d4dc'
+00:58:18.417 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB040 Setting up jobExecutor with corePoolSize=3, maxPoolSize:10
+00:58:18.433 [restartedMain] INFO  org.camunda.bpm.engine.cfg - ENGINE-12003 Plugin 'CompositeProcessEnginePlugin[genericPropertiesConfiguration, camundaConfig, camundaProcessEngineConfiguration, camundaDatasourceConfiguration, camundaJobConfiguration, camundaHistoryConfiguration, camundaMetricsConfiguration, camundaAuthorizationConfiguration, camundaDeploymentConfiguration, createAdminUserConfiguration, failedJobConfiguration, , eventPublisherPlugin, ApplicationContextClassloaderSwitchPlugin]' activated on process engine 'default'
+00:58:18.965 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB021 Auto-Deploying resources: []
+00:58:18.966 [restartedMain] INFO  o.u.i.config.CamundaConfig - [CamundaConfig] Registered parse listeners
+00:58:18.966 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-001: Initialized Camunda Spring Boot Eventing Engine Plugin.
+00:58:18.966 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-003: Task events will be published as Spring Events.
+00:58:18.966 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-005: Execution events will be published as Spring Events.
+00:58:18.966 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-009: Listeners will not be invoked if a skipCustomListeners API parameter is set to true by user.
+00:58:18.966 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-007: History events will be published as Spring events.
+00:58:19.761 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.engine.sql'
+00:58:19.770 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.history.sql'
+00:58:19.771 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'identity' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.identity.sql'
+00:58:19.773 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.engine.sql'
+00:58:19.773 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.history.sql'
+00:58:19.773 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.engine.sql'
+00:58:19.774 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.history.sql'
+00:58:19.775 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03067 No history level property found in database
+00:58:19.775 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03065 Creating historyLevel property in database for level: HistoryLevelFull(name=full, id=3)
+00:58:19.776 [restartedMain] INFO  org.camunda.bpm.engine - ENGINE-00001 Process Engine default created.
+00:58:19.798 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 23 places, 9 logical places
+00:58:19.815 [restartedMain] INFO  o.u.i.service.TaskTypeRegistry - [TaskTypeRegistry] Initialized with 3 task types
+00:58:19.821 [restartedMain] INFO  o.u.i.s.p.ParticipantDataService - [ParticipantDataService] Initialized - participants will be loaded dynamically at process start
+00:58:19.846 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 5552db52-30c6-491b-a26d-870924cb83b1
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+00:58:19.892 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+00:58:19.904 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@34e9ce3d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@286e885e, org.springframework.security.web.context.SecurityContextHolderFilter@246340de, org.springframework.security.web.header.HeaderWriterFilter@2ca40874, org.springframework.web.filter.CorsFilter@50792998, org.springframework.security.web.authentication.logout.LogoutFilter@2b06e3b5, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4a706194, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@19b6688a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@446d9e5e, org.springframework.security.web.access.ExceptionTranslationFilter@2aff3d45, org.springframework.security.web.access.intercept.AuthorizationFilter@486b8d64]
+00:58:19.941 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazySecurityFilter@7c8d359
+00:58:19.941 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazyProcessEnginesFilter@517953fc
+00:58:19.961 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+00:58:19.974 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8082"]
+00:58:19.975 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8082 (http) with context path ''
+00:58:19.981 [restartedMain] INFO  org.unicam.intermediate.Application - Started Application in 1.945 seconds (process running for 2634.272)
+00:58:19.982 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Initializing Environment on startup
+00:58:19.982 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 23 places, 9 logical places
+00:58:19.982 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Environment loaded with 23 physical places
+00:58:19.982 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Starting user and group initialization...
+00:58:19.983 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: students
+00:58:19.983 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: tutors
+00:58:19.984 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: acataluffi (Andrea Cataluffi)
+00:58:19.986 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added acataluffi to students group
+00:58:19.986 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: lmozzoni (Luca Mozzoni)
+00:58:19.987 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added lmozzoni to tutors group
+00:58:19.988 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: admins
+00:58:19.989 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+00:58:19.989 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Initialization completed successfully!
+00:58:19.989 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+00:58:19.989 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current users count: 3
+00:58:19.989 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current groups count: 4
+00:58:19.989 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+00:58:19.989 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Camunda Cockpit: http://localhost:8082/camunda
+00:58:19.989 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+00:58:19.989 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Login credentials:
+00:58:19.989 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Admin    : a / a
+00:58:19.989 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Student  : acataluffi / a
+00:58:19.989 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   Tutor    : lmozzoni / a
+00:58:19.989 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+00:58:19.989 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] All users in system:
+00:58:19.990 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - acataluffi (Andrea Cataluffi) - Groups: [admins, students]
+00:58:19.990 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - demo (demo Demo) - Groups: [camunda-admin]
+00:58:19.990 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - lmozzoni (Luca Mozzoni) - Groups: [admins, tutors]
+00:58:19.991 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+00:58:19.991 [restartedMain] INFO  o.u.i.config.MessageFlowRegistrar - [MessageFlowRegistrar] Application ready - registering message flows for all deployed processes
+00:58:19.992 [restartedMain] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14014 Starting up the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor].
+00:58:19.992 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14018 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] starting to acquire jobs
+00:58:35.678 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+00:58:35.690 [Thread-83] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8082"]
+00:58:35.696 [Thread-83] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14015 Shutting down the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]
+00:58:35.696 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14020 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] stopped job acquisition
+00:58:35.698 [Thread-83] INFO  org.camunda.bpm.engine - ENGINE-00007 Process Engine default closed
+00:58:35.700 [Thread-83] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Shutting down embedded database: url='jdbc:h2:mem:cdc4581d-bafc-482c-be25-9d9fdb91d4dc;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false'
+00:58:35.975 [restartedMain] INFO  org.unicam.intermediate.Application - Starting Application using Java 21.0.2 with PID 53995 (/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes started by lucamoz in /Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine)
+00:58:35.975 [restartedMain] INFO  org.unicam.intermediate.Application - No active profile set, falling back to 1 default profile: "default"
+00:58:36.273 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
+00:58:36.273 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+00:58:36.273 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+00:58:36.273 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+00:58:36.279 [restartedMain] INFO  o.a.c.c.C.[Tomcat-7].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+00:58:36.279 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 304 ms
+00:58:36.281 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Configuring camunda rest api.
+00:58:36.281 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Finished configuring camunda rest api.
+00:58:36.301 [restartedMain] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:d2a1ac8c-b69a-47f9-abab-0f8eb70a5093;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+00:58:36.302 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:d2a1ac8c-b69a-47f9-abab-0f8eb70a5093'
+00:58:36.340 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB040 Setting up jobExecutor with corePoolSize=3, maxPoolSize:10
+00:58:36.362 [restartedMain] INFO  org.camunda.bpm.engine.cfg - ENGINE-12003 Plugin 'CompositeProcessEnginePlugin[genericPropertiesConfiguration, camundaConfig, camundaProcessEngineConfiguration, camundaDatasourceConfiguration, camundaJobConfiguration, camundaHistoryConfiguration, camundaMetricsConfiguration, camundaAuthorizationConfiguration, camundaDeploymentConfiguration, createAdminUserConfiguration, failedJobConfiguration, , eventPublisherPlugin, ApplicationContextClassloaderSwitchPlugin]' activated on process engine 'default'
+00:58:36.845 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB021 Auto-Deploying resources: []
+00:58:36.845 [restartedMain] INFO  o.u.i.config.CamundaConfig - [CamundaConfig] Registered parse listeners
+00:58:36.845 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-001: Initialized Camunda Spring Boot Eventing Engine Plugin.
+00:58:36.845 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-003: Task events will be published as Spring Events.
+00:58:36.845 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-005: Execution events will be published as Spring Events.
+00:58:36.845 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-009: Listeners will not be invoked if a skipCustomListeners API parameter is set to true by user.
+00:58:36.845 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-007: History events will be published as Spring events.
+00:58:37.774 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.engine.sql'
+00:58:37.777 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.history.sql'
+00:58:37.778 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'identity' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.identity.sql'
+00:58:37.779 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.engine.sql'
+00:58:37.779 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.history.sql'
+00:58:37.780 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.engine.sql'
+00:58:37.780 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.history.sql'
+00:58:37.781 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03067 No history level property found in database
+00:58:37.781 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03065 Creating historyLevel property in database for level: HistoryLevelFull(name=full, id=3)
+00:58:37.782 [restartedMain] INFO  org.camunda.bpm.engine - ENGINE-00001 Process Engine default created.
+00:58:37.803 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 23 places, 9 logical places
+00:58:37.820 [restartedMain] INFO  o.u.i.service.TaskTypeRegistry - [TaskTypeRegistry] Initialized with 3 task types
+00:58:37.826 [restartedMain] INFO  o.u.i.s.p.ParticipantDataService - [ParticipantDataService] Initialized - participants will be loaded dynamically at process start
+00:58:37.833 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'startProcessByMessageDelegate' defined in file [/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes/org/unicam/intermediate/delegateExpression/StartProcessByMessageDelegate.class]: Failed to instantiate [org.unicam.intermediate.delegateExpression.StartProcessByMessageDelegate]: Constructor threw exception
+00:58:37.833 [restartedMain] INFO  org.camunda.bpm.engine - ENGINE-00007 Process Engine default closed
+00:58:37.833 [restartedMain] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Shutting down embedded database: url='jdbc:h2:mem:d2a1ac8c-b69a-47f9-abab-0f8eb70a5093;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false'
+00:58:37.834 [restartedMain] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+00:58:37.843 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+00:58:37.844 [restartedMain] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'startProcessByMessageDelegate' defined in file [/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes/org/unicam/intermediate/delegateExpression/StartProcessByMessageDelegate.class]: Failed to instantiate [org.unicam.intermediate.delegateExpression.StartProcessByMessageDelegate]: Constructor threw exception
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:318)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:306)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1355)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1192)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:562)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:975)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:962)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.unicam.intermediate.Application.main(Application.java:9)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.unicam.intermediate.delegateExpression.StartProcessByMessageDelegate]: Constructor threw exception
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:221)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:111)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:315)
+	... 22 common frames omitted
+Caused by: java.lang.Error: Unresolved compilation problems: 
+	Syntax error, insert "Identifier (" to complete ConstructorHeaderName
+	Syntax error, insert ")" to complete ConstructorDeclaration
+	Syntax error, insert ";" to complete ConstructorDeclaration
+
+	at org.unicam.intermediate.delegateExpression.StartProcessByMessageDelegate.<init>(StartProcessByMessageDelegate.java:21)
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:208)
+	... 24 common frames omitted
+01:00:51.220 [restartedMain] INFO  org.unicam.intermediate.Application - Starting Application using Java 21.0.2 with PID 53995 (/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes started by lucamoz in /Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine)
+01:00:51.220 [restartedMain] INFO  org.unicam.intermediate.Application - No active profile set, falling back to 1 default profile: "default"
+01:00:51.476 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
+01:00:51.478 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+01:00:51.478 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+01:00:51.478 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+01:00:51.489 [restartedMain] INFO  o.a.c.c.C.[Tomcat-8].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+01:00:51.489 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 266 ms
+01:00:51.491 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Configuring camunda rest api.
+01:00:51.492 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Finished configuring camunda rest api.
+01:00:51.518 [restartedMain] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:c26d01e8-e01e-4009-9f6d-1a35f94b2d8a;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+01:00:51.519 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:c26d01e8-e01e-4009-9f6d-1a35f94b2d8a'
+01:00:51.554 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB040 Setting up jobExecutor with corePoolSize=3, maxPoolSize:10
+01:00:51.572 [restartedMain] INFO  org.camunda.bpm.engine.cfg - ENGINE-12003 Plugin 'CompositeProcessEnginePlugin[genericPropertiesConfiguration, camundaConfig, camundaProcessEngineConfiguration, camundaDatasourceConfiguration, camundaJobConfiguration, camundaHistoryConfiguration, camundaMetricsConfiguration, camundaAuthorizationConfiguration, camundaDeploymentConfiguration, createAdminUserConfiguration, failedJobConfiguration, , eventPublisherPlugin, ApplicationContextClassloaderSwitchPlugin]' activated on process engine 'default'
+01:00:52.305 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB021 Auto-Deploying resources: []
+01:00:52.305 [restartedMain] INFO  o.u.i.config.CamundaConfig - [CamundaConfig] Registered parse listeners
+01:00:52.305 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-001: Initialized Camunda Spring Boot Eventing Engine Plugin.
+01:00:52.305 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-003: Task events will be published as Spring Events.
+01:00:52.305 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-005: Execution events will be published as Spring Events.
+01:00:52.305 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-009: Listeners will not be invoked if a skipCustomListeners API parameter is set to true by user.
+01:00:52.305 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-007: History events will be published as Spring events.
+01:00:53.303 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.engine.sql'
+01:00:53.306 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.history.sql'
+01:00:53.307 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'identity' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.identity.sql'
+01:00:53.308 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.engine.sql'
+01:00:53.309 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.history.sql'
+01:00:53.309 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.engine.sql'
+01:00:53.310 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.history.sql'
+01:00:53.310 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03067 No history level property found in database
+01:00:53.311 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03065 Creating historyLevel property in database for level: HistoryLevelFull(name=full, id=3)
+01:00:53.312 [restartedMain] INFO  org.camunda.bpm.engine - ENGINE-00001 Process Engine default created.
+01:00:53.331 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 23 places, 9 logical places
+01:00:53.347 [restartedMain] INFO  o.u.i.service.TaskTypeRegistry - [TaskTypeRegistry] Initialized with 3 task types
+01:00:53.352 [restartedMain] INFO  o.u.i.s.p.ParticipantDataService - [ParticipantDataService] Initialized - participants will be loaded dynamically at process start
+01:00:53.362 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'startProcessByMessageDelegate' defined in file [/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes/org/unicam/intermediate/delegateExpression/StartProcessByMessageDelegate.class]: Failed to instantiate [org.unicam.intermediate.delegateExpression.StartProcessByMessageDelegate]: Constructor threw exception
+01:00:53.363 [restartedMain] INFO  org.camunda.bpm.engine - ENGINE-00007 Process Engine default closed
+01:00:53.363 [restartedMain] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Shutting down embedded database: url='jdbc:h2:mem:c26d01e8-e01e-4009-9f6d-1a35f94b2d8a;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false'
+01:00:53.364 [restartedMain] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+01:00:53.369 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+01:00:53.370 [restartedMain] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'startProcessByMessageDelegate' defined in file [/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes/org/unicam/intermediate/delegateExpression/StartProcessByMessageDelegate.class]: Failed to instantiate [org.unicam.intermediate.delegateExpression.StartProcessByMessageDelegate]: Constructor threw exception
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:318)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:306)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1355)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1192)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:562)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:975)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:962)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.unicam.intermediate.Application.main(Application.java:9)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.unicam.intermediate.delegateExpression.StartProcessByMessageDelegate]: Constructor threw exception
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:221)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:111)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:315)
+	... 22 common frames omitted
+Caused by: java.lang.Error: Unresolved compilation problems: 
+	Syntax error, insert "Identifier (" to complete ConstructorHeaderName
+	Syntax error, insert ")" to complete ConstructorDeclaration
+	Syntax error, insert ";" to complete ConstructorDeclaration
+
+	at org.unicam.intermediate.delegateExpression.StartProcessByMessageDelegate.<init>(StartProcessByMessageDelegate.java:21)
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:208)
+	... 24 common frames omitted
+01:01:20.509 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+01:01:20.532 [restartedMain] INFO  org.unicam.intermediate.Application - Starting Application using Java 21.0.2 with PID 64266 (/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes started by lucamoz in /Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine)
+01:01:20.532 [restartedMain] INFO  org.unicam.intermediate.Application - No active profile set, falling back to 1 default profile: "default"
+01:01:20.552 [restartedMain] INFO  o.s.b.d.restart.ChangeableUrls - The Class-Path manifest attribute in /Users/lucamoz/.m2/repository/com/sun/xml/bind/jaxb-impl/4.0.5/jaxb-impl-4.0.5.jar referenced one or more files that do not exist: file:/Users/lucamoz/.m2/repository/com/sun/xml/bind/jaxb-impl/4.0.5/jaxb-core.jar,file:/Users/lucamoz/.m2/repository/com/sun/xml/bind/jaxb-impl/4.0.5/angus-activation.jar
+01:01:20.552 [restartedMain] INFO  o.s.b.d.restart.ChangeableUrls - The Class-Path manifest attribute in /Users/lucamoz/.m2/repository/com/sun/xml/bind/jaxb-core/4.0.5/jaxb-core-4.0.5.jar referenced one or more files that do not exist: file:/Users/lucamoz/.m2/repository/com/sun/xml/bind/jaxb-core/4.0.5/jakarta.activation-api.jar,file:/Users/lucamoz/.m2/repository/com/sun/xml/bind/jaxb-core/4.0.5/jakarta.xml.bind-api.jar
+01:01:20.552 [restartedMain] INFO  o.s.b.d.restart.ChangeableUrls - The Class-Path manifest attribute in /Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/hk2-3.0.6.jar referenced one or more files that do not exist: file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/hk2-utils.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/jakarta.annotation-api.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/jakarta.inject-api.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/hk2-api.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/aopalliance-repackaged.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/hk2-core.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/hk2-locator.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/javassist.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/hk2-runlevel.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/class-model.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/asm.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/asm-analysis.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/asm-commons.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/asm-tree.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/asm-util.jar
+01:01:20.552 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+01:01:20.552 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+01:01:21.316 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
+01:01:21.323 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+01:01:21.324 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+01:01:21.325 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+01:01:21.347 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+01:01:21.347 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 795 ms
+01:01:21.358 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Configuring camunda rest api.
+01:01:21.366 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Finished configuring camunda rest api.
+01:01:21.453 [restartedMain] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:f6d751a9-0ce1-4866-89f5-db8f60734513;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+01:01:21.551 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:f6d751a9-0ce1-4866-89f5-db8f60734513'
+01:01:21.647 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB040 Setting up jobExecutor with corePoolSize=3, maxPoolSize:10
+01:01:21.689 [restartedMain] INFO  org.camunda.bpm.engine.cfg - ENGINE-12003 Plugin 'CompositeProcessEnginePlugin[genericPropertiesConfiguration, camundaConfig, camundaProcessEngineConfiguration, camundaDatasourceConfiguration, camundaJobConfiguration, camundaHistoryConfiguration, camundaMetricsConfiguration, camundaAuthorizationConfiguration, camundaDeploymentConfiguration, createAdminUserConfiguration, failedJobConfiguration, , eventPublisherPlugin, ApplicationContextClassloaderSwitchPlugin]' activated on process engine 'default'
+01:01:22.084 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB021 Auto-Deploying resources: []
+01:01:22.085 [restartedMain] INFO  o.u.i.config.CamundaConfig - [CamundaConfig] Registered parse listeners
+01:01:22.086 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-001: Initialized Camunda Spring Boot Eventing Engine Plugin.
+01:01:22.086 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-003: Task events will be published as Spring Events.
+01:01:22.086 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-005: Execution events will be published as Spring Events.
+01:01:22.086 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-009: Listeners will not be invoked if a skipCustomListeners API parameter is set to true by user.
+01:01:22.087 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-007: History events will be published as Spring events.
+01:01:23.164 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.engine.sql'
+01:01:23.183 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.history.sql'
+01:01:23.187 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'identity' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.identity.sql'
+01:01:23.191 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.engine.sql'
+01:01:23.192 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.history.sql'
+01:01:23.193 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.engine.sql'
+01:01:23.194 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.history.sql'
+01:01:23.210 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03067 No history level property found in database
+01:01:23.212 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03065 Creating historyLevel property in database for level: HistoryLevelFull(name=full, id=3)
+01:01:23.220 [restartedMain] INFO  org.camunda.bpm.engine - ENGINE-00001 Process Engine default created.
+01:01:23.426 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 23 places, 9 logical places
+01:01:23.446 [restartedMain] INFO  o.u.i.service.TaskTypeRegistry - [TaskTypeRegistry] Initialized with 3 task types
+01:01:23.455 [restartedMain] INFO  o.u.i.s.p.ParticipantDataService - [ParticipantDataService] Initialized - participants will be loaded dynamically at process start
+01:01:23.468 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'startProcessByMessageDelegate' defined in file [/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes/org/unicam/intermediate/delegateExpression/StartProcessByMessageDelegate.class]: Failed to instantiate [org.unicam.intermediate.delegateExpression.StartProcessByMessageDelegate]: Constructor threw exception
+01:01:23.471 [restartedMain] INFO  org.camunda.bpm.engine - ENGINE-00007 Process Engine default closed
+01:01:23.471 [restartedMain] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Shutting down embedded database: url='jdbc:h2:mem:f6d751a9-0ce1-4866-89f5-db8f60734513;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false'
+01:01:23.473 [restartedMain] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+01:01:23.484 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+01:01:23.494 [restartedMain] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'startProcessByMessageDelegate' defined in file [/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes/org/unicam/intermediate/delegateExpression/StartProcessByMessageDelegate.class]: Failed to instantiate [org.unicam.intermediate.delegateExpression.StartProcessByMessageDelegate]: Constructor threw exception
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:318)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:306)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1355)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1192)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:562)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:975)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:962)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.unicam.intermediate.Application.main(Application.java:9)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.unicam.intermediate.delegateExpression.StartProcessByMessageDelegate]: Constructor threw exception
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:221)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:111)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:315)
+	... 22 common frames omitted
+Caused by: java.lang.Error: Unresolved compilation problems: 
+	Syntax error, insert "Identifier (" to complete ConstructorHeaderName
+	Syntax error, insert ")" to complete ConstructorDeclaration
+	Syntax error, insert ";" to complete ConstructorDeclaration
+
+	at org.unicam.intermediate.delegateExpression.StartProcessByMessageDelegate.<init>(StartProcessByMessageDelegate.java:21)
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:208)
+	... 24 common frames omitted
+01:02:51.658 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+01:02:51.682 [restartedMain] INFO  org.unicam.intermediate.Application - Starting Application using Java 21.0.2 with PID 64822 (/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes started by lucamoz in /Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine)
+01:02:51.683 [restartedMain] INFO  org.unicam.intermediate.Application - No active profile set, falling back to 1 default profile: "default"
+01:02:51.702 [restartedMain] INFO  o.s.b.d.restart.ChangeableUrls - The Class-Path manifest attribute in /Users/lucamoz/.m2/repository/com/sun/xml/bind/jaxb-impl/4.0.5/jaxb-impl-4.0.5.jar referenced one or more files that do not exist: file:/Users/lucamoz/.m2/repository/com/sun/xml/bind/jaxb-impl/4.0.5/jaxb-core.jar,file:/Users/lucamoz/.m2/repository/com/sun/xml/bind/jaxb-impl/4.0.5/angus-activation.jar
+01:02:51.702 [restartedMain] INFO  o.s.b.d.restart.ChangeableUrls - The Class-Path manifest attribute in /Users/lucamoz/.m2/repository/com/sun/xml/bind/jaxb-core/4.0.5/jaxb-core-4.0.5.jar referenced one or more files that do not exist: file:/Users/lucamoz/.m2/repository/com/sun/xml/bind/jaxb-core/4.0.5/jakarta.activation-api.jar,file:/Users/lucamoz/.m2/repository/com/sun/xml/bind/jaxb-core/4.0.5/jakarta.xml.bind-api.jar
+01:02:51.702 [restartedMain] INFO  o.s.b.d.restart.ChangeableUrls - The Class-Path manifest attribute in /Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/hk2-3.0.6.jar referenced one or more files that do not exist: file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/hk2-utils.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/jakarta.annotation-api.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/jakarta.inject-api.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/hk2-api.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/aopalliance-repackaged.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/hk2-core.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/hk2-locator.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/javassist.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/hk2-runlevel.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/class-model.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/asm.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/asm-analysis.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/asm-commons.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/asm-tree.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/asm-util.jar
+01:02:51.702 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+01:02:51.702 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+01:02:52.485 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
+01:02:52.491 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+01:02:52.492 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+01:02:52.493 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+01:02:52.518 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+01:02:52.519 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 816 ms
+01:02:52.529 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Configuring camunda rest api.
+01:02:52.537 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Finished configuring camunda rest api.
+01:02:52.626 [restartedMain] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:565a8a86-b88a-4855-9284-28dfa0fd4510;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+01:02:52.725 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:565a8a86-b88a-4855-9284-28dfa0fd4510'
+01:02:52.824 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB040 Setting up jobExecutor with corePoolSize=3, maxPoolSize:10
+01:02:52.867 [restartedMain] INFO  org.camunda.bpm.engine.cfg - ENGINE-12003 Plugin 'CompositeProcessEnginePlugin[genericPropertiesConfiguration, camundaConfig, camundaProcessEngineConfiguration, camundaDatasourceConfiguration, camundaJobConfiguration, camundaHistoryConfiguration, camundaMetricsConfiguration, camundaAuthorizationConfiguration, camundaDeploymentConfiguration, createAdminUserConfiguration, failedJobConfiguration, , eventPublisherPlugin, ApplicationContextClassloaderSwitchPlugin]' activated on process engine 'default'
+01:02:53.261 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB021 Auto-Deploying resources: []
+01:02:53.262 [restartedMain] INFO  o.u.i.config.CamundaConfig - [CamundaConfig] Registered parse listeners
+01:02:53.263 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-001: Initialized Camunda Spring Boot Eventing Engine Plugin.
+01:02:53.263 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-003: Task events will be published as Spring Events.
+01:02:53.263 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-005: Execution events will be published as Spring Events.
+01:02:53.263 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-009: Listeners will not be invoked if a skipCustomListeners API parameter is set to true by user.
+01:02:53.263 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-007: History events will be published as Spring events.
+01:02:54.335 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.engine.sql'
+01:02:54.350 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.history.sql'
+01:02:54.354 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'identity' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.identity.sql'
+01:02:54.358 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.engine.sql'
+01:02:54.359 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.history.sql'
+01:02:54.361 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.engine.sql'
+01:02:54.363 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.history.sql'
+01:02:54.379 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03067 No history level property found in database
+01:02:54.380 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03065 Creating historyLevel property in database for level: HistoryLevelFull(name=full, id=3)
+01:02:54.389 [restartedMain] INFO  org.camunda.bpm.engine - ENGINE-00001 Process Engine default created.
+01:02:54.568 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 23 places, 9 logical places
+01:02:54.588 [restartedMain] INFO  o.u.i.service.TaskTypeRegistry - [TaskTypeRegistry] Initialized with 3 task types
+01:02:54.596 [restartedMain] INFO  o.u.i.s.p.ParticipantDataService - [ParticipantDataService] Initialized - participants will be loaded dynamically at process start
+01:02:54.616 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'startProcessByMessageDelegate' defined in file [/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes/org/unicam/intermediate/delegateExpression/StartProcessByMessageDelegate.class]: Failed to instantiate [org.unicam.intermediate.delegateExpression.StartProcessByMessageDelegate]: Constructor threw exception
+01:02:54.620 [restartedMain] INFO  org.camunda.bpm.engine - ENGINE-00007 Process Engine default closed
+01:02:54.620 [restartedMain] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Shutting down embedded database: url='jdbc:h2:mem:565a8a86-b88a-4855-9284-28dfa0fd4510;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false'
+01:02:54.622 [restartedMain] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+01:02:54.640 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+01:02:54.652 [restartedMain] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'startProcessByMessageDelegate' defined in file [/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes/org/unicam/intermediate/delegateExpression/StartProcessByMessageDelegate.class]: Failed to instantiate [org.unicam.intermediate.delegateExpression.StartProcessByMessageDelegate]: Constructor threw exception
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1317)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1202)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:562)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:975)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:962)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.unicam.intermediate.Application.main(Application.java:9)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.unicam.intermediate.delegateExpression.StartProcessByMessageDelegate]: Constructor threw exception
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:221)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:88)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1311)
+	... 20 common frames omitted
+Caused by: java.lang.Error: Unresolved compilation problems: 
+	Syntax error, insert "Identifier (" to complete ConstructorHeaderName
+	Syntax error, insert ")" to complete ConstructorDeclaration
+	Syntax error, insert ";" to complete ConstructorDeclaration
+	Syntax error, insert "Identifier (" to complete ConstructorHeaderName
+	Syntax error, insert ")" to complete ConstructorDeclaration
+	Syntax error, insert ";" to complete ConstructorDeclaration
+	Syntax error, insert "}" to complete Block
+
+	at org.unicam.intermediate.delegateExpression.StartProcessByMessageDelegate.<init>(StartProcessByMessageDelegate.java:35)
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:195)
+	... 22 common frames omitted
+01:04:21.090 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+01:04:21.113 [restartedMain] INFO  org.unicam.intermediate.Application - Starting Application using Java 21.0.2 with PID 65212 (/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes started by lucamoz in /Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine)
+01:04:21.114 [restartedMain] INFO  org.unicam.intermediate.Application - No active profile set, falling back to 1 default profile: "default"
+01:04:21.133 [restartedMain] INFO  o.s.b.d.restart.ChangeableUrls - The Class-Path manifest attribute in /Users/lucamoz/.m2/repository/com/sun/xml/bind/jaxb-impl/4.0.5/jaxb-impl-4.0.5.jar referenced one or more files that do not exist: file:/Users/lucamoz/.m2/repository/com/sun/xml/bind/jaxb-impl/4.0.5/jaxb-core.jar,file:/Users/lucamoz/.m2/repository/com/sun/xml/bind/jaxb-impl/4.0.5/angus-activation.jar
+01:04:21.133 [restartedMain] INFO  o.s.b.d.restart.ChangeableUrls - The Class-Path manifest attribute in /Users/lucamoz/.m2/repository/com/sun/xml/bind/jaxb-core/4.0.5/jaxb-core-4.0.5.jar referenced one or more files that do not exist: file:/Users/lucamoz/.m2/repository/com/sun/xml/bind/jaxb-core/4.0.5/jakarta.activation-api.jar,file:/Users/lucamoz/.m2/repository/com/sun/xml/bind/jaxb-core/4.0.5/jakarta.xml.bind-api.jar
+01:04:21.133 [restartedMain] INFO  o.s.b.d.restart.ChangeableUrls - The Class-Path manifest attribute in /Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/hk2-3.0.6.jar referenced one or more files that do not exist: file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/hk2-utils.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/jakarta.annotation-api.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/jakarta.inject-api.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/hk2-api.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/aopalliance-repackaged.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/hk2-core.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/hk2-locator.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/javassist.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/hk2-runlevel.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/class-model.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/asm.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/asm-analysis.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/asm-commons.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/asm-tree.jar,file:/Users/lucamoz/.m2/repository/org/glassfish/hk2/hk2/3.0.6/asm-util.jar
+01:04:21.133 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+01:04:21.133 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+01:04:21.898 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
+01:04:21.905 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+01:04:21.906 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+01:04:21.910 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+01:04:21.933 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+01:04:21.933 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 800 ms
+01:04:21.945 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Configuring camunda rest api.
+01:04:21.953 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Finished configuring camunda rest api.
+01:04:22.041 [restartedMain] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:b57138e0-05a2-4c24-8107-14dff7663025;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+01:04:22.150 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:b57138e0-05a2-4c24-8107-14dff7663025'
+01:04:22.250 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB040 Setting up jobExecutor with corePoolSize=3, maxPoolSize:10
+01:04:22.292 [restartedMain] INFO  org.camunda.bpm.engine.cfg - ENGINE-12003 Plugin 'CompositeProcessEnginePlugin[genericPropertiesConfiguration, camundaConfig, camundaProcessEngineConfiguration, camundaDatasourceConfiguration, camundaJobConfiguration, camundaHistoryConfiguration, camundaMetricsConfiguration, camundaAuthorizationConfiguration, camundaDeploymentConfiguration, createAdminUserConfiguration, failedJobConfiguration, , eventPublisherPlugin, ApplicationContextClassloaderSwitchPlugin]' activated on process engine 'default'
+01:04:22.687 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB021 Auto-Deploying resources: []
+01:04:22.688 [restartedMain] INFO  o.u.i.config.CamundaConfig - [CamundaConfig] Registered parse listeners
+01:04:22.688 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-001: Initialized Camunda Spring Boot Eventing Engine Plugin.
+01:04:22.688 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-003: Task events will be published as Spring Events.
+01:04:22.688 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-005: Execution events will be published as Spring Events.
+01:04:22.688 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-009: Listeners will not be invoked if a skipCustomListeners API parameter is set to true by user.
+01:04:22.689 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-007: History events will be published as Spring events.
+01:04:23.775 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.engine.sql'
+01:04:23.792 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.history.sql'
+01:04:23.797 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'identity' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.identity.sql'
+01:04:23.801 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.engine.sql'
+01:04:23.803 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.history.sql'
+01:04:23.804 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.engine.sql'
+01:04:23.807 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.history.sql'
+01:04:23.823 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03067 No history level property found in database
+01:04:23.824 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03065 Creating historyLevel property in database for level: HistoryLevelFull(name=full, id=3)
+01:04:23.835 [restartedMain] INFO  org.camunda.bpm.engine - ENGINE-00001 Process Engine default created.
+01:04:24.058 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 23 places, 9 logical places
+01:04:24.078 [restartedMain] INFO  o.u.i.service.TaskTypeRegistry - [TaskTypeRegistry] Initialized with 3 task types
+01:04:24.088 [restartedMain] INFO  o.u.i.s.p.ParticipantDataService - [ParticipantDataService] Initialized - participants will be loaded dynamically at process start
+01:04:24.143 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: ca7af474-57f4-4d38-8fb8-6e8eb575f310
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+01:04:24.296 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+01:04:24.319 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@d43a5ba, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5c70c804, org.springframework.security.web.context.SecurityContextHolderFilter@1625361, org.springframework.security.web.header.HeaderWriterFilter@197a498d, org.springframework.web.filter.CorsFilter@12171475, org.springframework.security.web.authentication.logout.LogoutFilter@3f02d29, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@13a11052, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@656ae348, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@78c6b7f2, org.springframework.security.web.access.ExceptionTranslationFilter@7576eb2d, org.springframework.security.web.access.intercept.AuthorizationFilter@43925e08]
+01:04:24.393 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazyProcessEnginesFilter@20903a95
+01:04:24.396 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazySecurityFilter@4dbfab43
+01:04:24.461 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+01:04:24.491 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8082"]
+01:04:24.497 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8082 (http) with context path ''
+01:04:24.507 [restartedMain] INFO  org.unicam.intermediate.Application - Started Application in 3.533 seconds (process running for 3.806)
+01:04:24.551 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Initializing Environment on startup
+01:04:24.554 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 23 places, 9 logical places
+01:04:24.554 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Environment loaded with 23 physical places
+01:04:24.554 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Starting user and group initialization...
+01:04:24.556 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: students
+01:04:24.558 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: tutors
+01:04:24.560 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: acataluffi (Andrea Cataluffi)
+01:04:24.562 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added acataluffi to students group
+01:04:24.564 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: admins
+01:04:24.566 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+01:04:24.566 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Initialization completed successfully!
+01:04:24.566 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================.
+01:04:24.567 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current users count: 2
+01:04:24.568 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current groups count: 4
+01:04:24.568 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+01:04:24.568 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Camunda Cockpit: http://localhost:8082/camunda
+01:04:24.568 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+01:04:24.568 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] All users in system:
+01:04:24.570 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - acataluffi (Andrea Cataluffi) - Groups: [admins, students]
+01:04:24.571 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - demo (demo Demo) - Groups: [camunda-admin]
+01:04:24.572 [restartedMain] INFO  o.u.i.config.MessageFlowRegistrar - [MessageFlowRegistrar] Application ready - registering message flows for all deployed processes
+01:04:24.573 [restartedMain] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14014 Starting up the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor].
+01:04:24.574 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14018 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] starting to acquire jobs
+01:04:33.010 [http-nio-8082-exec-5] INFO  o.u.i.listener.DynamicParseListener - [DynamicParseListener] Configured activity 'Activity_0pux44l' with type 'movement' -> listener ${{movementExecutionListener}}
+01:04:33.011 [http-nio-8082-exec-5] INFO  o.u.i.listener.DynamicParseListener - [DynamicParseListener] Configured activity 'Activity_0r4gaqa' with type 'binding' -> listener ${{bindingExecutionListener}}
+01:04:33.011 [http-nio-8082-exec-5] INFO  o.u.i.listener.DynamicParseListener - [DynamicParseListener] Configured activity 'Activity_1t301f5' with type 'unbinding' -> listener ${{unbindingExecutionListener}}
+01:04:33.013 [http-nio-8082-exec-5] INFO  o.u.i.listener.DynamicParseListener - [DynamicParseListener] Configured guarded send task 'Activity_053u9k9' with wait-for-guard behavior
+01:04:33.013 [http-nio-8082-exec-5] INFO  o.u.i.listener.DynamicParseListener - [DynamicParseListener] Configured activity 'Activity_0ni6qyx' with type 'environmental' -> listener ${{environmentalExecutionListener}}
+01:04:33.013 [http-nio-8082-exec-5] INFO  o.u.i.listener.DynamicParseListener - [DynamicParseListener] Configured activity 'Activity_146u96e' with type 'environmental' -> listener ${{environmentalExecutionListener}}
+01:04:33.013 [http-nio-8082-exec-5] INFO  o.u.i.listener.DynamicParseListener - [DynamicParseListener] Configured activity 'Activity_1b8dtmr' with type 'unbinding' -> listener ${{unbindingExecutionListener}}
+01:04:33.013 [http-nio-8082-exec-5] INFO  o.u.i.listener.DynamicParseListener - [DynamicParseListener] Configured activity 'Activity_1qbf2yn' with type 'environmental' -> listener ${{environmentalExecutionListener}}
+01:04:33.013 [http-nio-8082-exec-5] INFO  o.u.i.listener.DynamicParseListener - [DynamicParseListener] Configured activity 'Activity_134ot6o' with type 'movement' -> listener ${{movementExecutionListener}}
+01:04:33.014 [http-nio-8082-exec-5] INFO  o.u.i.listener.DynamicParseListener - [DynamicParseListener] Configured activity 'Activity_0t7ecrn' with type 'binding' -> listener ${{bindingExecutionListener}}
+01:04:33.056 [http-nio-8082-exec-7] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+01:04:33.056 [http-nio-8082-exec-7] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+01:04:33.059 [http-nio-8082-exec-7] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+01:04:33.080 [http-nio-8082-exec-7] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 23 places, 9 logical places
+01:04:33.080 [http-nio-8082-exec-7] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment data reloaded
+01:04:33.105 [http-nio-8082-exec-8] ERROR o.u.i.e.GlobalExceptionHandler - [Unexpected Error] No static resource .well-known/camunda-automation-platform/webapps.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource .well-known/camunda-automation-platform/webapps.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:479)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:340)
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:82)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:128)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:323)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:224)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1736)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+01:04:33.108 [http-nio-8082-exec-8] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource .well-known/camunda-automation-platform/webapps.]
+01:04:43.803 [http-nio-8082-exec-6] INFO  o.u.i.s.p.ParticipantService - [ParticipantService] Extracted collaboration with 2 participants
+01:04:43.804 [http-nio-8082-exec-6] INFO  o.u.i.s.x.m.DestinationXmlService - [DestinationXmlService] patched <space:destination>='Tutors Room' on Activity_0pux44l
+01:04:43.814 [http-nio-8082-exec-6] INFO  o.u.i.l.e.MovementExecutionListener - [MOVEMENT] WAITING | Activity: Activity_0pux44l - Move to
+tutor's room | Participant: Student (Participant_0yrbhi5) | Destination: Tutors Room | Timer: (empty)
+01:04:43.814 [http-nio-8082-exec-6] INFO  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Registered movement task | Participant: Participant_0yrbhi5 | Activity: Activity_0pux44l | Destination: Tutors Room | ExecutionId: 6623041f-23f0-11f1-9c3d-8e1927c4889c | Timer: (empty)
+01:04:43.814 [http-nio-8082-exec-6] INFO  o.u.i.activity.WaitStateActivity - [WaitStateActivity] Activity 'Activity_0pux44l' has entered wait state.
+01:04:44.521 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Participant Participant_0yrbhi5 not found in environment data
+01:04:46.513 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Participant Participant_0yrbhi5 not found in environment data
+01:04:48.510 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Participant Participant_0yrbhi5 not found in environment data
+01:04:50.512 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Participant Participant_0yrbhi5 not found in environment data
+01:04:52.509 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Participant Participant_0yrbhi5 not found in environment data
+01:04:54.513 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Participant Participant_0yrbhi5 not found in environment data
+01:04:56.514 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Participant Participant_0yrbhi5 not found in environment data
+01:04:58.515 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Participant Participant_0yrbhi5 not found in environment data
+01:05:00.513 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Participant Participant_0yrbhi5 not found in environment data
+01:05:02.515 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Participant Participant_0yrbhi5 not found in environment data
+01:05:04.514 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Participant Participant_0yrbhi5 not found in environment data
+01:05:06.513 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Participant Participant_0yrbhi5 not found in environment data
+01:05:08.511 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Participant Participant_0yrbhi5 not found in environment data
+01:05:10.511 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Participant Participant_0yrbhi5 not found in environment data
+01:05:12.513 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Participant Participant_0yrbhi5 not found in environment data
+01:05:14.514 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Participant Participant_0yrbhi5 not found in environment data
+01:05:16.514 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Participant Participant_0yrbhi5 not found in environment data
+01:05:18.514 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Participant Participant_0yrbhi5 not found in environment data
+01:05:20.509 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Participant Participant_0yrbhi5 not found in environment data
+01:05:22.511 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Participant Participant_0yrbhi5 not found in environment data
+01:05:24.511 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Participant Participant_0yrbhi5 not found in environment data
+01:05:26.514 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Participant Participant_0yrbhi5 not found in environment data
+01:05:28.513 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Participant Participant_0yrbhi5 not found in environment data
+01:05:30.516 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Participant Participant_0yrbhi5 not found in environment data
+01:05:32.520 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Participant Participant_0yrbhi5 not found in environment data
+01:05:34.512 [scheduling-1] WARN  o.u.i.s.e.m.MovementTaskRegistry - [MovementRegistry] Participant Participant_0yrbhi5 not found in environment data
+01:05:36.083 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 4 class path changes (0 additions, 0 deletions, 4 modifications)
+01:05:36.099 [Thread-5] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8082"]
+01:05:36.117 [Thread-5] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14015 Shutting down the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]
+01:05:36.118 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14020 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] stopped job acquisition
+01:05:36.121 [Thread-5] INFO  org.camunda.bpm.engine - ENGINE-00007 Process Engine default closed
+01:05:36.122 [Thread-5] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Shutting down embedded database: url='jdbc:h2:mem:b57138e0-05a2-4c24-8107-14dff7663025;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false'
+01:05:36.242 [restartedMain] INFO  org.unicam.intermediate.Application - Starting Application using Java 21.0.2 with PID 65212 (/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes started by lucamoz in /Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine)
+01:05:36.242 [restartedMain] INFO  org.unicam.intermediate.Application - No active profile set, falling back to 1 default profile: "default"
+01:05:36.536 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
+01:05:36.537 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+01:05:36.537 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+01:05:36.537 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+01:05:36.545 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+01:05:36.545 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 302 ms
+01:05:36.547 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Configuring camunda rest api.
+01:05:36.547 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Finished configuring camunda rest api.
+01:05:36.570 [restartedMain] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:2209605c-7b40-42e4-949c-27d5f4e06e72;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+01:05:36.571 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:2209605c-7b40-42e4-949c-27d5f4e06e72'
+01:05:36.610 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB040 Setting up jobExecutor with corePoolSize=3, maxPoolSize:10
+01:05:36.627 [restartedMain] INFO  org.camunda.bpm.engine.cfg - ENGINE-12003 Plugin 'CompositeProcessEnginePlugin[genericPropertiesConfiguration, camundaConfig, camundaProcessEngineConfiguration, camundaDatasourceConfiguration, camundaJobConfiguration, camundaHistoryConfiguration, camundaMetricsConfiguration, camundaAuthorizationConfiguration, camundaDeploymentConfiguration, createAdminUserConfiguration, failedJobConfiguration, , eventPublisherPlugin, ApplicationContextClassloaderSwitchPlugin]' activated on process engine 'default'
+01:05:37.042 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB021 Auto-Deploying resources: []
+01:05:37.042 [restartedMain] INFO  o.u.i.config.CamundaConfig - [CamundaConfig] Registered parse listeners
+01:05:37.042 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-001: Initialized Camunda Spring Boot Eventing Engine Plugin.
+01:05:37.042 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-003: Task events will be published as Spring Events.
+01:05:37.042 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-005: Execution events will be published as Spring Events.
+01:05:37.042 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-009: Listeners will not be invoked if a skipCustomListeners API parameter is set to true by user.
+01:05:37.042 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-007: History events will be published as Spring events.
+01:05:37.812 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.engine.sql'
+01:05:37.819 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.history.sql'
+01:05:37.822 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'identity' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.identity.sql'
+01:05:37.824 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.engine.sql'
+01:05:37.826 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'case.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.case.history.sql'
+01:05:37.827 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.engine.sql'
+01:05:37.828 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03016 Performing database operation 'create' on component 'decision.history' with resource 'org/camunda/bpm/engine/db/create/activiti.h2.create.decision.history.sql'
+01:05:37.829 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03067 No history level property found in database
+01:05:37.829 [restartedMain] INFO  org.camunda.bpm.engine.persistence - ENGINE-03065 Creating historyLevel property in database for level: HistoryLevelFull(name=full, id=3)
+01:05:37.830 [restartedMain] INFO  org.camunda.bpm.engine - ENGINE-00001 Process Engine default created.
+01:05:37.856 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 23 places, 9 logical places
+01:05:37.871 [restartedMain] INFO  o.u.i.service.TaskTypeRegistry - [TaskTypeRegistry] Initialized with 3 task types
+01:05:37.876 [restartedMain] INFO  o.u.i.s.p.ParticipantDataService - [ParticipantDataService] Initialized with 5 static participants
+01:05:37.898 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 86502d40-2b6d-4131-95d9-0a86a234c8ef
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+01:05:37.946 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+01:05:37.957 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4c542e80, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@798d1531, org.springframework.security.web.context.SecurityContextHolderFilter@7372641b, org.springframework.security.web.header.HeaderWriterFilter@48e56ea5, org.springframework.web.filter.CorsFilter@4f60f6ce, org.springframework.security.web.authentication.logout.LogoutFilter@4edf7665, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6a42a847, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4d9e425f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5f9e9e05, org.springframework.security.web.access.ExceptionTranslationFilter@6899ec5c, org.springframework.security.web.access.intercept.AuthorizationFilter@e93cfa8]
+01:05:37.985 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazySecurityFilter@5714cad3
+01:05:37.986 [restartedMain] INFO  o.c.b.s.b.s.w.f.LazyInitRegistration - lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazyProcessEnginesFilter@3bc2084b
+01:05:38.001 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+01:05:38.013 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8082"]
+01:05:38.014 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8082 (http) with context path ''
+01:05:38.020 [restartedMain] INFO  org.unicam.intermediate.Application - Started Application in 1.792 seconds (process running for 77.321)
+01:05:38.021 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Initializing Environment on startup
+01:05:38.021 [restartedMain] INFO  o.u.i.s.e.EnvironmentDataService - [EnvironmentDataService] Environment loaded from classpath resource with 23 places, 9 logical places
+01:05:38.022 [restartedMain] INFO  o.u.i.config.EnvironmentInitializer - [EnvironmentInitializer] Environment loaded with 23 physical places
+01:05:38.022 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Starting user and group initialization...
+01:05:38.022 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: students
+01:05:38.023 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: tutors
+01:05:38.024 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW user: acataluffi (Andrea Cataluffi)
+01:05:38.025 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Added acataluffi to students group
+01:05:38.025 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Created NEW group: admins
+01:05:38.026 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================
+01:05:38.026 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Initialization completed successfully!
+01:05:38.027 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] ========================================.
+01:05:38.027 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current users count: 2
+01:05:38.027 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Current groups count: 4
+01:05:38.027 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+01:05:38.027 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] Camunda Cockpit: http://localhost:8082/camunda
+01:05:38.027 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] 
+01:05:38.027 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer] All users in system:
+01:05:38.028 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - acataluffi (Andrea Cataluffi) - Groups: [admins, students]
+01:05:38.029 [restartedMain] INFO  o.u.i.config.UserInitializer - [UserInitializer]   - demo (demo Demo) - Groups: [camunda-admin]
+01:05:38.030 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+01:05:38.030 [restartedMain] INFO  o.u.i.config.MessageFlowRegistrar - [MessageFlowRegistrar] Application ready - registering message flows for all deployed processes
+01:05:38.031 [restartedMain] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14014 Starting up the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor].
+01:05:38.031 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14018 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] starting to acquire jobs
+01:06:04.357 [http-nio-8082-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+01:06:04.358 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+01:06:04.371 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 13 ms
+01:06:17.069 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+01:06:17.075 [Thread-7] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8082"]
+01:06:18.086 [Thread-7] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14015 Shutting down the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]
+01:06:18.086 [JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]] INFO  org.camunda.bpm.engine.jobexecutor - ENGINE-14020 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] stopped job acquisition
+01:06:18.086 [Thread-7] INFO  org.camunda.bpm.engine - ENGINE-00007 Process Engine default closed
+01:06:18.087 [Thread-7] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Shutting down embedded database: url='jdbc:h2:mem:2209605c-7b40-42e4-949c-27d5f4e06e72;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false'
+01:06:18.205 [restartedMain] INFO  org.unicam.intermediate.Application - Starting Application using Java 21.0.2 with PID 65212 (/Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine/target/classes started by lucamoz in /Users/lucamoz/Progetti/eabpmn-monorepo/camunda-bpmn-engine)
+01:06:18.205 [restartedMain] INFO  org.unicam.intermediate.Application - No active profile set, falling back to 1 default profile: "default"
+01:06:18.451 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
+01:06:18.451 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+01:06:18.452 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+01:06:18.452 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+01:06:18.457 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+01:06:18.457 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 251 ms
+01:06:18.460 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Configuring camunda rest api.
+01:06:18.460 [restartedMain] INFO  o.c.b.s.b.s.r.CamundaJerseyResourceConfig - Finished configuring camunda rest api.
+01:06:18.480 [restartedMain] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:084587a9-c345-4d1b-b630-33df92927590;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+01:06:18.481 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:084587a9-c345-4d1b-b630-33df92927590'
+01:06:18.510 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB040 Setting up jobExecutor with corePoolSize=3, maxPoolSize:10
+01:06:18.526 [restartedMain] INFO  org.camunda.bpm.engine.cfg - ENGINE-12003 Plugin 'CompositeProcessEnginePlugin[genericPropertiesConfiguration, camundaConfig, camundaProcessEngineConfiguration, camundaDatasourceConfiguration, camundaJobConfiguration, camundaHistoryConfiguration, camundaMetricsConfiguration, camundaAuthorizationConfiguration, camundaDeploymentConfiguration, createAdminUserConfiguration, failedJobConfiguration, , eventPublisherPlugin, ApplicationContextClassloaderSwitchPlugin]' activated on process engine 'default'
+01:06:18.936 [restartedMain] INFO  org.camunda.bpm.spring.boot - STARTER-SB021 Auto-Deploying resources: []
+01:06:18.936 [restartedMain] INFO  o.u.i.config.CamundaConfig - [CamundaConfig] Registered parse listeners
+01:06:18.936 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-001: Initialized Camunda Spring Boot Eventing Engine Plugin.
+01:06:18.936 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-003: Task events will be published as Spring Events.
+01:06:18.936 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-005: Execution events will be published as Spring Events.
+01:06:18.936 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-009: Listeners will not be invoked if a skipCustomListeners API parameter is set to true by user.
+01:06:18.936 [restartedMain] INFO  o.c.b.s.b.s.e.EventPublisherPlugin - EVENTING-007: History events will be published as Spring events.

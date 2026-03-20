@@ -14,18 +14,13 @@ mvn spring-boot:run
  ## How to Login
 
 **Available Users:**
-
-| User | Password | Role | Email |
-|------|----------|------|-------|
-| `acataluffi` | `a` | Student | andrea.cataluffi@studenti.unicam.it |
-| `lmozzoni` | `a` | Tutor | luca.mozzoni@unicam.it |
-| `a` | `a` | Admin | - |
+| `demo` | `demo` | Admin | - |
 
 ## How to Start the GPS Process
 
 ### 1. Open Camunda Cockpit
 - Go to: http://localhost:8082/camunda
-- Login: `acataluffi` / `a`
+- Login: `demo` / `demo`
 
 ### 2. Start Process Instance
 1. Click **Cockpit** → **Processes**
