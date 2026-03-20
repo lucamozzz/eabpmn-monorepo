@@ -50,32 +50,31 @@ public class UserInitializer {
                     log.info("[UserInitializer] Group already exists: tutors");
                 }
 
-                // Create or update Andrea Cataluffi
-                User andrea = identityService.createUserQuery().userId("acataluffi").singleResult();
+                // Create or update a
+                User andrea = identityService.createUserQuery().userId("aa").singleResult();
                 if (andrea == null) {
-                    andrea = identityService.newUser("acataluffi");
-                    andrea.setFirstName("Andrea");
-                    andrea.setLastName("Cataluffi");
+                    andrea = identityService.newUser("aa");
+                    andrea.setFirstName("a");
+                    andrea.setLastName("a");
                     andrea.setPassword("a");
-                    andrea.setEmail("andrea.cataluffi@studenti.unicam.it");
+                    andrea.setEmail("a.a@mail.com");
                     identityService.saveUser(andrea);
-                    log.info("[UserInitializer] Created NEW user: acataluffi (Andrea Cataluffi)");
                 } else {
                     // Update existing user
-                    andrea.setFirstName("Andrea");
-                    andrea.setLastName("Cataluffi");
-                    andrea.setPassword("password123");
-                    andrea.setEmail("andrea.cataluffi@studenti.unicam.it");
+                    andrea.setFirstName("a");
+                    andrea.setLastName("a");
+                    andrea.setPassword("a");
+                    andrea.setEmail("a.a@mail.com");
                     identityService.saveUser(andrea);
-                    log.info("[UserInitializer] UPDATED existing user: acataluffi");
+                    log.info("[UserInitializer] UPDATED existing user: aa");
                 }
 
                 // Check and add Andrea to students group
-                if (!isUserInGroup("acataluffi", "students")) {
-                    identityService.createMembership("acataluffi", "students");
-                    log.info("[UserInitializer] Added acataluffi to students group");
+                if (!isUserInGroup("aa", "students")) {
+                    identityService.createMembership("aa", "students");
+                    log.info("[UserInitializer] Added aa to students group");
                 } else {
-                    log.info("[UserInitializer] acataluffi already in students group");
+                    log.info("[UserInitializer] aa already in students group");
                 }
 
                 // Create admins group if needed
@@ -99,7 +98,7 @@ public class UserInitializer {
                     }
                 }
 
-                identityService.createMembership("acataluffi", "admins");
+                identityService.createMembership("aa", "admins");
 
                 // Print summary
                 log.info("[UserInitializer] ========================================");

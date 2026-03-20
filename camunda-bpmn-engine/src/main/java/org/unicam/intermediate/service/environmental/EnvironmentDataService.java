@@ -29,6 +29,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import com.fasterxml.jackson.databind.JsonNode;
 
 @Service
 @Slf4j
@@ -40,7 +41,7 @@ public class EnvironmentDataService {
     private final ObjectMapper objectMapper;
     private final ExternalAttributeRefreshService externalAttributeRefreshService;
 
-    @Value("${app.scenario:university}")
+    @Value("${app.scenario:}")
     private String environmentScenario;
 
     // Hold the data directly in the service
@@ -412,9 +413,19 @@ public class EnvironmentDataService {
      * This is an alternative to deployments, useful for development/testing
      */
     public void loadEnvironmentFromFile() {
+        String scenario = environmentScenario != null ? environmentScenario.trim().toLowerCase() : "";
+        if (scenario.isBlank()) {
+            this.data = new EnvironmentData();
+            this.data.setPhysicalPlaces(List.of());
+            this.data.setEdges(List.of());
+            this.data.setLogicalPlaces(List.of());
+            this.data.setViews(List.of());
+            log.info("[EnvironmentDataService] app.scenario is empty, skipping environment configuration loading");
+            return;
+        }
+
         try {
             // Determine filename based on the scenario
-            String scenario = environmentScenario != null ? environmentScenario.toLowerCase() : "university";
             String filename = String.format("envs/%s.json", scenario);
             
             // Try to load from classpath first (standard location in packaged app)
@@ -460,6 +471,54 @@ public class EnvironmentDataService {
             this.data.setEdges(List.of());
             this.data.setLogicalPlaces(List.of());
             this.data.setViews(List.of());
+        }
+    }
+
+    /**
+     * Loads environment data from a raw JSON payload (e.g., attached during deployment).
+     * Returns true when the payload contains environment sections and is successfully applied.
+     */
+    public synchronized boolean loadEnvironmentFromJsonContent(String jsonContent, String source) {
+        if (jsonContent == null || jsonContent.isBlank()) {
+            return false;
+        }
+
+        try {
+            JsonNode root = objectMapper.readTree(jsonContent);
+            boolean hasEnvironmentSections = root.has("physicalPlaces")
+                    || root.has("edges")
+                    || root.has("logicalPlaces")
+                    || root.has("views");
+
+            if (!hasEnvironmentSections) {
+                return false;
+            }
+
+            EnvironmentData loaded = objectMapper.readValue(jsonContent, EnvironmentData.class);
+            this.data = loaded != null ? loaded : new EnvironmentData();
+
+            if (this.data.getPhysicalPlaces() == null) {
+                this.data.setPhysicalPlaces(List.of());
+            }
+            if (this.data.getEdges() == null) {
+                this.data.setEdges(List.of());
+            }
+            if (this.data.getLogicalPlaces() == null) {
+                this.data.setLogicalPlaces(List.of());
+            }
+            if (this.data.getViews() == null) {
+                this.data.setViews(List.of());
+            }
+
+            log.info("[EnvironmentDataService] Environment loaded from deployment JSON '{}' with {} places, {} logical places",
+                    source,
+                    this.data.getPhysicalPlaces().size(),
+                    this.data.getLogicalPlaces().size());
+            return true;
+        } catch (Exception e) {
+            log.warn("[EnvironmentDataService] Could not apply deployment JSON '{}' as environment: {}",
+                    source, e.getMessage());
+            return false;
         }
     }
 }

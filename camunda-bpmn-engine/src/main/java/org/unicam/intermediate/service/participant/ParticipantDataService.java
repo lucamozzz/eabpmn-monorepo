@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.unicam.intermediate.config.ParticipantConfiguration;
 import org.unicam.intermediate.events.ParticipantPositionChangedEvent;
 import org.unicam.intermediate.models.pojo.Participant;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import jakarta.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class ParticipantDataService {
     private final ApplicationEventPublisher eventPublisher;
     private final ResourceLoader resourceLoader;
 
-    @Value("${app.scenario:university}")
+    @Value("${app.scenario:}")
     private String participantScenario;
 
     public ParticipantDataService(ApplicationEventPublisher eventPublisher, ResourceLoader resourceLoader) {
@@ -55,9 +56,17 @@ public class ParticipantDataService {
      * Falls back to creating empty map if file not found.
      */
     private void loadParticipantsFromConfiguration() {
+        participantsMap.clear();
+
+        String scenario = participantScenario != null ? participantScenario.trim().toLowerCase() : "";
+        if (scenario.isBlank()) {
+            log.info("[ParticipantDataService] app.scenario is empty, skipping participants configuration loading");
+            log.info("[ParticipantDataService] Total participants in map after loading: {}", participantsMap.size());
+            return;
+        }
+
         try {
             // Determine the filename based on the scenario
-            String scenario = participantScenario != null ? participantScenario.toLowerCase() : "university";
             String filename = String.format("classpath:envs/%s.json", scenario);
             
             log.info("[ParticipantDataService] Attempting to load participants from scenario: {}", scenario);
@@ -176,5 +185,42 @@ public class ParticipantDataService {
      */
     public boolean isLoaded() {
         return !participantsMap.isEmpty();
+    }
+
+    /**
+     * Loads participants from a raw JSON payload (e.g., attached during deployment).
+     * Returns the number of loaded participants; returns 0 when no participants section is present.
+     */
+    public synchronized int loadParticipantsFromJsonContent(String jsonContent, String source) {
+        if (jsonContent == null || jsonContent.isBlank()) {
+            return 0;
+        }
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(jsonContent);
+
+            if (!root.has("participants")) {
+                return 0;
+            }
+
+            ParticipantConfiguration config = mapper.readValue(jsonContent, ParticipantConfiguration.class);
+            List<Participant> participants = config != null ? config.toParticipants() : List.of();
+
+            participantsMap.clear();
+            for (Participant participant : participants) {
+                if (participant != null && participant.getId() != null) {
+                    participantsMap.put(participant.getId(), participant);
+                }
+            }
+
+            log.info("[ParticipantDataService] Loaded {} participants from deployment JSON '{}'",
+                    participantsMap.size(), source);
+            return participantsMap.size();
+        } catch (Exception e) {
+            log.warn("[ParticipantDataService] Could not apply deployment JSON '{}' as participants: {}",
+                    source, e.getMessage());
+            return 0;
+        }
     }
 }
